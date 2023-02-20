@@ -29,6 +29,10 @@ export const light = {
         dot: "#3cb371",
       },
     },
+
+    statusBar: {
+      backgroundPrimary: "#fafafa",
+    },
   },
 
   fonts: {

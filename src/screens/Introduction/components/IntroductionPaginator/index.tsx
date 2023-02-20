@@ -1,7 +1,8 @@
 import { FC } from "react";
-import { useWindowDimensions, Animated, ViewProps } from "react-native";
+import { Animated, ViewProps } from "react-native";
 
-import { introductionSlider } from "../../utils/introductionSlider";
+import { introductionSlider } from "@utils/introductionSlider";
+import { SCREEN_WIDTH } from "@utils/globalVariables";
 
 import { Container, Dot } from "./styles";
 
@@ -10,18 +11,16 @@ interface Props extends ViewProps {
   scrollX: Animated.Value;
 }
 
-export const IntroductionSliderPaginator: FC<Props> = (props) => {
+export const IntroductionPaginator: FC<Props> = (props) => {
   const { data, scrollX, ...rest } = props;
-
-  const { width } = useWindowDimensions();
 
   return (
     <Container {...rest}>
       {data.map((item, index) => {
         const inputRange = [
-          (index - 1) * width,
-          index * width,
-          (index + 1) * width,
+          (index - 1) * SCREEN_WIDTH,
+          index * SCREEN_WIDTH,
+          (index + 1) * SCREEN_WIDTH,
         ];
 
         const scaleX = scrollX.interpolate({

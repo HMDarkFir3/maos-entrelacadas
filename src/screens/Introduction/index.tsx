@@ -1,13 +1,7 @@
-import * as StatusBar from "expo-status-bar";
+import { StatusBar } from "expo-status-bar";
 import * as NavigationBar from "expo-navigation-bar";
 import { useState, useLayoutEffect, useRef, FC } from "react";
-import {
-  useWindowDimensions,
-  FlatList,
-  Alert,
-  Animated,
-  ViewToken,
-} from "react-native";
+import { FlatList, Alert, Animated, ViewToken } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "styled-components/native";
@@ -15,13 +9,14 @@ import { ArrowRight, Check } from "phosphor-react-native";
 
 import { useAuth } from "@hooks/useAuth";
 
-import { IntroductionSlider } from "@components/IntroductionSlider";
-import { IntroductionSliderPaginator } from "@components/IntroductionSliderPaginator";
+import { IntroductionSlider } from "@components-of-screens/Introduction/components/IntroductionSlider";
+import { IntroductionPaginator } from "@components-of-screens/Introduction/components/IntroductionPaginator";
 import { Button } from "@components/Button";
 
 import { COLLECTION_INTRODUCTION } from "@storages/index";
 
 import { introductionSlider } from "@utils/introductionSlider";
+import { SCREEN_HEIGHT } from "@utils/globalVariables";
 
 import { Container, Footer, EmptyView } from "./styles";
 
@@ -30,7 +25,9 @@ interface ViewabilityConfigRef {
 }
 
 export const Introduction: FC = () => {
-  const { state: authState, dispatch: authDispatch } = useAuth();
+  const { dispatch: authDispatch } = useAuth();
+  const { navigate } = useNavigation();
+  const { colors } = useTheme();
 
   const [currentIndex, setCurrentIndex] = useState<number | null>(0);
 
@@ -45,11 +42,7 @@ export const Introduction: FC = () => {
     viewAreaCoveragePercentThreshold: 50,
   }).current;
 
-  const { height } = useWindowDimensions();
-  const { navigate } = useNavigation();
-  const { colors } = useTheme();
-
-  const setSawIntroductionInStorage = async () => {
+  const sawIntroductionInStorage = async () => {
     authDispatch({ type: "SET_SAW_INTRODUCTION", payload: true });
     await AsyncStorage.setItem(COLLECTION_INTRODUCTION, JSON.stringify(true));
     navigate("Welcome");
@@ -64,7 +57,7 @@ export const Introduction: FC = () => {
       {
         text: "Sim",
         style: "default",
-        onPress: () => setSawIntroductionInStorage(),
+        onPress: () => sawIntroductionInStorage(),
       },
     ]);
   };
@@ -75,19 +68,21 @@ export const Introduction: FC = () => {
         index: currentIndex! + 1,
       });
     } else {
-      setSawIntroductionInStorage();
+      sawIntroductionInStorage();
     }
   };
 
   useLayoutEffect(() => {
-    StatusBar.setStatusBarStyle("dark");
-    StatusBar.setStatusBarBackgroundColor("#fafafa", true);
     NavigationBar.setBackgroundColorAsync("#fafafa");
     NavigationBar.setButtonStyleAsync("dark");
   }, []);
 
   return (
     <Container>
+      <StatusBar
+        backgroundColor={colors.statusBar.backgroundPrimary}
+        style="dark"
+      />
       <Animated.FlatList
         ref={introductionSliderRef}
         data={introductionSlider}
@@ -111,8 +106,8 @@ export const Introduction: FC = () => {
         viewabilityConfig={viewabilityConfig}
       />
 
-      <IntroductionSliderPaginator
-        style={{ position: "absolute", bottom: height / 2.21 }}
+      <IntroductionPaginator
+        style={{ position: "absolute", bottom: SCREEN_HEIGHT / 2.21 }}
         data={introductionSlider}
         scrollX={scrollX}
       />

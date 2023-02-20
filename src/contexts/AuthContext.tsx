@@ -38,7 +38,9 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const getSawIntroductionInStorage = async () => {
     const storage = await AsyncStorage.getItem(COLLECTION_INTRODUCTION);
 
-    dispatch({ type: "SET_SAW_INTRODUCTION", payload: JSON.parse(storage!) });
+    if (storage) {
+      dispatch({ type: "SET_SAW_INTRODUCTION", payload: JSON.parse(storage) });
+    }
   };
 
   useEffect(() => {

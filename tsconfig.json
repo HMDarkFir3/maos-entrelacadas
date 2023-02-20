@@ -6,6 +6,7 @@
       "@src/*": ["./src/*"],
       "@assets/*": ["./src/assets/*"],
       "@components/*": ["./src/components/*"],
+      "@components-of-screens/*": ["./src/screens/*"],
       "@contexts/*": ["./src/contexts/*"],
       "@dtos/*": ["./src/dtos/*"],
       "@hooks/*": ["./src/hooks/*"],
