@@ -1,6 +1,7 @@
 import * as StatusBar from "expo-status-bar";
 import * as NavigationBar from "expo-navigation-bar";
-import { useLayoutEffect, FC } from "react";
+import { useCallback, FC } from "react";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
 import { Button } from "@components/Button";
 
@@ -14,12 +15,19 @@ import {
 } from "./styles";
 
 export const Welcome: FC = () => {
-  useLayoutEffect(() => {
-    StatusBar.setStatusBarStyle("dark");
-    StatusBar.setStatusBarBackgroundColor("#fafafa", true);
-    NavigationBar.setBackgroundColorAsync("#fafafa");
-    NavigationBar.setButtonStyleAsync("dark");
-  }, []);
+  const { navigate } = useNavigation();
+
+  const onPressLogin = (screenName: "Login" | "Register") =>
+    navigate(screenName);
+
+  useFocusEffect(
+    useCallback(() => {
+      StatusBar.setStatusBarStyle("dark");
+      StatusBar.setStatusBarBackgroundColor("#fafafa", true);
+      NavigationBar.setBackgroundColorAsync("#fafafa");
+      NavigationBar.setButtonStyleAsync("dark");
+    }, [])
+  );
 
   return (
     <Container>
@@ -33,8 +41,16 @@ export const Welcome: FC = () => {
       </TextWrapper>
 
       <ButtonWrapper>
-        <Button type="normal" title="Login" />
-        <Button style={{ marginTop: 28 }} type="register" />
+        <Button
+          type="normal"
+          title="Login"
+          onPress={() => onPressLogin("Login")}
+        />
+        <Button
+          style={{ marginTop: 28 }}
+          type="register"
+          onPress={() => onPressLogin("Register")}
+        />
       </ButtonWrapper>
     </Container>
   );

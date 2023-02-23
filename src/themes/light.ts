@@ -3,7 +3,6 @@ export const light = {
 
   colors: {
     background: "#fafafa",
-    primary: "#3cb371",
 
     screens: {
       welcome: {
@@ -11,22 +10,38 @@ export const light = {
         title: "#3cb371",
         description: "#7d9cae",
       },
+      authentication: {
+        components: {
+          header: {
+            title: "#3cb371",
+            description: "#7d9cae",
+          },
+        },
+      },
+      introduction: {
+        components: {
+          introductionSlider: {
+            title: "#3cb371",
+            description: "#7d9cae",
+          },
+          introductionSliderPaginator: {
+            dot: "#3cb371",
+          },
+        },
+      },
     },
 
     components: {
+      backButton: {
+        title: "#1c1e26",
+        icon: "#1c1e26",
+      },
       button: {
         background: "#3cb371",
-        icon_color: "#fafafa",
+        icon: "#fafafa",
         normal: "#fafafa",
         register: "#3cb371",
         jump: "#7d9cae",
-      },
-      introduction_slider: {
-        title: "#3cb371",
-        description: "#7d9cae",
-      },
-      introduction_slider_paginator: {
-        dot: "#3cb371",
       },
     },
 

@@ -31,7 +31,8 @@ export const Title = styled.Text`
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.medium};
-    color: ${theme.colors.components.introduction_slider.title};
+    color: ${theme.colors.screens.introduction.components.introductionSlider
+      .title};
   `}
 `;
 
@@ -51,6 +52,7 @@ export const Description = styled.Text`
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};
-    color: ${theme.colors.components.introduction_slider.description};
+    color: ${theme.colors.screens.introduction.components.introductionSlider
+      .description};
   `}
 `;

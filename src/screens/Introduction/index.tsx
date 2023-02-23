@@ -123,13 +123,13 @@ export const Introduction: FC = () => {
           icon={() =>
             currentIndex === introductionSlider.length - 1 ? (
               <Check
-                color={colors.components.button.icon_color}
+                color={colors.components.button.icon}
                 weight="bold"
                 size={24}
               />
             ) : (
               <ArrowRight
-                color={colors.components.button.icon_color}
+                color={colors.components.button.icon}
                 weight="bold"
                 size={24}
               />

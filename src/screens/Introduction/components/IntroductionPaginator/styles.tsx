@@ -12,6 +12,7 @@ export const Dot = styled(Animated.View)`
   margin: 0 10px;
 
   background-color: ${({ theme }) =>
-    theme.colors.components.introduction_slider_paginator.dot};
+    theme.colors.screens.introduction.components.introductionSliderPaginator
+      .dot};
   border-radius: 2px;
 `;

@@ -8,21 +8,6 @@ export const Container = styled.View`
   background-color: ${({ theme }) => theme.colors.background};
 `;
 
-export const IntroductionContainer = styled.View`
-  flex-direction: row;
-`;
-
-export const IntroductionDot = styled(Animated.View)`
-  height: 10px;
-  width: 14px;
-
-  margin: 0 10px;
-
-  background-color: ${({ theme }) =>
-    theme.colors.components.introduction_slider_paginator.dot};
-  border-radius: 2px;
-`;
-
 export const Footer = styled.View`
   flex-direction: row;
   justify-content: space-between;
