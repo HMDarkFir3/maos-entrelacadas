@@ -11,14 +11,14 @@ import { useAuth } from "@hooks/useAuth";
 
 import { IntroductionSlider } from "@components-of-screens/Introduction/components/IntroductionSlider";
 import { IntroductionPaginator } from "@components-of-screens/Introduction/components/IntroductionPaginator";
-import { Button } from "@components/Button";
+import { SmallButton } from "@components/SmallButton";
 
 import { COLLECTION_INTRODUCTION } from "@storages/index";
 
 import { introductionSlider } from "@utils/introductionSlider";
 import { SCREEN_HEIGHT } from "@utils/globalVariables";
 
-import { Container, Footer, EmptyView } from "./styles";
+import { Container, Footer, JumpButton, Title } from "./styles";
 
 interface ViewabilityConfigRef {
   viewAreaCoveragePercentThreshold: number;
@@ -113,13 +113,17 @@ export const Introduction: FC = () => {
       />
 
       <Footer>
-        {currentIndex !== introductionSlider.length - 1 ? (
-          <Button type="jump" onPress={jumpSlides} />
-        ) : (
-          <EmptyView />
-        )}
+        <JumpButton
+          style={{
+            opacity: currentIndex === introductionSlider.length - 1 ? 0 : 1,
+          }}
+          disabled={currentIndex === introductionSlider.length - 1}
+          onPress={jumpSlides}
+        >
+          <Title>Pular</Title>
+        </JumpButton>
 
-        <Button
+        <SmallButton
           icon={() =>
             currentIndex === introductionSlider.length - 1 ? (
               <Check

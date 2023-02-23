@@ -1,18 +1,19 @@
 import { FC } from "react";
 import { TouchableOpacityProps } from "react-native";
 
-import { Container, Title } from "./styles";
+import { Container } from "./styles";
 
 interface Props extends TouchableOpacityProps {
+  icon?: any;
   title?: string;
 }
 
-export const Button: FC<Props> = (props) => {
-  const { title, ...rest } = props;
+export const SmallButton: FC<Props> = (props) => {
+  const { icon: Icon, title, ...rest } = props;
 
   return (
     <Container activeOpacity={0.7} {...rest}>
-      <Title>{title}</Title>
+      <Icon />
     </Container>
   );
 };

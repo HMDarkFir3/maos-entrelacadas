@@ -19,6 +19,8 @@ export const light = {
         },
       },
       introduction: {
+        title: "#7d9cae",
+
         components: {
           introductionSlider: {
             title: "#3cb371",

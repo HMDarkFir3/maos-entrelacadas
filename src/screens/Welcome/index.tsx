@@ -41,14 +41,9 @@ export const Welcome: FC = () => {
       </TextWrapper>
 
       <ButtonWrapper>
-        <Button
-          type="normal"
-          title="Login"
-          onPress={() => onPressLogin("Login")}
-        />
+        <Button title="Login" onPress={() => onPressLogin("Login")} />
         <Button
           style={{ marginTop: 28 }}
-          type="register"
           onPress={() => onPressLogin("Register")}
         />
       </ButtonWrapper>

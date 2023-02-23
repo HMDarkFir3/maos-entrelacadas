@@ -1,5 +1,4 @@
-import styled from "styled-components/native";
-import Animated from "react-native-reanimated";
+import styled, { css } from "styled-components/native";
 
 export const Container = styled.View`
   flex: 1;
@@ -10,14 +9,25 @@ export const Container = styled.View`
 
 export const Footer = styled.View`
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
 
   position: absolute;
-  bottom: 0;
+  bottom: 32px;
 
   width: 100%;
-
-  margin-bottom: 32px;
 `;
 
-export const EmptyView = styled.View``;
+export const JumpButton = styled.TouchableOpacity`
+  padding: 0 24px;
+`;
+
+export const Title = styled.Text`
+  font-size: 16px;
+
+  ${({ theme }) =>
+    css`
+      font-family: ${theme.fonts.regular};
+      color: ${theme.colors.screens.introduction.title};
+    `}
+`;
