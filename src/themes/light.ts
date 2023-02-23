@@ -38,12 +38,18 @@ export const light = {
         title: "#1c1e26",
         icon: "#1c1e26",
       },
-      button: {
+      smallButton: {
         background: "#3cb371",
         icon: "#fafafa",
-        normal: "#fafafa",
-        register: "#3cb371",
-        jump: "#7d9cae",
+      },
+      button: {
+        background: "#3cb371",
+        text: "#fafafa",
+      },
+      input: {
+        primary: "#3cb371",
+        text: "#000000",
+        placeholder: "#8babc3",
       },
     },
 

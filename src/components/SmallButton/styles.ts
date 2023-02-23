@@ -13,6 +13,6 @@ export const Container = styled(TouchableOpacity)`
 
   ${({ theme }) =>
     css`
-      background-color: ${theme.colors.components.button.background};
+      background-color: ${theme.colors.components.smallButton.background};
     `}
 `;

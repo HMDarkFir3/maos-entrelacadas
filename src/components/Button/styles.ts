@@ -17,13 +17,6 @@ export const Title = styled.Text`
     css`
       font-size: 16px;
       font-family: ${theme.fonts.bold};
-      color: ${theme.colors.components.button.normal};
+      color: ${theme.colors.components.button.text};
     `}
-`;
-
-export const GreenColor = styled.Text`
-  ${({ theme }) => css`
-    font-family: ${theme.fonts.bold};
-    color: ${theme.colors.components.button.register};
-  `}
 `;
