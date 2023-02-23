@@ -7,8 +7,8 @@ export const light = {
     screens: {
       welcome: {
         primary: "#3cb371",
-        title: "#3cb371",
-        description: "#7d9cae",
+        textPrimary: "#3cb371",
+        textSecondary: "#7d9cae",
       },
       authentication: {
         components: {

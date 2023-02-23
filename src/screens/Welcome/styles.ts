@@ -1,5 +1,9 @@
 import styled, { css } from "styled-components/native";
-import { Image } from "react-native";
+import { Image, TouchableOpacity } from "react-native";
+
+interface RegisterButtonTextProps {
+  isGreen: boolean;
+}
 
 export const Container = styled.View`
   flex: 1;
@@ -23,9 +27,10 @@ export const TextWrapper = styled.View``;
 export const Title = styled.Text`
   text-align: center;
   font-size: 48px;
+
   ${({ theme }) => css`
     font-family: ${theme.fonts.medium};
-    color: ${theme.colors.screens.welcome.title};
+    color: ${theme.colors.screens.welcome.textPrimary};
   `}
 `;
 
@@ -34,14 +39,39 @@ export const Description = styled.Text`
 
   text-align: center;
   font-size: 20px;
+
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};
-    color: ${theme.colors.screens.welcome.description};
+    color: ${theme.colors.screens.welcome.textSecondary};
   `}
 `;
 
 export const ButtonWrapper = styled.View`
+  align-items: center;
+
   width: 100%;
 
-  margin-bottom: 36px;
+  margin-bottom: 28px;
+`;
+
+export const RegisterButton = styled(TouchableOpacity)`
+  flex-direction: row;
+`;
+
+export const RegisterButtonText = styled.Text<RegisterButtonTextProps>`
+  font-size: 20px;
+
+  ${({ theme, isGreen }) =>
+    isGreen &&
+    css`
+      font-family: ${theme.fonts.bold};
+      color: ${theme.colors.screens.welcome.textPrimary};
+    `}
+
+  ${({ theme, isGreen }) =>
+    !isGreen &&
+    css`
+      font-family: ${theme.fonts.regular};
+      color: ${theme.colors.screens.welcome.textSecondary};
+    `}
 `;

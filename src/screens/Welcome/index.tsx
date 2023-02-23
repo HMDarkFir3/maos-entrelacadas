@@ -12,6 +12,8 @@ import {
   Title,
   Description,
   ButtonWrapper,
+  RegisterButton,
+  RegisterButtonText,
 } from "./styles";
 
 export const Welcome: FC = () => {
@@ -41,11 +43,18 @@ export const Welcome: FC = () => {
       </TextWrapper>
 
       <ButtonWrapper>
-        <Button title="Login" onPress={() => onPressLogin("Login")} />
         <Button
-          style={{ marginTop: 28 }}
-          onPress={() => onPressLogin("Register")}
+          style={{ marginBottom: 28 }}
+          title="Login"
+          onPress={() => onPressLogin("Login")}
         />
+
+        <RegisterButton onPress={() => onPressLogin("Register")}>
+          <RegisterButtonText isGreen={false}>
+            Não tem uma conta?{" "}
+            <RegisterButtonText isGreen>Registrar-se</RegisterButtonText>
+          </RegisterButtonText>
+        </RegisterButton>
       </ButtonWrapper>
     </Container>
   );
