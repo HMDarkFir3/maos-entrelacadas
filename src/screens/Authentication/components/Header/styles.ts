@@ -29,7 +29,7 @@ export const Title = styled.Text`
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.medium};
-    color: ${theme.colors.screens.authentication.components.header.title};
+    color: ${theme.colors.screens.authentication.components.header.textPrimary};
   `}
 `;
 
@@ -41,6 +41,7 @@ export const Description = styled.Text`
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};
-    color: ${theme.colors.screens.authentication.components.header.description};
+    color: ${theme.colors.screens.authentication.components.header
+      .textSecondary};
   `}
 `;

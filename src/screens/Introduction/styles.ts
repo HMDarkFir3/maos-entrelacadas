@@ -28,6 +28,6 @@ export const Title = styled.Text`
   ${({ theme }) =>
     css`
       font-family: ${theme.fonts.regular};
-      color: ${theme.colors.screens.introduction.title};
+      color: ${theme.colors.screens.introduction.text};
     `}
 `;

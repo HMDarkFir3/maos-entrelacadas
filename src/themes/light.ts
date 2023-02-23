@@ -11,20 +11,22 @@ export const light = {
         textSecondary: "#7d9cae",
       },
       authentication: {
+        textPrimary: "#3cb371",
+
         components: {
           header: {
-            title: "#3cb371",
-            description: "#7d9cae",
+            textPrimary: "#3cb371",
+            textSecondary: "#7d9cae",
           },
         },
       },
       introduction: {
-        title: "#7d9cae",
+        text: "#7d9cae",
 
         components: {
           introductionSlider: {
-            title: "#3cb371",
-            description: "#7d9cae",
+            textPrimary: "#3cb371",
+            textSecondary: "#7d9cae",
           },
           introductionSliderPaginator: {
             dot: "#3cb371",
