@@ -1,5 +1,5 @@
-import { useState, FC } from "react";
-import { TextInputProps, ViewStyle } from "react-native";
+import { useState, forwardRef, FC } from "react";
+import { TextInput, TextInputProps, ViewStyle } from "react-native";
 import { useTheme } from "styled-components/native";
 import { Eye, EyeSlash } from "phosphor-react-native";
 
@@ -15,7 +15,7 @@ interface Props extends TextInputProps {
   isPassword?: boolean;
 }
 
-export const Input: FC<Props> = (props) => {
+export const Input = forwardRef<TextInput, Props>((props, ref) => {
   const { style, icon: Icon, isPassword = false, ...rest } = props;
 
   const { colors } = useTheme();
@@ -29,6 +29,7 @@ export const Input: FC<Props> = (props) => {
     <Container style={style}>
       <Icon />
       <StyledInput
+        ref={ref}
         secureTextEntry={isPassword && !isVisibility}
         placeholderTextColor={colors.components.input.placeholder}
         {...rest}
@@ -47,4 +48,4 @@ export const Input: FC<Props> = (props) => {
       )}
     </Container>
   );
-};
+});

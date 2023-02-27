@@ -11,7 +11,7 @@ import { useAuth } from "@hooks/useAuth";
 
 import { IntroductionSlider } from "@components-of-screens/Introduction/components/IntroductionSlider";
 import { IntroductionPaginator } from "@components-of-screens/Introduction/components/IntroductionPaginator";
-import { SmallButton } from "@components/SmallButton";
+import { SmallButton } from "@components/Buttons/SmallButton";
 
 import { COLLECTION_INTRODUCTION } from "@storages/index";
 

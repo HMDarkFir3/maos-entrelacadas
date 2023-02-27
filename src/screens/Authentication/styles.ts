@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components/native";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, TouchableWithoutFeedback } from "react-native";
 
 import { SCREEN_WIDTH } from "@utils/globalVariables";
 
@@ -9,6 +9,8 @@ export const Container = styled.View`
 
   background-color: ${({ theme }) => theme.colors.background};
 `;
+
+export const InputBlurButton = styled(TouchableWithoutFeedback)``;
 
 export const InputWrapper = styled.View`
   margin-top: 92px;
@@ -34,5 +36,5 @@ export const Footer = styled.View`
   position: absolute;
   bottom: 32px;
 
-  width: ${SCREEN_WIDTH - 24}px;
+  width: ${SCREEN_WIDTH}px;
 `;

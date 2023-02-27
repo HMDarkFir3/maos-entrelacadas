@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { BackButton } from "@components/BackButton";
+import { BackButton } from "@components/Buttons/BackButton";
 
 import { Container, Wrapper, Logo, Title, Description } from "./styles";
 

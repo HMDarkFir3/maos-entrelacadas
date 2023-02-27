@@ -53,6 +53,11 @@ export const light = {
         text: "#000000",
         placeholder: "#8babc3",
       },
+      select: {
+        primary: "#3cb371",
+        text: "#000000",
+        placeholder: "#8babc3",
+      },
     },
 
     statusBar: {

@@ -3,7 +3,7 @@ import * as NavigationBar from "expo-navigation-bar";
 import { useCallback, FC } from "react";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 
-import { Button } from "@components/Button";
+import { Button } from "@components/Buttons/Button";
 
 import {
   Container,
@@ -19,7 +19,7 @@ import {
 export const Welcome: FC = () => {
   const { navigate } = useNavigation();
 
-  const onPressLogin = (screenName: "Login" | "Register") =>
+  const onPressLogin = (screenName: "Login" | "StepOne") =>
     navigate(screenName);
 
   useFocusEffect(
@@ -49,7 +49,7 @@ export const Welcome: FC = () => {
           onPress={() => onPressLogin("Login")}
         />
 
-        <RegisterButton onPress={() => onPressLogin("Register")}>
+        <RegisterButton onPress={() => onPressLogin("StepOne")}>
           <RegisterButtonText isGreen={false}>
             Não tem uma conta?{" "}
             <RegisterButtonText isGreen>Registrar-se</RegisterButtonText>

@@ -9,6 +9,8 @@ export const Container = styled.View`
 
   border-bottom-width: 1px;
   border-color: ${({ theme }) => theme.colors.components.input.primary};
+
+  z-index: 1;
 `;
 
 export const StyledInput = styled(TextInput)`
