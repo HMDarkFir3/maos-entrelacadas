@@ -5,18 +5,21 @@ import { Eye, EyeSlash } from "phosphor-react-native";
 
 import {
   Container,
+  Wrapper,
   StyledInput,
   TogglePasswordVisibilityButton,
+  MaxLength,
 } from "./styles";
 
 interface Props extends TextInputProps {
   style?: ViewStyle;
   icon: any;
   isPassword?: boolean;
+  maxLength?: number;
 }
 
 export const Input = forwardRef<TextInput, Props>((props, ref) => {
-  const { style, icon: Icon, isPassword = false, ...rest } = props;
+  const { style, icon: Icon, isPassword = false, maxLength, ...rest } = props;
 
   const { colors } = useTheme();
 
@@ -27,25 +30,30 @@ export const Input = forwardRef<TextInput, Props>((props, ref) => {
 
   return (
     <Container style={style}>
-      <Icon />
-      <StyledInput
-        ref={ref}
-        secureTextEntry={isPassword && !isVisibility}
-        placeholderTextColor={colors.components.input.placeholder}
-        {...rest}
-      />
-      {isPassword && (
-        <TogglePasswordVisibilityButton
-          activeOpacity={0.7}
-          onPress={onTogglePasswordVisibility}
-        >
-          {isVisibility ? (
-            <EyeSlash size={24} color={colors.components.input.placeholder} />
-          ) : (
-            <Eye size={24} color={colors.components.input.placeholder} />
-          )}
-        </TogglePasswordVisibilityButton>
-      )}
+      <Wrapper>
+        <Icon />
+        <StyledInput
+          ref={ref}
+          secureTextEntry={isPassword && !isVisibility}
+          placeholderTextColor={colors.components.input.placeholder}
+          maxLength={maxLength}
+          {...rest}
+        />
+        {isPassword && (
+          <TogglePasswordVisibilityButton
+            activeOpacity={0.7}
+            onPress={onTogglePasswordVisibility}
+          >
+            {isVisibility ? (
+              <EyeSlash size={24} color={colors.components.input.placeholder} />
+            ) : (
+              <Eye size={24} color={colors.components.input.placeholder} />
+            )}
+          </TogglePasswordVisibilityButton>
+        )}
+      </Wrapper>
+
+      {maxLength && <MaxLength>0/{maxLength}</MaxLength>}
     </Container>
   );
 });

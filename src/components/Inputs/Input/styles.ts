@@ -2,15 +2,16 @@ import styled, { css } from "styled-components/native";
 import { TextInput, TouchableOpacity } from "react-native";
 
 export const Container = styled.View`
+  z-index: 1;
+`;
+
+export const Wrapper = styled.View`
   flex-direction: row;
-  align-items: center;
 
   padding-bottom: 8px;
 
   border-bottom-width: 1px;
   border-color: ${({ theme }) => theme.colors.components.input.primary};
-
-  z-index: 1;
 `;
 
 export const StyledInput = styled(TextInput)`
@@ -23,6 +24,18 @@ export const StyledInput = styled(TextInput)`
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};
     color: ${theme.colors.components.input.text};
+  `}
+`;
+
+export const MaxLength = styled.Text`
+  margin-top: 6px;
+
+  text-align: right;
+  font-size: 16px;
+
+  ${({ theme }) => css`
+    font-family: ${theme.fonts.regular};
+    color: ${theme.colors.components.input.placeholder};
   `}
 `;
 

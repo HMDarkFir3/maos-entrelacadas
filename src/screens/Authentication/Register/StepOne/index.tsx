@@ -56,6 +56,7 @@ export const StepOne: FC = () => {
               <User size={24} color={colors.components.input.placeholder} />
             )}
             placeholder="Usuário"
+            maxLength={50}
           />
 
           <Input
@@ -69,6 +70,7 @@ export const StepOne: FC = () => {
             )}
             placeholder="Email"
             keyboardType="email-address"
+            maxLength={50}
           />
         </InputWrapper>
 

@@ -19,6 +19,11 @@ export const StepThree: FC = () => {
   const passwordInputRef = useRef<TextInput>(null);
   const confirmPasswordInputRef = useRef<TextInput>(null);
 
+  const onPressInScreen = () => {
+    passwordInputRef.current?.blur();
+    confirmPasswordInputRef.current?.blur();
+  };
+
   useFocusEffect(
     useCallback(() => {
       NavigationBar.setBackgroundColorAsync(
@@ -29,7 +34,7 @@ export const StepThree: FC = () => {
   );
 
   return (
-    <InputBlurButton>
+    <InputBlurButton onPress={onPressInScreen}>
       <Container>
         <StatusBar
           backgroundColor={colors.statusBar.backgroundPrimary}
@@ -50,6 +55,7 @@ export const StepThree: FC = () => {
             )}
             placeholder="Senha"
             isPassword
+            maxLength={100}
           />
 
           <Input
@@ -60,6 +66,7 @@ export const StepThree: FC = () => {
             )}
             isPassword
             placeholder="Confirmar senha"
+            maxLength={100}
           />
         </InputWrapper>
 
