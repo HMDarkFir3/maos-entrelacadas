@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import * as NavigationBar from "expo-navigation-bar";
-import { useRef, useCallback, FC } from "react";
+import { useState, useRef, useCallback, FC } from "react";
 import { TextInput } from "react-native";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { useTheme } from "styled-components/native";
@@ -15,6 +15,9 @@ import { InputBlurButton, Container, InputWrapper, Footer } from "../../styles";
 export const StepThree: FC = () => {
   const { navigate } = useNavigation();
   const { colors } = useTheme();
+
+  const [password, setPassword] = useState<string>("");
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
 
   const passwordInputRef = useRef<TextInput>(null);
   const confirmPasswordInputRef = useRef<TextInput>(null);
@@ -50,6 +53,8 @@ export const StepThree: FC = () => {
           <Input
             ref={passwordInputRef}
             style={{ marginBottom: 32 }}
+            value={password}
+            onChangeText={setPassword}
             icon={() => (
               <LockOpen size={24} color={colors.components.input.placeholder} />
             )}
@@ -61,6 +66,8 @@ export const StepThree: FC = () => {
           <Input
             ref={confirmPasswordInputRef}
             style={{ marginBottom: 16 }}
+            value={confirmPassword}
+            onChangeText={setConfirmPassword}
             icon={() => (
               <LockOpen size={24} color={colors.components.input.placeholder} />
             )}

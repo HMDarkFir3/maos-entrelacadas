@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import * as NavigationBar from "expo-navigation-bar";
-import { useRef, useCallback, FC } from "react";
+import { useState, useRef, useCallback, FC } from "react";
 import { TextInput } from "react-native";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { useTheme } from "styled-components/native";
@@ -15,6 +15,9 @@ import { InputBlurButton, Container, InputWrapper, Footer } from "../../styles";
 export const StepOne: FC = () => {
   const { navigate } = useNavigation();
   const { colors } = useTheme();
+
+  const [user, setUser] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
 
   const userInputRef = useRef<TextInput>(null);
   const emailInputRef = useRef<TextInput>(null);
@@ -52,6 +55,8 @@ export const StepOne: FC = () => {
           <Input
             ref={userInputRef}
             style={{ marginBottom: 32 }}
+            value={user}
+            onChangeText={setUser}
             icon={() => (
               <User size={24} color={colors.components.input.placeholder} />
             )}
@@ -62,6 +67,8 @@ export const StepOne: FC = () => {
           <Input
             ref={emailInputRef}
             style={{ marginBottom: 16 }}
+            value={email}
+            onChangeText={setEmail}
             icon={() => (
               <EnvelopeSimple
                 size={24}

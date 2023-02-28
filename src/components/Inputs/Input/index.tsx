@@ -13,13 +13,21 @@ import {
 
 interface Props extends TextInputProps {
   style?: ViewStyle;
+  value: string;
   icon: any;
   isPassword?: boolean;
   maxLength?: number;
 }
 
 export const Input = forwardRef<TextInput, Props>((props, ref) => {
-  const { style, icon: Icon, isPassword = false, maxLength, ...rest } = props;
+  const {
+    style,
+    value,
+    icon: Icon,
+    isPassword = false,
+    maxLength,
+    ...rest
+  } = props;
 
   const { colors } = useTheme();
 
@@ -53,7 +61,11 @@ export const Input = forwardRef<TextInput, Props>((props, ref) => {
         )}
       </Wrapper>
 
-      {maxLength && <MaxLength>0/{maxLength}</MaxLength>}
+      {maxLength && (
+        <MaxLength>
+          {value.length}/{maxLength}
+        </MaxLength>
+      )}
     </Container>
   );
 });
