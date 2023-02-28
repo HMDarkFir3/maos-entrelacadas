@@ -4,6 +4,7 @@ import {
   useAnimatedStyle,
   interpolate,
   withTiming,
+  Extrapolate,
 } from "react-native-reanimated";
 import { useTheme } from "styled-components/native";
 import { CaretDown } from "phosphor-react-native";
@@ -20,16 +21,16 @@ import {
   ItemText,
   ItemSeparator,
 } from "./styles";
-import { Extrapolate } from "@shopify/react-native-skia";
 
-interface Props {
+interface Props<T> {
   style?: ViewStyle;
   placeholder: string;
   icon: any;
+  data: T;
 }
 
-export const Select: FC<Props> = (props) => {
-  const { style, icon: Icon, placeholder } = props;
+export const Select: FC<Props<typeof genders>> = (props) => {
+  const { style, icon: Icon, placeholder, data } = props;
 
   const { colors } = useTheme();
 
@@ -73,7 +74,7 @@ export const Select: FC<Props> = (props) => {
       {isOpen && (
         <List>
           <FlatList
-            data={genders}
+            data={data}
             keyExtractor={(item) => String(item.id)}
             renderItem={({ item }) => (
               <Item

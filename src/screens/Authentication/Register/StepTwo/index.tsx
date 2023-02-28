@@ -1,12 +1,16 @@
-import { FC } from "react";
-import { useNavigation } from "@react-navigation/native";
+import { StatusBar } from "expo-status-bar";
+import * as NavigationBar from "expo-navigation-bar";
+import { useCallback, FC } from "react";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { useTheme } from "styled-components/native";
 import { GenderNeuter, Cake, ArrowRight } from "phosphor-react-native";
 
 import { Header } from "@components-of-screens/Authentication/components/Header";
-import { Input } from "@components/Input";
-import { Select } from "@components/Select";
+import { Select } from "@components/Inputs/Select";
+import { DatePicker } from "@components/Inputs/DatePicker";
 import { SmallButton } from "@components/Buttons/SmallButton";
+
+import { genders } from "@utils/genders";
 
 import { InputBlurButton, Container, InputWrapper, Footer } from "../../styles";
 
@@ -16,9 +20,23 @@ export const StepTwo: FC = () => {
 
   const onPressNextStep = () => navigate("StepThree");
 
+  useFocusEffect(
+    useCallback(() => {
+      NavigationBar.setBackgroundColorAsync(
+        colors.navigationBar.backgroundPrimary
+      );
+      NavigationBar.setButtonStyleAsync("dark");
+    }, [])
+  );
+
   return (
     <InputBlurButton>
       <Container>
+        <StatusBar
+          backgroundColor={colors.statusBar.backgroundPrimary}
+          style="dark"
+        />
+
         <Header
           title="Crie sua conta!"
           description="Selecione seu gênero e preecha sua data de nascimento."
@@ -34,15 +52,17 @@ export const StepTwo: FC = () => {
               />
             )}
             placeholder="Gênero"
+            data={genders}
           />
 
-          <Input
+          <DatePicker
             icon={() => (
-              <GenderNeuter
+              <Cake
                 size={24}
-                color={colors.components.select.placeholder}
+                color={colors.components.datePicker.placeholder}
               />
             )}
+            placeholder="Data de Nascimento"
           />
         </InputWrapper>
 

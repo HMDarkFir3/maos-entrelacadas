@@ -1,10 +1,13 @@
-import { useRef, FC } from "react";
+import { StatusBar } from "expo-status-bar";
+import * as NavigationBar from "expo-navigation-bar";
+import { useRef, useCallback, FC } from "react";
 import { TextInput } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
 import { useTheme } from "styled-components/native";
 import { EnvelopeSimple, LockOpen, Check } from "phosphor-react-native";
 
 import { Header } from "@components-of-screens/Authentication/components/Header";
-import { Input } from "@components/Input";
+import { Input } from "@components/Inputs/Input";
 import { SmallButton } from "@components/Buttons/SmallButton";
 
 import {
@@ -27,9 +30,23 @@ export const Login: FC = () => {
     passwordInputRef.current?.blur();
   };
 
+  useFocusEffect(
+    useCallback(() => {
+      NavigationBar.setBackgroundColorAsync(
+        colors.navigationBar.backgroundPrimary
+      );
+      NavigationBar.setButtonStyleAsync("dark");
+    }, [])
+  );
+
   return (
     <InputBlurButton onPress={onPressInScreen}>
       <Container>
+        <StatusBar
+          backgroundColor={colors.statusBar.backgroundPrimary}
+          style="dark"
+        />
+
         <Header
           title="Faça login"
           description="Queremos impactar de forma positiva a sua vida e de sua comunidade."

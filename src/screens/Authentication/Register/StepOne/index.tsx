@@ -1,11 +1,13 @@
-import { useRef, FC } from "react";
+import { StatusBar } from "expo-status-bar";
+import * as NavigationBar from "expo-navigation-bar";
+import { useRef, useCallback, FC } from "react";
 import { TextInput } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { useTheme } from "styled-components/native";
 import { User, EnvelopeSimple, ArrowRight } from "phosphor-react-native";
 
 import { Header } from "@components-of-screens/Authentication/components/Header";
-import { Input } from "@components/Input";
+import { Input } from "@components/Inputs/Input";
 import { SmallButton } from "@components/Buttons/SmallButton";
 
 import { InputBlurButton, Container, InputWrapper, Footer } from "../../styles";
@@ -24,9 +26,23 @@ export const StepOne: FC = () => {
 
   const onPressNextStep = () => navigate("StepTwo");
 
+  useFocusEffect(
+    useCallback(() => {
+      NavigationBar.setBackgroundColorAsync(
+        colors.navigationBar.backgroundPrimary
+      );
+      NavigationBar.setButtonStyleAsync("dark");
+    }, [])
+  );
+
   return (
     <InputBlurButton onPress={onPressInScreen}>
       <Container>
+        <StatusBar
+          backgroundColor={colors.statusBar.backgroundPrimary}
+          style="dark"
+        />
+
         <Header
           title="Crie sua conta!"
           description="Vamos começar preenchendo seus dados, começando com seu nome."

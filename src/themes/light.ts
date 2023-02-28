@@ -58,9 +58,18 @@ export const light = {
         text: "#000000",
         placeholder: "#8babc3",
       },
+      datePicker: {
+        primary: "#3cb371",
+        text: "#000000",
+        placeholder: "#8babc3",
+      },
     },
 
     statusBar: {
+      backgroundPrimary: "#fafafa",
+    },
+
+    navigationBar: {
       backgroundPrimary: "#fafafa",
     },
   },

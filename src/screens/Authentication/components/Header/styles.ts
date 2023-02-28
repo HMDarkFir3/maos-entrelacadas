@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components/native";
 import { Image } from "react-native";
+import { getStatusBarHeight } from "react-native-iphone-x-helper";
 
 import { SCREEN_WIDTH } from "@utils/globalVariables";
 
@@ -10,7 +11,7 @@ export const Wrapper = styled.View`
   align-items: center;
   justify-content: space-between;
 
-  margin-top: 40px;
+  margin-top: ${getStatusBarHeight() + 40}px;
 `;
 
 export const Logo = styled(Image)`
