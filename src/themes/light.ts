@@ -33,6 +33,15 @@ export const light = {
           },
         },
       },
+      home: {
+        components: {
+          header: {
+            primary: "#3cb371",
+            text: "#1c1e26",
+            icon: "#3cb371",
+          },
+        },
+      },
     },
 
     components: {
@@ -50,17 +59,17 @@ export const light = {
       },
       input: {
         primary: "#3cb371",
-        text: "#000000",
+        text: "#1c1e26",
         placeholder: "#8babc3",
       },
       select: {
         primary: "#3cb371",
-        text: "#000000",
+        text: "#1c1e26",
         placeholder: "#8babc3",
       },
       datePicker: {
         primary: "#3cb371",
-        text: "#000000",
+        text: "#1c1e26",
         placeholder: "#8babc3",
       },
       customTabBar: {

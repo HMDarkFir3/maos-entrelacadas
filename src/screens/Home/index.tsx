@@ -4,6 +4,8 @@ import { useCallback, FC } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import { useTheme } from "styled-components/native";
 
+import { Header } from "@components-of-screens/Home/components/Header";
+
 import { Container } from "./styles";
 
 export const Home: FC = () => {
@@ -24,6 +26,8 @@ export const Home: FC = () => {
         backgroundColor={colors.statusBar.backgroundPrimary}
         style="dark"
       />
+
+      <Header />
     </Container>
   );
 };
