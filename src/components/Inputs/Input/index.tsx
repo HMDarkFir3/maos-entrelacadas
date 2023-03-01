@@ -1,5 +1,5 @@
-import { useState, forwardRef, FC } from "react";
-import { TextInput, TextInputProps, ViewStyle } from "react-native";
+import { useState, forwardRef } from "react";
+import { TextInput, TextInputProps, ViewStyle, StyleProp } from "react-native";
 import { useTheme } from "styled-components/native";
 import { Eye, EyeSlash } from "phosphor-react-native";
 
@@ -12,7 +12,7 @@ import {
 } from "./styles";
 
 interface Props extends TextInputProps {
-  style?: ViewStyle;
+  style?: StyleProp<ViewStyle>;
   value: string;
   icon: any;
   isPassword?: boolean;

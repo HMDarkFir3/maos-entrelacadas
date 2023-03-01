@@ -63,6 +63,12 @@ export const light = {
         text: "#000000",
         placeholder: "#8babc3",
       },
+      customTabBar: {
+        background: "#ffffff",
+        active: "#3cb371",
+        inactive: "#6E8592",
+        border: "#3cb371",
+      },
     },
 
     statusBar: {
@@ -71,6 +77,7 @@ export const light = {
 
     navigationBar: {
       backgroundPrimary: "#ffffff",
+      backgroundSecondary: "#ffffff",
     },
   },
 

@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import * as NavigationBar from "expo-navigation-bar";
-import { useRef, useCallback, FC } from "react";
+import { useState, useRef, useCallback, FC } from "react";
 import { TextInput } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import { useTheme } from "styled-components/native";
@@ -21,6 +21,9 @@ import {
 
 export const Login: FC = () => {
   const { colors } = useTheme();
+
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
   const emailInputRef = useRef<TextInput>(null);
   const passwordInputRef = useRef<TextInput>(null);
@@ -56,6 +59,8 @@ export const Login: FC = () => {
           <Input
             ref={emailInputRef}
             style={{ marginBottom: 32 }}
+            value={email}
+            onChangeText={setEmail}
             icon={() => (
               <EnvelopeSimple
                 size={24}
@@ -69,6 +74,8 @@ export const Login: FC = () => {
           <Input
             ref={passwordInputRef}
             style={{ marginBottom: 16 }}
+            value={password}
+            onChangeText={setPassword}
             icon={() => (
               <LockOpen size={24} color={colors.components.input.placeholder} />
             )}

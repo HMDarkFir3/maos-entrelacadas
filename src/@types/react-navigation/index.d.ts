@@ -8,6 +8,11 @@ export declare global {
       StepOne: undefined;
       StepTwo: undefined;
       StepThree: undefined;
+
+      Home: undefined;
+      Events: undefined;
+      Donations: undefined;
+      Profile: undefined;
     }
   }
 }
