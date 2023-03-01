@@ -2,7 +2,7 @@ export const light = {
   title: "light",
 
   colors: {
-    background: "#fafafa",
+    background: "#ffffff",
 
     screens: {
       welcome: {
@@ -66,11 +66,11 @@ export const light = {
     },
 
     statusBar: {
-      backgroundPrimary: "#fafafa",
+      backgroundPrimary: "#ffffff",
     },
 
     navigationBar: {
-      backgroundPrimary: "#fafafa",
+      backgroundPrimary: "#ffffff",
     },
   },
 
