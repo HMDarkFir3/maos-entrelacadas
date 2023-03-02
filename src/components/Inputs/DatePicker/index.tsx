@@ -8,24 +8,23 @@ import { Container, Date, Placeholder } from "./styles";
 
 interface Props {
   style?: ViewStyle;
+  value: Date | null;
+  onChange: (date: Date) => void;
   placeholder: string;
   icon: any;
 }
 
 export const DatePicker: FC<Props> = (props) => {
-  const { style, icon: Icon, placeholder } = props;
+  const { style, value, onChange, icon: Icon, placeholder } = props;
 
-  const [date, setDate] = useState<Date | null>(null);
   const [isOpenDatePicker, setIsOpenDatePicker] = useState<boolean>(false);
 
   const onPressOpenDatePicker = () =>
     setIsOpenDatePicker((prevState) => !prevState);
 
   const onChangeDate = (date: Date) => {
-    setDate(date);
+    onChange(date);
     setIsOpenDatePicker(false);
-
-    console.log(date);
   };
 
   const onCancelDatePicker = () =>
@@ -39,8 +38,8 @@ export const DatePicker: FC<Props> = (props) => {
     >
       <Icon />
 
-      {date ? (
-        <Date>{formatDate(date)}</Date>
+      {value ? (
+        <Date>{formatDate(value)}</Date>
       ) : (
         <Placeholder>{placeholder}</Placeholder>
       )}

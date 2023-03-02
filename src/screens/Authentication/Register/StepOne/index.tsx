@@ -1,10 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import * as NavigationBar from "expo-navigation-bar";
-import { useState, useRef, useCallback, FC } from "react";
+import { useRef, useCallback, FC } from "react";
 import { TextInput } from "react-native";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { useTheme } from "styled-components/native";
 import { User, EnvelopeSimple, ArrowRight } from "phosphor-react-native";
+
+import { useAuth } from "@hooks/useAuth";
 
 import { Header } from "@components-of-screens/Authentication/components/Header";
 import { Input } from "@components/Inputs/Input";
@@ -13,21 +15,26 @@ import { SmallButton } from "@components/Buttons/SmallButton";
 import { InputBlurButton, Container, InputWrapper, Footer } from "../../styles";
 
 export const StepOne: FC = () => {
+  const { state: authState, dispatch: authDispatch } = useAuth();
   const { navigate } = useNavigation();
   const { colors } = useTheme();
 
-  const [user, setUser] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-
-  const userInputRef = useRef<TextInput>(null);
+  const nameInputRef = useRef<TextInput>(null);
   const emailInputRef = useRef<TextInput>(null);
 
   const onPressInScreen = () => {
-    userInputRef.current?.blur();
+    nameInputRef.current?.blur();
     emailInputRef.current?.blur();
   };
 
-  const onPressNextStep = () => navigate("StepTwo");
+  const onPressNextStep = () => {
+    if (!authState.givenName.trim()) return;
+    if (!authState.email.trim()) return;
+
+    navigate("StepTwo");
+  };
+
+  const onPressBackButton = () => authDispatch({ type: "SET_EMPTY_FIELDS" });
 
   useFocusEffect(
     useCallback(() => {
@@ -49,26 +56,39 @@ export const StepOne: FC = () => {
         <Header
           title="Crie sua conta!"
           description="Vamos começar preenchendo seus dados, começando com seu nome."
+          onBackButton={onPressBackButton}
         />
 
         <InputWrapper>
           <Input
-            ref={userInputRef}
+            ref={nameInputRef}
             style={{ marginBottom: 32 }}
-            value={user}
-            onChangeText={setUser}
+            value={authState.givenName}
+            onChangeText={(text) =>
+              authDispatch({
+                type: "SET_FIELD",
+                fieldName: "givenName",
+                payload: text,
+              })
+            }
             icon={() => (
               <User size={24} color={colors.components.input.placeholder} />
             )}
-            placeholder="Usuário"
+            placeholder="Nome e Sobrenome"
             maxLength={50}
           />
 
           <Input
             ref={emailInputRef}
             style={{ marginBottom: 16 }}
-            value={email}
-            onChangeText={setEmail}
+            value={authState.email}
+            onChangeText={(text) =>
+              authDispatch({
+                type: "SET_FIELD",
+                fieldName: "email",
+                payload: text,
+              })
+            }
             icon={() => (
               <EnvelopeSimple
                 size={24}

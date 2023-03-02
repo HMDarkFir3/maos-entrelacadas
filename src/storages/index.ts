@@ -1,5 +1,6 @@
 const STORAGE_NAME = "@maosentrelacadas";
 
 const COLLECTION_INTRODUCTION = `${STORAGE_NAME}:introduction`;
+const COLLECTION_USER = `${STORAGE_NAME}:user`;
 
-export { COLLECTION_INTRODUCTION };
+export { COLLECTION_INTRODUCTION, COLLECTION_USER };

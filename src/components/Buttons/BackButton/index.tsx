@@ -6,15 +6,23 @@ import { ArrowLeft } from "phosphor-react-native";
 
 import { Container, Title } from "./styles";
 
-interface Props extends TouchableOpacityProps {}
+interface Props extends TouchableOpacityProps {
+  onBackButton?: () => void;
+}
 
 export const BackButton: FC<Props> = (props) => {
-  const { ...rest } = props;
+  const { onBackButton, ...rest } = props;
 
   const { goBack } = useNavigation();
   const { colors } = useTheme();
 
-  const onPressBackButton = () => goBack();
+  const onPressBackButton = () => {
+    if (onBackButton) {
+      onBackButton();
+    }
+
+    goBack();
+  };
 
   return (
     <Container activeOpacity={0.7} onPress={onPressBackButton} {...rest}>

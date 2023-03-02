@@ -31,7 +31,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#3cb371"
-      }
+      },
+      "package": "com.hmdarkfire.maosentrelacadas.development"
     },
     "extra": {
       "eas": {

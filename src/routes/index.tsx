@@ -7,7 +7,7 @@ import { AppRoutes } from "@routes/app.routes";
 export const Routes: FC = () => {
   return (
     <NavigationContainer>
-      <AppRoutes />
+      <AuthRoutes />
     </NavigationContainer>
   );
 };

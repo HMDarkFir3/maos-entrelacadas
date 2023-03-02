@@ -1,10 +1,12 @@
 import { StatusBar } from "expo-status-bar";
 import * as NavigationBar from "expo-navigation-bar";
-import { useState, useRef, useCallback, FC } from "react";
+import { useRef, useCallback, FC } from "react";
 import { TextInput } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import { useTheme } from "styled-components/native";
 import { EnvelopeSimple, LockOpen, Check } from "phosphor-react-native";
+
+import { useAuth } from "@hooks/useAuth";
 
 import { Header } from "@components-of-screens/Authentication/components/Header";
 import { Input } from "@components/Inputs/Input";
@@ -20,10 +22,8 @@ import {
 } from "../styles";
 
 export const Login: FC = () => {
+  const { state: authState, dispatch: authDispatch, login } = useAuth();
   const { colors } = useTheme();
-
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
 
   const emailInputRef = useRef<TextInput>(null);
   const passwordInputRef = useRef<TextInput>(null);
@@ -32,6 +32,10 @@ export const Login: FC = () => {
     emailInputRef.current?.blur();
     passwordInputRef.current?.blur();
   };
+
+  const onPressLogin = () => login();
+
+  const onPressBackButton = () => authDispatch({ type: "SET_EMPTY_FIELDS" });
 
   useFocusEffect(
     useCallback(() => {
@@ -53,14 +57,21 @@ export const Login: FC = () => {
         <Header
           title="Faça login"
           description="Queremos impactar de forma positiva a sua vida e de sua comunidade."
+          onBackButton={onPressBackButton}
         />
 
         <InputWrapper>
           <Input
             ref={emailInputRef}
             style={{ marginBottom: 32 }}
-            value={email}
-            onChangeText={setEmail}
+            value={authState.email}
+            onChangeText={(text) =>
+              authDispatch({
+                type: "SET_FIELD",
+                fieldName: "email",
+                payload: text,
+              })
+            }
             icon={() => (
               <EnvelopeSimple
                 size={24}
@@ -74,8 +85,14 @@ export const Login: FC = () => {
           <Input
             ref={passwordInputRef}
             style={{ marginBottom: 16 }}
-            value={password}
-            onChangeText={setPassword}
+            value={authState.password}
+            onChangeText={(text) =>
+              authDispatch({
+                type: "SET_FIELD",
+                fieldName: "password",
+                payload: text,
+              })
+            }
             icon={() => (
               <LockOpen size={24} color={colors.components.input.placeholder} />
             )}
@@ -99,6 +116,7 @@ export const Login: FC = () => {
                 size={24}
               />
             )}
+            onPress={onPressLogin}
           />
         </Footer>
       </Container>

@@ -1,78 +1,33 @@
 {
   "project_info": {
-    "project_number": "1088546210691",
-    "project_id": "maosentrelacadas-d6418",
-    "storage_bucket": "maosentrelacadas-d6418.appspot.com"
+    "project_number": "1017948069117",
+    "project_id": "maos-entrelacadas-97ef9",
+    "storage_bucket": "maos-entrelacadas-97ef9.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1088546210691:android:ee67953bb06b25e9152cb6",
+        "mobilesdk_app_id": "1:1017948069117:android:68238cd0053183c269b294",
         "android_client_info": {
-          "package_name": "com.hmdarkfire.maosentrelacadas.preview"
+          "package_name": "com.hmdarkfire.maosentrelacadas.development"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1088546210691-mmnahdlm1r2agtgl9mp6a5n4t6cbmtd8.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.hmdarkfire.maosentrelacadas.preview",
-            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
-          }
-        },
-        {
-          "client_id": "1088546210691-aqk5klap145kfvlrp0b7reenhjq6oe5j.apps.googleusercontent.com",
+          "client_id": "1017948069117-0562ul2sgstn4vqvt3lrk5ep6o6enfno.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCQeetxGNkErjclCkA-Qa4S4xpt5FoomzU"
+          "current_key": "AIzaSyC1noleGzapQNy_ZprxMzmnEIl57SGUzYQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1088546210691-aqk5klap145kfvlrp0b7reenhjq6oe5j.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:1088546210691:android:9d5fe5903ad0220f152cb6",
-        "android_client_info": {
-          "package_name": "com.hmdarkfire.maosentrelacadas.preview"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "1088546210691-8519lk5eh8hbffrv7qvt6drn0s7q73br.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.hmdarkfire.maosentrelacadas.preview",
-            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
-          }
-        },
-        {
-          "client_id": "1088546210691-aqk5klap145kfvlrp0b7reenhjq6oe5j.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCQeetxGNkErjclCkA-Qa4S4xpt5FoomzU"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "1088546210691-aqk5klap145kfvlrp0b7reenhjq6oe5j.apps.googleusercontent.com",
+              "client_id": "1017948069117-0562ul2sgstn4vqvt3lrk5ep6o6enfno.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
