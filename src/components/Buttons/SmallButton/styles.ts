@@ -16,3 +16,5 @@ export const Container = styled(TouchableOpacity)`
       background-color: ${theme.colors.components.smallButton.background};
     `}
 `;
+
+export const Load = styled.ActivityIndicator``;

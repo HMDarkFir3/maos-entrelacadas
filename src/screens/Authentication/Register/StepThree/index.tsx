@@ -104,6 +104,7 @@ export const StepThree: FC = () => {
                 size={24}
               />
             )}
+            isLoading={authState.isLoading}
             onPress={onPressSubmit}
           />
         </Footer>

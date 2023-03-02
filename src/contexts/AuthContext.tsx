@@ -11,6 +11,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import auth from "@react-native-firebase/auth";
 import firestore from "@react-native-firebase/firestore";
 
+import { UserDTO } from "@dtos/UserDTO";
+
 import {
   authReducer,
   initialState,
@@ -78,6 +80,8 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 
   const register = async () => {
     try {
+      dispatch({ type: "SET_IS_LOADING", payload: true });
+
       const { user } = await auth().createUserWithEmailAndPassword(
         state.email,
         state.password
@@ -91,17 +95,20 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
       });
 
       const data = {
+        uid: user.uid,
         given_name: state.givenName,
         email: state.email,
         gender: state.gender,
         birthdate: state.birthdate,
-      };
+      } as UserDTO;
 
       dispatch({ type: "SET_USER", payload: data });
 
       await AsyncStorage.setItem(COLLECTION_USER, JSON.stringify(data));
     } catch (error) {
       console.log(error);
+    } finally {
+      dispatch({ type: "SET_IS_LOADING", payload: false });
     }
   };
 
