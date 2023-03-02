@@ -115,7 +115,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const logOut = async () => {
     try {
       await auth().signOut();
-      await AsyncStorage.removeItem(COLLECTION_USER);
+      `await AsyncStorage.removeItem(COLLECTION_USER);`;
       dispatch({ type: "SET_USER", payload: null });
     } catch (error) {
       console.log(error);
