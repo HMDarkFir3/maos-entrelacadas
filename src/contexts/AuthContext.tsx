@@ -10,6 +10,7 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import auth from "@react-native-firebase/auth";
 import firestore from "@react-native-firebase/firestore";
+import { format } from "date-fns";
 
 import { UserDTO } from "@dtos/UserDTO";
 
@@ -32,6 +33,16 @@ export interface AuthContextData {
 
 interface AuthProviderProps {
   children: ReactNode;
+}
+
+interface User {
+  given_name: string;
+  email: string;
+  gender: string;
+  birthdate: {
+    nanoseconds: number;
+    seconds: number;
+  };
 }
 
 export const AuthContext = createContext({} as AuthContextData);
@@ -60,21 +71,37 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 
   const login = async () => {
     try {
-      console.log(state.email, state.password);
+      dispatch({ type: "SET_IS_LOADING", payload: true });
 
       const { user } = await auth().signInWithEmailAndPassword(
         state.email,
         state.password
       );
 
-      const { data } = await firestore()
+      await firestore()
         .collection("users")
         .doc(user?.uid)
-        .get();
+        .get()
+        .then(async (documentSnapshot) => {
+          const formattedBirthdate = new Date(
+            documentSnapshot.data()?.birthdate.seconds * 1000
+          );
 
-      console.log(data());
+          const data = {
+            uid: user?.uid,
+            given_name: documentSnapshot.data()?.given_name,
+            email: documentSnapshot.data()?.email,
+            gender: documentSnapshot.data()?.gender,
+            birthdate: formattedBirthdate,
+          } as UserDTO;
+
+          dispatch({ type: "SET_USER", payload: data });
+          await AsyncStorage.setItem(COLLECTION_USER, JSON.stringify(data));
+        });
     } catch (error) {
       console.log(error);
+    } finally {
+      dispatch({ type: "SET_IS_LOADING", payload: false });
     }
   };
 
@@ -87,24 +114,27 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         state.password
       );
 
-      await firestore().collection("users").doc(user?.uid).set({
-        given_name: state.givenName,
-        email: state.email,
-        gender: state.gender,
-        birthdate: state.birthdate,
-      });
+      await firestore()
+        .collection("users")
+        .doc(user?.uid)
+        .set({
+          given_name: state.givenName,
+          email: state.email,
+          gender: state.gender,
+          birthdate: state.birthdate,
+        })
+        .then(async () => {
+          const data = {
+            uid: user.uid,
+            given_name: state.givenName,
+            email: state.email,
+            gender: state.gender,
+            birthdate: state.birthdate,
+          } as UserDTO;
 
-      const data = {
-        uid: user.uid,
-        given_name: state.givenName,
-        email: state.email,
-        gender: state.gender,
-        birthdate: state.birthdate,
-      } as UserDTO;
-
-      dispatch({ type: "SET_USER", payload: data });
-
-      await AsyncStorage.setItem(COLLECTION_USER, JSON.stringify(data));
+          dispatch({ type: "SET_USER", payload: data });
+          await AsyncStorage.setItem(COLLECTION_USER, JSON.stringify(data));
+        });
     } catch (error) {
       console.log(error);
     } finally {
@@ -114,8 +144,8 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 
   const logOut = async () => {
     try {
+      await AsyncStorage.removeItem(COLLECTION_USER);
       await auth().signOut();
-      `await AsyncStorage.removeItem(COLLECTION_USER);`;
       dispatch({ type: "SET_USER", payload: null });
     } catch (error) {
       console.log(error);

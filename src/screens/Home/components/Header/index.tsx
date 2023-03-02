@@ -1,6 +1,9 @@
 import { FC } from "react";
+import { Alert } from "react-native";
 import { useTheme } from "styled-components/native";
 import { SignOut } from "phosphor-react-native";
+
+import { useAuth } from "@hooks/useAuth";
 
 import {
   Container,
@@ -13,7 +16,26 @@ import {
 } from "./styles";
 
 export const Header: FC = () => {
+  const { logOut } = useAuth();
   const { colors } = useTheme();
+
+  const onPressLogOut = () => {
+    Alert.alert(
+      "Sair",
+      "Deseja sair da aplicação?",
+      [
+        {
+          text: "Não",
+          style: "cancel",
+        },
+        {
+          text: "Sim",
+          onPress: () => logOut(),
+        },
+      ],
+      { cancelable: true }
+    );
+  };
 
   return (
     <Container>
@@ -25,7 +47,7 @@ export const Header: FC = () => {
         </UserInfo>
       </Wrapper>
 
-      <SignOutButton activeOpacity={0.7}>
+      <SignOutButton activeOpacity={0.7} onPress={onPressLogOut}>
         <SignOut size={24} color={colors.screens.home.components.header.icon} />
       </SignOutButton>
     </Container>

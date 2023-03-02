@@ -116,6 +116,7 @@ export const Login: FC = () => {
                 size={24}
               />
             )}
+            isLoading={authState.isLoading}
             onPress={onPressLogin}
           />
         </Footer>
