@@ -35,16 +35,6 @@ interface AuthProviderProps {
   children: ReactNode;
 }
 
-interface User {
-  given_name: string;
-  email: string;
-  gender: string;
-  birthdate: {
-    nanoseconds: number;
-    seconds: number;
-  };
-}
-
 export const AuthContext = createContext({} as AuthContextData);
 
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {

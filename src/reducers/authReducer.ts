@@ -39,7 +39,7 @@ export type AuthAction =
       type: "SET_EMPTY_FIELDS";
     };
 
-export const initialState: AuthState = {
+export const initialState = {
   user: null,
   givenName: "",
   email: "",
@@ -50,7 +50,7 @@ export const initialState: AuthState = {
   sawIntroduction: false,
   isSigned: false,
   isLoading: false,
-};
+} as AuthState;
 
 export const authReducer = (state: AuthState, action: AuthAction) => {
   switch (action.type) {

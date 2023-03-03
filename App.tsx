@@ -9,6 +9,7 @@ import { FC } from "react";
 import { ThemeProvider } from "styled-components/native";
 
 import { AuthProvider } from "@contexts/AuthContext";
+import { TabBarProvider } from "@contexts/TabBarContext";
 
 import { Routes } from "@routes/index";
 
@@ -29,9 +30,11 @@ export const App: FC = () => {
 
   return (
     <AuthProvider>
-      <ThemeProvider theme={light}>
-        <Routes />
-      </ThemeProvider>
+      <TabBarProvider>
+        <ThemeProvider theme={light}>
+          <Routes />
+        </ThemeProvider>
+      </TabBarProvider>
     </AuthProvider>
   );
 };

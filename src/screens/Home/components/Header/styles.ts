@@ -16,6 +16,8 @@ export const Wrapper = styled.View`
   gap: 12px;
 `;
 
+export const ProfileButton = styled(TouchableOpacity)``;
+
 export const UserImage = styled.Image`
   width: 48px;
   height: 48px;
