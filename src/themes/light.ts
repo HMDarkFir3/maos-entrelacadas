@@ -42,6 +42,19 @@ export const light = {
           },
         },
       },
+      profile: {
+        primary: "#3cb371",
+        text: "#1c1e26",
+        icon: "#3cb371",
+
+        components: {
+          header: {
+            primary: "#3cb371",
+            text: "#bfbfbf",
+            icon: "#3cb371",
+          },
+        },
+      },
     },
 
     components: {
