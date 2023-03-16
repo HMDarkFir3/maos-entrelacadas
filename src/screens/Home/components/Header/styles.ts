@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components/native";
-import { TouchableOpacity } from "react-native";
+import { Pressable } from "react-native";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
 
 export const Container = styled.View`
@@ -16,7 +16,7 @@ export const Wrapper = styled.View`
   gap: 12px;
 `;
 
-export const ProfileButton = styled(TouchableOpacity)``;
+export const ProfileButton = styled(Pressable)``;
 
 export const UserImage = styled.Image`
   width: 48px;
@@ -48,4 +48,4 @@ export const Username = styled.Text`
   `}
 `;
 
-export const SignOutButton = styled(TouchableOpacity)``;
+export const SignOutButton = styled(Pressable)``;

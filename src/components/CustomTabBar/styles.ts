@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components/native";
+import { Pressable } from "react-native";
 
 interface TabItemTextProps {
   isActive: boolean;
@@ -16,7 +17,11 @@ export const Container = styled.View`
   border-color: ${({ theme }) => theme.colors.components.customTabBar.border};
 `;
 
-export const TabItem = styled.TouchableOpacity`
+export const TabItem = styled(Pressable).attrs(({ theme }) => ({
+  android_ripple: {
+    color: theme.colors.androidRipple.backgroundPrimary,
+  },
+}))`
   flex: 1;
   align-items: center;
   justify-content: center;

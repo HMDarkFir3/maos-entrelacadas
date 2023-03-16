@@ -24,7 +24,7 @@ export const CustomTabBar: FC<Props> = () => {
 
   return (
     <Container>
-      <TabItem activeOpacity={0.7} onPress={() => onPressNavigate("Home")}>
+      <TabItem onPress={() => onPressNavigate("Home")}>
         <House
           size={28}
           color={
@@ -38,7 +38,7 @@ export const CustomTabBar: FC<Props> = () => {
         </TabItemText>
       </TabItem>
 
-      <TabItem activeOpacity={0.7} onPress={() => onPressNavigate("Events")}>
+      <TabItem onPress={() => onPressNavigate("Events")}>
         <MapPinLine
           size={28}
           color={
@@ -52,7 +52,7 @@ export const CustomTabBar: FC<Props> = () => {
         </TabItemText>
       </TabItem>
 
-      <TabItem activeOpacity={0.7} onPress={() => onPressNavigate("Donations")}>
+      <TabItem onPress={() => onPressNavigate("Donations")}>
         <Gift
           size={28}
           color={
@@ -66,7 +66,7 @@ export const CustomTabBar: FC<Props> = () => {
         </TabItemText>
       </TabItem>
 
-      <TabItem activeOpacity={0.7} onPress={() => onPressNavigate("Profile")}>
+      <TabItem onPress={() => onPressNavigate("Profile")}>
         <User
           size={28}
           color={

@@ -2,10 +2,13 @@ import styled, { css } from "styled-components/native";
 
 export const Container = styled.View`
   flex: 1;
-
-  padding: 0 24px;
+  justify-content: space-between;
 
   background-color: ${({ theme }) => theme.colors.background};
+`;
+
+export const Wrapper = styled.View`
+  padding: 0 24px;
 `;
 
 export const EventHeader = styled.View`
@@ -24,3 +27,5 @@ export const EventTitle = styled.Text`
     color: ${theme.colors.screens.profile.text};
   `}
 `;
+
+export const Footer = styled.View``;

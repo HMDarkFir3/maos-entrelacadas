@@ -53,6 +53,10 @@ export const light = {
             text: "#bfbfbf",
             icon: "#3cb371",
           },
+          settingsItem: {
+            text: "#6e8592",
+            icon: "#6e8592",
+          },
         },
       },
     },
@@ -100,6 +104,10 @@ export const light = {
     navigationBar: {
       backgroundPrimary: "#ffffff",
       backgroundSecondary: "#ffffff",
+    },
+
+    androidRipple: {
+      backgroundPrimary: "#e1e1e1",
     },
   },
 
