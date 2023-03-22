@@ -1,26 +1,24 @@
 import { FC } from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+import { TabRoutes } from "@routes/tab.routes";
 
 import { Home } from "@screens/Home";
 import { Profile } from "@screens/Profile";
+import { Settings } from "@screens/Settings";
 
-import { CustomTabBar } from "@components/CustomTabBar";
-
-const { Navigator, Screen } = createBottomTabNavigator();
+const { Navigator, Screen, Group } = createNativeStackNavigator();
 
 export const AppRoutes: FC = () => {
   return (
     <Navigator
-      initialRouteName="Home"
-      tabBar={(props) => <CustomTabBar {...props} />}
+      initialRouteName="TabRoutes"
       screenOptions={{
         headerShown: false,
       }}
     >
-      <Screen name="Home" component={Home} />
-      <Screen name="Events" component={Home} />
-      <Screen name="Donations" component={Home} />
-      <Screen name="Profile" component={Profile} />
+      <Screen name="TabRoutes" component={TabRoutes} />
+      <Screen name="Settings" component={Settings} />
     </Navigator>
   );
 };

@@ -13,6 +13,7 @@ export declare global {
       Events: undefined;
       Donations: undefined;
       Profile: undefined;
+      Settings: undefined;
     }
   }
 }

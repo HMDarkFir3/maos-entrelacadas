@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { GestureDetector } from "react-native-gesture-handler";
+import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "styled-components/native";
 import {
   Funnel,
@@ -15,7 +15,10 @@ import { SettingsItem } from "@components-of-screens/Profile/components/Settings
 import { Container, Wrapper, EventHeader, EventTitle, Footer } from "./styles";
 
 export const Profile: FC = () => {
+  const { navigate } = useNavigation();
   const { colors } = useTheme();
+
+  const onPressNavigate = (screenName: "Settings") => navigate(screenName);
 
   return (
     <Container>
@@ -38,7 +41,7 @@ export const Profile: FC = () => {
             />
           )}
           title="Configurações"
-          onPress={() => alert("Configurações")}
+          onPress={() => onPressNavigate("Settings")}
         />
 
         <SettingsItem
