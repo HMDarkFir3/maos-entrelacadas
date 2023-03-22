@@ -11,5 +11,5 @@ export const Container = styled.View`
 `;
 
 export const Header = styled.View`
-  margin-top: ${STATUS_BAR_HEIGHT + }px;
+  margin-top: ${STATUS_BAR_HEIGHT + 24}px;
 `;

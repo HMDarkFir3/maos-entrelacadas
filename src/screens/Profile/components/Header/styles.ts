@@ -1,13 +1,14 @@
 import styled, { css } from "styled-components/native";
 import { TouchableOpacity } from "react-native";
-import { getStatusBarHeight } from "react-native-iphone-x-helper";
+
+import { STATUS_BAR_HEIGHT } from "@utils/globalVariables";
 
 export const Container = styled(TouchableOpacity)`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 
-  margin-top: ${getStatusBarHeight() + 24}px;
+  margin-top: ${STATUS_BAR_HEIGHT + 24}px;
 `;
 
 export const Wrapper = styled.View`
