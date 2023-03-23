@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "styled-components/native";
 import {
@@ -9,16 +10,37 @@ import {
   SignOut,
 } from "phosphor-react-native";
 
+import { useAuth } from "@hooks/useAuth";
+
 import { Header } from "@components-of-screens/Profile/components/Header";
 import { SettingsItem } from "@components-of-screens/Profile/components/SettingsItem";
 
 import { Container, Wrapper, EventHeader, EventTitle, Footer } from "./styles";
 
 export const Profile: FC = () => {
+  const { logOut } = useAuth();
   const { navigate } = useNavigation();
   const { colors } = useTheme();
 
   const onPressNavigate = (screenName: "Settings") => navigate(screenName);
+
+  const onPressLogOut = () => {
+    Alert.alert(
+      "Sair",
+      "Deseja sair da aplicação?",
+      [
+        {
+          text: "Não",
+          style: "cancel",
+        },
+        {
+          text: "Sim",
+          onPress: () => logOut(),
+        },
+      ],
+      { cancelable: true }
+    );
+  };
 
   return (
     <Container>
@@ -72,6 +94,7 @@ export const Profile: FC = () => {
             />
           )}
           title="Sair"
+          onPress={onPressLogOut}
         />
       </Footer>
     </Container>

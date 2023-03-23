@@ -5,8 +5,8 @@
     "start": "npx expo start --dev-client",
     "android": "npx expo run:android",
     "ios": "npx expo run:ios",
-    "build-development": "eas build --profile development --platform android",
-    "build-preview": "eas build --profile preview --platform android"
+    "build:development": "eas build --profile development --platform android",
+    "build:preview": "eas build --profile preview --platform android"
   },
   "dependencies": {
     "@expo-google-fonts/ubuntu": "^0.2.2",

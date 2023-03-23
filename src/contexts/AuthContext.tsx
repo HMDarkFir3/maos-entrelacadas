@@ -10,9 +10,10 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import auth from "@react-native-firebase/auth";
 import firestore from "@react-native-firebase/firestore";
-import { format } from "date-fns";
 
 import { UserDTO } from "@dtos/UserDTO";
+
+import { useTabBar } from "@hooks/useTabBar";
 
 import {
   authReducer,
@@ -42,6 +43,8 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     authReducer,
     initialState
   );
+
+  const { dispatch: tabBarDispatch } = useTabBar();
 
   const getSawIntroductionInStorage = async () => {
     const storage = await AsyncStorage.getItem(COLLECTION_INTRODUCTION);
@@ -136,6 +139,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     try {
       await AsyncStorage.removeItem(COLLECTION_USER);
       await auth().signOut();
+      tabBarDispatch({ type: "SET_IS_ACTIVE", payload: "Home" });
       dispatch({ type: "SET_USER", payload: null });
     } catch (error) {
       console.log(error);

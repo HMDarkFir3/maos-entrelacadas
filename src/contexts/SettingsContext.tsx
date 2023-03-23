@@ -26,8 +26,6 @@ export const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
 
     if (storage) {
       setTheme(storage === "light" ? dark : light);
-
-      console.log(storage);
     }
   };
 
@@ -35,8 +33,6 @@ export const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
     setTheme(theme.title === "light" ? dark : light);
 
     await AsyncStorage.setItem(COLLECTION_THEME, theme.title);
-
-    console.log(theme.title);
   };
 
   useEffect(() => {

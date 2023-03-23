@@ -30,13 +30,13 @@ export const App: FC = () => {
 
   return (
     <NavigationContainer>
-      <AuthProvider>
-        <TabBarProvider>
+      <TabBarProvider>
+        <AuthProvider>
           <SettingsProvider>
             <Routes />
           </SettingsProvider>
-        </TabBarProvider>
-      </AuthProvider>
+        </AuthProvider>
+      </TabBarProvider>
     </NavigationContainer>
   );
 };

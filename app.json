@@ -32,7 +32,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#3cb371"
       },
-      "package": "com.hmdarkfire.maosentrelacadas.development"
+      "package": "com.hmdarkfire.maosentrelacadas.preview"
     },
     "extra": {
       "eas": {
