@@ -114,8 +114,8 @@ export const dark = {
     },
 
     navigationBar: {
-      backgroundPrimary: "#000000",
-      backgroundSecondary: "#000000",
+      backgroundPrimary: "#222222",
+      backgroundSecondary: "#222222",
     },
 
     androidRipple: {

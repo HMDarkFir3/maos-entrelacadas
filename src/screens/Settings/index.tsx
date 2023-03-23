@@ -1,6 +1,4 @@
-import * as NavigationBar from "expo-navigation-bar";
-import { useState, useCallback, FC } from "react";
-import { useFocusEffect } from "@react-navigation/native";
+import { useState, FC } from "react";
 import { useTheme } from "styled-components/native";
 import { Moon, BellRinging } from "phosphor-react-native";
 
@@ -17,22 +15,11 @@ export const Settings: FC = () => {
 
   const [notificationsSwitch, setNotificationsSwitch] = useState(false);
 
-  const onToggleTheme = () => {
-    toggleTheme();
-  };
+  const onToggleTheme = async () => toggleTheme();
 
   const onToggleNotifications = () => {
     setNotificationsSwitch((prevState) => !prevState);
   };
-
-  useFocusEffect(
-    useCallback(() => {
-      NavigationBar.setBackgroundColorAsync(
-        colors.navigationBar.backgroundPrimary
-      );
-      NavigationBar.setButtonStyleAsync("light");
-    }, [])
-  );
 
   return (
     <Container>
@@ -50,7 +37,9 @@ export const Settings: FC = () => {
             />
           )}
           title="Tema escuro"
+          value={theme.title === "dark"}
           switchValue={theme.title === "dark"}
+          onValueChange={onToggleTheme}
           onSwitchValue={onToggleTheme}
         />
 

@@ -1,7 +1,5 @@
-import * as NavigationBar from "expo-navigation-bar";
-import { useRef, useCallback, FC } from "react";
+import { useRef, FC } from "react";
 import { TextInput } from "react-native";
-import { useFocusEffect } from "@react-navigation/native";
 import { useTheme } from "styled-components/native";
 import { LockOpen, Check } from "phosphor-react-native";
 
@@ -31,15 +29,6 @@ export const StepThree: FC = () => {
 
     register();
   };
-
-  useFocusEffect(
-    useCallback(() => {
-      NavigationBar.setBackgroundColorAsync(
-        colors.navigationBar.backgroundPrimary
-      );
-      NavigationBar.setButtonStyleAsync("light");
-    }, [])
-  );
 
   return (
     <InputBlurButton onPress={onPressInScreen}>

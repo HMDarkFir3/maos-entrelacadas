@@ -1,7 +1,5 @@
-import * as NavigationBar from "expo-navigation-bar";
-import { useCallback, FC } from "react";
-import { useNavigation, useFocusEffect } from "@react-navigation/native";
-import { useTheme } from "styled-components/native";
+import { FC } from "react";
+import { useNavigation } from "@react-navigation/native";
 
 import { Button } from "@components/Buttons/Button";
 
@@ -18,19 +16,9 @@ import {
 
 export const Welcome: FC = () => {
   const { navigate } = useNavigation();
-  const { colors } = useTheme();
 
   const onPressLogin = (screenName: "Login" | "StepOne") =>
     navigate(screenName);
-
-  useFocusEffect(
-    useCallback(() => {
-      NavigationBar.setBackgroundColorAsync(
-        colors.navigationBar.backgroundPrimary
-      );
-      NavigationBar.setButtonStyleAsync("light");
-    }, [])
-  );
 
   return (
     <Container>

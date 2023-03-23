@@ -8,11 +8,11 @@ interface Props extends SwitchProps {
   icon: any;
   title: string;
   switchValue: boolean;
-  onSwitchValue: (prevState: boolean) => void;
+  onSwitchValue: () => void;
 }
 
 export const Switcher: FC<Props> = (props) => {
-  const { icon: Icon, title, switchValue, onSwitchValue } = props;
+  const { icon: Icon, title, switchValue, onSwitchValue, ...rest } = props;
 
   const { colors } = useTheme();
 
@@ -24,6 +24,7 @@ export const Switcher: FC<Props> = (props) => {
       </Wrapper>
 
       <Switch
+        {...rest}
         trackColor={{
           false: colors.screens.settings.components.switcher.trackInactive,
           true: colors.screens.settings.components.switcher.trackActive,
@@ -34,7 +35,7 @@ export const Switcher: FC<Props> = (props) => {
             : colors.screens.settings.components.switcher.thumbInactive
         }
         value={switchValue}
-        onValueChange={(value) => onSwitchValue(value)}
+        onValueChange={onSwitchValue}
       />
     </Container>
   );

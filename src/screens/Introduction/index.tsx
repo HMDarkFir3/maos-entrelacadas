@@ -1,8 +1,7 @@
-import * as NavigationBar from "expo-navigation-bar";
-import { useState, useRef, useCallback, FC } from "react";
+import { useState, useRef, FC } from "react";
 import { FlatList, Alert, Animated, ViewToken } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useNavigation, useFocusEffect } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "styled-components/native";
 import { ArrowRight, Check } from "phosphor-react-native";
 
@@ -70,15 +69,6 @@ export const Introduction: FC = () => {
       sawIntroductionInStorage();
     }
   };
-
-  useFocusEffect(
-    useCallback(() => {
-      NavigationBar.setBackgroundColorAsync(
-        colors.navigationBar.backgroundPrimary
-      );
-      NavigationBar.setButtonStyleAsync("light");
-    }, [])
-  );
 
   return (
     <Container>

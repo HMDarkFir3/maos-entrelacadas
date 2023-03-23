@@ -1,6 +1,7 @@
 import { StatusBar } from "expo-status-bar";
-import { FC } from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import * as NavigationBar from "expo-navigation-bar";
+import { useCallback, FC } from "react";
+import { useFocusEffect } from "@react-navigation/native";
 import { useTheme } from "styled-components/native";
 
 import { useAuth } from "@hooks/useAuth";
@@ -14,13 +15,25 @@ export const Routes: FC = () => {
   const { theme } = useSettings();
   const { colors } = useTheme();
 
+  useFocusEffect(
+    useCallback(() => {
+      NavigationBar.setBackgroundColorAsync(
+        theme.colors.navigationBar.backgroundPrimary
+      );
+      NavigationBar.setButtonStyleAsync(
+        theme.title === "light" ? "dark" : "light"
+      );
+    }, [theme.title])
+  );
+
   return (
-    <NavigationContainer>
+    <>
       <StatusBar
         backgroundColor={colors.statusBar.backgroundPrimary}
         style={theme.title === "light" ? "dark" : "light"}
       />
+
       {authState.user?.uid ? <AppRoutes /> : <AuthRoutes />}
-    </NavigationContainer>
+    </>
   );
 };

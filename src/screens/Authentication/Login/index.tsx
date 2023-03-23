@@ -1,7 +1,5 @@
-import * as NavigationBar from "expo-navigation-bar";
-import { useRef, useCallback, FC } from "react";
+import { useRef, FC } from "react";
 import { TextInput } from "react-native";
-import { useFocusEffect } from "@react-navigation/native";
 import { useTheme } from "styled-components/native";
 import { EnvelopeSimple, LockOpen, Check } from "phosphor-react-native";
 
@@ -35,15 +33,6 @@ export const Login: FC = () => {
   const onPressLogin = () => login();
 
   const onPressBackButton = () => authDispatch({ type: "SET_EMPTY_FIELDS" });
-
-  useFocusEffect(
-    useCallback(() => {
-      NavigationBar.setBackgroundColorAsync(
-        colors.navigationBar.backgroundPrimary
-      );
-      NavigationBar.setButtonStyleAsync("light");
-    }, [])
-  );
 
   return (
     <InputBlurButton onPress={onPressInScreen}>

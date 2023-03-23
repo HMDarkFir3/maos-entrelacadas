@@ -9,7 +9,7 @@ import { dark } from "@themes/dark";
 
 export interface SettingsContextData {
   theme: DefaultTheme;
-  toggleTheme: () => void;
+  toggleTheme: () => Promise<void>;
 }
 
 interface SettingsProviderProps {
@@ -25,7 +25,9 @@ export const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
     const storage = await AsyncStorage.getItem(COLLECTION_THEME);
 
     if (storage) {
-      setTheme(storage === "light" ? light : dark);
+      setTheme(storage === "light" ? dark : light);
+
+      console.log(storage);
     }
   };
 
@@ -33,6 +35,8 @@ export const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
     setTheme(theme.title === "light" ? dark : light);
 
     await AsyncStorage.setItem(COLLECTION_THEME, theme.title);
+
+    console.log(theme.title);
   };
 
   useEffect(() => {

@@ -7,6 +7,7 @@ import {
   Ubuntu_700Bold,
 } from "@expo-google-fonts/ubuntu";
 import { FC } from "react";
+import { NavigationContainer } from "@react-navigation/native";
 
 import { AuthProvider } from "@contexts/AuthContext";
 import { TabBarProvider } from "@contexts/TabBarContext";
@@ -28,12 +29,14 @@ export const App: FC = () => {
   SplashScreen.hideAsync();
 
   return (
-    <AuthProvider>
-      <TabBarProvider>
-        <SettingsProvider>
-          <Routes />
-        </SettingsProvider>
-      </TabBarProvider>
-    </AuthProvider>
+    <NavigationContainer>
+      <AuthProvider>
+        <TabBarProvider>
+          <SettingsProvider>
+            <Routes />
+          </SettingsProvider>
+        </TabBarProvider>
+      </AuthProvider>
+    </NavigationContainer>
   );
 };

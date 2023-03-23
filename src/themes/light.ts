@@ -114,8 +114,8 @@ export const light = {
     },
 
     navigationBar: {
-      backgroundPrimary: "#000000",
-      backgroundSecondary: "#000000",
+      backgroundPrimary: "#ffffff",
+      backgroundSecondary: "#ffffff",
     },
 
     androidRipple: {

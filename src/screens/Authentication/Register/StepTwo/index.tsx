@@ -1,6 +1,5 @@
-import * as NavigationBar from "expo-navigation-bar";
-import { useCallback, FC } from "react";
-import { useNavigation, useFocusEffect } from "@react-navigation/native";
+import { FC } from "react";
+import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "styled-components/native";
 import { GenderNeuter, Cake, ArrowRight } from "phosphor-react-native";
 
@@ -28,15 +27,6 @@ export const StepTwo: FC = () => {
   };
 
   const onPressBackButton = () => authDispatch({ type: "SET_EMPTY_FIELDS" });
-
-  useFocusEffect(
-    useCallback(() => {
-      NavigationBar.setBackgroundColorAsync(
-        colors.navigationBar.backgroundPrimary
-      );
-      NavigationBar.setButtonStyleAsync("light");
-    }, [])
-  );
 
   return (
     <InputBlurButton>
