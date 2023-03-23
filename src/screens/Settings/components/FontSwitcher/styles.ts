@@ -21,6 +21,15 @@ export const Title = styled.Text`
   font-size: 20px;
   ${({ theme }) => css`
     font-family: ${theme.fonts.medium};
-    color: ${theme.colors.screens.settings.components.switcher.text};
+    color: ${theme.colors.screens.settings.components.fontSwitcher.textPrimary};
+  `}
+`;
+
+export const SelectedFont = styled.Text`
+  font-size: 20px;
+  ${({ theme }) => css`
+    font-family: ${theme.fonts.medium};
+    color: ${theme.colors.screens.settings.components.fontSwitcher
+      .textSecondary};
   `}
 `;

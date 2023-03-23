@@ -69,6 +69,11 @@ export const dark = {
             thumbActive: "#f4f3f4",
             thumbInactive: "#f4f3f4",
           },
+          fontSwitcher: {
+            icon: "#3cb371",
+            textPrimary: "#e5ebef",
+            textSecondary: "#3cb371",
+          },
         },
       },
     },

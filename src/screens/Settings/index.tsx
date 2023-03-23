@@ -4,6 +4,7 @@ import { Moon, BellRinging } from "phosphor-react-native";
 
 import { BackButton } from "@components/Buttons/BackButton";
 import { Switcher } from "@components-of-screens/Settings/components/Switcher";
+import { FontSwitcher } from "@components-of-screens/Settings/components/FontSwitcher";
 
 import { useSettings } from "@hooks/useSettings";
 
@@ -55,6 +56,8 @@ export const Settings: FC = () => {
           switchValue={notificationsSwitch}
           onSwitchValue={onToggleNotifications}
         />
+
+        <FontSwitcher />
       </Wrapper>
     </Container>
   );

@@ -69,6 +69,11 @@ export const light = {
             thumbActive: "#f4f3f4",
             thumbInactive: "#f4f3f4",
           },
+          fontSwitcher: {
+            icon: "#3cb371",
+            textPrimary: "#6e8592",
+            textSecondary: "#3cb371",
+          },
         },
       },
     },

@@ -35,6 +35,8 @@ export const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
     await AsyncStorage.setItem(COLLECTION_THEME, theme.title);
   };
 
+  const changeFontSize = (size: "sm" | "nm" | "lg") => {};
+
   useEffect(() => {
     getThemeInStorage();
   }, []);
