@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import * as NavigationBar from "expo-navigation-bar";
 import { useRef, useCallback, FC } from "react";
 import { TextInput } from "react-native";
@@ -42,18 +41,13 @@ export const Login: FC = () => {
       NavigationBar.setBackgroundColorAsync(
         colors.navigationBar.backgroundPrimary
       );
-      NavigationBar.setButtonStyleAsync("dark");
+      NavigationBar.setButtonStyleAsync("light");
     }, [])
   );
 
   return (
     <InputBlurButton onPress={onPressInScreen}>
       <Container>
-        <StatusBar
-          backgroundColor={colors.statusBar.backgroundPrimary}
-          style="dark"
-        />
-
         <Header
           title="Faça login"
           description="Queremos impactar de forma positiva a sua vida e de sua comunidade."

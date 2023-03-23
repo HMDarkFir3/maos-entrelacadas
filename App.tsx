@@ -7,14 +7,12 @@ import {
   Ubuntu_700Bold,
 } from "@expo-google-fonts/ubuntu";
 import { FC } from "react";
-import { ThemeProvider } from "styled-components/native";
 
 import { AuthProvider } from "@contexts/AuthContext";
 import { TabBarProvider } from "@contexts/TabBarContext";
+import { SettingsProvider } from "@contexts/SettingsContext";
 
 import { Routes } from "@routes/index";
-
-import { light } from "@themes/light";
 
 export const App: FC = () => {
   SplashScreen.preventAutoHideAsync();
@@ -32,9 +30,9 @@ export const App: FC = () => {
   return (
     <AuthProvider>
       <TabBarProvider>
-        <ThemeProvider theme={light}>
+        <SettingsProvider>
           <Routes />
-        </ThemeProvider>
+        </SettingsProvider>
       </TabBarProvider>
     </AuthProvider>
   );

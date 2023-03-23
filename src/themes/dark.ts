@@ -1,14 +1,14 @@
-export const light = {
-  title: "light",
+export const dark = {
+  title: "dark",
 
   colors: {
-    background: "#ffffff",
+    background: "#222222",
 
     screens: {
       welcome: {
         primary: "#3cb371",
         textPrimary: "#3cb371",
-        textSecondary: "#7d9cae",
+        textSecondary: "#e5ebef",
       },
       authentication: {
         textPrimary: "#3cb371",
@@ -16,17 +16,17 @@ export const light = {
         components: {
           header: {
             textPrimary: "#3cb371",
-            textSecondary: "#7d9cae",
+            textSecondary: "#e5ebef",
           },
         },
       },
       introduction: {
-        text: "#7d9cae",
+        text: "#e5ebef",
 
         components: {
           introductionSlider: {
             textPrimary: "#3cb371",
-            textSecondary: "#7d9cae",
+            textSecondary: "#e5ebef",
           },
           introductionSliderPaginator: {
             dot: "#3cb371",
@@ -37,14 +37,14 @@ export const light = {
         components: {
           header: {
             primary: "#3cb371",
-            text: "#1c1e26",
+            text: "#e5ebef",
             icon: "#3cb371",
           },
         },
       },
       profile: {
         primary: "#3cb371",
-        text: "#1c1e26",
+        text: "#e5ebef",
         icon: "#3cb371",
 
         components: {
@@ -54,8 +54,8 @@ export const light = {
             icon: "#3cb371",
           },
           settingsItem: {
-            text: "#6e8592",
-            icon: "#6e8592",
+            text: "#e5ebef",
+            icon: "#e5ebef",
           },
         },
       },
@@ -63,7 +63,7 @@ export const light = {
         components: {
           switcher: {
             icon: "#3cb371",
-            text: "#6e8592",
+            text: "#e5ebef",
             trackActive: "#3cb371",
             trackInactive: "#bdc8ce",
             thumbActive: "#f4f3f4",
@@ -75,8 +75,8 @@ export const light = {
 
     components: {
       backButton: {
-        title: "#1c1e26",
-        icon: "#1c1e26",
+        title: "#e5ebef",
+        icon: "#e5ebef",
       },
       smallButton: {
         background: "#3cb371",
@@ -88,29 +88,29 @@ export const light = {
       },
       input: {
         primary: "#3cb371",
-        text: "#1c1e26",
-        placeholder: "#8babc3",
+        text: "#e5ebef",
+        placeholder: "#c0c0c0",
       },
       select: {
         primary: "#3cb371",
-        text: "#1c1e26",
-        placeholder: "#8babc3",
+        text: "#e5ebef",
+        placeholder: "#c0c0c0",
       },
       datePicker: {
         primary: "#3cb371",
-        text: "#1c1e26",
-        placeholder: "#8babc3",
+        text: "#e5ebef",
+        placeholder: "#c0c0c0",
       },
       customTabBar: {
-        background: "#ffffff",
+        background: "#222222",
         active: "#3cb371",
-        inactive: "#6E8592",
+        inactive: "#e5ebef",
         border: "#3cb371",
       },
     },
 
     statusBar: {
-      backgroundPrimary: "#ffffff",
+      backgroundPrimary: "#222222",
     },
 
     navigationBar: {
@@ -119,7 +119,7 @@ export const light = {
     },
 
     androidRipple: {
-      backgroundPrimary: "#e1e1e1",
+      backgroundPrimary: "#111111",
     },
   },
 

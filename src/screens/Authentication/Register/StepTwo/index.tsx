@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import * as NavigationBar from "expo-navigation-bar";
 import { useCallback, FC } from "react";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
@@ -35,18 +34,13 @@ export const StepTwo: FC = () => {
       NavigationBar.setBackgroundColorAsync(
         colors.navigationBar.backgroundPrimary
       );
-      NavigationBar.setButtonStyleAsync("dark");
+      NavigationBar.setButtonStyleAsync("light");
     }, [])
   );
 
   return (
     <InputBlurButton>
       <Container>
-        <StatusBar
-          backgroundColor={colors.statusBar.backgroundPrimary}
-          style="dark"
-        />
-
         <Header
           title="Crie sua conta!"
           description="Selecione seu gênero e preecha sua data de nascimento."

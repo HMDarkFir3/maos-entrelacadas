@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import * as NavigationBar from "expo-navigation-bar";
 import { useCallback, FC } from "react";
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
@@ -29,17 +28,12 @@ export const Welcome: FC = () => {
       NavigationBar.setBackgroundColorAsync(
         colors.navigationBar.backgroundPrimary
       );
-      NavigationBar.setButtonStyleAsync("dark");
+      NavigationBar.setButtonStyleAsync("light");
     }, [])
   );
 
   return (
     <Container>
-      <StatusBar
-        backgroundColor={colors.statusBar.backgroundPrimary}
-        style="dark"
-      />
-
       <Logo source={require("@assets/img/logo.png")} />
 
       <TextWrapper>

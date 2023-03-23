@@ -1,5 +1,6 @@
-import { FC } from "react";
-import { useNavigation } from "@react-navigation/native";
+import * as NavigationBar from "expo-navigation-bar";
+import { useCallback, FC } from "react";
+import { useNavigation, useFocusEffect } from "@react-navigation/native";
 import { useTheme } from "styled-components/native";
 import {
   Funnel,
@@ -19,6 +20,15 @@ export const Profile: FC = () => {
   const { colors } = useTheme();
 
   const onPressNavigate = (screenName: "Settings") => navigate(screenName);
+
+  useFocusEffect(
+    useCallback(() => {
+      NavigationBar.setBackgroundColorAsync(
+        colors.navigationBar.backgroundPrimary
+      );
+      NavigationBar.setButtonStyleAsync("light");
+    }, [])
+  );
 
   return (
     <Container>

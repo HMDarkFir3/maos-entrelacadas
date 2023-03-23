@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import * as NavigationBar from "expo-navigation-bar";
 import { useState, useRef, useCallback, FC } from "react";
 import { FlatList, Alert, Animated, ViewToken } from "react-native";
@@ -77,16 +76,12 @@ export const Introduction: FC = () => {
       NavigationBar.setBackgroundColorAsync(
         colors.navigationBar.backgroundPrimary
       );
-      NavigationBar.setButtonStyleAsync("dark");
+      NavigationBar.setButtonStyleAsync("light");
     }, [])
   );
 
   return (
     <Container>
-      <StatusBar
-        backgroundColor={colors.statusBar.backgroundPrimary}
-        style="dark"
-      />
       <Animated.FlatList
         ref={introductionSliderRef}
         data={introductionSlider}
