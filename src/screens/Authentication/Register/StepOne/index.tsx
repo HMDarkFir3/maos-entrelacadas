@@ -5,6 +5,7 @@ import { useTheme } from "styled-components/native";
 import { User, EnvelopeSimple, ArrowRight } from "phosphor-react-native";
 
 import { useAuth } from "@hooks/useAuth";
+import { useSettings } from "@hooks/useSettings";
 
 import { Header } from "@components-of-screens/Authentication/components/Header";
 import { Input } from "@components/Inputs/Input";
@@ -14,6 +15,7 @@ import { InputBlurButton, Container, InputWrapper, Footer } from "../../styles";
 
 export const StepOne: FC = () => {
   const { state: authState, dispatch: authDispatch } = useAuth();
+  const { fontSizeValue } = useSettings();
   const { navigate } = useNavigation();
   const { colors } = useTheme();
 
@@ -56,7 +58,10 @@ export const StepOne: FC = () => {
               })
             }
             icon={() => (
-              <User size={24} color={colors.components.input.placeholder} />
+              <User
+                size={fontSizeValue(24)}
+                color={colors.components.input.placeholder}
+              />
             )}
             placeholder="Nome e Sobrenome"
             maxLength={50}
@@ -75,7 +80,7 @@ export const StepOne: FC = () => {
             }
             icon={() => (
               <EnvelopeSimple
-                size={24}
+                size={fontSizeValue(24)}
                 color={colors.components.input.placeholder}
               />
             )}
@@ -89,9 +94,9 @@ export const StepOne: FC = () => {
           <SmallButton
             icon={() => (
               <ArrowRight
+                size={fontSizeValue(24)}
                 color={colors.components.smallButton.icon}
                 weight="bold"
-                size={24}
               />
             )}
             onPress={onPressNextStep}

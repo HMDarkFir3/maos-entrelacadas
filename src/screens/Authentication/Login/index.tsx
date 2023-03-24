@@ -59,7 +59,7 @@ export const Login: FC = () => {
             }
             icon={() => (
               <EnvelopeSimple
-                size={24}
+                size={fontSizeValue(24)}
                 color={colors.components.input.placeholder}
               />
             )}
@@ -79,7 +79,10 @@ export const Login: FC = () => {
               })
             }
             icon={() => (
-              <LockOpen size={24} color={colors.components.input.placeholder} />
+              <LockOpen
+                size={fontSizeValue(24)}
+                color={colors.components.input.placeholder}
+              />
             )}
             isPassword
             placeholder="Senha"
@@ -101,7 +104,7 @@ export const Login: FC = () => {
               <Check
                 color={colors.components.smallButton.icon}
                 weight="bold"
-                size={24}
+                size={fontSizeValue(24)}
               />
             )}
             isLoading={authState.isLoading}

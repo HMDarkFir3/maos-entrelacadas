@@ -32,7 +32,10 @@ export const Header: FC = () => {
         </UserInfo>
       </Wrapper>
 
-      <Info size={24} color={colors.screens.profile.components.header.icon} />
+      <Info
+        size={fontSizeValue(24)}
+        color={colors.screens.profile.components.header.icon}
+      />
     </Container>
   );
 };

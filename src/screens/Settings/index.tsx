@@ -11,7 +11,7 @@ import { useSettings } from "@hooks/useSettings";
 import { Container, Header, Wrapper } from "./styles";
 
 export const Settings: FC = () => {
-  const { theme, toggleTheme } = useSettings();
+  const { theme, toggleTheme, fontSizeValue } = useSettings();
   const { colors } = useTheme();
 
   const [notificationsSwitch, setNotificationsSwitch] = useState(false);
@@ -32,7 +32,7 @@ export const Settings: FC = () => {
         <Switcher
           icon={() => (
             <Moon
-              size={24}
+              size={fontSizeValue(24)}
               color={colors.screens.settings.components.switcher.icon}
               weight="bold"
             />
@@ -47,7 +47,7 @@ export const Settings: FC = () => {
         <Switcher
           icon={() => (
             <BellRinging
-              size={24}
+              size={fontSizeValue(24)}
               color={colors.screens.settings.components.switcher.icon}
               weight="bold"
             />

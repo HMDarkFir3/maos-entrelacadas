@@ -76,7 +76,10 @@ export const Select: FC<Props<typeof genders>> = (props) => {
         )}
 
         <CaretWrapper style={caretWrapperAnimatedStyle}>
-          <CaretDown size={16} color={colors.components.select.primary} />
+          <CaretDown
+            size={fontSizeValue(16)}
+            color={colors.components.select.primary}
+          />
         </CaretWrapper>
       </Wrapper>
 

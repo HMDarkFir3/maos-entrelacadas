@@ -28,7 +28,7 @@ export const CustomTabBar: FC<Props> = () => {
     <Container>
       <TabItem onPress={() => onPressNavigate("Home")}>
         <House
-          size={28}
+          size={fontSizeValue(28)}
           color={
             tabBarState.isActive === "Home"
               ? colors.components.customTabBar.active
@@ -45,7 +45,7 @@ export const CustomTabBar: FC<Props> = () => {
 
       <TabItem onPress={() => onPressNavigate("Events")}>
         <MapPinLine
-          size={28}
+          size={fontSizeValue(28)}
           color={
             tabBarState.isActive === "Events"
               ? colors.components.customTabBar.active
@@ -62,7 +62,7 @@ export const CustomTabBar: FC<Props> = () => {
 
       <TabItem onPress={() => onPressNavigate("Donations")}>
         <Gift
-          size={28}
+          size={fontSizeValue(28)}
           color={
             tabBarState.isActive === "Donations"
               ? colors.components.customTabBar.active
@@ -79,7 +79,7 @@ export const CustomTabBar: FC<Props> = () => {
 
       <TabItem onPress={() => onPressNavigate("Profile")}>
         <User
-          size={28}
+          size={fontSizeValue(28)}
           color={
             tabBarState.isActive === "Profile"
               ? colors.components.customTabBar.active

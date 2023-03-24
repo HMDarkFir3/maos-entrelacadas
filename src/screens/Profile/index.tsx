@@ -54,7 +54,10 @@ export const Profile: FC = () => {
             Eventos
           </EventTitle>
 
-          <Funnel size={24} color={colors.screens.profile.icon} />
+          <Funnel
+            size={fontSizeValue(24)}
+            color={colors.screens.profile.icon}
+          />
         </EventHeader>
       </Wrapper>
 
@@ -62,7 +65,7 @@ export const Profile: FC = () => {
         <SettingsItem
           icon={() => (
             <Gear
-              size={24}
+              size={fontSizeValue(24)}
               color={colors.screens.profile.components.settingsItem.icon}
             />
           )}
@@ -73,7 +76,7 @@ export const Profile: FC = () => {
         <SettingsItem
           icon={() => (
             <ClockCounterClockwise
-              size={24}
+              size={fontSizeValue(24)}
               color={colors.screens.profile.components.settingsItem.icon}
             />
           )}
@@ -83,7 +86,7 @@ export const Profile: FC = () => {
         <SettingsItem
           icon={() => (
             <Question
-              size={24}
+              size={fontSizeValue(24)}
               color={colors.screens.profile.components.settingsItem.icon}
             />
           )}
@@ -93,7 +96,7 @@ export const Profile: FC = () => {
         <SettingsItem
           icon={() => (
             <SignOut
-              size={24}
+              size={fontSizeValue(24)}
               color={colors.screens.profile.components.settingsItem.icon}
             />
           )}

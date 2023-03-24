@@ -83,7 +83,10 @@ export const Header: FC = () => {
         }}
         onPress={onPressLogOut}
       >
-        <SignOut size={24} color={colors.screens.home.components.header.icon} />
+        <SignOut
+          size={fontSizeValue(24)}
+          color={colors.screens.home.components.header.icon}
+        />
       </SignOutButton>
     </Container>
   );

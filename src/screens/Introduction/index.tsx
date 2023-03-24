@@ -120,13 +120,13 @@ export const Introduction: FC = () => {
               <Check
                 color={colors.components.smallButton.icon}
                 weight="bold"
-                size={24}
+                size={fontSizeValue(24)}
               />
             ) : (
               <ArrowRight
                 color={colors.components.smallButton.icon}
                 weight="bold"
-                size={24}
+                size={fontSizeValue(24)}
               />
             )
           }

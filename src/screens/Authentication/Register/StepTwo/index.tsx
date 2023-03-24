@@ -4,6 +4,7 @@ import { useTheme } from "styled-components/native";
 import { GenderNeuter, Cake, ArrowRight } from "phosphor-react-native";
 
 import { useAuth } from "@hooks/useAuth";
+import { useSettings } from "@hooks/useSettings";
 
 import { Header } from "@components-of-screens/Authentication/components/Header";
 import { Select } from "@components/Inputs/Select";
@@ -16,6 +17,7 @@ import { InputBlurButton, Container, InputWrapper, Footer } from "../../styles";
 
 export const StepTwo: FC = () => {
   const { state: authState, dispatch: authDispatch } = useAuth();
+  const { fontSizeValue } = useSettings();
   const { navigate } = useNavigation();
   const { colors } = useTheme();
 
@@ -50,7 +52,7 @@ export const StepTwo: FC = () => {
             }
             icon={() => (
               <GenderNeuter
-                size={24}
+                size={fontSizeValue(24)}
                 color={colors.components.select.placeholder}
               />
             )}
@@ -69,7 +71,7 @@ export const StepTwo: FC = () => {
             }
             icon={() => (
               <Cake
-                size={24}
+                size={fontSizeValue(24)}
                 color={colors.components.datePicker.placeholder}
               />
             )}
@@ -83,7 +85,7 @@ export const StepTwo: FC = () => {
               <ArrowRight
                 color={colors.components.smallButton.icon}
                 weight="bold"
-                size={24}
+                size={fontSizeValue(24)}
               />
             )}
             onPress={onPressNextStep}

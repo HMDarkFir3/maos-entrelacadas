@@ -22,7 +22,7 @@ export const SettingsContext = createContext({} as SettingsContextData);
 
 export const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
   const [theme, setTheme] = useState(light);
-  const [fontSize, setFontSize] = useState<"sm" | "nm" | "lg">("nm");
+  const [fontSize, setFontSize] = useState<"sm" | "nm" | "lg">("lg");
 
   const getThemeInStorage = async () => {
     const storage = await AsyncStorage.getItem(COLLECTION_THEME);

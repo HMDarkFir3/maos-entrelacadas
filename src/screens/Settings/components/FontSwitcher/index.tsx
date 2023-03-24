@@ -18,7 +18,7 @@ export const FontSwitcher: FC<Props> = (props) => {
     <Container>
       <Wrapper>
         <TextAa
-          size={24}
+          size={fontSizeValue(24)}
           color={colors.screens.settings.components.fontSwitcher.icon}
           weight="bold"
         />

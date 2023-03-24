@@ -4,6 +4,7 @@ import { useTheme } from "styled-components/native";
 import { LockOpen, Check } from "phosphor-react-native";
 
 import { useAuth } from "@hooks/useAuth";
+import { useSettings } from "@hooks/useSettings";
 
 import { Header } from "@components-of-screens/Authentication/components/Header";
 import { Input } from "@components/Inputs/Input";
@@ -13,6 +14,7 @@ import { InputBlurButton, Container, InputWrapper, Footer } from "../../styles";
 
 export const StepThree: FC = () => {
   const { state: authState, dispatch: authDispatch, register } = useAuth();
+  const { fontSizeValue } = useSettings();
   const { colors } = useTheme();
 
   const passwordInputRef = useRef<TextInput>(null);
@@ -51,7 +53,10 @@ export const StepThree: FC = () => {
               })
             }
             icon={() => (
-              <LockOpen size={24} color={colors.components.input.placeholder} />
+              <LockOpen
+                size={fontSizeValue(24)}
+                color={colors.components.input.placeholder}
+              />
             )}
             placeholder="Senha"
             isPassword
@@ -70,7 +75,10 @@ export const StepThree: FC = () => {
               })
             }
             icon={() => (
-              <LockOpen size={24} color={colors.components.input.placeholder} />
+              <LockOpen
+                size={fontSizeValue(24)}
+                color={colors.components.input.placeholder}
+              />
             )}
             isPassword
             placeholder="Confirmar senha"
@@ -84,7 +92,7 @@ export const StepThree: FC = () => {
               <Check
                 color={colors.components.smallButton.icon}
                 weight="bold"
-                size={24}
+                size={fontSizeValue(24)}
               />
             )}
             isLoading={authState.isLoading}
