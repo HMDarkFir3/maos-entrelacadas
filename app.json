@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Mãos Entrelaçadas (LOCAL)",
+    "name": "Mãos Entrelaçadas (DEVELOPMENT)",
     "slug": "maosentrelacadas",
     "scheme": "maosentrelacadas",
     "version": "1.0.0",
@@ -32,8 +32,10 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#3cb371"
       },
-      "package": "com.hmdarkfire.maosentrelacadas.preview"
+      "package": "com.hmdarkfire.maosentrelacadas.development",
+      "googleServicesFile": "./google-services.json"
     },
+    "plugins": ["@react-native-firebase/app"],
     "extra": {
       "eas": {
         "projectId": "dfcd84b5-f1d4-4aa5-a828-f2fe48c6758d"
