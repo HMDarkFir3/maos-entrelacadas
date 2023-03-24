@@ -20,7 +20,6 @@ export const ForgetPasswordButton = styled(TouchableOpacity)``;
 
 export const ForgetPasswordButtonText = styled.Text`
   text-align: right;
-  font-size: 16px;
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.medium};

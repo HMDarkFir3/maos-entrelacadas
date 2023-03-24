@@ -25,7 +25,6 @@ export const Title = styled.Text`
   margin-top: 52px;
 
   text-align: center;
-  font-size: 48px;
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.medium};
@@ -37,7 +36,6 @@ export const Description = styled.Text`
   margin-top: 12px;
 
   text-align: center;
-  font-size: 20px;
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};

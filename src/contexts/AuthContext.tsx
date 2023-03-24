@@ -148,9 +148,6 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 
   useEffect(() => {
     getSawIntroductionInStorage();
-  }, []);
-
-  useEffect(() => {
     getUserData();
   }, []);
 

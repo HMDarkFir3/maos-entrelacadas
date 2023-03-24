@@ -23,8 +23,6 @@ export const JumpButton = styled.TouchableOpacity`
 `;
 
 export const Title = styled.Text`
-  font-size: 16px;
-
   ${({ theme }) =>
     css`
       font-family: ${theme.fonts.regular};

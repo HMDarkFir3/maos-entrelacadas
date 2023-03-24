@@ -19,8 +19,6 @@ export const StyledInput = styled(TextInput)`
 
   padding: 0 16px;
 
-  font-size: 20px;
-
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};
     color: ${theme.colors.components.input.text};
@@ -31,7 +29,6 @@ export const MaxLength = styled.Text`
   margin-top: 6px;
 
   text-align: right;
-  font-size: 16px;
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};

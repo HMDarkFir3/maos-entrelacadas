@@ -2,6 +2,8 @@ import { useState, FC } from "react";
 import { ViewStyle } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
+import { useSettings } from "@hooks/useSettings";
+
 import { formatDate } from "@utils/formatDate";
 
 import { Container, Date, Placeholder } from "./styles";
@@ -16,6 +18,8 @@ interface Props {
 
 export const DatePicker: FC<Props> = (props) => {
   const { style, value, onChange, icon: Icon, placeholder } = props;
+
+  const { fontSizeValue } = useSettings();
 
   const [isOpenDatePicker, setIsOpenDatePicker] = useState<boolean>(false);
 
@@ -39,9 +43,11 @@ export const DatePicker: FC<Props> = (props) => {
       <Icon />
 
       {value ? (
-        <Date>{formatDate(value)}</Date>
+        <Date style={{ fontSize: fontSizeValue(20) }}>{formatDate(value)}</Date>
       ) : (
-        <Placeholder>{placeholder}</Placeholder>
+        <Placeholder style={{ fontSize: fontSizeValue(20) }}>
+          {placeholder}
+        </Placeholder>
       )}
 
       <DateTimePickerModal

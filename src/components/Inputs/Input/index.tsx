@@ -3,6 +3,8 @@ import { TextInput, TextInputProps, ViewStyle, StyleProp } from "react-native";
 import { useTheme } from "styled-components/native";
 import { Eye, EyeSlash } from "phosphor-react-native";
 
+import { useSettings } from "@hooks/useSettings";
+
 import {
   Container,
   Wrapper,
@@ -29,6 +31,7 @@ export const Input = forwardRef<TextInput, Props>((props, ref) => {
     ...rest
   } = props;
 
+  const { fontSizeValue } = useSettings();
   const { colors } = useTheme();
 
   const [isVisibility, setIsVisibility] = useState<boolean>(false);
@@ -42,6 +45,7 @@ export const Input = forwardRef<TextInput, Props>((props, ref) => {
         <Icon />
         <StyledInput
           ref={ref}
+          style={{ fontSize: fontSizeValue(20) }}
           secureTextEntry={isPassword && !isVisibility}
           placeholderTextColor={colors.components.input.placeholder}
           maxLength={maxLength}
@@ -62,7 +66,7 @@ export const Input = forwardRef<TextInput, Props>((props, ref) => {
       </Wrapper>
 
       {maxLength && (
-        <MaxLength>
+        <MaxLength style={{ fontSize: fontSizeValue(16) }}>
           {value.length}/{maxLength}
         </MaxLength>
       )}

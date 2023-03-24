@@ -1,6 +1,8 @@
 import { FC } from "react";
 import { useNavigation } from "@react-navigation/native";
 
+import { useSettings } from "@hooks/useSettings";
+
 import { Button } from "@components/Buttons/Button";
 
 import {
@@ -15,6 +17,7 @@ import {
 } from "./styles";
 
 export const Welcome: FC = () => {
+  const { fontSizeValue } = useSettings();
   const { navigate } = useNavigation();
 
   const onPressLogin = (screenName: "Login" | "StepOne") =>
@@ -25,8 +28,10 @@ export const Welcome: FC = () => {
       <Logo source={require("@assets/img/logo.png")} />
 
       <TextWrapper>
-        <Title>Boas-vindas!</Title>
-        <Description>
+        <Title style={{ fontSize: fontSizeValue(48) }} numberOfLines={1}>
+          Boas-vindas!
+        </Title>
+        <Description style={{ fontSize: fontSizeValue(20) }} numberOfLines={3}>
           Queremos impactar de forma positiva a sua vida e de sua comunidade.
         </Description>
       </TextWrapper>
@@ -39,9 +44,14 @@ export const Welcome: FC = () => {
         />
 
         <RegisterButton onPress={() => onPressLogin("StepOne")}>
-          <RegisterButtonText isGreen={false}>
+          <RegisterButtonText
+            style={{ fontSize: fontSizeValue(20) }}
+            isGreen={false}
+          >
             Não tem uma conta?{" "}
-            <RegisterButtonText isGreen>Registrar-se</RegisterButtonText>
+            <RegisterButtonText style={{ fontSize: fontSizeValue(20) }} isGreen>
+              Registrar-se
+            </RegisterButtonText>
           </RegisterButtonText>
         </RegisterButton>
       </ButtonWrapper>

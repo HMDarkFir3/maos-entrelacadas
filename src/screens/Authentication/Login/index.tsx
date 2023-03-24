@@ -4,6 +4,7 @@ import { useTheme } from "styled-components/native";
 import { EnvelopeSimple, LockOpen, Check } from "phosphor-react-native";
 
 import { useAuth } from "@hooks/useAuth";
+import { useSettings } from "@hooks/useSettings";
 
 import { Header } from "@components-of-screens/Authentication/components/Header";
 import { Input } from "@components/Inputs/Input";
@@ -20,6 +21,7 @@ import {
 
 export const Login: FC = () => {
   const { state: authState, dispatch: authDispatch, login } = useAuth();
+  const { fontSizeValue } = useSettings();
   const { colors } = useTheme();
 
   const emailInputRef = useRef<TextInput>(null);
@@ -84,7 +86,10 @@ export const Login: FC = () => {
           />
 
           <ForgetPasswordButton activeOpacity={0.7}>
-            <ForgetPasswordButtonText>
+            <ForgetPasswordButtonText
+              style={{ fontSize: fontSizeValue(16) }}
+              numberOfLines={2}
+            >
               Esqueci minha senha
             </ForgetPasswordButtonText>
           </ForgetPasswordButton>

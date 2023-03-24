@@ -1,5 +1,7 @@
 import { FC } from "react";
 
+import { useSettings } from "@hooks/useSettings";
+
 import { introductionSlider } from "@utils/introductionSlider";
 import { SCREEN_WIDTH } from "@utils/globalVariables";
 
@@ -23,6 +25,8 @@ interface Props {
 
 export const IntroductionSlider: FC<Props> = (props) => {
   const { id, title, description } = props.data;
+
+  const { fontSizeValue } = useSettings();
 
   const RenderSvg: FC = () => {
     switch (id) {
@@ -51,10 +55,17 @@ export const IntroductionSlider: FC<Props> = (props) => {
       </SvgWrapper>
 
       <TextWrapper>
-        <Title>{title}</Title>
+        <Title style={{ fontSize: fontSizeValue(40) }} numberOfLines={1}>
+          {title}
+        </Title>
 
         <DescriptionWrapper>
-          <Description>{description}</Description>
+          <Description
+            style={{ fontSize: fontSizeValue(20) }}
+            numberOfLines={3}
+          >
+            {description}
+          </Description>
         </DescriptionWrapper>
       </TextWrapper>
     </Container>

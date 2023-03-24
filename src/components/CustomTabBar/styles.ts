@@ -28,8 +28,6 @@ export const TabItem = styled(Pressable).attrs(({ theme }) => ({
 `;
 
 export const TabItemText = styled.Text<TabItemTextProps>`
-  font-size: 12px;
-
   ${({ theme, isActive }) => css`
     font-family: ${theme.fonts.bold};
     color: ${isActive

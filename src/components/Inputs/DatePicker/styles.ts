@@ -18,8 +18,6 @@ export const Date = styled.Text`
 
   margin-left: 16px;
 
-  font-size: 20px;
-
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};
     color: ${theme.colors.components.select.text};
@@ -30,8 +28,6 @@ export const Placeholder = styled.Text`
   flex: 1;
 
   margin-left: 16px;
-
-  font-size: 20px;
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};

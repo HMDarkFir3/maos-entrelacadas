@@ -10,7 +10,7 @@ export const Container = styled.View`
   align-items: center;
   justify-content: space-between;
 
-  padding: 0 32px;
+  padding: 0 24px;
 
   background-color: ${({ theme }) => theme.colors.background};
 `;
@@ -26,7 +26,6 @@ export const TextWrapper = styled.View``;
 
 export const Title = styled.Text`
   text-align: center;
-  font-size: 48px;
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.medium};
@@ -38,7 +37,6 @@ export const Description = styled.Text`
   margin-top: 4px;
 
   text-align: center;
-  font-size: 20px;
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};
@@ -59,7 +57,7 @@ export const RegisterButton = styled(TouchableOpacity)`
 `;
 
 export const RegisterButtonText = styled.Text<RegisterButtonTextProps>`
-  font-size: 20px;
+  text-align: center;
 
   ${({ theme, isGreen }) =>
     isGreen &&

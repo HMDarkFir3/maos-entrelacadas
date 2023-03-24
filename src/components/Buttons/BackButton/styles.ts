@@ -9,8 +9,6 @@ export const Container = styled(TouchableOpacity)`
 export const Title = styled.Text`
   margin-left: 4px;
 
-  font-size: 14px;
-
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};
     color: ${theme.colors.components.backButton.title};

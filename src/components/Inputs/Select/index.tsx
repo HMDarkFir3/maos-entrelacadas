@@ -9,7 +9,7 @@ import {
 import { useTheme } from "styled-components/native";
 import { CaretDown } from "phosphor-react-native";
 
-import { useAuth } from "@hooks/useAuth";
+import { useSettings } from "@hooks/useSettings";
 
 import { genders } from "@utils/genders";
 
@@ -36,6 +36,7 @@ interface Props<T> {
 export const Select: FC<Props<typeof genders>> = (props) => {
   const { style, value, onChange, icon: Icon, placeholder, data } = props;
 
+  const { fontSizeValue } = useSettings();
   const { colors } = useTheme();
 
   const [isOpen, setIsOpen] = useState(false);
@@ -62,11 +63,16 @@ export const Select: FC<Props<typeof genders>> = (props) => {
       <Wrapper activeOpacity={0.7} onPress={onPressOpenSelect}>
         <Icon />
         {value ? (
-          <ItemText selected style={{ marginLeft: 16 }}>
+          <ItemText
+            style={{ marginLeft: 16, fontSize: fontSizeValue(20) }}
+            selected
+          >
             {value}
           </ItemText>
         ) : (
-          <Placeholder>{placeholder}</Placeholder>
+          <Placeholder style={{ marginLeft: 16, fontSize: fontSizeValue(20) }}>
+            {placeholder}
+          </Placeholder>
         )}
 
         <CaretWrapper style={caretWrapperAnimatedStyle}>
@@ -84,7 +90,12 @@ export const Select: FC<Props<typeof genders>> = (props) => {
                 activeOpacity={0.7}
                 onPress={() => onPressSelectItem(item.name)}
               >
-                <ItemText selected={item.name === value}>{item.name}</ItemText>
+                <ItemText
+                  style={{ marginLeft: 16, fontSize: fontSizeValue(20) }}
+                  selected={item.name === value}
+                >
+                  {item.name}
+                </ItemText>
               </Item>
             )}
             ItemSeparatorComponent={() => <ItemSeparator />}

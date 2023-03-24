@@ -4,6 +4,8 @@ import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "styled-components/native";
 import { ArrowLeft } from "phosphor-react-native";
 
+import { useSettings } from "@hooks/useSettings";
+
 import { Container, Title } from "./styles";
 
 interface Props extends TouchableOpacityProps {
@@ -13,6 +15,7 @@ interface Props extends TouchableOpacityProps {
 export const BackButton: FC<Props> = (props) => {
   const { onBackButton, ...rest } = props;
 
+  const { fontSizeValue } = useSettings();
   const { goBack } = useNavigation();
   const { colors } = useTheme();
 
@@ -27,7 +30,7 @@ export const BackButton: FC<Props> = (props) => {
   return (
     <Container activeOpacity={0.7} onPress={onPressBackButton} {...rest}>
       <ArrowLeft size={20} color={colors.components.backButton.icon} />
-      <Title>Voltar</Title>
+      <Title style={{ fontSize: fontSizeValue(14) }}>Voltar</Title>
     </Container>
   );
 };

@@ -6,6 +6,7 @@ import { useTheme } from "styled-components/native";
 import { ArrowRight, Check } from "phosphor-react-native";
 
 import { useAuth } from "@hooks/useAuth";
+import { useSettings } from "@hooks/useSettings";
 
 import { IntroductionSlider } from "@components-of-screens/Introduction/components/IntroductionSlider";
 import { IntroductionPaginator } from "@components-of-screens/Introduction/components/IntroductionPaginator";
@@ -24,6 +25,7 @@ interface ViewabilityConfigRef {
 
 export const Introduction: FC = () => {
   const { dispatch: authDispatch } = useAuth();
+  const { fontSizeValue } = useSettings();
   const { navigate } = useNavigation();
   const { colors } = useTheme();
 
@@ -109,7 +111,7 @@ export const Introduction: FC = () => {
           disabled={currentIndex === introductionSlider.length - 1}
           onPress={jumpSlides}
         >
-          <Title>Pular</Title>
+          <Title style={{ fontSize: fontSizeValue(16) }}>Pular</Title>
         </JumpButton>
 
         <SmallButton

@@ -5,6 +5,7 @@ import { useTheme } from "styled-components/native";
 import { House, MapPinLine, Gift, User } from "phosphor-react-native";
 
 import { useTabBar } from "@hooks/useTabBar";
+import { useSettings } from "@hooks/useSettings";
 
 import { Container, TabItem, TabItemText } from "./styles";
 
@@ -12,6 +13,7 @@ interface Props extends BottomTabBarProps {}
 
 export const CustomTabBar: FC<Props> = () => {
   const { state: tabBarState, dispatch: tabBarDispatch } = useTabBar();
+  const { fontSizeValue } = useSettings();
   const { navigate } = useNavigation();
   const { colors } = useTheme();
 
@@ -33,7 +35,10 @@ export const CustomTabBar: FC<Props> = () => {
               : colors.components.customTabBar.inactive
           }
         />
-        <TabItemText isActive={tabBarState.isActive === "Home"}>
+        <TabItemText
+          style={{ fontSize: fontSizeValue(12) }}
+          isActive={tabBarState.isActive === "Home"}
+        >
           Início
         </TabItemText>
       </TabItem>
@@ -47,7 +52,10 @@ export const CustomTabBar: FC<Props> = () => {
               : colors.components.customTabBar.inactive
           }
         />
-        <TabItemText isActive={tabBarState.isActive === "Events"}>
+        <TabItemText
+          style={{ fontSize: fontSizeValue(12) }}
+          isActive={tabBarState.isActive === "Events"}
+        >
           Eventos
         </TabItemText>
       </TabItem>
@@ -61,7 +69,10 @@ export const CustomTabBar: FC<Props> = () => {
               : colors.components.customTabBar.inactive
           }
         />
-        <TabItemText isActive={tabBarState.isActive === "Donations"}>
+        <TabItemText
+          style={{ fontSize: fontSizeValue(12) }}
+          isActive={tabBarState.isActive === "Donations"}
+        >
           Doações
         </TabItemText>
       </TabItem>
@@ -75,7 +86,10 @@ export const CustomTabBar: FC<Props> = () => {
               : colors.components.customTabBar.inactive
           }
         />
-        <TabItemText isActive={tabBarState.isActive === "Profile"}>
+        <TabItemText
+          style={{ fontSize: fontSizeValue(12) }}
+          isActive={tabBarState.isActive === "Profile"}
+        >
           Perfil
         </TabItemText>
       </TabItem>

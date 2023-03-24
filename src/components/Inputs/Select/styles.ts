@@ -25,8 +25,6 @@ export const Placeholder = styled.Text`
 
   margin-left: 16px;
 
-  font-size: 20px;
-
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};
     color: ${theme.colors.components.select.placeholder};
@@ -57,8 +55,6 @@ export const Item = styled(TouchableOpacity)``;
 
 export const ItemText = styled.Text<ItemTextProps>`
   flex: 1;
-
-  font-size: 20px;
 
   ${({ theme, selected }) => css`
     font-family: ${theme.fonts.regular};
