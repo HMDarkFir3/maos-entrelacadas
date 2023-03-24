@@ -1,6 +1,11 @@
 import styled, { css } from "styled-components/native";
+import { Pressable } from "react-native";
 
-export const Container = styled.View`
+interface ItemTextProps {
+  selected: boolean;
+}
+
+export const Container = styled(Pressable)`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -29,5 +34,31 @@ export const SelectedFont = styled.Text`
     font-family: ${theme.fonts.medium};
     color: ${theme.colors.screens.settings.components.fontSwitcher
       .textSecondary};
+  `}
+`;
+
+export const List = styled.View`
+  width: 100%;
+
+  background-color: ${({ theme }) => theme.colors.background};
+`;
+
+export const Item = styled(Pressable)`
+  flex-direction: row;
+  align-items: center;
+
+  height: 48px;
+
+  padding: 0 24px;
+`;
+
+export const ItemText = styled.Text<ItemTextProps>`
+  flex: 1;
+
+  ${({ theme, selected }) => css`
+    font-family: ${theme.fonts.medium};
+    color: ${selected
+      ? theme.colors.screens.settings.components.fontSwitcher.textSecondary
+      : theme.colors.screens.settings.components.fontSwitcher.textPrimary};
   `}
 `;

@@ -7,10 +7,18 @@ import { COLLECTION_THEME, COLLECTION_FONT_SIZE } from "@storages/index";
 import { light } from "@themes/light";
 import { dark } from "@themes/dark";
 
+interface FontSizeData {
+  name: "Pequeno" | "Normal" | "Grande";
+  value: "sm" | "md" | "lg";
+}
 export interface SettingsContextData {
   theme: DefaultTheme;
+  fontSize: FontSizeData;
   toggleTheme: () => Promise<void>;
-  changeFontSize: (size: "sm" | "nm" | "lg") => Promise<void>;
+  changeFontSize: (
+    name: "Pequeno" | "Normal" | "Grande",
+    size: "sm" | "md" | "lg"
+  ) => Promise<void>;
   fontSizeValue: (size: number) => number;
 }
 
@@ -22,7 +30,10 @@ export const SettingsContext = createContext({} as SettingsContextData);
 
 export const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
   const [theme, setTheme] = useState(light);
-  const [fontSize, setFontSize] = useState<"sm" | "nm" | "lg">("lg");
+  const [fontSize, setFontSize] = useState<FontSizeData>({
+    name: "Normal",
+    value: "md",
+  });
 
   const getThemeInStorage = async () => {
     const storage = await AsyncStorage.getItem(COLLECTION_THEME);
@@ -36,7 +47,9 @@ export const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
     const storage = await AsyncStorage.getItem(COLLECTION_FONT_SIZE);
 
     if (storage) {
-      setFontSize(JSON.parse(storage as "sm" | "nm" | "lg"));
+      console.log(JSON.parse(storage));
+
+      setFontSize(JSON.parse(storage));
     }
   };
 
@@ -46,18 +59,26 @@ export const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
     await AsyncStorage.setItem(COLLECTION_THEME, theme.title);
   };
 
-  const changeFontSize = async (size: "sm" | "nm" | "lg") => {
-    setFontSize(size);
+  const changeFontSize = async (
+    name: "Pequeno" | "Normal" | "Grande",
+    size: "sm" | "md" | "lg"
+  ) => {
+    setFontSize({ name, value: size });
 
-    await AsyncStorage.setItem(COLLECTION_FONT_SIZE, size);
+    const data = {
+      name,
+      value: size,
+    };
+
+    await AsyncStorage.setItem(COLLECTION_FONT_SIZE, JSON.stringify(data));
   };
 
   const fontSizeValue = (size: number) => {
-    switch (fontSize) {
+    switch (fontSize.value) {
       case "sm": {
         return size * 0.8;
       }
-      case "nm": {
+      case "md": {
         return size;
       }
       case "lg": {
@@ -68,12 +89,15 @@ export const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
 
   useEffect(() => {
     getThemeInStorage();
+  }, []);
+
+  useEffect(() => {
     getFontSizeInStorage();
   }, []);
 
   return (
     <SettingsContext.Provider
-      value={{ theme, toggleTheme, changeFontSize, fontSizeValue }}
+      value={{ theme, fontSize, toggleTheme, changeFontSize, fontSizeValue }}
     >
       <ThemeProvider theme={theme}>{children}</ThemeProvider>
     </SettingsContext.Provider>
