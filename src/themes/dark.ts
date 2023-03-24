@@ -76,6 +76,15 @@ export const dark = {
           },
         },
       },
+      userInfo: {
+        components: {
+          header: {
+            primary: "#3cb371",
+            text: "#e5ebef",
+            icon: "#3cb371",
+          },
+        },
+      },
     },
 
     components: {

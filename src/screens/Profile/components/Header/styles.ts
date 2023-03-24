@@ -1,14 +1,15 @@
 import styled, { css } from "styled-components/native";
-import { TouchableOpacity } from "react-native";
+import { Pressable } from "react-native";
 
 import { STATUS_BAR_HEIGHT } from "@utils/globalVariables";
 
-export const Container = styled(TouchableOpacity)`
+export const Container = styled(Pressable)`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
 
   margin-top: ${STATUS_BAR_HEIGHT + 24}px;
+  padding: 12px 24px;
 `;
 
 export const Wrapper = styled.View`

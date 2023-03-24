@@ -3,9 +3,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import { TabRoutes } from "@routes/tab.routes";
 
-import { Home } from "@screens/Home";
-import { Profile } from "@screens/Profile";
 import { Settings } from "@screens/Settings";
+import { UserInfo } from "@screens/UserInfo";
 
 const { Navigator, Screen, Group } = createNativeStackNavigator();
 
@@ -19,6 +18,7 @@ export const AppRoutes: FC = () => {
     >
       <Screen name="TabRoutes" component={TabRoutes} />
       <Screen name="Settings" component={Settings} />
+      <Screen name="UserInfo" component={UserInfo} />
     </Navigator>
   );
 };

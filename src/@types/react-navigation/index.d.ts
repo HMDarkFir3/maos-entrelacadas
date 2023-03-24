@@ -12,8 +12,11 @@ export declare global {
       Home: undefined;
       Events: undefined;
       Donations: undefined;
+
+      //Settings
       Profile: undefined;
       Settings: undefined;
+      UserInfo: undefined;
     }
   }
 }

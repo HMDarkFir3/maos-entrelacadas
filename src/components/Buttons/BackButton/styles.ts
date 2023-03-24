@@ -3,7 +3,6 @@ import { TouchableOpacity } from "react-native";
 
 export const Container = styled(TouchableOpacity)`
   flex-direction: row;
-  align-items: center;
 `;
 
 export const Title = styled.Text`

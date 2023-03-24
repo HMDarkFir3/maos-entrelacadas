@@ -22,19 +22,29 @@ import {
   Item,
   ItemText,
   ItemSeparator,
+  SelectedText,
 } from "./styles";
 
 interface Props<T> {
   style?: ViewStyle;
   value: string;
   onChange: (item: string) => void;
-  placeholder: string;
+  placeholder?: string;
   icon: any;
   data: T;
+  isEditable?: boolean;
 }
 
 export const Select: FC<Props<typeof genders>> = (props) => {
-  const { style, value, onChange, icon: Icon, placeholder, data } = props;
+  const {
+    style,
+    value,
+    onChange,
+    icon: Icon,
+    placeholder,
+    data,
+    isEditable = true,
+  } = props;
 
   const { fontSizeValue } = useSettings();
   const { colors } = useTheme();
@@ -60,18 +70,22 @@ export const Select: FC<Props<typeof genders>> = (props) => {
 
   return (
     <Container style={style}>
-      <Wrapper activeOpacity={0.7} onPress={onPressOpenSelect}>
+      <Wrapper
+        activeOpacity={0.7}
+        disabled={!isEditable}
+        onPress={onPressOpenSelect}
+      >
         <Icon />
         {value ? (
           <ItemText
             style={{ marginLeft: 16, fontSize: fontSizeValue(20) }}
-            selected
+            isEditable={isEditable}
           >
             {value}
           </ItemText>
         ) : (
           <Placeholder style={{ marginLeft: 16, fontSize: fontSizeValue(20) }}>
-            {placeholder}
+            {placeholder ?? "Selecione uma opção"}
           </Placeholder>
         )}
 
@@ -93,12 +107,12 @@ export const Select: FC<Props<typeof genders>> = (props) => {
                 activeOpacity={0.7}
                 onPress={() => onPressSelectItem(item.name)}
               >
-                <ItemText
+                <SelectedText
                   style={{ marginLeft: 16, fontSize: fontSizeValue(20) }}
-                  selected={item.name === value}
+                  isSelected={item.name === value}
                 >
                   {item.name}
-                </ItemText>
+                </SelectedText>
               </Item>
             )}
             ItemSeparatorComponent={() => <ItemSeparator />}

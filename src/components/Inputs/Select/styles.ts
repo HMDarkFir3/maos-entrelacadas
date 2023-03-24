@@ -3,7 +3,11 @@ import { TouchableOpacity } from "react-native";
 import Animated from "react-native-reanimated";
 
 interface ItemTextProps {
-  selected?: boolean;
+  isEditable: boolean;
+}
+
+interface SelectedTextProps {
+  isSelected: boolean;
 }
 
 export const Container = styled.View`
@@ -56,9 +60,8 @@ export const Item = styled(TouchableOpacity)``;
 export const ItemText = styled.Text<ItemTextProps>`
   flex: 1;
 
-  ${({ theme, selected }) => css`
-    font-family: ${theme.fonts.regular};
-    color: ${selected
+  ${({ theme, isEditable }) => css`
+    color: ${isEditable
       ? theme.colors.components.select.text
       : theme.colors.components.select.placeholder};
   `}
@@ -72,4 +75,12 @@ export const ItemSeparator = styled.View`
   background-color: ${({ theme }) => theme.colors.components.select.primary};
 
   opacity: 0.3;
+`;
+
+export const SelectedText = styled.Text<SelectedTextProps>`
+  ${({ theme, isSelected }) => css`
+    color: ${isSelected
+      ? theme.colors.components.select.primary
+      : theme.colors.components.select.placeholder};
+  `}
 `;

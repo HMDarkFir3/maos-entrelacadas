@@ -7,9 +7,7 @@ export const Container = styled.View`
   background-color: ${({ theme }) => theme.colors.background};
 `;
 
-export const Wrapper = styled.View`
-  padding: 0 24px;
-`;
+export const Wrapper = styled.View``;
 
 export const EventHeader = styled.View`
   flex-direction: row;
@@ -17,6 +15,7 @@ export const EventHeader = styled.View`
   justify-content: space-between;
 
   margin-top: 28px;
+  padding: 0 24px;
 `;
 
 export const EventTitle = styled.Text`

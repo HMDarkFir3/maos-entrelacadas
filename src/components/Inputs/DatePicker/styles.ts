@@ -1,6 +1,10 @@
 import styled, { css } from "styled-components/native";
 import { TouchableOpacity } from "react-native";
 
+interface DateProps {
+  isEditable: boolean;
+}
+
 export const Container = styled(TouchableOpacity)`
   flex-direction: row;
   align-items: center;
@@ -13,14 +17,16 @@ export const Container = styled(TouchableOpacity)`
   z-index: 1;
 `;
 
-export const Date = styled.Text`
+export const Date = styled.Text<DateProps>`
   flex: 1;
 
   margin-left: 16px;
 
-  ${({ theme }) => css`
+  ${({ theme, isEditable }) => css`
     font-family: ${theme.fonts.regular};
-    color: ${theme.colors.components.select.text};
+    color: ${isEditable
+      ? theme.colors.components.select.text
+      : theme.colors.components.select.placeholder};
   `}
 `;
 

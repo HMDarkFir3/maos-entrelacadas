@@ -76,6 +76,15 @@ export const light = {
           },
         },
       },
+      userInfo: {
+        components: {
+          header: {
+            primary: "#3cb371",
+            text: "#1c1e26",
+            icon: "#3cb371",
+          },
+        },
+      },
     },
 
     components: {

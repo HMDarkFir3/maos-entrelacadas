@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "styled-components/native";
 import { Info } from "phosphor-react-native";
 
@@ -17,10 +18,16 @@ import {
 export const Header: FC = () => {
   const { state: authState } = useAuth();
   const { fontSizeValue } = useSettings();
+  const { navigate } = useNavigation();
   const { colors } = useTheme();
 
+  const onPressUserInfo = () => navigate("UserInfo");
+
   return (
-    <Container activeOpacity={0.7}>
+    <Container
+      android_ripple={{ color: colors.androidRipple.backgroundPrimary }}
+      onPress={onPressUserInfo}
+    >
       <Wrapper>
         <UserImage source={{ uri: "https://www.github.com/hmdarkfir3.png" }} />
 

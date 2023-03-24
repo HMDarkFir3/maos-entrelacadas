@@ -15,9 +15,10 @@ import {
 
 interface Props extends TextInputProps {
   style?: StyleProp<ViewStyle>;
-  value: string;
+  value?: string;
   icon: any;
   isPassword?: boolean;
+  isEditable?: boolean;
   maxLength?: number;
 }
 
@@ -27,6 +28,7 @@ export const Input = forwardRef<TextInput, Props>((props, ref) => {
     value,
     icon: Icon,
     isPassword = false,
+    isEditable = true,
     maxLength,
     ...rest
   } = props;
@@ -49,6 +51,8 @@ export const Input = forwardRef<TextInput, Props>((props, ref) => {
           secureTextEntry={isPassword && !isVisibility}
           placeholderTextColor={colors.components.input.placeholder}
           maxLength={maxLength}
+          isEditable={isEditable}
+          editable={isEditable}
           {...rest}
         />
         {isPassword && (
@@ -73,7 +77,7 @@ export const Input = forwardRef<TextInput, Props>((props, ref) => {
 
       {maxLength && (
         <MaxLength style={{ fontSize: fontSizeValue(16) }}>
-          {value.length}/{maxLength}
+          {value?.length}/{maxLength}
         </MaxLength>
       )}
     </Container>
