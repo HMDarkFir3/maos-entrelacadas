@@ -13,12 +13,12 @@ export const Container = styled(Pressable)`
 
 export const Wrapper = styled.View`
   flex-direction: row;
+  align-items: center;
 `;
 
 export const Title = styled.Text`
   margin-left: 16px;
 
-  font-size: 20px;
   ${({ theme }) => css`
     font-family: ${theme.fonts.medium};
     color: ${theme.colors.screens.profile.components.settingsItem.text};

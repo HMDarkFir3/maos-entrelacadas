@@ -18,7 +18,6 @@ export const Wrapper = styled.View`
 export const Title = styled.Text`
   margin-left: 16px;
 
-  font-size: 20px;
   ${({ theme }) => css`
     font-family: ${theme.fonts.medium};
     color: ${theme.colors.screens.settings.components.switcher.text};

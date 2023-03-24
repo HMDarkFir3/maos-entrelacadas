@@ -20,8 +20,6 @@ export const EventHeader = styled.View`
 `;
 
 export const EventTitle = styled.Text`
-  font-size: 20px;
-
   ${({ theme }) => css`
     font-family: ${theme.fonts.medium};
     color: ${theme.colors.screens.profile.text};

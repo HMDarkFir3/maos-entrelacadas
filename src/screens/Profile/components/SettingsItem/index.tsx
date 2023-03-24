@@ -3,6 +3,8 @@ import { PressableProps } from "react-native";
 import { CaretRight } from "phosphor-react-native";
 import { useTheme } from "styled-components/native";
 
+import { useSettings } from "@hooks/useSettings";
+
 import { Container, Wrapper, Title } from "./styles";
 
 interface Props extends PressableProps {
@@ -13,6 +15,7 @@ interface Props extends PressableProps {
 export const SettingsItem: FC<Props> = (props) => {
   const { icon: Icon, title, ...rest } = props;
 
+  const { fontSizeValue } = useSettings();
   const { colors } = useTheme();
 
   return (
@@ -22,7 +25,9 @@ export const SettingsItem: FC<Props> = (props) => {
     >
       <Wrapper>
         <Icon />
-        <Title>{title}</Title>
+        <Title style={{ fontSize: fontSizeValue(20) }} numberOfLines={1}>
+          {title}
+        </Title>
       </Wrapper>
 
       <CaretRight

@@ -13,6 +13,7 @@ export const Container = styled(TouchableOpacity)`
 
 export const Wrapper = styled.View`
   flex-direction: row;
+  align-items: center;
 
   gap: 12px;
 `;
@@ -30,8 +31,6 @@ export const UserImage = styled.Image`
 export const UserInfo = styled.View``;
 
 export const Username = styled.Text`
-  font-size: 20px;
-
   ${({ theme }) => css`
     font-family: ${theme.fonts.medium};
     color: ${theme.colors.screens.profile.components.header.primary};
@@ -39,8 +38,6 @@ export const Username = styled.Text`
 `;
 
 export const Role = styled.Text`
-  font-size: 16px;
-
   ${({ theme }) => css`
     font-family: ${theme.fonts.medium};
     color: ${theme.colors.screens.profile.components.header.text};

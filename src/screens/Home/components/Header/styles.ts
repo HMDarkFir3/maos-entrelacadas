@@ -13,6 +13,7 @@ export const Container = styled.View`
 
 export const Wrapper = styled.View`
   flex-direction: row;
+  align-items: center;
 
   gap: 12px;
 `;
@@ -32,8 +33,6 @@ export const UserImage = styled.Image`
 export const UserInfo = styled.View``;
 
 export const Greeting = styled.Text`
-  font-size: 20px;
-
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};
     color: ${theme.colors.screens.home.components.header.text};
@@ -41,8 +40,6 @@ export const Greeting = styled.Text`
 `;
 
 export const Username = styled.Text`
-  font-size: 20px;
-
   ${({ theme }) => css`
     font-family: ${theme.fonts.medium};
     color: ${theme.colors.screens.home.components.header.text};

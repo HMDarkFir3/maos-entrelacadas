@@ -2,6 +2,8 @@ import { FC } from "react";
 import { Switch, SwitchProps } from "react-native";
 import { useTheme } from "styled-components/native";
 
+import { useSettings } from "@hooks/useSettings";
+
 import { Container, Wrapper, Title } from "./styles";
 
 interface Props extends SwitchProps {
@@ -14,13 +16,16 @@ interface Props extends SwitchProps {
 export const Switcher: FC<Props> = (props) => {
   const { icon: Icon, title, switchValue, onSwitchValue, ...rest } = props;
 
+  const { fontSizeValue } = useSettings();
   const { colors } = useTheme();
 
   return (
     <Container>
       <Wrapper>
         <Icon />
-        <Title>{title}</Title>
+        <Title style={{ fontSize: fontSizeValue(20) }} numberOfLines={1}>
+          {title}
+        </Title>
       </Wrapper>
 
       <Switch

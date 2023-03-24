@@ -3,6 +3,7 @@ import { useTheme } from "styled-components/native";
 import { Info } from "phosphor-react-native";
 
 import { useAuth } from "@hooks/useAuth";
+import { useSettings } from "@hooks/useSettings";
 
 import {
   Container,
@@ -15,6 +16,7 @@ import {
 
 export const Header: FC = () => {
   const { state: authState } = useAuth();
+  const { fontSizeValue } = useSettings();
   const { colors } = useTheme();
 
   return (
@@ -23,8 +25,10 @@ export const Header: FC = () => {
         <UserImage source={{ uri: "https://www.github.com/hmdarkfir3.png" }} />
 
         <UserInfo>
-          <Username>{authState.user?.given_name}</Username>
-          <Role>Associado</Role>
+          <Username style={{ fontSize: fontSizeValue(20) }} numberOfLines={1}>
+            {authState.user?.given_name}
+          </Username>
+          <Role style={{ fontSize: fontSizeValue(16) }}>Associado</Role>
         </UserInfo>
       </Wrapper>
 

@@ -11,6 +11,7 @@ import {
 } from "phosphor-react-native";
 
 import { useAuth } from "@hooks/useAuth";
+import { useSettings } from "@hooks/useSettings";
 
 import { Header } from "@components-of-screens/Profile/components/Header";
 import { SettingsItem } from "@components-of-screens/Profile/components/SettingsItem";
@@ -19,6 +20,7 @@ import { Container, Wrapper, EventHeader, EventTitle, Footer } from "./styles";
 
 export const Profile: FC = () => {
   const { logOut } = useAuth();
+  const { fontSizeValue } = useSettings();
   const { navigate } = useNavigation();
   const { colors } = useTheme();
 
@@ -48,7 +50,9 @@ export const Profile: FC = () => {
         <Header />
 
         <EventHeader>
-          <EventTitle>Eventos</EventTitle>
+          <EventTitle style={{ fontSize: fontSizeValue(20) }}>
+            Eventos
+          </EventTitle>
 
           <Funnel size={24} color={colors.screens.profile.icon} />
         </EventHeader>

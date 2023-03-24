@@ -6,6 +6,7 @@ import { SignOut } from "phosphor-react-native";
 
 import { useAuth } from "@hooks/useAuth";
 import { useTabBar } from "@hooks/useTabBar";
+import { useSettings } from "@hooks/useSettings";
 
 import {
   Container,
@@ -21,6 +22,7 @@ import {
 export const Header: FC = () => {
   const { state: authState, logOut } = useAuth();
   const { dispatch: tabBarDispatch } = useTabBar();
+  const { fontSizeValue } = useSettings();
   const { navigate } = useNavigation();
   const { colors } = useTheme();
 
@@ -66,8 +68,10 @@ export const Header: FC = () => {
           />
         </ProfileButton>
         <UserInfo>
-          <Greeting>Olá,</Greeting>
-          <Username>{formattedGivenName}</Username>
+          <Greeting style={{ fontSize: fontSizeValue(20) }}>Olá,</Greeting>
+          <Username style={{ fontSize: fontSizeValue(20) }}>
+            {formattedGivenName}
+          </Username>
         </UserInfo>
       </Wrapper>
 
