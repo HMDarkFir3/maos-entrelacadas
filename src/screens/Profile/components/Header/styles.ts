@@ -8,7 +8,7 @@ export const Container = styled(Pressable)`
   align-items: center;
   justify-content: space-between;
 
-  margin-top: ${STATUS_BAR_HEIGHT + 24}px;
+  margin-top: ${STATUS_BAR_HEIGHT + 12}px;
   padding: 12px 24px;
 `;
 
