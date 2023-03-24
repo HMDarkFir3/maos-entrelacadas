@@ -22,7 +22,7 @@ interface Props {}
 export const FontSwitcher: FC<Props> = (props) => {
   const {} = props;
 
-  const { fontSize, changeFontSize, fontSizeValue } = useSettings();
+  const { state: settingsState, changeFontSize, fontSizeValue } = useSettings();
   const { colors } = useTheme();
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -47,7 +47,7 @@ export const FontSwitcher: FC<Props> = (props) => {
         </Wrapper>
 
         <SelectedFont style={{ fontSize: fontSizeValue(20) }}>
-          {fontSize.name}
+          {settingsState.fontSize.name}
         </SelectedFont>
       </Container>
       {isOpen && (
@@ -68,7 +68,7 @@ export const FontSwitcher: FC<Props> = (props) => {
                 }
               >
                 <ItemText
-                  selected={item.value === fontSize.value}
+                  selected={item.value === settingsState.fontSize.value}
                   style={{ fontSize: fontSizeValue(20) }}
                 >
                   {item.name}

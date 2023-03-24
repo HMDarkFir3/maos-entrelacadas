@@ -12,25 +12,25 @@ import { AppRoutes } from "@routes/app.routes";
 
 export const Routes: FC = () => {
   const { state: authState } = useAuth();
-  const { theme } = useSettings();
+  const { state: settingsState } = useSettings();
   const { colors } = useTheme();
 
   useFocusEffect(
     useCallback(() => {
       NavigationBar.setBackgroundColorAsync(
-        theme.colors.navigationBar.backgroundPrimary
+        settingsState.theme.colors.navigationBar.backgroundPrimary
       );
       NavigationBar.setButtonStyleAsync(
-        theme.title === "light" ? "dark" : "light"
+        settingsState.theme.title === "light" ? "dark" : "light"
       );
-    }, [theme.title])
+    }, [settingsState.theme.title])
   );
 
   return (
     <>
       <StatusBar
         backgroundColor={colors.statusBar.backgroundPrimary}
-        style={theme.title === "light" ? "dark" : "light"}
+        style={settingsState.theme.title === "light" ? "dark" : "light"}
       />
 
       {authState.user?.uid ? <AppRoutes /> : <AuthRoutes />}

@@ -1,19 +1,30 @@
-import { createContext, useState, useEffect, FC, ReactNode } from "react";
+import {
+  createContext,
+  useEffect,
+  useReducer,
+  FC,
+  Dispatch,
+  ReactNode,
+  Reducer,
+} from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { ThemeProvider, DefaultTheme } from "styled-components/native";
+import { ThemeProvider } from "styled-components/native";
+
+import {
+  settingsReducer,
+  initialState,
+  SettingsState,
+  SettingsAction,
+} from "@reducers/settingsReducer";
 
 import { COLLECTION_THEME, COLLECTION_FONT_SIZE } from "@storages/index";
 
 import { light } from "@themes/light";
 import { dark } from "@themes/dark";
 
-interface FontSizeData {
-  name: "Pequeno" | "Normal" | "Grande";
-  value: "sm" | "md" | "lg";
-}
 export interface SettingsContextData {
-  theme: DefaultTheme;
-  fontSize: FontSizeData;
+  state: SettingsState;
+  dispatch: Dispatch<SettingsAction>;
   toggleTheme: () => Promise<void>;
   changeFontSize: (
     name: "Pequeno" | "Normal" | "Grande",
@@ -29,17 +40,18 @@ interface SettingsProviderProps {
 export const SettingsContext = createContext({} as SettingsContextData);
 
 export const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
-  const [theme, setTheme] = useState(light);
-  const [fontSize, setFontSize] = useState<FontSizeData>({
-    name: "Normal",
-    value: "md",
-  });
+  const [state, dispatch] = useReducer<Reducer<SettingsState, SettingsAction>>(
+    settingsReducer,
+    initialState
+  );
 
   const getThemeInStorage = async () => {
     const storage = await AsyncStorage.getItem(COLLECTION_THEME);
 
     if (storage) {
-      setTheme(storage === "light" ? dark : light);
+      const themeInStorage = storage === "light" ? light : dark;
+
+      dispatch({ type: "SET_THEME", payload: themeInStorage });
     }
   };
 
@@ -47,14 +59,14 @@ export const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
     const storage = await AsyncStorage.getItem(COLLECTION_FONT_SIZE);
 
     if (storage) {
-      console.log(JSON.parse(storage));
-
-      setFontSize(JSON.parse(storage));
+      dispatch({ type: "SET_FONT_SIZE", payload: JSON.parse(storage) });
     }
   };
 
   const toggleTheme = async () => {
-    setTheme(theme.title === "light" ? dark : light);
+    const theme = state.theme.title === "light" ? dark : light;
+
+    dispatch({ type: "SET_THEME", payload: theme });
 
     await AsyncStorage.setItem(COLLECTION_THEME, theme.title);
   };
@@ -63,18 +75,17 @@ export const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
     name: "Pequeno" | "Normal" | "Grande",
     size: "sm" | "md" | "lg"
   ) => {
-    setFontSize({ name, value: size });
-
     const data = {
       name,
       value: size,
     };
+    dispatch({ type: "SET_FONT_SIZE", payload: data });
 
     await AsyncStorage.setItem(COLLECTION_FONT_SIZE, JSON.stringify(data));
   };
 
   const fontSizeValue = (size: number) => {
-    switch (fontSize.value) {
+    switch (state.fontSize.value) {
       case "sm": {
         return size * 0.8;
       }
@@ -97,9 +108,15 @@ export const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
 
   return (
     <SettingsContext.Provider
-      value={{ theme, fontSize, toggleTheme, changeFontSize, fontSizeValue }}
+      value={{
+        state,
+        dispatch,
+        toggleTheme,
+        changeFontSize,
+        fontSizeValue,
+      }}
     >
-      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+      <ThemeProvider theme={state.theme}>{children}</ThemeProvider>
     </SettingsContext.Provider>
   );
 };

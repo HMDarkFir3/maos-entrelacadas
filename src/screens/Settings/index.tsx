@@ -11,7 +11,7 @@ import { useSettings } from "@hooks/useSettings";
 import { Container, Header, Wrapper } from "./styles";
 
 export const Settings: FC = () => {
-  const { theme, toggleTheme, fontSizeValue } = useSettings();
+  const { state: settingsState, toggleTheme, fontSizeValue } = useSettings();
   const { colors } = useTheme();
 
   const [notificationsSwitch, setNotificationsSwitch] = useState(false);
@@ -38,8 +38,8 @@ export const Settings: FC = () => {
             />
           )}
           title="Tema escuro"
-          value={theme.title === "dark"}
-          switchValue={theme.title === "dark"}
+          value={settingsState.theme.title === "dark"}
+          switchValue={settingsState.theme.title === "dark"}
           onValueChange={onToggleTheme}
           onSwitchValue={onToggleTheme}
         />
