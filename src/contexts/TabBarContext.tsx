@@ -1,18 +1,6 @@
-import {
-  createContext,
-  useReducer,
-  FC,
-  Dispatch,
-  ReactNode,
-  Reducer,
-} from "react";
+import { createContext, useReducer, FC, Dispatch, ReactNode, Reducer } from "react";
 
-import {
-  tabBarReducer,
-  initialState,
-  TabBarState,
-  TabBarAction,
-} from "@reducers/tabBarReducer";
+import { tabBarReducer, initialState, TabBarState, TabBarAction } from "@reducers/tabBarReducer";
 
 export interface TabBarContextData {
   state: TabBarState;
@@ -31,9 +19,5 @@ export const TabBarProvider: FC<TabBarProviderProps> = ({ children }) => {
     initialState
   );
 
-  return (
-    <TabBarContext.Provider value={{ state, dispatch }}>
-      {children}
-    </TabBarContext.Provider>
-  );
+  return <TabBarContext.Provider value={{ state, dispatch }}>{children}</TabBarContext.Provider>;
 };
