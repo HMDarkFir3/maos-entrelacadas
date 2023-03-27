@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components/native";
-import { TouchableOpacity } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import Animated from "react-native-reanimated";
 
 interface ItemTextProps {
@@ -10,7 +10,7 @@ interface SelectedTextProps {
   isSelected: boolean;
 }
 
-export const Container = styled.View`
+export const Container = styled(View)`
   z-index: 2;
 `;
 

@@ -147,8 +147,11 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   };
 
   useEffect(() => {
-    getSawIntroductionInStorage();
     getUserData();
+  }, []);
+
+  useEffect(() => {
+    getSawIntroductionInStorage();
   }, []);
 
   return (

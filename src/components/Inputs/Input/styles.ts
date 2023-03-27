@@ -1,11 +1,11 @@
 import styled, { css } from "styled-components/native";
-import { TextInput, TouchableOpacity } from "react-native";
+import { View, TextInput, TouchableOpacity } from "react-native";
 
 interface StyledInputProps {
   isEditable: boolean;
 }
 
-export const Container = styled.View`
+export const Container = styled(View)`
   z-index: 1;
 `;
 

@@ -14,7 +14,7 @@ import {
 } from "./styles";
 
 interface Props extends TextInputProps {
-  style?: StyleProp<ViewStyle>;
+  style?: ViewStyle;
   value?: string;
   icon: any;
   isPassword?: boolean;

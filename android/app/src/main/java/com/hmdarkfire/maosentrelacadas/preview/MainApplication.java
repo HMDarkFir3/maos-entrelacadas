@@ -1,4 +1,4 @@
-package com.hmdarkfire.maosentrelacadas.development;
+package com.hmdarkfire.maosentrelacadas.preview;
 
 import android.app.Application;
 import android.content.res.Configuration;

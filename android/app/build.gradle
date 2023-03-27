@@ -113,9 +113,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace 'com.hmdarkfire.maosentrelacadas.development'
+    namespace 'com.hmdarkfire.maosentrelacadas.preview'
     defaultConfig {
-        applicationId 'com.hmdarkfire.maosentrelacadas.development'
+        applicationId 'com.hmdarkfire.maosentrelacadas.preview'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
