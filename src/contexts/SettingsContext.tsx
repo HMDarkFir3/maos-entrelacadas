@@ -1,12 +1,4 @@
-import {
-  createContext,
-  useEffect,
-  useReducer,
-  FC,
-  Dispatch,
-  ReactNode,
-  Reducer,
-} from "react";
+import { createContext, useEffect, useReducer, FC, Dispatch, ReactNode, Reducer } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ThemeProvider } from "styled-components/native";
 

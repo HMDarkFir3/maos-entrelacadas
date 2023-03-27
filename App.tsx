@@ -1,11 +1,7 @@
 import "react-native-gesture-handler";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
-import {
-  Ubuntu_400Regular,
-  Ubuntu_500Medium,
-  Ubuntu_700Bold,
-} from "@expo-google-fonts/ubuntu";
+import { Ubuntu_400Regular, Ubuntu_500Medium, Ubuntu_700Bold } from "@expo-google-fonts/ubuntu";
 import { FC } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 

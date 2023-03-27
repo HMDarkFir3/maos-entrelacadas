@@ -1,12 +1,4 @@
-import {
-  createContext,
-  useEffect,
-  useReducer,
-  FC,
-  Dispatch,
-  ReactNode,
-  Reducer,
-} from "react";
+import { createContext, useEffect, useReducer, FC, Dispatch, ReactNode, Reducer } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import auth from "@react-native-firebase/auth";
 import firestore from "@react-native-firebase/firestore";
@@ -15,12 +7,7 @@ import { UserDTO } from "@dtos/UserDTO";
 
 import { useTabBar } from "@hooks/useTabBar";
 
-import {
-  authReducer,
-  initialState,
-  AuthState,
-  AuthAction,
-} from "@reducers/authReducer";
+import { authReducer, initialState, AuthState, AuthAction } from "@reducers/authReducer";
 
 import { COLLECTION_INTRODUCTION, COLLECTION_USER } from "@storages/index";
 
@@ -39,10 +26,7 @@ interface AuthProviderProps {
 export const AuthContext = createContext({} as AuthContextData);
 
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
-  const [state, dispatch] = useReducer<Reducer<AuthState, AuthAction>>(
-    authReducer,
-    initialState
-  );
+  const [state, dispatch] = useReducer<Reducer<AuthState, AuthAction>>(authReducer, initialState);
 
   const { dispatch: tabBarDispatch } = useTabBar();
 
@@ -66,19 +50,14 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     try {
       dispatch({ type: "SET_IS_LOADING", payload: true });
 
-      const { user } = await auth().signInWithEmailAndPassword(
-        state.email,
-        state.password
-      );
+      const { user } = await auth().signInWithEmailAndPassword(state.email, state.password);
 
       await firestore()
         .collection("users")
         .doc(user?.uid)
         .get()
         .then(async (documentSnapshot) => {
-          const formattedBirthdate = new Date(
-            documentSnapshot.data()?.birthdate.seconds * 1000
-          );
+          const formattedBirthdate = new Date(documentSnapshot.data()?.birthdate.seconds * 1000);
 
           const data = {
             uid: user?.uid,
@@ -102,10 +81,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     try {
       dispatch({ type: "SET_IS_LOADING", payload: true });
 
-      const { user } = await auth().createUserWithEmailAndPassword(
-        state.email,
-        state.password
-      );
+      const { user } = await auth().createUserWithEmailAndPassword(state.email, state.password);
 
       await firestore()
         .collection("users")
