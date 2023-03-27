@@ -20,5 +20,5 @@
     }
   },
   "extends": "expo/tsconfig.base",
-  "types": ["styled-components-react-native"]
+  "types": ["jest", "styled-components-react-native"]
 }

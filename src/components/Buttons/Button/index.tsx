@@ -6,7 +6,7 @@ import { useSettings } from "@hooks/useSettings";
 import { Container, Title } from "./styles";
 
 interface Props extends TouchableOpacityProps {
-  title?: string;
+  title: string;
 }
 
 export const Button: FC<Props> = (props) => {
