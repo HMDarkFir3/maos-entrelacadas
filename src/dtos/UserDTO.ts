@@ -4,4 +4,5 @@ export interface UserDTO {
   email: string;
   gender: string;
   birthdate: Date;
+  status: "";
 }

@@ -1,6 +1,5 @@
 import { FC } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { useTheme } from "styled-components/native";
 import { House, MapPinLine, Gift, User } from "phosphor-react-native";
 
@@ -9,9 +8,7 @@ import { useSettings } from "@hooks/useSettings";
 
 import { Container, TabItem, TabItemText } from "./styles";
 
-interface Props extends BottomTabBarProps {}
-
-export const CustomTabBar: FC<Props> = () => {
+export const CustomTabBar: FC = () => {
   const { state: tabBarState, dispatch: tabBarDispatch } = useTabBar();
   const { fontSizeValue } = useSettings();
   const { navigate } = useNavigation();
@@ -26,7 +23,7 @@ export const CustomTabBar: FC<Props> = () => {
 
   return (
     <Container>
-      <TabItem onPress={() => onPressNavigate("Home")}>
+      <TabItem testID="tab-item-1" onPress={() => onPressNavigate("Home")}>
         <House
           size={fontSizeValue(28)}
           color={
@@ -43,7 +40,7 @@ export const CustomTabBar: FC<Props> = () => {
         </TabItemText>
       </TabItem>
 
-      <TabItem onPress={() => onPressNavigate("Events")}>
+      <TabItem testID="tab-item-2" onPress={() => onPressNavigate("Events")}>
         <MapPinLine
           size={fontSizeValue(28)}
           color={
@@ -60,7 +57,7 @@ export const CustomTabBar: FC<Props> = () => {
         </TabItemText>
       </TabItem>
 
-      <TabItem onPress={() => onPressNavigate("Donations")}>
+      <TabItem testID="tab-item-3" onPress={() => onPressNavigate("Donations")}>
         <Gift
           size={fontSizeValue(28)}
           color={
@@ -77,7 +74,7 @@ export const CustomTabBar: FC<Props> = () => {
         </TabItemText>
       </TabItem>
 
-      <TabItem onPress={() => onPressNavigate("Profile")}>
+      <TabItem testID="tab-item-4" onPress={() => onPressNavigate("Profile")}>
         <User
           size={fontSizeValue(28)}
           color={

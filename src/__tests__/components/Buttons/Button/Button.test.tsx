@@ -1,9 +1,10 @@
+import { ReactNode } from "react";
 import { render } from "@testing-library/react-native";
 import { ThemeProvider } from "styled-components/native";
 
-import { light } from "@themes/light";
+import { Button } from "@components/Buttons/Button";
 
-import { Button } from "../index";
+import { light } from "@themes/light";
 
 jest.mock("@hooks/useSettings", () => {
   return {
@@ -15,15 +16,17 @@ jest.mock("@hooks/useSettings", () => {
   };
 });
 
+const Providers = ({ children }: { children: ReactNode }) => (
+  <ThemeProvider theme={light}>{children}</ThemeProvider>
+);
+
 describe("Button", () => {
   it("the component rendered correctly", () => {
     const titleProp = "title";
 
-    const { getByText } = render(
-      <ThemeProvider theme={light}>
-        <Button title={titleProp} />
-      </ThemeProvider>
-    );
+    const { getByText } = render(<Button testID="button" title={titleProp} />, {
+      wrapper: Providers,
+    });
 
     const element = getByText(titleProp);
     expect(element).toBeTruthy();

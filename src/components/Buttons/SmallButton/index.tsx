@@ -5,13 +5,12 @@ import { useTheme } from "styled-components/native";
 import { Container, Load } from "./styles";
 
 interface Props extends TouchableOpacityProps {
-  icon?: any;
-  title?: string;
+  icon: any;
   isLoading?: boolean;
 }
 
 export const SmallButton: FC<Props> = (props) => {
-  const { icon: Icon, title, isLoading = false, ...rest } = props;
+  const { icon: Icon, isLoading = false, ...rest } = props;
 
   const { colors } = useTheme();
 
