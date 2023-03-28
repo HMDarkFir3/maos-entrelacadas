@@ -37,6 +37,7 @@ export const DatePicker: FC<Props> = (props) => {
   const onChangeDate = (date: Date) => {
     onChange(date);
     setIsOpenDatePicker(false);
+    console.log(date);
   };
 
   const onCancelDatePicker = () =>
@@ -44,6 +45,7 @@ export const DatePicker: FC<Props> = (props) => {
 
   return (
     <Container
+      testID="date-picker"
       style={style}
       activeOpacity={0.7}
       disabled={!isEditable}
@@ -62,6 +64,7 @@ export const DatePicker: FC<Props> = (props) => {
       )}
 
       <DateTimePickerModal
+        testID="date-time-picker-modal"
         isVisible={isOpenDatePicker}
         mode="date"
         onConfirm={onChangeDate}
