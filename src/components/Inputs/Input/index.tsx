@@ -57,6 +57,7 @@ export const Input = forwardRef<TextInput, Props>((props, ref) => {
         />
         {isPassword && (
           <TogglePasswordVisibilityButton
+            testID="toggle-password-visibility-button"
             activeOpacity={0.7}
             onPress={onTogglePasswordVisibility}
           >

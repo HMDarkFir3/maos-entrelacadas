@@ -3,7 +3,7 @@ import { render, fireEvent } from "@testing-library/react-native";
 import { ThemeProvider } from "styled-components/native";
 import { Activity } from "phosphor-react-native";
 
-import { DatePicker } from "@components/Inputs/DatePicker";
+import { Input } from "@components/Inputs/Input";
 
 import { light } from "@themes/light";
 
@@ -21,27 +21,30 @@ jest.mock("@hooks/useSettings", () => {
   };
 });
 
-describe("DatePicker", () => {
+describe("Input", () => {
   it("the component rendered correctly", () => {
-    const onChangeMock = jest.fn();
-    let valueMock: Date | null = null;
+    render(<Input icon={() => <Activity />} />, {
+      wrapper: Providers,
+    });
+  });
 
+  it("the component rendered correctly with isPassword prop", () => {
     const { getByTestId } = render(
-      <DatePicker
-        icon={() => <Activity />}
-        onChange={onChangeMock}
-        value={valueMock}
-      />,
+      <Input icon={() => <Activity />} isPassword />,
       {
         wrapper: Providers,
       }
     );
 
-    const datePicker = getByTestId("date-picker");
-    fireEvent.press(datePicker);
+    const togglePasswordVisibilityButton = getByTestId(
+      "toggle-password-visibility-button"
+    );
+    fireEvent.press(togglePasswordVisibilityButton);
+  });
 
-    const dateTimePickerModal = getByTestId("date-time-picker-modal");
-    fireEvent(dateTimePickerModal, "onConfirm", new Date());
-    fireEvent(dateTimePickerModal, "onCancel");
+  it("the component rendered correctly with maxLength prop", () => {
+    render(<Input icon={() => <Activity />} maxLength={10} />, {
+      wrapper: Providers,
+    });
   });
 });
