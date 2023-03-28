@@ -66,11 +66,10 @@ export const Select: FC<Props<typeof genders>> = (props) => {
 
   const onPressOpenSelect = () => setIsOpen((prevState) => !prevState);
 
-  const onPressSelectItem = (item: string) => onChange(item);
-
   return (
     <Container style={style}>
       <Wrapper
+        testID="select-wrapper"
         activeOpacity={0.7}
         disabled={!isEditable}
         onPress={onPressOpenSelect}
@@ -104,8 +103,9 @@ export const Select: FC<Props<typeof genders>> = (props) => {
             keyExtractor={(item) => String(item.id)}
             renderItem={({ item }) => (
               <Item
+                testID="select-item"
                 activeOpacity={0.7}
-                onPress={() => onPressSelectItem(item.name)}
+                onPress={() => onChange(item.name)}
               >
                 <SelectedText
                   style={{ marginLeft: 16, fontSize: fontSizeValue(20) }}

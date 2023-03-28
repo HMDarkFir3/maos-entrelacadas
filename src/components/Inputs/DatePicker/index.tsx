@@ -37,7 +37,6 @@ export const DatePicker: FC<Props> = (props) => {
   const onChangeDate = (date: Date) => {
     onChange(date);
     setIsOpenDatePicker(false);
-    console.log(date);
   };
 
   const onCancelDatePicker = () =>

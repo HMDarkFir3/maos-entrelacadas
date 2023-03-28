@@ -23,12 +23,12 @@ jest.mock("@hooks/useSettings", () => {
 
 describe("Input", () => {
   it("the component rendered correctly", () => {
-    render(<Input icon={() => <Activity />} />, {
+    render(<Input icon={() => <Activity />} maxLength={10} />, {
       wrapper: Providers,
     });
   });
 
-  it("the component rendered correctly with isPassword prop", () => {
+  it("pressed toggle password", () => {
     const { getByTestId } = render(
       <Input icon={() => <Activity />} isPassword />,
       {
@@ -40,11 +40,5 @@ describe("Input", () => {
       "toggle-password-visibility-button"
     );
     fireEvent.press(togglePasswordVisibilityButton);
-  });
-
-  it("the component rendered correctly with maxLength prop", () => {
-    render(<Input icon={() => <Activity />} maxLength={10} />, {
-      wrapper: Providers,
-    });
   });
 });
