@@ -63,12 +63,14 @@ export const Introduction: FC = () => {
   };
 
   const scrollToNextSlide = () => {
-    if (currentIndex! < introductionSlider.length - 1) {
-      introductionSliderRef.current!.scrollToIndex({
-        index: currentIndex! + 1,
-      });
-    } else {
-      sawIntroductionInStorage();
+    if (currentIndex) {
+      if (currentIndex < introductionSlider.length - 1) {
+        introductionSliderRef.current?.scrollToIndex({
+          index: currentIndex + 1,
+        });
+      } else {
+        sawIntroductionInStorage();
+      }
     }
   };
 
@@ -105,6 +107,7 @@ export const Introduction: FC = () => {
 
       <Footer>
         <JumpButton
+          testID="jump-button"
           style={{
             opacity: currentIndex === introductionSlider.length - 1 ? 0 : 1,
           }}
@@ -115,6 +118,7 @@ export const Introduction: FC = () => {
         </JumpButton>
 
         <SmallButton
+          testID="next-button"
           icon={() =>
             currentIndex === introductionSlider.length - 1 ? (
               <Check

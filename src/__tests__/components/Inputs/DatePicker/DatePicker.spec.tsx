@@ -44,4 +44,27 @@ describe("DatePicker", () => {
     fireEvent(dateTimePickerModal, "onConfirm", new Date());
     fireEvent(dateTimePickerModal, "onCancel");
   });
+
+  it("the component rendered correctly with value", () => {
+    const onChangeMock = jest.fn();
+    let valueMock: Date | null = new Date();
+
+    const { getByTestId } = render(
+      <DatePicker
+        icon={() => <Activity />}
+        onChange={onChangeMock}
+        value={valueMock}
+      />,
+      {
+        wrapper: Providers,
+      }
+    );
+
+    const datePicker = getByTestId("date-picker");
+    fireEvent.press(datePicker);
+
+    const dateTimePickerModal = getByTestId("date-time-picker-modal");
+    fireEvent(dateTimePickerModal, "onConfirm", new Date());
+    fireEvent(dateTimePickerModal, "onCancel");
+  });
 });

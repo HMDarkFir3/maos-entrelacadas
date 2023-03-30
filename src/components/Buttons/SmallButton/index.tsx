@@ -10,7 +10,7 @@ interface Props extends TouchableOpacityProps {
 }
 
 export const SmallButton: FC<Props> = (props) => {
-  const { icon: Icon, isLoading = false, ...rest } = props;
+  const { icon: Icon, isLoading, ...rest } = props;
 
   const { colors } = useTheme();
 

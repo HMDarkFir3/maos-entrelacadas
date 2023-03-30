@@ -6,6 +6,10 @@ import { Button } from "@components/Buttons/Button";
 
 import { light } from "@themes/light";
 
+const Providers = ({ children }: { children: ReactNode }) => (
+  <ThemeProvider theme={light}>{children}</ThemeProvider>
+);
+
 jest.mock("@hooks/useSettings", () => {
   return {
     useSettings: () => {
@@ -15,10 +19,6 @@ jest.mock("@hooks/useSettings", () => {
     },
   };
 });
-
-const Providers = ({ children }: { children: ReactNode }) => (
-  <ThemeProvider theme={light}>{children}</ThemeProvider>
-);
 
 describe("Button", () => {
   it("the component rendered correctly", () => {

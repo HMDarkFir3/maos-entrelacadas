@@ -28,30 +28,15 @@ export const IntroductionSlider: FC<Props> = (props) => {
 
   const { fontSizeValue } = useSettings();
 
-  const RenderSvg: FC = () => {
-    switch (id) {
-      case "1": {
-        return <IntroductionSlide1 width={SCREEN_WIDTH} />;
-      }
-      case "2": {
-        return <IntroductionSlide2 width={SCREEN_WIDTH} />;
-      }
-      case "3": {
-        return <IntroductionSlide3 width={SCREEN_WIDTH} />;
-      }
-      case "4": {
-        return <IntroductionSlide4 width={SCREEN_WIDTH} />;
-      }
-      default: {
-        return null;
-      }
-    }
-  };
-
   return (
     <Container>
       <SvgWrapper>
-        <RenderSvg />
+        <>
+          {/* {id === "1" && <IntroductionSlide1 width={SCREEN_WIDTH} />}
+          {id === "2" && <IntroductionSlide2 width={SCREEN_WIDTH} />}
+          {id === "3" && <IntroductionSlide3 width={SCREEN_WIDTH} />}
+          {id === "4" && <IntroductionSlide4 width={SCREEN_WIDTH} />} */}
+        </>
       </SvgWrapper>
 
       <TextWrapper>

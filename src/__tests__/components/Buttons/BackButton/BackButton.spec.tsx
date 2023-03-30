@@ -21,15 +21,22 @@ jest.mock("@hooks/useSettings", () => {
 });
 
 describe("BackButton", () => {
-  it("the component rendered correctly", () => {
-    const onPressBackButtonMock = jest.fn();
-
+  const onPressBackButtonMock = jest.fn();
+  it("was pressed the button", () => {
     const { getByTestId } = render(
       <BackButton testID="back-button" onBackButton={onPressBackButtonMock} />,
       {
         wrapper: Providers,
       }
     );
+
+    const backButton = getByTestId("back-button");
+    fireEvent.press(backButton);
+  });
+  it("was pressed the button without onBackButton prop", () => {
+    const { getByTestId } = render(<BackButton testID="back-button" />, {
+      wrapper: Providers,
+    });
 
     const backButton = getByTestId("back-button");
     fireEvent.press(backButton);

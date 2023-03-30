@@ -43,7 +43,10 @@ export const Welcome: FC = () => {
           onPress={() => onPressLogin("Login")}
         />
 
-        <RegisterButton onPress={() => onPressLogin("StepOne")}>
+        <RegisterButton
+          testID="register-button"
+          onPress={() => onPressLogin("StepOne")}
+        >
           <RegisterButtonText
             style={{ fontSize: fontSizeValue(20) }}
             isGreen={false}
