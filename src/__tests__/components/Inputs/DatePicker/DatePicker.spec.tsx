@@ -22,7 +22,7 @@ jest.mock("@hooks/useSettings", () => {
 });
 
 describe("DatePicker", () => {
-  it("the component rendered correctly", () => {
+  it("should be able to render the component", () => {
     const onChangeMock = jest.fn();
     const valueMock: Date | null = null;
 
@@ -45,7 +45,7 @@ describe("DatePicker", () => {
     fireEvent(dateTimePickerModal, "onCancel");
   });
 
-  it("the component rendered correctly with value", () => {
+  it("should be able to render the component when value exists", () => {
     const onChangeMock = jest.fn();
     const valueMock: Date | null = new Date();
 

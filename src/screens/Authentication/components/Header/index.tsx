@@ -9,7 +9,7 @@ import { Container, Wrapper, Logo, Title, Description } from "./styles";
 interface Props {
   title: string;
   description: string;
-  onBackButton?: () => void;
+  onBackButton: () => void;
 }
 
 export const Header: FC<Props> = (props) => {

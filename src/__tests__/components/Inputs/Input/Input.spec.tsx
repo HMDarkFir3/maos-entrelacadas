@@ -22,13 +22,13 @@ jest.mock("@hooks/useSettings", () => {
 });
 
 describe("Input", () => {
-  it("the component rendered correctly", () => {
+  it("should be able to render the component", () => {
     render(<Input icon={() => <Activity />} maxLength={10} />, {
       wrapper: Providers,
     });
   });
 
-  it("pressed toggle password", () => {
+  it("should be able to render the component when pressed toggle password", () => {
     const { getByTestId } = render(
       <Input icon={() => <Activity />} isPassword />,
       {

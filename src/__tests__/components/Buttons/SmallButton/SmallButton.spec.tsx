@@ -12,13 +12,13 @@ const Providers = ({ children }: { children: ReactNode }) => (
 );
 
 describe("SmallButton Component", () => {
-  it("component rendered correctly when isLoading is false", () => {
+  it("should be able to render the component when isLoading is false", () => {
     render(<SmallButton icon={() => <Activity />} isLoading={false} />, {
       wrapper: Providers,
     });
   });
 
-  it("component rendered correctly when isLoading is true", () => {
+  it("should be able to render the component when isLoading is true", () => {
     render(<SmallButton icon={() => <Activity />} isLoading />, {
       wrapper: Providers,
     });

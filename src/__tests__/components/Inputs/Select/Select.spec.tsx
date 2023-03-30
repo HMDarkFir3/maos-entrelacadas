@@ -34,7 +34,7 @@ describe("Select", () => {
     },
   ];
 
-  it("the component rendered correctly when pressed", () => {
+  it("should be able to render the component when pressed the select", () => {
     const { getByTestId } = render(
       <Select
         icon={() => <Activity />}
@@ -51,7 +51,7 @@ describe("Select", () => {
     fireEvent.press(selectWrapper);
   });
 
-  it("the component rendered correctly when selected an item", () => {
+  it("should be able to render the component when selected an item", () => {
     const { getByTestId, getByText } = render(
       <Select
         icon={() => <Activity />}

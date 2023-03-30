@@ -21,7 +21,7 @@ jest.mock("@hooks/useSettings", () => {
 });
 
 describe("Button Component", () => {
-  it("the component rendered correctly", () => {
+  it("should be able to render the component", () => {
     const titleMock = "title";
 
     const { getByText } = render(<Button title={titleMock} />, {
