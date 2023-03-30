@@ -14,6 +14,16 @@ const Providers = ({ children }: { children: ReactNode }) => (
   </AuthProvider>
 );
 
+jest.mock("@hooks/useSettings", () => {
+  return {
+    useSettings: () => {
+      return {
+        fontSizeValue: jest.fn().mockReturnValue(16),
+      };
+    },
+  };
+});
+
 describe("Home Screen", () => {
   it("should be able to render the component", () => {
     render(<Home />, { wrapper: Providers });

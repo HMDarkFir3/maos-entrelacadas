@@ -25,6 +25,7 @@ export const Header: FC = () => {
 
   return (
     <Container
+      testID="Header.Container"
       android_ripple={{ color: colors.androidRipple.backgroundPrimary }}
       onPress={onPressUserInfo}
     >
