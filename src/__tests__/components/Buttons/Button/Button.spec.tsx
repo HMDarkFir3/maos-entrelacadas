@@ -20,11 +20,11 @@ jest.mock("@hooks/useSettings", () => {
   };
 });
 
-describe("Button", () => {
+describe("Button Component", () => {
   it("the component rendered correctly", () => {
     const titleProp = "title";
 
-    const { getByText } = render(<Button testID="button" title={titleProp} />, {
+    const { getByText } = render(<Button title={titleProp} />, {
       wrapper: Providers,
     });
 

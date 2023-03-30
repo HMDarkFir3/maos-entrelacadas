@@ -23,7 +23,10 @@ export const CustomTabBar: FC = () => {
 
   return (
     <Container>
-      <TabItem testID="tab-item-1" onPress={() => onPressNavigate("Home")}>
+      <TabItem
+        testID="CustomTabBar.TabItem1"
+        onPress={() => onPressNavigate("Home")}
+      >
         <House
           size={fontSizeValue(28)}
           color={
@@ -40,7 +43,10 @@ export const CustomTabBar: FC = () => {
         </TabItemText>
       </TabItem>
 
-      <TabItem testID="tab-item-2" onPress={() => onPressNavigate("Events")}>
+      <TabItem
+        testID="CustomTabBar.TabItem2"
+        onPress={() => onPressNavigate("Events")}
+      >
         <MapPinLine
           size={fontSizeValue(28)}
           color={
@@ -57,7 +63,10 @@ export const CustomTabBar: FC = () => {
         </TabItemText>
       </TabItem>
 
-      <TabItem testID="tab-item-3" onPress={() => onPressNavigate("Donations")}>
+      <TabItem
+        testID="CustomTabBar.TabItem3"
+        onPress={() => onPressNavigate("Donations")}
+      >
         <Gift
           size={fontSizeValue(28)}
           color={
@@ -74,7 +83,10 @@ export const CustomTabBar: FC = () => {
         </TabItemText>
       </TabItem>
 
-      <TabItem testID="tab-item-4" onPress={() => onPressNavigate("Profile")}>
+      <TabItem
+        testID="CustomTabBar.TabItem4"
+        onPress={() => onPressNavigate("Profile")}
+      >
         <User
           size={fontSizeValue(28)}
           color={

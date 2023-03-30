@@ -11,7 +11,7 @@ const Providers = ({ children }: { children: ReactNode }) => (
   <ThemeProvider theme={light}>{children}</ThemeProvider>
 );
 
-describe("SmallButton", () => {
+describe("SmallButton Component", () => {
   it("component rendered correctly when isLoading is false", () => {
     render(<SmallButton icon={() => <Activity />} isLoading={false} />, {
       wrapper: Providers,

@@ -20,7 +20,7 @@ jest.mock("@hooks/useSettings", () => {
   };
 });
 
-describe("Welcome", () => {
+describe("Welcome Screen", () => {
   it("verify if the texts rendered correctly", () => {
     const { getByText } = render(<Welcome />, { wrapper: Providers });
 

@@ -24,13 +24,13 @@ jest.mock("@hooks/useSettings", () => {
   };
 });
 
-describe("CustomTabBar", () => {
+describe("CustomTabBar Component", () => {
   it("was pressed Home button", () => {
     const { getByTestId } = render(<CustomTabBar />, {
       wrapper: Providers,
     });
 
-    const tabItem1 = getByTestId("tab-item-1");
+    const tabItem1 = getByTestId("CustomTabBar.TabItem1");
     fireEvent.press(tabItem1);
   });
 
@@ -39,7 +39,7 @@ describe("CustomTabBar", () => {
       wrapper: Providers,
     });
 
-    const tabItem2 = getByTestId("tab-item-2");
+    const tabItem2 = getByTestId("CustomTabBar.TabItem2");
     fireEvent.press(tabItem2);
   });
 
@@ -48,7 +48,7 @@ describe("CustomTabBar", () => {
       wrapper: Providers,
     });
 
-    const tabItem3 = getByTestId("tab-item-3");
+    const tabItem3 = getByTestId("CustomTabBar.TabItem3");
     fireEvent.press(tabItem3);
   });
 
@@ -57,7 +57,7 @@ describe("CustomTabBar", () => {
       wrapper: Providers,
     });
 
-    const tabItem4 = getByTestId("tab-item-4");
+    const tabItem4 = getByTestId("CustomTabBar.TabItem4");
     fireEvent.press(tabItem4);
   });
 });
