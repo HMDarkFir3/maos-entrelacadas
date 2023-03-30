@@ -17,11 +17,7 @@ import {
   ItemText,
 } from "./styles";
 
-interface Props {}
-
-export const FontSwitcher: FC<Props> = (props) => {
-  const {} = props;
-
+export const FontSwitcher: FC = () => {
   const { state: settingsState, changeFontSize, fontSizeValue } = useSettings();
   const { colors } = useTheme();
 
@@ -32,6 +28,7 @@ export const FontSwitcher: FC<Props> = (props) => {
   return (
     <>
       <Container
+        testID="FontSwitcher.OpenFontSwitcherButton"
         android_ripple={{ color: colors.androidRipple.backgroundPrimary }}
         onPress={onPressOpenFontSwitcher}
       >
@@ -51,12 +48,13 @@ export const FontSwitcher: FC<Props> = (props) => {
         </SelectedFont>
       </Container>
       {isOpen && (
-        <List>
+        <List testID="FontSwitcher.List">
           <FlatList
             data={typeFonts}
             keyExtractor={(item) => item.value}
             renderItem={({ item }) => (
               <Item
+                testID="FontSwitcher.Item"
                 android_ripple={{
                   color: colors.androidRipple.backgroundPrimary,
                 }}
