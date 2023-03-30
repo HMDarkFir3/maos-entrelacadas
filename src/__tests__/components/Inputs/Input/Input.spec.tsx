@@ -37,7 +37,7 @@ describe("Input", () => {
     );
 
     const togglePasswordVisibilityButton = getByTestId(
-      "toggle-password-visibility-button"
+      "Input.TogglePasswordVisibilityButton"
     );
     fireEvent.press(togglePasswordVisibilityButton);
   });

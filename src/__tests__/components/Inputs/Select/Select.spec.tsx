@@ -47,7 +47,7 @@ describe("Select", () => {
       }
     );
 
-    const selectWrapper = getByTestId("select-wrapper");
+    const selectWrapper = getByTestId("Select.Wrapper");
     fireEvent.press(selectWrapper);
   });
 
@@ -64,7 +64,7 @@ describe("Select", () => {
       }
     );
 
-    const selectWrapper = getByTestId("select-wrapper");
+    const selectWrapper = getByTestId("Select.Wrapper");
     fireEvent.press(selectWrapper);
 
     const selectItem = getByText(/masculino/i);

@@ -37,10 +37,10 @@ describe("DatePicker", () => {
       }
     );
 
-    const datePicker = getByTestId("date-picker");
+    const datePicker = getByTestId("DatePicker");
     fireEvent.press(datePicker);
 
-    const dateTimePickerModal = getByTestId("date-time-picker-modal");
+    const dateTimePickerModal = getByTestId("DatePicker.DateTimePickerModal");
     fireEvent(dateTimePickerModal, "onConfirm", new Date());
     fireEvent(dateTimePickerModal, "onCancel");
   });
@@ -60,10 +60,10 @@ describe("DatePicker", () => {
       }
     );
 
-    const datePicker = getByTestId("date-picker");
+    const datePicker = getByTestId("DatePicker");
     fireEvent.press(datePicker);
 
-    const dateTimePickerModal = getByTestId("date-time-picker-modal");
+    const dateTimePickerModal = getByTestId("DatePicker.DateTimePickerModal");
     fireEvent(dateTimePickerModal, "onConfirm", new Date());
     fireEvent(dateTimePickerModal, "onCancel");
   });

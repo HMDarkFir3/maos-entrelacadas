@@ -44,7 +44,7 @@ export const DatePicker: FC<Props> = (props) => {
 
   return (
     <Container
-      testID="date-picker"
+      testID="DatePicker"
       style={style}
       activeOpacity={0.7}
       disabled={!isEditable}
@@ -63,7 +63,7 @@ export const DatePicker: FC<Props> = (props) => {
       )}
 
       <DateTimePickerModal
-        testID="date-time-picker-modal"
+        testID="DatePicker.DateTimePickerModal"
         isVisible={isOpenDatePicker}
         mode="date"
         onConfirm={onChangeDate}
