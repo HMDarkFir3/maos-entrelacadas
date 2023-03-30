@@ -7,20 +7,21 @@ import { BackButton } from "@components/Buttons/BackButton";
 import { Container, Wrapper, Logo, Title, Description } from "./styles";
 
 interface Props {
+  testID?: string;
   title: string;
   description: string;
   onBackButton: () => void;
 }
 
 export const Header: FC<Props> = (props) => {
-  const { title, description, onBackButton } = props;
+  const { testID, title, description, onBackButton } = props;
 
   const { fontSizeValue } = useSettings();
 
   return (
     <Container>
       <Wrapper>
-        <BackButton onBackButton={onBackButton} />
+        <BackButton testID={testID} onBackButton={onBackButton} />
         <Logo source={require("@assets/img/logo.png")} />
       </Wrapper>
 

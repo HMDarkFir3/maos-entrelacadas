@@ -37,9 +37,10 @@ export const Login: FC = () => {
   const onPressBackButton = () => authDispatch({ type: "SET_EMPTY_FIELDS" });
 
   return (
-    <InputBlurButton onPress={onPressInScreen}>
+    <InputBlurButton testID="Login.InputBlurButton" onPress={onPressInScreen}>
       <Container>
         <Header
+          testID="Login.Header"
           title="Faça login"
           description="Queremos impactar de forma positiva a sua vida e de sua comunidade."
           onBackButton={onPressBackButton}
@@ -100,6 +101,7 @@ export const Login: FC = () => {
 
         <Footer>
           <SmallButton
+            testID="Login.SmallButton"
             icon={() => (
               <Check
                 color={colors.components.smallButton.icon}
