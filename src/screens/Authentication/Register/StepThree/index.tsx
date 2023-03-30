@@ -26,16 +26,19 @@ export const StepThree: FC = () => {
   };
 
   const onPressSubmit = () => {
-    if (!authState.password.trim()) return;
-    if (!authState.confirmPassword.trim()) return;
+    if (!authState.password.trim() || !authState.confirmPassword.trim()) return;
 
     register();
   };
 
   return (
-    <InputBlurButton onPress={onPressInScreen}>
+    <InputBlurButton
+      testID="StepThree.InputBlurButton"
+      onPress={onPressInScreen}
+    >
       <Container>
         <Header
+          testID="StepThree.Header"
           title="Crie sua conta!"
           description="Preencha com sua senha, depois a confirme."
         />
@@ -88,6 +91,7 @@ export const StepThree: FC = () => {
 
         <Footer>
           <SmallButton
+            testID="StepThree.SmallButton"
             icon={() => (
               <Check
                 color={colors.components.smallButton.icon}

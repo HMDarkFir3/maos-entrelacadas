@@ -10,7 +10,7 @@ interface Props {
   testID?: string;
   title: string;
   description: string;
-  onBackButton: () => void;
+  onBackButton?: () => void;
 }
 
 export const Header: FC<Props> = (props) => {

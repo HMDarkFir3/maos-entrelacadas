@@ -28,6 +28,7 @@ describe("DatePicker", () => {
 
     const { getByTestId } = render(
       <DatePicker
+        testDateTimePickerModalID="DatePicker.DateTimePickerModal"
         icon={() => <Activity />}
         onChange={onChangeMock}
         value={valueMock}
@@ -51,6 +52,7 @@ describe("DatePicker", () => {
 
     const { getByTestId } = render(
       <DatePicker
+        testDateTimePickerModalID="DatePicker.DateTimePickerModal"
         icon={() => <Activity />}
         onChange={onChangeMock}
         value={valueMock}

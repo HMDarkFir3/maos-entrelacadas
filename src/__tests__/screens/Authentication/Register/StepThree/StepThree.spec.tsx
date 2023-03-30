@@ -4,7 +4,7 @@ import { ThemeProvider } from "styled-components/native";
 
 import { AuthProvider } from "@contexts/AuthContext";
 
-import { StepOne } from "@screens/Authentication/Register/StepOne";
+import { StepThree } from "@screens/Authentication/Register/StepThree";
 
 import { light } from "@themes/light";
 
@@ -24,58 +24,56 @@ jest.mock("@hooks/useSettings", () => {
   };
 });
 
-describe("StepOne Screen", () => {
+describe("StepThree Screen", () => {
   it("should be able to render the component", () => {
-    const { getByText } = render(<StepOne />, { wrapper: Providers });
+    const { getByText } = render(<StepThree />, { wrapper: Providers });
 
     const title = getByText("Crie sua conta!");
-    const description = getByText(
-      "Vamos começar preenchendo seus dados, começando com seu nome."
-    );
+    const description = getByText("Preencha com sua senha, depois a confirme.");
 
     expect(title).toBeTruthy();
     expect(description).toBeTruthy();
   });
 
   it("should be able to press the screen", () => {
-    const { getByTestId } = render(<StepOne />, {
+    const { getByTestId } = render(<StepThree />, {
       wrapper: Providers,
     });
 
-    const inputBlurButton = getByTestId("StepOne.InputBlurButton");
+    const inputBlurButton = getByTestId("StepThree.InputBlurButton");
     fireEvent.press(inputBlurButton);
   });
 
   it("should be able to press the next button", () => {
-    const { getByTestId } = render(<StepOne />, {
+    const { getByTestId } = render(<StepThree />, {
       wrapper: Providers,
     });
 
-    const smallButton = getByTestId("StepOne.SmallButton");
+    const smallButton = getByTestId("StepThree.SmallButton");
     fireEvent.press(smallButton);
   });
 
   it("should be able to press the back button", () => {
-    const { getByTestId } = render(<StepOne />, {
+    const { getByTestId } = render(<StepThree />, {
       wrapper: Providers,
     });
 
-    const header = getByTestId("StepOne.Header");
+    const header = getByTestId("StepThree.Header");
     fireEvent.press(header, "onBackButton");
   });
 
   it("should be able to change the values the inputs", async () => {
-    const { getByTestId } = render(<StepOne />, {
+    const { getByPlaceholderText, getByTestId } = render(<StepThree />, {
       wrapper: Providers,
     });
 
-    const givenNameInput = getByTestId("StepOne.GivenNameInput");
-    const emailInput = getByTestId("StepOne.EmailInput");
+    const passwordInput = getByPlaceholderText("Senha");
+    const confirmPasswordInput = getByPlaceholderText("Confirmar senha");
 
-    fireEvent.changeText(givenNameInput, "John Doe");
-    fireEvent.changeText(emailInput, "johndoe@example.com");
+    fireEvent.changeText(passwordInput, "123456");
+    fireEvent.changeText(confirmPasswordInput, "123456");
 
-    const smallButton = getByTestId("StepOne.SmallButton");
+    const smallButton = getByTestId("StepThree.SmallButton");
     fireEvent.press(smallButton);
   });
 });

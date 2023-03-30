@@ -4,7 +4,7 @@ import { ThemeProvider } from "styled-components/native";
 
 import { AuthProvider } from "@contexts/AuthContext";
 
-import { StepOne } from "@screens/Authentication/Register/StepOne";
+import { StepTwo } from "@screens/Authentication/Register/StepTwo";
 
 import { light } from "@themes/light";
 
@@ -24,58 +24,58 @@ jest.mock("@hooks/useSettings", () => {
   };
 });
 
-describe("StepOne Screen", () => {
+describe("StepTwo Screen", () => {
   it("should be able to render the component", () => {
-    const { getByText } = render(<StepOne />, { wrapper: Providers });
+    const { getByText } = render(<StepTwo />, { wrapper: Providers });
 
     const title = getByText("Crie sua conta!");
     const description = getByText(
-      "Vamos começar preenchendo seus dados, começando com seu nome."
+      "Selecione seu gênero e preecha sua data de nascimento."
     );
 
     expect(title).toBeTruthy();
     expect(description).toBeTruthy();
   });
 
-  it("should be able to press the screen", () => {
-    const { getByTestId } = render(<StepOne />, {
-      wrapper: Providers,
-    });
-
-    const inputBlurButton = getByTestId("StepOne.InputBlurButton");
-    fireEvent.press(inputBlurButton);
-  });
-
   it("should be able to press the next button", () => {
-    const { getByTestId } = render(<StepOne />, {
+    const { getByTestId } = render(<StepTwo />, {
       wrapper: Providers,
     });
 
-    const smallButton = getByTestId("StepOne.SmallButton");
+    const smallButton = getByTestId("StepTwo.SmallButton");
     fireEvent.press(smallButton);
   });
 
   it("should be able to press the back button", () => {
-    const { getByTestId } = render(<StepOne />, {
+    const { getByTestId } = render(<StepTwo />, {
       wrapper: Providers,
     });
 
-    const header = getByTestId("StepOne.Header");
+    const header = getByTestId("StepTwo.Header");
     fireEvent.press(header, "onBackButton");
   });
 
-  it("should be able to change the values the inputs", async () => {
-    const { getByTestId } = render(<StepOne />, {
+  it("should be able to select a gender and a birthdate", () => {
+    const { getByText, getByTestId } = render(<StepTwo />, {
       wrapper: Providers,
     });
 
-    const givenNameInput = getByTestId("StepOne.GivenNameInput");
-    const emailInput = getByTestId("StepOne.EmailInput");
+    const genderInput = getByText("Gênero");
+    fireEvent.press(genderInput);
 
-    fireEvent.changeText(givenNameInput, "John Doe");
-    fireEvent.changeText(emailInput, "johndoe@example.com");
+    const genderSelected = getByText("Masculino");
+    fireEvent.press(genderSelected);
 
-    const smallButton = getByTestId("StepOne.SmallButton");
+    const birthdateInput = getByText("Data de Nascimento");
+    fireEvent.press(birthdateInput);
+
+    const dateTimePickerModal = getByTestId("StepTwo.DatePicker");
+
+    expect(dateTimePickerModal).toBeTruthy();
+
+    fireEvent(dateTimePickerModal, "onConfirm", new Date());
+
+    const smallButton = getByTestId("StepTwo.SmallButton");
     fireEvent.press(smallButton);
   });
 });

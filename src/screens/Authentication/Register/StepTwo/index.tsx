@@ -22,8 +22,7 @@ export const StepTwo: FC = () => {
   const { colors } = useTheme();
 
   const onPressNextStep = () => {
-    if (!authState.gender) return;
-    if (!authState.birthdate) return;
+    if (!authState.gender || !authState.birthdate) return;
 
     navigate("StepThree");
   };
@@ -34,6 +33,7 @@ export const StepTwo: FC = () => {
     <InputBlurButton>
       <Container>
         <Header
+          testID="StepTwo.Header"
           title="Crie sua conta!"
           description="Selecione seu gênero e preecha sua data de nascimento."
           onBackButton={onPressBackButton}
@@ -61,6 +61,7 @@ export const StepTwo: FC = () => {
           />
 
           <DatePicker
+            testDateTimePickerModalID="StepTwo.DatePicker"
             value={authState.birthdate}
             onChange={(date: Date) =>
               authDispatch({
@@ -81,6 +82,7 @@ export const StepTwo: FC = () => {
 
         <Footer>
           <SmallButton
+            testID="StepTwo.SmallButton"
             icon={() => (
               <ArrowRight
                 color={colors.components.smallButton.icon}

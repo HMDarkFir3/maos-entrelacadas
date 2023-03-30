@@ -9,6 +9,7 @@ import { formatDate } from "@utils/formatDate";
 import { Container, Date, Placeholder } from "./styles";
 
 interface Props {
+  testDateTimePickerModalID?: string;
   style?: ViewStyle;
   value: Date | null;
   onChange: (date: Date) => void;
@@ -19,6 +20,7 @@ interface Props {
 
 export const DatePicker: FC<Props> = (props) => {
   const {
+    testDateTimePickerModalID,
     style,
     value,
     onChange,
@@ -63,7 +65,7 @@ export const DatePicker: FC<Props> = (props) => {
       )}
 
       <DateTimePickerModal
-        testID="DatePicker.DateTimePickerModal"
+        testID={testDateTimePickerModalID}
         isVisible={isOpenDatePicker}
         mode="date"
         onConfirm={onChangeDate}
