@@ -21,7 +21,7 @@ jest.mock("@hooks/useSettings", () => {
   };
 });
 
-describe("SettigsItem Component", () => {
+describe("SettingsItem Component", () => {
   it("should be able to render the component correctly", () => {
     const titleMock = "title";
 

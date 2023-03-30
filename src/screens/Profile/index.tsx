@@ -63,6 +63,7 @@ export const Profile: FC = () => {
 
       <Footer>
         <SettingsItem
+          testID="Profile.Settings"
           icon={() => (
             <Gear
               size={fontSizeValue(24)}
@@ -94,6 +95,7 @@ export const Profile: FC = () => {
         />
 
         <SettingsItem
+          testID="Profile.LogOut"
           icon={() => (
             <SignOut
               size={fontSizeValue(24)}
