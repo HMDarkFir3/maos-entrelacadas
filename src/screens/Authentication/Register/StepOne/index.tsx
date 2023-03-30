@@ -28,8 +28,7 @@ export const StepOne: FC = () => {
   };
 
   const onPressNextStep = () => {
-    if (!authState.givenName.trim()) return;
-    if (!authState.email.trim()) return;
+    if (!authState.givenName.trim() || !authState.email.trim()) return;
 
     navigate("StepTwo");
   };
@@ -37,9 +36,10 @@ export const StepOne: FC = () => {
   const onPressBackButton = () => authDispatch({ type: "SET_EMPTY_FIELDS" });
 
   return (
-    <InputBlurButton onPress={onPressInScreen}>
+    <InputBlurButton testID="StepOne.InputBlurButton" onPress={onPressInScreen}>
       <Container>
         <Header
+          testID="StepOne.Header"
           title="Crie sua conta!"
           description="Vamos começar preenchendo seus dados, começando com seu nome."
           onBackButton={onPressBackButton}
@@ -47,6 +47,7 @@ export const StepOne: FC = () => {
 
         <InputWrapper>
           <Input
+            testID="StepOne.GivenNameInput"
             ref={nameInputRef}
             style={{ marginBottom: 32 }}
             value={authState.givenName}
@@ -68,6 +69,7 @@ export const StepOne: FC = () => {
           />
 
           <Input
+            testID="StepOne.EmailInput"
             ref={emailInputRef}
             style={{ marginBottom: 16 }}
             value={authState.email}
@@ -92,6 +94,7 @@ export const StepOne: FC = () => {
 
         <Footer>
           <SmallButton
+            testID="StepOne.SmallButton"
             icon={() => (
               <ArrowRight
                 size={fontSizeValue(24)}
