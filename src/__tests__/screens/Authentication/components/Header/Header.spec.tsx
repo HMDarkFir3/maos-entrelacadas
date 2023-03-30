@@ -2,23 +2,17 @@ import { ReactNode } from "react";
 import { render } from "@testing-library/react-native";
 import { ThemeProvider } from "styled-components/native";
 
+import { SettingsProvider } from "@contexts/SettingsContext";
+
 import { Header } from "@components-of-screens/Authentication/components/Header";
 
 import { light } from "@themes/light";
 
 const Providers = ({ children }: { children: ReactNode }) => (
-  <ThemeProvider theme={light}>{children}</ThemeProvider>
+  <SettingsProvider>
+    <ThemeProvider theme={light}>{children}</ThemeProvider>
+  </SettingsProvider>
 );
-
-jest.mock("@hooks/useSettings", () => {
-  return {
-    useSettings: () => {
-      return {
-        fontSizeValue: jest.fn().mockReturnValue(16),
-      };
-    },
-  };
-});
 
 describe("Header Component", () => {
   it("should be able to render the component", () => {

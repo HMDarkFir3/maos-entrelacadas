@@ -3,23 +3,17 @@ import { Animated } from "react-native";
 import { render } from "@testing-library/react-native";
 import { ThemeProvider } from "styled-components/native";
 
+import { SettingsProvider } from "@contexts/SettingsContext";
+
 import { IntroductionPaginator } from "@components-of-screens/Introduction/components/IntroductionPaginator";
 
 import { light } from "@themes/light";
 
 const Providers = ({ children }: { children: ReactNode }) => (
-  <ThemeProvider theme={light}>{children}</ThemeProvider>
+  <SettingsProvider>
+    <ThemeProvider theme={light}>{children}</ThemeProvider>
+  </SettingsProvider>
 );
-
-jest.mock("@hooks/useSettings", () => {
-  return {
-    useSettings: () => {
-      return {
-        fontSizeValue: jest.fn().mockReturnValue(16),
-      };
-    },
-  };
-});
 
 describe("IntroductionPaginator Component", () => {
   it("should be able to render IntroductionPaginator", () => {

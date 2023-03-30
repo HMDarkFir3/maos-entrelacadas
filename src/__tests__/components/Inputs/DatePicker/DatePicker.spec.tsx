@@ -3,23 +3,17 @@ import { render, fireEvent } from "@testing-library/react-native";
 import { ThemeProvider } from "styled-components/native";
 import { Activity } from "phosphor-react-native";
 
+import { SettingsProvider } from "@contexts/SettingsContext";
+
 import { DatePicker } from "@components/Inputs/DatePicker";
 
 import { light } from "@themes/light";
 
 const Providers = ({ children }: { children: ReactNode }) => (
-  <ThemeProvider theme={light}>{children}</ThemeProvider>
+  <SettingsProvider>
+    <ThemeProvider theme={light}>{children}</ThemeProvider>
+  </SettingsProvider>
 );
-
-jest.mock("@hooks/useSettings", () => {
-  return {
-    useSettings: () => {
-      return {
-        fontSizeValue: jest.fn().mockReturnValue(16),
-      };
-    },
-  };
-});
 
 describe("DatePicker", () => {
   it("should be able to render the component", () => {

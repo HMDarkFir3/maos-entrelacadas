@@ -3,6 +3,7 @@ import { render, fireEvent, waitFor } from "@testing-library/react-native";
 import { ThemeProvider } from "styled-components/native";
 
 import { AuthProvider } from "@contexts/AuthContext";
+import { SettingsProvider } from "@contexts/SettingsContext";
 
 import { StepTwo } from "@screens/Authentication/Register/StepTwo";
 
@@ -10,19 +11,11 @@ import { light } from "@themes/light";
 
 const Providers = ({ children }: { children: ReactNode }) => (
   <AuthProvider>
-    <ThemeProvider theme={light}>{children}</ThemeProvider>
+    <SettingsProvider>
+      <ThemeProvider theme={light}>{children}</ThemeProvider>
+    </SettingsProvider>
   </AuthProvider>
 );
-
-jest.mock("@hooks/useSettings", () => {
-  return {
-    useSettings: () => {
-      return {
-        fontSizeValue: jest.fn().mockReturnValue(16),
-      };
-    },
-  };
-});
 
 describe("StepTwo Screen", () => {
   it("should be able to render the component", () => {

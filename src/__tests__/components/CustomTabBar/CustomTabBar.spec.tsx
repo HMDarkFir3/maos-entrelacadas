@@ -3,6 +3,7 @@ import { render, fireEvent } from "@testing-library/react-native";
 import { ThemeProvider } from "styled-components/native";
 
 import { TabBarProvider } from "@contexts/TabBarContext";
+import { SettingsProvider } from "@contexts/SettingsContext";
 
 import { CustomTabBar } from "@components/CustomTabBar";
 
@@ -10,19 +11,11 @@ import { light } from "@themes/light";
 
 const Providers = ({ children }: { children: ReactNode }) => (
   <TabBarProvider>
-    <ThemeProvider theme={light}>{children}</ThemeProvider>
+    <SettingsProvider>
+      <ThemeProvider theme={light}>{children}</ThemeProvider>
+    </SettingsProvider>
   </TabBarProvider>
 );
-
-jest.mock("@hooks/useSettings", () => {
-  return {
-    useSettings: () => {
-      return {
-        fontSizeValue: jest.fn().mockReturnValue(16),
-      };
-    },
-  };
-});
 
 describe("CustomTabBar Component", () => {
   it("should be able to press the home button", () => {
