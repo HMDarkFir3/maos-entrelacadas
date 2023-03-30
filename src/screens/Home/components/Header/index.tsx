@@ -56,6 +56,7 @@ export const Header: FC = () => {
     <Container>
       <Wrapper>
         <ProfileButton
+          testID="Header.ProfileButton"
           android_ripple={{
             color: colors.androidRipple.backgroundPrimary,
             radius: 32,
@@ -76,6 +77,7 @@ export const Header: FC = () => {
       </Wrapper>
 
       <SignOutButton
+        testID="Header.SignOutButton"
         android_ripple={{
           color: colors.androidRipple.backgroundPrimary,
           radius: 20,
