@@ -44,7 +44,7 @@ export const Welcome: FC = () => {
         />
 
         <RegisterButton
-          testID="register-button"
+          testID="Welcome.RegisterButton"
           onPress={() => onPressLogin("StepOne")}
         >
           <RegisterButtonText

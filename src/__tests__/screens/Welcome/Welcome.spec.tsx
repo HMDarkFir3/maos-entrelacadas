@@ -37,19 +37,15 @@ describe("Welcome Screen", () => {
     const { getByText } = render(<Welcome />, { wrapper: Providers });
 
     const loginButton = getByText("Login");
-
     expect(loginButton).toBeTruthy();
-
     fireEvent.press(loginButton, "onPress");
   });
 
   it("verify if the register button is rendered correctly", () => {
     const { getByTestId } = render(<Welcome />, { wrapper: Providers });
 
-    const registerButton = getByTestId("register-button");
-
+    const registerButton = getByTestId("Welcome.RegisterButton");
     expect(registerButton).toBeTruthy();
-
     fireEvent.press(registerButton, "onPress");
   });
 });
