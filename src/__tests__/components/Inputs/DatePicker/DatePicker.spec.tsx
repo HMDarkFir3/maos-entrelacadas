@@ -24,7 +24,7 @@ jest.mock("@hooks/useSettings", () => {
 describe("DatePicker", () => {
   it("the component rendered correctly", () => {
     const onChangeMock = jest.fn();
-    let valueMock: Date | null = null;
+    const valueMock: Date | null = null;
 
     const { getByTestId } = render(
       <DatePicker
@@ -47,7 +47,7 @@ describe("DatePicker", () => {
 
   it("the component rendered correctly with value", () => {
     const onChangeMock = jest.fn();
-    let valueMock: Date | null = new Date();
+    const valueMock: Date | null = new Date();
 
     const { getByTestId } = render(
       <DatePicker

@@ -36,7 +36,11 @@ export const IntroductionPaginator: FC<Props> = (props) => {
         });
 
         return (
-          <Dot style={{ transform: [{ scaleX }], opacity }} key={item.id} />
+          <Dot
+            testID="IntroductionPaginator.Dot"
+            style={{ transform: [{ scaleX }], opacity }}
+            key={item.id}
+          />
         );
       })}
     </Container>

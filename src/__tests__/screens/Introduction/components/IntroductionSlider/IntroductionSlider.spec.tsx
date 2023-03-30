@@ -20,7 +20,7 @@ jest.mock("@hooks/useSettings", () => {
   };
 });
 
-describe("IntroductionSlider", () => {
+describe("IntroductionSlider Component", () => {
   it("should be able to render IntroductionSlider", () => {
     const mockData = {
       id: "1",
