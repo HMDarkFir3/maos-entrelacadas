@@ -25,7 +25,7 @@ jest.mock("@hooks/useSettings", () => {
 });
 
 describe("CustomTabBar Component", () => {
-  it("was pressed Home button", () => {
+  it("should be able to press the home button", () => {
     const { getByTestId } = render(<CustomTabBar />, {
       wrapper: Providers,
     });
@@ -34,7 +34,7 @@ describe("CustomTabBar Component", () => {
     fireEvent.press(tabItem1);
   });
 
-  it("was pressed Events button", () => {
+  it("should be able to press the events button", () => {
     const { getByTestId } = render(<CustomTabBar />, {
       wrapper: Providers,
     });
@@ -43,7 +43,7 @@ describe("CustomTabBar Component", () => {
     fireEvent.press(tabItem2);
   });
 
-  it("was pressed Donations button", () => {
+  it("should be able to press the donations button", () => {
     const { getByTestId } = render(<CustomTabBar />, {
       wrapper: Providers,
     });
@@ -52,7 +52,7 @@ describe("CustomTabBar Component", () => {
     fireEvent.press(tabItem3);
   });
 
-  it("was pressed Profile button", () => {
+  it("should be able to press the profile button", () => {
     const { getByTestId } = render(<CustomTabBar />, {
       wrapper: Providers,
     });
