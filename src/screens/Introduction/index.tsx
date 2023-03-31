@@ -1,18 +1,14 @@
 import { useState, useRef, FC } from "react";
 import { FlatList, Alert, Animated, ViewToken } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "styled-components/native";
 import { ArrowRight, Check } from "phosphor-react-native";
 
-import { useAuth } from "@hooks/useAuth";
 import { useSettings } from "@hooks/useSettings";
 
 import { IntroductionSlider } from "@components-of-screens/Introduction/components/IntroductionSlider";
 import { IntroductionPaginator } from "@components-of-screens/Introduction/components/IntroductionPaginator";
 import { SmallButton } from "@components/Buttons/SmallButton";
-
-import { COLLECTION_INTRODUCTION } from "@storages/index";
 
 import { introductionSlider } from "@utils/introductionSlider";
 import { SCREEN_WIDTH, SCREEN_HEIGHT } from "@utils/globalVariables";
@@ -24,8 +20,7 @@ interface ViewabilityConfigRef {
 }
 
 export const Introduction: FC = () => {
-  const { dispatch: authDispatch } = useAuth();
-  const { fontSizeValue } = useSettings();
+  const { sawIntroductionInStorage, fontSizeValue } = useSettings();
   const { navigate } = useNavigation();
   const { colors } = useTheme();
 
@@ -42,12 +37,6 @@ export const Introduction: FC = () => {
     viewAreaCoveragePercentThreshold: 50,
   }).current;
 
-  const sawIntroductionInStorage = async () => {
-    authDispatch({ type: "SET_SAW_INTRODUCTION", payload: true });
-    await AsyncStorage.setItem(COLLECTION_INTRODUCTION, JSON.stringify(true));
-    navigate("Welcome");
-  };
-
   const jumpSlides = () => {
     Alert.alert("Pular Introdução!", "Deseja pular a introdução?", [
       {
@@ -57,7 +46,10 @@ export const Introduction: FC = () => {
       {
         text: "Sim",
         style: "default",
-        onPress: () => sawIntroductionInStorage(),
+        onPress: () => {
+          sawIntroductionInStorage();
+          navigate("Welcome");
+        },
       },
     ]);
   };

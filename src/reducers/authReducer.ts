@@ -1,7 +1,6 @@
 import { UserDTO } from "@dtos/UserDTO";
 
 enum ActionType {
-  SET_SAW_INTRODUCTION = "SET_SAW_INTRODUCTION",
   SET_FIELD = "SET_FIELD",
   SET_USER = "SET_USER",
   SET_EMPTY_FIELDS = "SET_EMPTY_FIELDS",
@@ -15,7 +14,6 @@ export interface AuthState {
   birthdate: Date | null;
   password: string;
   confirmPassword: string;
-  sawIntroduction: boolean;
   isSigned: boolean;
   isLoading: boolean;
   user: UserDTO | null;
@@ -23,7 +21,7 @@ export interface AuthState {
 
 export type AuthAction =
   | {
-      type: "SET_SAW_INTRODUCTION" | "SET_IS_LOADING";
+      type: "SET_IS_LOADING";
       payload: boolean;
     }
   | {
@@ -47,19 +45,12 @@ export const initialState = {
   gender: "",
   birthdate: null,
   confirmPassword: "",
-  sawIntroduction: false,
   isSigned: false,
   isLoading: false,
 } as AuthState;
 
 export const authReducer = (state: AuthState, action: AuthAction) => {
   switch (action.type) {
-    case ActionType.SET_SAW_INTRODUCTION: {
-      return {
-        ...state,
-        sawIntroduction: action.payload,
-      };
-    }
     case ActionType.SET_FIELD: {
       return {
         ...state,

@@ -8,16 +8,22 @@ interface FontSizeData {
 }
 
 enum ActionType {
+  SET_SAW_INTRODUCTION = "SET_SAW_INTRODUCTION",
   SET_THEME = "SET_THEME",
   SET_FONT_SIZE = "SET_FONT_SIZE",
 }
 
 export interface SettingsState {
+  sawIntroduction: boolean;
   theme: DefaultTheme;
   fontSize: FontSizeData;
 }
 
 export type SettingsAction =
+  | {
+      type: "SET_SAW_INTRODUCTION";
+      payload: boolean;
+    }
   | {
       type: "SET_THEME";
       payload: DefaultTheme;
@@ -28,6 +34,7 @@ export type SettingsAction =
     };
 
 export const initialState = {
+  sawIntroduction: false,
   theme: light,
   fontSize: { name: "Normal", value: "md" },
 } as SettingsState;
@@ -37,6 +44,12 @@ export const settingsReducer = (
   action: SettingsAction
 ) => {
   switch (action.type) {
+    case ActionType.SET_SAW_INTRODUCTION: {
+      return {
+        ...state,
+        sawIntroduction: action.payload,
+      };
+    }
     case ActionType.SET_THEME: {
       return {
         ...state,

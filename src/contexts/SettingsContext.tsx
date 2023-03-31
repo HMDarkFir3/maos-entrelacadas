@@ -1,4 +1,12 @@
-import { createContext, useEffect, useReducer, FC, Dispatch, ReactNode, Reducer } from "react";
+import {
+  createContext,
+  useEffect,
+  useReducer,
+  FC,
+  Dispatch,
+  ReactNode,
+  Reducer,
+} from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ThemeProvider } from "styled-components/native";
 
@@ -9,7 +17,11 @@ import {
   SettingsAction,
 } from "@reducers/settingsReducer";
 
-import { COLLECTION_THEME, COLLECTION_FONT_SIZE } from "@storages/index";
+import {
+  COLLECTION_THEME,
+  COLLECTION_FONT_SIZE,
+  COLLECTION_INTRODUCTION,
+} from "@storages/index";
 
 import { light } from "@themes/light";
 import { dark } from "@themes/dark";
@@ -17,6 +29,7 @@ import { dark } from "@themes/dark";
 export interface SettingsContextData {
   state: SettingsState;
   dispatch: Dispatch<SettingsAction>;
+  sawIntroductionInStorage: () => Promise<void>;
   toggleTheme: () => Promise<void>;
   changeFontSize: (
     name: "Pequeno" | "Normal" | "Grande",
@@ -53,6 +66,12 @@ export const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
     if (storage) {
       dispatch({ type: "SET_FONT_SIZE", payload: JSON.parse(storage) });
     }
+  };
+
+  const sawIntroductionInStorage = async () => {
+    dispatch({ type: "SET_SAW_INTRODUCTION", payload: true });
+
+    await AsyncStorage.setItem(COLLECTION_INTRODUCTION, JSON.stringify(true));
   };
 
   const toggleTheme = async () => {
@@ -103,6 +122,7 @@ export const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
       value={{
         state,
         dispatch,
+        sawIntroductionInStorage,
         toggleTheme,
         changeFontSize,
         fontSizeValue,
