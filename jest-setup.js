@@ -1,3 +1,5 @@
+import React from "react";
+
 import mockAsyncStorage from "@react-native-async-storage/async-storage/jest/async-storage-mock";
 
 jest.mock("@react-native-async-storage/async-storage", () => mockAsyncStorage);
@@ -20,12 +22,47 @@ jest.mock("react-native/Libraries/Animated/NativeAnimatedHelper");
 
 jest.mock("@react-navigation/native", () => {
   return {
+    useFocusEffect: jest.fn(),
     useNavigation: () => {
       return {
         navigate: jest.fn(),
         goBack: jest.fn(),
       };
     },
+  };
+});
+
+jest.mock("@react-navigation/native-stack", () => {
+  return {
+    createNativeStackNavigator: jest.fn(() => {
+      return {
+        Navigator: jest.fn(),
+        Screen: jest.fn(),
+        Group: jest.fn(),
+      };
+    }),
+  };
+});
+
+jest.mock("@react-navigation/bottom-tabs", () => {
+  return {
+    createBottomTabNavigator: jest.fn(() => {
+      return {
+        Navigator: jest.fn(),
+        Screen: jest.fn(),
+      };
+    }),
+  };
+});
+
+jest.mock("expo-navigation-bar", () => {
+  return {
+    NavigationBar: jest.fn(() => {
+      return {
+        setBackgroundColorAsync: jest.fn(),
+        setButtonStyleAsync: jest.fn(),
+      };
+    }),
   };
 });
 

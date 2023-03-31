@@ -71,7 +71,13 @@ describe("SettingsContext", () => {
 
     const jumpIntroduction = getByText("Jump Introduction");
 
-    fireEvent.press(jumpIntroduction);
+    waitFor(() => {
+      act(() => {
+        fireEvent.press(jumpIntroduction);
+      });
+    });
+
+    render(<ComponentMock />, { wrapper: Providers });
   });
 
   it("should be able to press the toggle theme", () => {

@@ -46,21 +46,22 @@ export const Introduction: FC = () => {
       {
         text: "Sim",
         style: "default",
-        onPress: () => {
-          sawIntroductionInStorage();
+        onPress: async () => {
+          await sawIntroductionInStorage();
           navigate("Welcome");
         },
       },
     ]);
   };
 
-  const scrollToNextSlide = () => {
+  const scrollToNextSlide = async () => {
     if (currentIndex! < introductionSlider.length - 1) {
       introductionSliderRef.current?.scrollToIndex({
         index: currentIndex! + 1,
       });
     } else {
-      sawIntroductionInStorage();
+      await sawIntroductionInStorage();
+      navigate("Welcome");
     }
   };
 

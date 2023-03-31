@@ -32,10 +32,10 @@ export const IntroductionSlider: FC<Props> = (props) => {
     <Container>
       <SvgWrapper>
         <>
-          {/* {id === "1" && <IntroductionSlide1 width={SCREEN_WIDTH} />}
+          {id === "1" && <IntroductionSlide1 width={SCREEN_WIDTH} />}
           {id === "2" && <IntroductionSlide2 width={SCREEN_WIDTH} />}
           {id === "3" && <IntroductionSlide3 width={SCREEN_WIDTH} />}
-          {id === "4" && <IntroductionSlide4 width={SCREEN_WIDTH} />} */}
+          {id === "4" && <IntroductionSlide4 width={SCREEN_WIDTH} />}
         </>
       </SvgWrapper>
 
