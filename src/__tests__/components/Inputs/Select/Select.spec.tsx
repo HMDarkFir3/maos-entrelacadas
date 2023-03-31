@@ -1,7 +1,10 @@
 import { ReactNode } from "react";
 import { render, fireEvent } from "@testing-library/react-native";
+import { Provider as ReduxProvider } from "react-redux";
 import { ThemeProvider } from "styled-components/native";
 import { Activity } from "phosphor-react-native";
+
+import { store } from "@store/index";
 
 import { SettingsProvider } from "@contexts/SettingsContext";
 
@@ -10,9 +13,11 @@ import { Select } from "@components/Inputs/Select";
 import { light } from "@themes/light";
 
 const Providers = ({ children }: { children: ReactNode }) => (
-  <SettingsProvider>
-    <ThemeProvider theme={light}>{children}</ThemeProvider>
-  </SettingsProvider>
+  <ReduxProvider store={store}>
+    <SettingsProvider>
+      <ThemeProvider theme={light}>{children}</ThemeProvider>
+    </SettingsProvider>
+  </ReduxProvider>
 );
 
 describe("Select", () => {
@@ -65,5 +70,20 @@ describe("Select", () => {
     fireEvent.press(selectItem);
 
     expect(onChangeMock).toBeCalledWith("Masculino");
+  });
+
+  it("should be able to render the component when onChange not exists", () => {
+    const { getByTestId, getByText } = render(
+      <Select icon={() => <Activity />} data={dataMock} value="Feminino" />,
+      {
+        wrapper: Providers,
+      }
+    );
+
+    const selectWrapper = getByTestId("Select.Wrapper");
+    fireEvent.press(selectWrapper);
+
+    const selectItem = getByText(/masculino/i);
+    fireEvent.press(selectItem);
   });
 });

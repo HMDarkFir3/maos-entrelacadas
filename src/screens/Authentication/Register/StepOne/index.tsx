@@ -59,7 +59,7 @@ export const StepOne: FC = () => {
             ref={nameInputRef}
             style={{ marginBottom: 32 }}
             value={givenName}
-            onChangeText={(text) => setGivenNameField(text)}
+            onChangeText={(text) => dispatch(setGivenNameField(text))}
             icon={() => (
               <User
                 size={fontSizeValue(24)}
@@ -75,7 +75,7 @@ export const StepOne: FC = () => {
             ref={emailInputRef}
             style={{ marginBottom: 16 }}
             value={email}
-            onChangeText={(text) => setEmailField(text)}
+            onChangeText={(text) => dispatch(setEmailField(text))}
             icon={() => (
               <EnvelopeSimple
                 size={fontSizeValue(24)}

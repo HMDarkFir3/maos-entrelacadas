@@ -7,7 +7,7 @@ import {
   Ubuntu_700Bold,
 } from "@expo-google-fonts/ubuntu";
 import { FC } from "react";
-import { Provider } from "react-redux";
+import { Provider as ReduxProvider } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
 
 import { store } from "@store/index";
@@ -32,13 +32,13 @@ export const App: FC = () => {
 
   return (
     <NavigationContainer>
-      <Provider store={store}>
+      <ReduxProvider store={store}>
         <AuthProvider>
           <SettingsProvider>
             <Routes />
           </SettingsProvider>
         </AuthProvider>
-      </Provider>
+      </ReduxProvider>
     </NavigationContainer>
   );
 };

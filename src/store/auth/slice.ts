@@ -20,7 +20,7 @@ export const authSlice = createSlice({
     setGenderField: (state: AuthState, action: PayloadAction<string>) => {
       state.gender = action.payload;
     },
-    setBirthdateField: (state: AuthState, action: PayloadAction<Date>) => {
+    setBirthdateField: (state: AuthState, action: PayloadAction<string>) => {
       state.birthdate = action.payload;
     },
     setConfirmPasswordField: (

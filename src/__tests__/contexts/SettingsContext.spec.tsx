@@ -1,13 +1,20 @@
 import { ReactNode } from "react";
 import { View, Text, Button, FlatList } from "react-native";
 import { render, fireEvent, act, waitFor } from "@testing-library/react-native";
+import { Provider as ReduxProvider } from "react-redux";
+
+import { store } from "@store/index";
 
 import { SettingsProvider } from "@contexts/SettingsContext";
 
 import { useSettings } from "@hooks/useSettings";
 
 const Providers = ({ children }: { children: ReactNode }) => {
-  return <SettingsProvider>{children}</SettingsProvider>;
+  return (
+    <ReduxProvider store={store}>
+      <SettingsProvider>{children}</SettingsProvider>
+    </ReduxProvider>
+  );
 };
 
 describe("SettingsContext", () => {

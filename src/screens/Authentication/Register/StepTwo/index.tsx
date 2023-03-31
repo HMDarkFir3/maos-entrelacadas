@@ -51,7 +51,7 @@ export const StepTwo: FC = () => {
           <Select
             style={{ marginBottom: 32 }}
             value={gender}
-            onChange={(item: string) => setGenderField(item)}
+            onChange={(item: string) => dispatch(setGenderField(item))}
             icon={() => (
               <GenderNeuter
                 size={fontSizeValue(24)}
@@ -65,7 +65,9 @@ export const StepTwo: FC = () => {
           <DatePicker
             testDateTimePickerModalID="StepTwo.DatePicker"
             value={birthdate}
-            onChange={(date: Date) => setBirthdateField(date)}
+            onChange={(date: Date) =>
+              dispatch(setBirthdateField(date.toISOString()))
+            }
             icon={() => (
               <Cake
                 size={fontSizeValue(24)}

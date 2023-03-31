@@ -1,13 +1,20 @@
 import { ReactNode } from "react";
 import { View, Text, Button } from "react-native";
 import { render, fireEvent, act, waitFor } from "@testing-library/react-native";
+import { Provider as ReduxProvider } from "react-redux";
+
+import { store } from "@store/index";
 
 import { AuthProvider } from "@contexts/AuthContext";
 
 import { useAuth } from "@hooks/useAuth";
 
 const Providers = ({ children }: { children: ReactNode }) => {
-  return <AuthProvider>{children}</AuthProvider>;
+  return (
+    <ReduxProvider store={store}>
+      <AuthProvider>{children}</AuthProvider>
+    </ReduxProvider>
+  );
 };
 
 describe("AuthContext", () => {

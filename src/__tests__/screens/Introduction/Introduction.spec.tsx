@@ -1,9 +1,11 @@
 import { ReactNode } from "react";
 import { Alert } from "react-native";
 import { fireEvent, render, act } from "@testing-library/react-native";
+import { Provider as ReduxProvider } from "react-redux";
 import { ThemeProvider } from "styled-components/native";
 
-import { AuthProvider } from "@contexts/AuthContext";
+import { store } from "@store/index";
+
 import { SettingsProvider } from "@contexts/SettingsContext";
 
 import { Introduction } from "@screens/Introduction";
@@ -11,9 +13,11 @@ import { Introduction } from "@screens/Introduction";
 import { light } from "@themes/light";
 
 const Providers = ({ children }: { children: ReactNode }) => (
-  <SettingsProvider>
-    <ThemeProvider theme={light}>{children}</ThemeProvider>
-  </SettingsProvider>
+  <ReduxProvider store={store}>
+    <SettingsProvider>
+      <ThemeProvider theme={light}>{children}</ThemeProvider>
+    </SettingsProvider>
+  </ReduxProvider>
 );
 
 jest.mock("@hooks/useAuth", () => {

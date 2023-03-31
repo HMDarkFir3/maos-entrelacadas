@@ -4,7 +4,7 @@ export interface AuthState {
   givenName: string;
   email: string;
   gender: string;
-  birthdate: Date | null;
+  birthdate: string | null;
   password: string;
   confirmPassword: string;
   isSigned: boolean;

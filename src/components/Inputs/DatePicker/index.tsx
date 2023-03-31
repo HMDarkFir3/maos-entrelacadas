@@ -11,7 +11,7 @@ import { Container, Date, Placeholder } from "./styles";
 interface Props {
   testDateTimePickerModalID?: string;
   style?: ViewStyle;
-  value: Date | null;
+  value: string | null;
   onChange?: (date: Date) => void;
   placeholder?: string;
   icon: any;
