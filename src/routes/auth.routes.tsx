@@ -1,6 +1,8 @@
 import { FC } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
+import { useAppSelector } from "@hooks/useAppSelector";
+
 import { Introduction } from "@screens/Introduction";
 import { Welcome } from "@screens/Welcome";
 import { Login } from "@screens/Authentication/Login";
@@ -8,16 +10,14 @@ import { StepOne } from "@screens/Authentication/Register/StepOne";
 import { StepTwo } from "@screens/Authentication/Register/StepTwo";
 import { StepThree } from "@screens/Authentication/Register/StepThree";
 
-import { useSettings } from "@hooks/useSettings";
-
 const { Navigator, Group, Screen } = createNativeStackNavigator();
 
 export const AuthRoutes: FC = () => {
-  const { state: settingsState } = useSettings();
+  const { sawIntroduction } = useAppSelector((store) => store.settings);
 
   return (
     <Navigator screenOptions={{ header: () => null }}>
-      {!settingsState.sawIntroduction && (
+      {!sawIntroduction && (
         <Screen name="Introduction" component={Introduction} />
       )}
       <Screen name="Welcome" component={Welcome} />

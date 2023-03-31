@@ -71,7 +71,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
             given_name: documentSnapshot.data()?.given_name,
             email: documentSnapshot.data()?.email,
             gender: documentSnapshot.data()?.gender,
-            birthdate: formattedBirthdate,
+            birthdate: formattedBirthdate.toISOString(),
           } as UserDTO;
 
           dispatch(setUser(data));
@@ -114,7 +114,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
             given_name: givenName,
             email,
             gender,
-            birthdate,
+            birthdate: birthdate?.toISOString(),
           } as UserDTO;
 
           dispatch(setUser(data));

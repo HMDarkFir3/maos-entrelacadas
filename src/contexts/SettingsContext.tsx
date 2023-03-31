@@ -1,21 +1,15 @@
-import {
-  createContext,
-  useEffect,
-  useReducer,
-  FC,
-  Dispatch,
-  ReactNode,
-  Reducer,
-} from "react";
+import { createContext, useEffect, FC, ReactNode } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ThemeProvider } from "styled-components/native";
 
+import { useAppDispatch } from "@hooks/useAppDispatch";
+import { useAppSelector } from "@hooks/useAppSelector";
+
 import {
-  settingsReducer,
-  initialState,
-  SettingsState,
-  SettingsAction,
-} from "@reducers/settingsReducer";
+  setSawIntroduction,
+  setTheme,
+  setFontSize,
+} from "@store/settings/actions";
 
 import {
   COLLECTION_INTRODUCTION,
@@ -27,8 +21,6 @@ import { light } from "@themes/light";
 import { dark } from "@themes/dark";
 
 export interface SettingsContextData {
-  state: SettingsState;
-  dispatch: Dispatch<SettingsAction>;
   sawIntroductionInStorage: () => Promise<void>;
   toggleTheme: () => Promise<void>;
   changeFontSize: (
@@ -45,26 +37,23 @@ interface SettingsProviderProps {
 export const SettingsContext = createContext({} as SettingsContextData);
 
 export const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
-  const [state, dispatch] = useReducer<Reducer<SettingsState, SettingsAction>>(
-    settingsReducer,
-    initialState
-  );
+  const dispatch = useAppDispatch();
+  const { theme, fontSize } = useAppSelector((store) => store.settings);
 
   const getSawIntroductionInStorage = async () => {
     const storage = await AsyncStorage.getItem(COLLECTION_INTRODUCTION);
 
     if (storage) {
-      dispatch({ type: "SET_SAW_INTRODUCTION", payload: JSON.parse(storage) });
+      dispatch(setSawIntroduction(JSON.parse(storage)));
     }
   };
 
   const getThemeInStorage = async () => {
-    const storage = await AsyncStorage.getItem(COLLECTION_THEME);
+    const themeInStorage = await AsyncStorage.getItem(COLLECTION_THEME);
+    const formattedTheme = themeInStorage === "light" ? light : dark;
 
-    if (storage) {
-      const themeInStorage = storage === "light" ? light : dark;
-
-      dispatch({ type: "SET_THEME", payload: themeInStorage });
+    if (themeInStorage) {
+      dispatch(setTheme(formattedTheme));
     }
   };
 
@@ -72,22 +61,22 @@ export const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
     const storage = await AsyncStorage.getItem(COLLECTION_FONT_SIZE);
 
     if (storage) {
-      dispatch({ type: "SET_FONT_SIZE", payload: JSON.parse(storage) });
+      dispatch(setFontSize(JSON.parse(storage)));
     }
   };
 
   const sawIntroductionInStorage = async () => {
-    dispatch({ type: "SET_SAW_INTRODUCTION", payload: true });
+    dispatch(setSawIntroduction(true));
 
     await AsyncStorage.setItem(COLLECTION_INTRODUCTION, JSON.stringify(true));
   };
 
   const toggleTheme = async () => {
-    const theme = state.theme.title === "light" ? dark : light;
+    const formattedTheme = theme.title === "light" ? dark : light;
 
-    dispatch({ type: "SET_THEME", payload: theme });
+    dispatch(setTheme(formattedTheme));
 
-    await AsyncStorage.setItem(COLLECTION_THEME, theme.title);
+    await AsyncStorage.setItem(COLLECTION_THEME, formattedTheme.title);
   };
 
   const changeFontSize = async (
@@ -98,13 +87,13 @@ export const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
       name,
       value: size,
     };
-    dispatch({ type: "SET_FONT_SIZE", payload: data });
+    dispatch(setFontSize(data));
 
     await AsyncStorage.setItem(COLLECTION_FONT_SIZE, JSON.stringify(data));
   };
 
   const fontSizeValue = (size: number) => {
-    switch (state.fontSize.value) {
+    switch (fontSize.value) {
       case "sm": {
         return size * 0.8;
       }
@@ -126,15 +115,13 @@ export const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
   return (
     <SettingsContext.Provider
       value={{
-        state,
-        dispatch,
         sawIntroductionInStorage,
         toggleTheme,
         changeFontSize,
         fontSizeValue,
       }}
     >
-      <ThemeProvider theme={state.theme}>{children}</ThemeProvider>
+      <ThemeProvider theme={theme}>{children}</ThemeProvider>
     </SettingsContext.Provider>
   );
 };

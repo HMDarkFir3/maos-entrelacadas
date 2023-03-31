@@ -2,16 +2,18 @@ import { useState, FC } from "react";
 import { useTheme } from "styled-components/native";
 import { Moon, BellRinging } from "phosphor-react-native";
 
+import { useAppSelector } from "@hooks/useAppSelector";
+import { useSettings } from "@hooks/useSettings";
+
 import { BackButton } from "@components/Buttons/BackButton";
 import { Switcher } from "@components-of-screens/Settings/components/Switcher";
 import { FontSwitcher } from "@components-of-screens/Settings/components/FontSwitcher";
 
-import { useSettings } from "@hooks/useSettings";
-
 import { Container, Header, Wrapper } from "./styles";
 
 export const Settings: FC = () => {
-  const { state: settingsState, toggleTheme, fontSizeValue } = useSettings();
+  const { theme } = useAppSelector((store) => store.settings);
+  const { toggleTheme, fontSizeValue } = useSettings();
   const { colors } = useTheme();
 
   const [notificationsSwitch, setNotificationsSwitch] = useState(false);
@@ -38,8 +40,8 @@ export const Settings: FC = () => {
             />
           )}
           title="Tema escuro"
-          value={settingsState.theme.title === "dark"}
-          switchValue={settingsState.theme.title === "dark"}
+          value={theme.title === "dark"}
+          switchValue={theme.title === "dark"}
           onValueChange={onToggleTheme}
           onSwitchValue={onToggleTheme}
         />

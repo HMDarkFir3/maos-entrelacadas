@@ -3,6 +3,7 @@ import { FlatList } from "react-native";
 import { useTheme } from "styled-components/native";
 import { TextAa } from "phosphor-react-native";
 
+import { useAppSelector } from "@hooks/useAppSelector";
 import { useSettings } from "@hooks/useSettings";
 
 import { typeFonts } from "@utils/typeFonts";
@@ -18,7 +19,8 @@ import {
 } from "./styles";
 
 export const FontSwitcher: FC = () => {
-  const { state: settingsState, changeFontSize, fontSizeValue } = useSettings();
+  const { fontSize } = useAppSelector((store) => store.settings);
+  const { changeFontSize, fontSizeValue } = useSettings();
   const { colors } = useTheme();
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -44,7 +46,7 @@ export const FontSwitcher: FC = () => {
         </Wrapper>
 
         <SelectedFont style={{ fontSize: fontSizeValue(20) }}>
-          {settingsState.fontSize.name}
+          {fontSize.name}
         </SelectedFont>
       </Container>
       {isOpen && (
@@ -66,7 +68,7 @@ export const FontSwitcher: FC = () => {
                 }
               >
                 <ItemText
-                  selected={item.value === settingsState.fontSize.value}
+                  selected={item.value === fontSize.value}
                   style={{ fontSize: fontSizeValue(20) }}
                 >
                   {item.name}
