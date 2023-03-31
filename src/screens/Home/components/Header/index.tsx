@@ -4,9 +4,12 @@ import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "styled-components/native";
 import { SignOut } from "phosphor-react-native";
 
+import { useAppDispatch } from "@hooks/useAppDispatch";
+import { useAppSelector } from "@hooks/useAppSelector";
 import { useAuth } from "@hooks/useAuth";
-import { useTabBar } from "@hooks/useTabBar";
 import { useSettings } from "@hooks/useSettings";
+
+import { setIsActive } from "@store/tabBar/actions";
 
 import {
   Container,
@@ -20,18 +23,18 @@ import {
 } from "./styles";
 
 export const Header: FC = () => {
-  const { state: authState, logOut } = useAuth();
-  const { dispatch: tabBarDispatch } = useTabBar();
+  const dispatch = useAppDispatch();
+  const { user } = useAppSelector((store) => store.auth);
+  const { logOut } = useAuth();
   const { fontSizeValue } = useSettings();
   const { navigate } = useNavigation();
   const { colors } = useTheme();
 
-  const formattedGivenName: string | undefined =
-    authState.user?.given_name.split(" ")[0];
+  const formattedGivenName: string | undefined = user?.given_name.split(" ")[0];
 
   const onPressProfile = () => {
     navigate("Profile");
-    tabBarDispatch({ type: "SET_IS_ACTIVE", payload: "Profile" });
+    dispatch(setIsActive("Profile"));
   };
 
   const onPressLogOut = () => {

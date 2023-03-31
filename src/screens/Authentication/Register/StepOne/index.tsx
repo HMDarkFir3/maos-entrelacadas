@@ -4,8 +4,15 @@ import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "styled-components/native";
 import { User, EnvelopeSimple, ArrowRight } from "phosphor-react-native";
 
-import { useAuth } from "@hooks/useAuth";
+import { useAppDispatch } from "@hooks/useAppDispatch";
+import { useAppSelector } from "@hooks/useAppSelector";
 import { useSettings } from "@hooks/useSettings";
+
+import {
+  setEmptyFields,
+  setGivenNameField,
+  setEmailField,
+} from "@store/auth/actions";
 
 import { Header } from "@components-of-screens/Authentication/components/Header";
 import { Input } from "@components/Inputs/Input";
@@ -14,7 +21,8 @@ import { SmallButton } from "@components/Buttons/SmallButton";
 import { InputBlurButton, Container, InputWrapper, Footer } from "../../styles";
 
 export const StepOne: FC = () => {
-  const { state: authState, dispatch: authDispatch } = useAuth();
+  const dispatch = useAppDispatch();
+  const { givenName, email } = useAppSelector((store) => store.auth);
   const { fontSizeValue } = useSettings();
   const { navigate } = useNavigation();
   const { colors } = useTheme();
@@ -28,12 +36,12 @@ export const StepOne: FC = () => {
   };
 
   const onPressNextStep = () => {
-    if (!authState.givenName.trim() || !authState.email.trim()) return;
+    if (!givenName.trim() || !email.trim()) return;
 
     navigate("StepTwo");
   };
 
-  const onPressBackButton = () => authDispatch({ type: "SET_EMPTY_FIELDS" });
+  const onPressBackButton = () => dispatch(setEmptyFields());
 
   return (
     <InputBlurButton testID="StepOne.InputBlurButton" onPress={onPressInScreen}>
@@ -50,14 +58,8 @@ export const StepOne: FC = () => {
             testID="StepOne.GivenNameInput"
             ref={nameInputRef}
             style={{ marginBottom: 32 }}
-            value={authState.givenName}
-            onChangeText={(text) =>
-              authDispatch({
-                type: "SET_FIELD",
-                fieldName: "givenName",
-                payload: text,
-              })
-            }
+            value={givenName}
+            onChangeText={(text) => setGivenNameField(text)}
             icon={() => (
               <User
                 size={fontSizeValue(24)}
@@ -72,14 +74,8 @@ export const StepOne: FC = () => {
             testID="StepOne.EmailInput"
             ref={emailInputRef}
             style={{ marginBottom: 16 }}
-            value={authState.email}
-            onChangeText={(text) =>
-              authDispatch({
-                type: "SET_FIELD",
-                fieldName: "email",
-                payload: text,
-              })
-            }
+            value={email}
+            onChangeText={(text) => setEmailField(text)}
             icon={() => (
               <EnvelopeSimple
                 size={fontSizeValue(24)}

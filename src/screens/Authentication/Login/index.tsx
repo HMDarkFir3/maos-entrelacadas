@@ -3,8 +3,16 @@ import { TextInput } from "react-native";
 import { useTheme } from "styled-components/native";
 import { EnvelopeSimple, LockOpen, Check } from "phosphor-react-native";
 
+import { useAppDispatch } from "@hooks/useAppDispatch";
+import { useAppSelector } from "@hooks/useAppSelector";
 import { useAuth } from "@hooks/useAuth";
 import { useSettings } from "@hooks/useSettings";
+
+import {
+  setEmailField,
+  setPasswordField,
+  setEmptyFields,
+} from "@store/auth/actions";
 
 import { Header } from "@components-of-screens/Authentication/components/Header";
 import { Input } from "@components/Inputs/Input";
@@ -20,7 +28,9 @@ import {
 } from "../styles";
 
 export const Login: FC = () => {
-  const { state: authState, dispatch: authDispatch, login } = useAuth();
+  const dispatch = useAppDispatch();
+  const { email, password, isLoading } = useAppSelector((store) => store.auth);
+  const { login } = useAuth();
   const { fontSizeValue } = useSettings();
   const { colors } = useTheme();
 
@@ -32,9 +42,9 @@ export const Login: FC = () => {
     passwordInputRef.current?.blur();
   };
 
-  const onPressLogin = () => login(authState.email, authState.password);
+  const onPressLogin = () => login(email, password);
 
-  const onPressBackButton = () => authDispatch({ type: "SET_EMPTY_FIELDS" });
+  const onPressBackButton = () => setEmptyFields();
 
   return (
     <InputBlurButton testID="Login.InputBlurButton" onPress={onPressInScreen}>
@@ -50,14 +60,8 @@ export const Login: FC = () => {
           <Input
             ref={emailInputRef}
             style={{ marginBottom: 32 }}
-            value={authState.email}
-            onChangeText={(text) =>
-              authDispatch({
-                type: "SET_FIELD",
-                fieldName: "email",
-                payload: text,
-              })
-            }
+            value={email}
+            onChangeText={(text) => dispatch(setEmailField(text))}
             icon={() => (
               <EnvelopeSimple
                 size={fontSizeValue(24)}
@@ -71,14 +75,8 @@ export const Login: FC = () => {
           <Input
             ref={passwordInputRef}
             style={{ marginBottom: 16 }}
-            value={authState.password}
-            onChangeText={(text) =>
-              authDispatch({
-                type: "SET_FIELD",
-                fieldName: "password",
-                payload: text,
-              })
-            }
+            value={password}
+            onChangeText={(text) => dispatch(setPasswordField(text))}
             icon={() => (
               <LockOpen
                 size={fontSizeValue(24)}
@@ -109,7 +107,7 @@ export const Login: FC = () => {
                 size={fontSizeValue(24)}
               />
             )}
-            isLoading={authState.isLoading}
+            isLoading={isLoading}
             onPress={onPressLogin}
           />
         </Footer>

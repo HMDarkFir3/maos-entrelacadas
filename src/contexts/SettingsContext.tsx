@@ -53,8 +53,6 @@ export const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
   const getSawIntroductionInStorage = async () => {
     const storage = await AsyncStorage.getItem(COLLECTION_INTRODUCTION);
 
-    console.log(storage);
-
     if (storage) {
       dispatch({ type: "SET_SAW_INTRODUCTION", payload: JSON.parse(storage) });
     }
@@ -82,8 +80,6 @@ export const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
     dispatch({ type: "SET_SAW_INTRODUCTION", payload: true });
 
     await AsyncStorage.setItem(COLLECTION_INTRODUCTION, JSON.stringify(true));
-
-    console.log("Saw introduction in storage!");
   };
 
   const toggleTheme = async () => {

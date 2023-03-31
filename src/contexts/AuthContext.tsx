@@ -13,20 +13,14 @@ import firestore from "@react-native-firebase/firestore";
 
 import { UserDTO } from "@dtos/UserDTO";
 
-import { useTabBar } from "@hooks/useTabBar";
+import { useAppDispatch } from "@hooks/useAppDispatch";
 
-import {
-  authReducer,
-  initialState,
-  AuthState,
-  AuthAction,
-} from "@reducers/authReducer";
+import { setUser, setIsLoading } from "@store/auth/actions";
+import { setIsActive } from "@store/tabBar/actions";
 
-import { COLLECTION_INTRODUCTION, COLLECTION_USER } from "@storages/index";
+import { COLLECTION_USER } from "@storages/index";
 
 export interface AuthContextData {
-  state: AuthState;
-  dispatch: Dispatch<AuthAction>;
   login: (email: string, password: string) => Promise<void>;
   register: (
     givenName: string,
@@ -45,24 +39,21 @@ interface AuthProviderProps {
 export const AuthContext = createContext({} as AuthContextData);
 
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
-  const [state, dispatch] = useReducer<Reducer<AuthState, AuthAction>>(
-    authReducer,
-    initialState
-  );
-
-  const { dispatch: tabBarDispatch } = useTabBar();
+  const dispatch = useAppDispatch();
 
   const getUserData = async () => {
     const storage = await AsyncStorage.getItem(COLLECTION_USER);
 
     if (storage) {
-      dispatch({ type: "SET_USER", payload: JSON.parse(storage) });
+      const formattedUser: UserDTO = JSON.parse(storage);
+
+      dispatch(setUser(formattedUser));
     }
   };
 
   const login = async (email: string, password: string) => {
     try {
-      dispatch({ type: "SET_IS_LOADING", payload: true });
+      dispatch(setIsLoading(true));
 
       const { user } = await auth().signInWithEmailAndPassword(email, password);
 
@@ -83,13 +74,13 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
             birthdate: formattedBirthdate,
           } as UserDTO;
 
-          dispatch({ type: "SET_USER", payload: data });
+          dispatch(setUser(data));
           await AsyncStorage.setItem(COLLECTION_USER, JSON.stringify(data));
         });
     } catch (error) {
       console.log(error);
     } finally {
-      dispatch({ type: "SET_IS_LOADING", payload: false });
+      dispatch(setIsLoading(false));
     }
   };
 
@@ -101,7 +92,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     password: string
   ) => {
     try {
-      dispatch({ type: "SET_IS_LOADING", payload: true });
+      dispatch(setIsLoading(true));
 
       const { user } = await auth().createUserWithEmailAndPassword(
         email,
@@ -120,19 +111,19 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         .then(async () => {
           const data = {
             uid: user.uid,
-            given_name: state.givenName,
+            given_name: givenName,
             email,
             gender,
             birthdate,
           } as UserDTO;
 
-          dispatch({ type: "SET_USER", payload: data });
+          dispatch(setUser(data));
           await AsyncStorage.setItem(COLLECTION_USER, JSON.stringify(data));
         });
     } catch (error) {
       console.log(error);
     } finally {
-      dispatch({ type: "SET_IS_LOADING", payload: false });
+      dispatch(setIsLoading(false));
     }
   };
 
@@ -140,8 +131,8 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     try {
       await AsyncStorage.removeItem(COLLECTION_USER);
       await auth().signOut();
-      tabBarDispatch({ type: "SET_IS_ACTIVE", payload: "Home" });
-      dispatch({ type: "SET_USER", payload: null });
+      dispatch(setIsActive("Home"));
+      dispatch(setUser(null));
     } catch (error) {
       console.log(error);
     }
@@ -152,7 +143,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ state, dispatch, login, register, logOut }}>
+    <AuthContext.Provider value={{ login, register, logOut }}>
       {children}
     </AuthContext.Provider>
   );

@@ -9,7 +9,7 @@ import {
   LockOpen,
 } from "phosphor-react-native";
 
-import { useAuth } from "@hooks/useAuth";
+import { useAppSelector } from "@hooks/useAppSelector";
 import { useSettings } from "@hooks/useSettings";
 
 import { Header } from "@components-of-screens/UserInfo/components/Header";
@@ -22,7 +22,7 @@ import { genders } from "@utils/genders";
 import { Container, Wrapper } from "./styles";
 
 export const UserInfo: FC = () => {
-  const { state: authState } = useAuth();
+  const { user } = useAppSelector((store) => store.auth);
   const { fontSizeValue } = useSettings();
   const { colors } = useTheme();
 
@@ -50,7 +50,7 @@ export const UserInfo: FC = () => {
               color={colors.components.input.placeholder}
             />
           )}
-          defaultValue={authState.user?.given_name}
+          defaultValue={user?.given_name}
           isEditable={false}
         />
 
@@ -62,7 +62,7 @@ export const UserInfo: FC = () => {
               color={colors.components.input.placeholder}
             />
           )}
-          defaultValue={authState.user?.email}
+          defaultValue={user?.email}
           isEditable={false}
         />
 
@@ -75,7 +75,7 @@ export const UserInfo: FC = () => {
               color={colors.components.input.placeholder}
             />
           )}
-          value={authState.user?.gender ?? "Selecione um gênero"}
+          value={user?.gender ?? "Selecione um gênero"}
           placeholder="Selecione um gênero"
           isEditable={false}
         />
@@ -88,7 +88,7 @@ export const UserInfo: FC = () => {
               color={colors.components.input.placeholder}
             />
           )}
-          value={authState.user?.birthdate ?? new Date()}
+          value={user?.birthdate ?? new Date()}
           placeholder="Selecione sua data de nascimento"
           isEditable={false}
         />

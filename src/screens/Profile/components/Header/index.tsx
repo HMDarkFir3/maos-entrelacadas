@@ -3,7 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "styled-components/native";
 import { Info } from "phosphor-react-native";
 
-import { useAuth } from "@hooks/useAuth";
+import { useAppSelector } from "@hooks/useAppSelector";
 import { useSettings } from "@hooks/useSettings";
 
 import {
@@ -16,7 +16,7 @@ import {
 } from "./styles";
 
 export const Header: FC = () => {
-  const { state: authState } = useAuth();
+  const { user } = useAppSelector((store) => store.auth);
   const { fontSizeValue } = useSettings();
   const { navigate } = useNavigation();
   const { colors } = useTheme();
@@ -34,7 +34,7 @@ export const Header: FC = () => {
 
         <UserInfo>
           <Username style={{ fontSize: fontSizeValue(20) }} numberOfLines={1}>
-            {authState.user?.given_name}
+            {user?.given_name}
           </Username>
           <Role style={{ fontSize: fontSizeValue(16) }}>Associado</Role>
         </UserInfo>

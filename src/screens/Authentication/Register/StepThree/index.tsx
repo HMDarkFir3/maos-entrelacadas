@@ -3,8 +3,16 @@ import { TextInput } from "react-native";
 import { useTheme } from "styled-components/native";
 import { LockOpen, Check } from "phosphor-react-native";
 
+import { useAppDispatch } from "@hooks/useAppDispatch";
+import { useAppSelector } from "@hooks/useAppSelector";
 import { useAuth } from "@hooks/useAuth";
 import { useSettings } from "@hooks/useSettings";
+
+import {
+  setEmptyFields,
+  setPasswordField,
+  setConfirmPasswordField,
+} from "@store/auth/actions";
 
 import { Header } from "@components-of-screens/Authentication/components/Header";
 import { Input } from "@components/Inputs/Input";
@@ -13,7 +21,17 @@ import { SmallButton } from "@components/Buttons/SmallButton";
 import { InputBlurButton, Container, InputWrapper, Footer } from "../../styles";
 
 export const StepThree: FC = () => {
-  const { state: authState, dispatch: authDispatch, register } = useAuth();
+  const dispatch = useAppDispatch();
+  const {
+    givenName,
+    email,
+    gender,
+    birthdate,
+    password,
+    confirmPassword,
+    isLoading,
+  } = useAppSelector((store) => store.auth);
+  const { register } = useAuth();
   const { fontSizeValue } = useSettings();
   const { colors } = useTheme();
 
@@ -26,15 +44,9 @@ export const StepThree: FC = () => {
   };
 
   const onPressSubmit = () => {
-    if (!authState.password.trim() || !authState.confirmPassword.trim()) return;
+    if (!password.trim() || !confirmPassword.trim()) return;
 
-    register(
-      authState.givenName,
-      authState.email,
-      authState.gender,
-      authState.birthdate,
-      authState.password
-    );
+    register(givenName, email, gender, birthdate, password);
   };
 
   return (
@@ -53,14 +65,8 @@ export const StepThree: FC = () => {
           <Input
             ref={passwordInputRef}
             style={{ marginBottom: 32 }}
-            value={authState.password}
-            onChangeText={(text) =>
-              authDispatch({
-                type: "SET_FIELD",
-                fieldName: "password",
-                payload: text,
-              })
-            }
+            value={password}
+            onChangeText={(text) => dispatch(setPasswordField(text))}
             icon={() => (
               <LockOpen
                 size={fontSizeValue(24)}
@@ -75,14 +81,8 @@ export const StepThree: FC = () => {
           <Input
             ref={confirmPasswordInputRef}
             style={{ marginBottom: 16 }}
-            value={authState.confirmPassword}
-            onChangeText={(text) =>
-              authDispatch({
-                type: "SET_FIELD",
-                fieldName: "confirmPassword",
-                payload: text,
-              })
-            }
+            value={confirmPassword}
+            onChangeText={(text) => dispatch(setConfirmPasswordField(text))}
             icon={() => (
               <LockOpen
                 size={fontSizeValue(24)}
@@ -105,7 +105,7 @@ export const StepThree: FC = () => {
                 size={fontSizeValue(24)}
               />
             )}
-            isLoading={authState.isLoading}
+            isLoading={isLoading}
             onPress={onPressSubmit}
           />
         </Footer>

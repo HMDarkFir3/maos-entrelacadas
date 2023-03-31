@@ -3,8 +3,15 @@ import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "styled-components/native";
 import { GenderNeuter, Cake, ArrowRight } from "phosphor-react-native";
 
-import { useAuth } from "@hooks/useAuth";
+import { useAppDispatch } from "@hooks/useAppDispatch";
+import { useAppSelector } from "@hooks/useAppSelector";
 import { useSettings } from "@hooks/useSettings";
+
+import {
+  setEmptyFields,
+  setGenderField,
+  setBirthdateField,
+} from "@store/auth/actions";
 
 import { Header } from "@components-of-screens/Authentication/components/Header";
 import { Select } from "@components/Inputs/Select";
@@ -16,18 +23,19 @@ import { genders } from "@utils/genders";
 import { InputBlurButton, Container, InputWrapper, Footer } from "../../styles";
 
 export const StepTwo: FC = () => {
-  const { state: authState, dispatch: authDispatch } = useAuth();
+  const dispatch = useAppDispatch();
+  const { gender, birthdate } = useAppSelector((store) => store.auth);
   const { fontSizeValue } = useSettings();
   const { navigate } = useNavigation();
   const { colors } = useTheme();
 
   const onPressNextStep = () => {
-    if (!authState.gender || !authState.birthdate) return;
+    if (!gender || !birthdate) return;
 
     navigate("StepThree");
   };
 
-  const onPressBackButton = () => authDispatch({ type: "SET_EMPTY_FIELDS" });
+  const onPressBackButton = () => dispatch(setEmptyFields());
 
   return (
     <InputBlurButton>
@@ -42,14 +50,8 @@ export const StepTwo: FC = () => {
         <InputWrapper>
           <Select
             style={{ marginBottom: 32 }}
-            value={authState.gender}
-            onChange={(item: string) =>
-              authDispatch({
-                type: "SET_FIELD",
-                fieldName: "gender",
-                payload: item,
-              })
-            }
+            value={gender}
+            onChange={(item: string) => setGenderField(item)}
             icon={() => (
               <GenderNeuter
                 size={fontSizeValue(24)}
@@ -62,14 +64,8 @@ export const StepTwo: FC = () => {
 
           <DatePicker
             testDateTimePickerModalID="StepTwo.DatePicker"
-            value={authState.birthdate}
-            onChange={(date: Date) =>
-              authDispatch({
-                type: "SET_FIELD",
-                fieldName: "birthdate",
-                payload: date,
-              })
-            }
+            value={birthdate}
+            onChange={(date: Date) => setBirthdateField(date)}
             icon={() => (
               <Cake
                 size={fontSizeValue(24)}

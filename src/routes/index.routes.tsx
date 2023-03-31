@@ -4,14 +4,14 @@ import { useCallback, FC } from "react";
 import { useFocusEffect } from "@react-navigation/native";
 import { useTheme } from "styled-components/native";
 
-import { useAuth } from "@hooks/useAuth";
+import { useAppSelector } from "@hooks/useAppSelector";
 import { useSettings } from "@hooks/useSettings";
 
 import { AuthRoutes } from "@routes/Auth.routes";
 import { AppRoutes } from "@routes/App.routes";
 
 export const Routes: FC = () => {
-  const { state: authState } = useAuth();
+  const { isSigned } = useAppSelector((store) => store.auth);
   const { state: settingsState } = useSettings();
   const { colors } = useTheme();
 
@@ -33,7 +33,7 @@ export const Routes: FC = () => {
         style={settingsState.theme.title === "light" ? "dark" : "light"}
       />
 
-      {authState.user?.uid ? <AppRoutes /> : <AuthRoutes />}
+      {isSigned ? <AppRoutes /> : <AuthRoutes />}
     </>
   );
 };
