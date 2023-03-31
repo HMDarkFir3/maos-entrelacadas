@@ -13,7 +13,7 @@ import { AuthProvider } from "@contexts/AuthContext";
 import { TabBarProvider } from "@contexts/TabBarContext";
 import { SettingsProvider } from "@contexts/SettingsContext";
 
-import { Routes } from "@routes/index";
+import { Routes } from "@routes/index.routes";
 
 export const App: FC = () => {
   SplashScreen.preventAutoHideAsync();

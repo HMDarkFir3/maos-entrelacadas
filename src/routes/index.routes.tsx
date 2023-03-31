@@ -7,8 +7,8 @@ import { useTheme } from "styled-components/native";
 import { useAuth } from "@hooks/useAuth";
 import { useSettings } from "@hooks/useSettings";
 
-import { AuthRoutes } from "@routes/auth.routes";
-import { AppRoutes } from "@routes/app.routes";
+import { AuthRoutes } from "@routes/Auth.routes";
+import { AppRoutes } from "@routes/App.routes";
 
 export const Routes: FC = () => {
   const { state: authState } = useAuth();

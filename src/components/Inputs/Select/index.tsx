@@ -28,7 +28,7 @@ import {
 interface Props<T> {
   style?: ViewStyle;
   value: string;
-  onChange: (item: string) => void;
+  onChange?: (item: string) => void;
   placeholder?: string;
   icon: any;
   data: T;
@@ -66,6 +66,13 @@ export const Select: FC<Props<typeof genders>> = (props) => {
 
   const onPressOpenSelect = () => setIsOpen((prevState) => !prevState);
 
+  const onPressSelectItem = (item: string) => {
+    if (onChange) {
+      onChange(item);
+      setIsOpen(false);
+    }
+  };
+
   return (
     <Container style={style}>
       <Wrapper
@@ -102,7 +109,10 @@ export const Select: FC<Props<typeof genders>> = (props) => {
             data={data}
             keyExtractor={(item) => String(item.id)}
             renderItem={({ item }) => (
-              <Item activeOpacity={0.7} onPress={() => onChange(item.name)}>
+              <Item
+                activeOpacity={0.7}
+                onPress={() => onPressSelectItem(item.name)}
+              >
                 <SelectedText
                   style={{ marginLeft: 16, fontSize: fontSizeValue(20) }}
                   isSelected={item.name === value}

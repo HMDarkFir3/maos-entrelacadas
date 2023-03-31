@@ -15,7 +15,7 @@ import { SmallButton } from "@components/Buttons/SmallButton";
 import { COLLECTION_INTRODUCTION } from "@storages/index";
 
 import { introductionSlider } from "@utils/introductionSlider";
-import { SCREEN_HEIGHT } from "@utils/globalVariables";
+import { SCREEN_WIDTH, SCREEN_HEIGHT } from "@utils/globalVariables";
 
 import { Container, Footer, JumpButton, Title } from "./styles";
 
@@ -63,20 +63,19 @@ export const Introduction: FC = () => {
   };
 
   const scrollToNextSlide = () => {
-    if (currentIndex) {
-      if (currentIndex < introductionSlider.length - 1) {
-        introductionSliderRef.current?.scrollToIndex({
-          index: currentIndex + 1,
-        });
-      } else {
-        sawIntroductionInStorage();
-      }
+    if (currentIndex! < introductionSlider.length - 1) {
+      introductionSliderRef.current?.scrollToIndex({
+        index: currentIndex! + 1,
+      });
+    } else {
+      sawIntroductionInStorage();
     }
   };
 
   return (
     <Container>
       <Animated.FlatList
+        testID="Introduction.FlatList"
         ref={introductionSliderRef}
         data={introductionSlider}
         keyExtractor={(item) => item.id}
@@ -97,6 +96,11 @@ export const Introduction: FC = () => {
         )}
         onViewableItemsChanged={onViewableItemsChanged}
         viewabilityConfig={viewabilityConfig}
+        getItemLayout={(_, index) => ({
+          length: SCREEN_WIDTH,
+          offset: SCREEN_WIDTH * index,
+          index,
+        })}
       />
 
       <IntroductionPaginator
@@ -107,7 +111,7 @@ export const Introduction: FC = () => {
 
       <Footer>
         <JumpButton
-          testID="jump-button"
+          testID="Introduction.JumpButton"
           style={{
             opacity: currentIndex === introductionSlider.length - 1 ? 0 : 1,
           }}
@@ -118,7 +122,7 @@ export const Introduction: FC = () => {
         </JumpButton>
 
         <SmallButton
-          testID="next-button"
+          testID="Introduction.SmallButton"
           icon={() =>
             currentIndex === introductionSlider.length - 1 ? (
               <Check

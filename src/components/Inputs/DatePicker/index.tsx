@@ -12,7 +12,7 @@ interface Props {
   testDateTimePickerModalID?: string;
   style?: ViewStyle;
   value: Date | null;
-  onChange: (date: Date) => void;
+  onChange?: (date: Date) => void;
   placeholder?: string;
   icon: any;
   isEditable?: boolean;
@@ -37,8 +37,10 @@ export const DatePicker: FC<Props> = (props) => {
     setIsOpenDatePicker((prevState) => !prevState);
 
   const onChangeDate = (date: Date) => {
-    onChange(date);
-    setIsOpenDatePicker(false);
+    if (onChange) {
+      onChange(date);
+      setIsOpenDatePicker(false);
+    }
   };
 
   const onCancelDatePicker = () =>

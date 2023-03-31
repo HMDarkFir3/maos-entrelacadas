@@ -1,12 +1,12 @@
 import { FC } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import { TabRoutes } from "@routes/tab.routes";
+import { TabRoutes } from "@routes/Tab.routes";
 
 import { Settings } from "@screens/Settings";
 import { UserInfo } from "@screens/UserInfo";
 
-const { Navigator, Screen, Group } = createNativeStackNavigator();
+const { Navigator, Screen } = createNativeStackNavigator();
 
 export const AppRoutes: FC = () => {
   return (

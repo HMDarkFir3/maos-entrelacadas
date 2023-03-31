@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { Alert } from "react-native";
-import { render, fireEvent } from "@testing-library/react-native";
+import { render, fireEvent, act } from "@testing-library/react-native";
 import { ThemeProvider } from "styled-components/native";
 
 import { AuthProvider } from "@contexts/AuthContext";
@@ -60,12 +60,14 @@ describe("Profile Screen", () => {
     const alertButtons = alertMock.mock.calls[0][2];
     const alertButton = alertButtons?.find((button) => button.text === "Sim");
 
-    if (alertButton) {
-      if (alertButton.onPress) {
-        alertButton.onPress();
+    act(() => {
+      if (alertButton) {
+        if (alertButton.onPress) {
+          alertButton.onPress();
+        }
+      } else {
+        throw new Error("Alert button not found");
       }
-    } else {
-      throw new Error("Alert button not found");
-    }
+    });
   });
 });

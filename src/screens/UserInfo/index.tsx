@@ -75,8 +75,8 @@ export const UserInfo: FC = () => {
               color={colors.components.input.placeholder}
             />
           )}
-          value={authState.user!.gender}
-          onChange={() => {}}
+          value={authState.user?.gender ?? "Selecione um gênero"}
+          placeholder="Selecione um gênero"
           isEditable={false}
         />
 
@@ -88,8 +88,8 @@ export const UserInfo: FC = () => {
               color={colors.components.input.placeholder}
             />
           )}
-          value={authState.user!.birthdate}
-          onChange={() => {}}
+          value={authState.user?.birthdate ?? new Date()}
+          placeholder="Selecione sua data de nascimento"
           isEditable={false}
         />
 

@@ -1,9 +1,8 @@
 import { ReactNode } from "react";
-import { render, fireEvent } from "@testing-library/react-native";
+import { render, fireEvent, act } from "@testing-library/react-native";
 import { ThemeProvider } from "styled-components/native";
 
 import { AuthProvider } from "@contexts/AuthContext";
-import { SettingsProvider } from "@contexts/SettingsContext";
 
 import { FontSwitcher } from "@components-of-screens/Settings/components/FontSwitcher";
 
@@ -11,11 +10,24 @@ import { light } from "@themes/light";
 
 const Providers = ({ children }: { children: ReactNode }) => (
   <AuthProvider>
-    <SettingsProvider>
-      <ThemeProvider theme={light}>{children}</ThemeProvider>
-    </SettingsProvider>
+    <ThemeProvider theme={light}>{children}</ThemeProvider>
   </AuthProvider>
 );
+
+jest.mock("@hooks/useSettings", () => {
+  return {
+    useSettings: () => ({
+      state: {
+        fontSize: {
+          name: "normal",
+          value: "md",
+        },
+      },
+      changeFontSize: jest.fn(),
+      fontSizeValue: jest.fn(),
+    }),
+  };
+});
 
 describe("FontSwitcher Component", () => {
   it("should be able to press the open font switcher button", () => {
@@ -24,7 +36,10 @@ describe("FontSwitcher Component", () => {
     const openFontSwitcherButton = getByTestId(
       "FontSwitcher.OpenFontSwitcherButton"
     );
-    fireEvent.press(openFontSwitcherButton);
+
+    act(() => {
+      fireEvent.press(openFontSwitcherButton);
+    });
   });
 
   it("should be able to press the small font size", () => {
@@ -35,13 +50,19 @@ describe("FontSwitcher Component", () => {
     const openFontSwitcherButton = getByTestId(
       "FontSwitcher.OpenFontSwitcherButton"
     );
-    fireEvent.press(openFontSwitcherButton);
+
+    act(() => {
+      fireEvent.press(openFontSwitcherButton);
+    });
 
     const list = getByTestId("FontSwitcher.List");
     expect(list).toBeTruthy();
 
     const item = getAllByTestId("FontSwitcher.Item");
-    fireEvent.press(item[0]);
+
+    act(() => {
+      fireEvent.press(item[0]);
+    });
   });
 
   it("should be able to press the medium font size", () => {
@@ -52,13 +73,19 @@ describe("FontSwitcher Component", () => {
     const openFontSwitcherButton = getByTestId(
       "FontSwitcher.OpenFontSwitcherButton"
     );
-    fireEvent.press(openFontSwitcherButton);
+
+    act(() => {
+      fireEvent.press(openFontSwitcherButton);
+    });
 
     const list = getByTestId("FontSwitcher.List");
     expect(list).toBeTruthy();
 
     const item = getAllByTestId("FontSwitcher.Item");
-    fireEvent.press(item[1]);
+
+    act(() => {
+      fireEvent.press(item[1]);
+    });
   });
 
   it("should be able to press the large font size", () => {
@@ -69,12 +96,18 @@ describe("FontSwitcher Component", () => {
     const openFontSwitcherButton = getByTestId(
       "FontSwitcher.OpenFontSwitcherButton"
     );
-    fireEvent.press(openFontSwitcherButton);
+
+    act(() => {
+      fireEvent.press(openFontSwitcherButton);
+    });
 
     const list = getByTestId("FontSwitcher.List");
     expect(list).toBeTruthy();
 
     const item = getAllByTestId("FontSwitcher.Item");
-    fireEvent.press(item[2]);
+
+    act(() => {
+      fireEvent.press(item[2]);
+    });
   });
 });
