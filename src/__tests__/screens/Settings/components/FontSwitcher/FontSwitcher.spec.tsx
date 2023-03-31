@@ -27,7 +27,7 @@ describe("FontSwitcher Component", () => {
     fireEvent.press(openFontSwitcherButton);
   });
 
-  it("should be able to press the list item", () => {
+  it("should be able to press the small font size", () => {
     const { getByTestId, getAllByTestId } = render(<FontSwitcher />, {
       wrapper: Providers,
     });
@@ -42,5 +42,39 @@ describe("FontSwitcher Component", () => {
 
     const item = getAllByTestId("FontSwitcher.Item");
     fireEvent.press(item[0]);
+  });
+
+  it("should be able to press the medium font size", () => {
+    const { getByTestId, getAllByTestId } = render(<FontSwitcher />, {
+      wrapper: Providers,
+    });
+
+    const openFontSwitcherButton = getByTestId(
+      "FontSwitcher.OpenFontSwitcherButton"
+    );
+    fireEvent.press(openFontSwitcherButton);
+
+    const list = getByTestId("FontSwitcher.List");
+    expect(list).toBeTruthy();
+
+    const item = getAllByTestId("FontSwitcher.Item");
+    fireEvent.press(item[1]);
+  });
+
+  it("should be able to press the large font size", () => {
+    const { getByTestId, getAllByTestId } = render(<FontSwitcher />, {
+      wrapper: Providers,
+    });
+
+    const openFontSwitcherButton = getByTestId(
+      "FontSwitcher.OpenFontSwitcherButton"
+    );
+    fireEvent.press(openFontSwitcherButton);
+
+    const list = getByTestId("FontSwitcher.List");
+    expect(list).toBeTruthy();
+
+    const item = getAllByTestId("FontSwitcher.Item");
+    fireEvent.press(item[2]);
   });
 });
