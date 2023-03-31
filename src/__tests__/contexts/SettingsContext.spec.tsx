@@ -115,6 +115,4 @@ describe("SettingsContext", () => {
 
     render(<ComponentMock />, { wrapper: Providers });
   });
-
-  it("should be able to change the font size", async () => {});
 });

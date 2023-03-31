@@ -28,7 +28,13 @@ export const StepThree: FC = () => {
   const onPressSubmit = () => {
     if (!authState.password.trim() || !authState.confirmPassword.trim()) return;
 
-    register();
+    register(
+      authState.givenName,
+      authState.email,
+      authState.gender,
+      authState.birthdate,
+      authState.password
+    );
   };
 
   return (

@@ -4,7 +4,7 @@ import { render } from "@testing-library/react-native";
 import { TabBarProvider } from "@contexts/TabBarContext";
 
 describe("TabBarContext", () => {
-  const TestComponent = () => {
+  const ComponentMock = () => {
     return (
       <TabBarProvider>
         <View>
@@ -15,7 +15,7 @@ describe("TabBarContext", () => {
   };
 
   it("should be able to render correctly", () => {
-    const { getByText } = render(<TestComponent />);
+    const { getByText } = render(<ComponentMock />);
     expect(getByText("Test")).toBeTruthy();
   });
 });

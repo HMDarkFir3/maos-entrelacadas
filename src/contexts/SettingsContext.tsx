@@ -50,6 +50,14 @@ export const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
     initialState
   );
 
+  const getSawIntroductionInStorage = async () => {
+    const storage = await AsyncStorage.getItem(COLLECTION_INTRODUCTION);
+
+    if (storage) {
+      dispatch({ type: "SET_SAW_INTRODUCTION", payload: JSON.parse(storage) });
+    }
+  };
+
   const getThemeInStorage = async () => {
     const storage = await AsyncStorage.getItem(COLLECTION_THEME);
 
@@ -108,6 +116,10 @@ export const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
       }
     }
   };
+
+  useEffect(() => {
+    getSawIntroductionInStorage;
+  });
 
   useEffect(() => {
     getThemeInStorage();

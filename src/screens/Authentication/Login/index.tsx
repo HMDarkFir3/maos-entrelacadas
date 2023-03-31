@@ -32,7 +32,7 @@ export const Login: FC = () => {
     passwordInputRef.current?.blur();
   };
 
-  const onPressLogin = () => login();
+  const onPressLogin = () => login(authState.email, authState.password);
 
   const onPressBackButton = () => authDispatch({ type: "SET_EMPTY_FIELDS" });
 

@@ -1,4 +1,12 @@
-import { createContext, useEffect, useReducer, FC, Dispatch, ReactNode, Reducer } from "react";
+import {
+  createContext,
+  useEffect,
+  useReducer,
+  FC,
+  Dispatch,
+  ReactNode,
+  Reducer,
+} from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import auth from "@react-native-firebase/auth";
 import firestore from "@react-native-firebase/firestore";
@@ -7,15 +15,26 @@ import { UserDTO } from "@dtos/UserDTO";
 
 import { useTabBar } from "@hooks/useTabBar";
 
-import { authReducer, initialState, AuthState, AuthAction } from "@reducers/authReducer";
+import {
+  authReducer,
+  initialState,
+  AuthState,
+  AuthAction,
+} from "@reducers/authReducer";
 
 import { COLLECTION_INTRODUCTION, COLLECTION_USER } from "@storages/index";
 
 export interface AuthContextData {
   state: AuthState;
   dispatch: Dispatch<AuthAction>;
-  login: () => Promise<void>;
-  register: () => Promise<void>;
+  login: (email: string, password: string) => Promise<void>;
+  register: (
+    givenName: string,
+    email: string,
+    gender: string,
+    birthdate: Date | null,
+    password: string
+  ) => Promise<void>;
   logOut: () => Promise<void>;
 }
 
@@ -26,17 +45,12 @@ interface AuthProviderProps {
 export const AuthContext = createContext({} as AuthContextData);
 
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
-  const [state, dispatch] = useReducer<Reducer<AuthState, AuthAction>>(authReducer, initialState);
+  const [state, dispatch] = useReducer<Reducer<AuthState, AuthAction>>(
+    authReducer,
+    initialState
+  );
 
   const { dispatch: tabBarDispatch } = useTabBar();
-
-  const getSawIntroductionInStorage = async () => {
-    const storage = await AsyncStorage.getItem(COLLECTION_INTRODUCTION);
-
-    if (storage) {
-      dispatch({ type: "SET_SAW_INTRODUCTION", payload: JSON.parse(storage) });
-    }
-  };
 
   const getUserData = async () => {
     const storage = await AsyncStorage.getItem(COLLECTION_USER);
@@ -46,18 +60,20 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  const login = async () => {
+  const login = async (email: string, password: string) => {
     try {
       dispatch({ type: "SET_IS_LOADING", payload: true });
 
-      const { user } = await auth().signInWithEmailAndPassword(state.email, state.password);
+      const { user } = await auth().signInWithEmailAndPassword(email, password);
 
       await firestore()
         .collection("users")
         .doc(user?.uid)
         .get()
         .then(async (documentSnapshot) => {
-          const formattedBirthdate = new Date(documentSnapshot.data()?.birthdate.seconds * 1000);
+          const formattedBirthdate = new Date(
+            documentSnapshot.data()?.birthdate.seconds * 1000
+          );
 
           const data = {
             uid: user?.uid,
@@ -77,28 +93,37 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  const register = async () => {
+  const register = async (
+    givenName: string,
+    email: string,
+    gender: string,
+    birthdate: Date | null,
+    password: string
+  ) => {
     try {
       dispatch({ type: "SET_IS_LOADING", payload: true });
 
-      const { user } = await auth().createUserWithEmailAndPassword(state.email, state.password);
+      const { user } = await auth().createUserWithEmailAndPassword(
+        email,
+        password
+      );
 
       await firestore()
         .collection("users")
         .doc(user?.uid)
         .set({
-          given_name: state.givenName,
-          email: state.email,
-          gender: state.gender,
-          birthdate: state.birthdate,
+          given_name: givenName,
+          email,
+          gender,
+          birthdate,
         })
         .then(async () => {
           const data = {
             uid: user.uid,
             given_name: state.givenName,
-            email: state.email,
-            gender: state.gender,
-            birthdate: state.birthdate,
+            email,
+            gender,
+            birthdate,
           } as UserDTO;
 
           dispatch({ type: "SET_USER", payload: data });
@@ -124,10 +149,6 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 
   useEffect(() => {
     getUserData();
-  }, []);
-
-  useEffect(() => {
-    getSawIntroductionInStorage();
   }, []);
 
   return (
