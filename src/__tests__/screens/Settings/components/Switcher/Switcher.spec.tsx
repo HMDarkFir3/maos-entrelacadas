@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { render, fireEvent } from "@testing-library/react-native";
+import { render } from "@testing-library/react-native";
 import { ThemeProvider } from "styled-components/native";
 import { Activity } from "phosphor-react-native";
 
