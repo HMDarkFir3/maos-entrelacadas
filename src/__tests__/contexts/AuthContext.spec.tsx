@@ -66,13 +66,13 @@ describe("AuthContext", () => {
     expect(getByText("Test")).toBeTruthy();
   });
 
-  it("should be able to login", async () => {
+  it("should be able to login", () => {
     const { getByText } = render(<ComponentMock />, { wrapper: Providers });
 
     const loginButton = getByText("Login");
 
-    await waitFor(async () => {
-      await act(() => {
+    waitFor(() => {
+      act(() => {
         fireEvent.press(loginButton);
       });
     });
