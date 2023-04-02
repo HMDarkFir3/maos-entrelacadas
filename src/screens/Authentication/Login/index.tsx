@@ -87,7 +87,7 @@ export const Login: FC = () => {
             placeholder="Senha"
           />
 
-          <ForgetPasswordButton activeOpacity={0.7}>
+          <ForgetPasswordButton>
             <ForgetPasswordButtonText
               style={{ fontSize: fontSizeValue(16) }}
               numberOfLines={2}

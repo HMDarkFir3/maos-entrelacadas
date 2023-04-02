@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components/native";
-import { Pressable } from "react-native";
 
 import { STATUS_BAR_HEIGHT } from "@utils/globalVariables";
 

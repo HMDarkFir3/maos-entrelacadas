@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components/native";
-import { Image, TouchableOpacity } from "react-native";
+import { Image } from "react-native";
 import { RectButton } from "react-native-gesture-handler";
 
 interface RegisterButtonTextProps {

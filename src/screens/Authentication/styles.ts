@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components/native";
-import { TouchableOpacity, TouchableWithoutFeedback } from "react-native";
+import { TouchableWithoutFeedback } from "react-native";
+import { RectButton } from "react-native-gesture-handler";
 
 import { SCREEN_WIDTH } from "@utils/globalVariables";
 
@@ -16,7 +17,11 @@ export const InputWrapper = styled.View`
   margin-top: 92px;
 `;
 
-export const ForgetPasswordButton = styled(TouchableOpacity)``;
+export const ForgetPasswordButton = styled(RectButton)`
+  justify-content: flex-end;
+
+  border-radius: 4px;
+`;
 
 export const ForgetPasswordButtonText = styled.Text`
   text-align: right;

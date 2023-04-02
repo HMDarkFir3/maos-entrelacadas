@@ -50,8 +50,7 @@ export const DatePicker: FC<Props> = (props) => {
     <Container
       testID="DatePicker"
       style={style}
-      activeOpacity={0.7}
-      disabled={!isEditable}
+      enabled={isEditable}
       onPress={onPressOpenDatePicker}
     >
       <Icon />

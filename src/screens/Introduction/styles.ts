@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components/native";
+import { RectButton } from "react-native-gesture-handler";
 
 export const Container = styled.View`
   flex: 1;
@@ -18,8 +19,25 @@ export const Footer = styled.View`
   width: 100%;
 `;
 
-export const JumpButton = styled.TouchableOpacity`
-  padding: 0 24px;
+export const JumpButton = styled.View`
+  align-items: center;
+  justify-content: center;
+
+  width: 78px;
+  height: 48px;
+
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
+
+  overflow: hidden;
+`;
+
+export const JumpButtonWrapper = styled(RectButton)`
+  align-items: center;
+  justify-content: center;
+
+  width: 78px;
+  height: 48px;
 `;
 
 export const Title = styled.Text`

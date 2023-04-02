@@ -13,7 +13,13 @@ import { SmallButton } from "@components/Buttons/SmallButton";
 import { introductionSlider } from "@utils/introductionSlider";
 import { SCREEN_WIDTH, SCREEN_HEIGHT } from "@utils/globalVariables";
 
-import { Container, Footer, JumpButton, Title } from "./styles";
+import {
+  Container,
+  Footer,
+  JumpButton,
+  JumpButtonWrapper,
+  Title,
+} from "./styles";
 
 interface ViewabilityConfigRef {
   viewAreaCoveragePercentThreshold: number;
@@ -108,10 +114,13 @@ export const Introduction: FC = () => {
           style={{
             opacity: currentIndex === introductionSlider.length - 1 ? 0 : 1,
           }}
-          disabled={currentIndex === introductionSlider.length - 1}
-          onPress={jumpSlides}
         >
-          <Title style={{ fontSize: fontSizeValue(16) }}>Pular</Title>
+          <JumpButtonWrapper
+            enabled={currentIndex !== introductionSlider.length - 1}
+            onPress={jumpSlides}
+          >
+            <Title style={{ fontSize: fontSizeValue(16) }}>Pular</Title>
+          </JumpButtonWrapper>
         </JumpButton>
 
         <SmallButton
