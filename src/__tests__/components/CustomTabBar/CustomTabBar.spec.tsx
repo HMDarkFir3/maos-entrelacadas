@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import { render, fireEvent } from "@testing-library/react-native";
 import { Provider as ReduxProvider } from "react-redux";
+import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { ThemeProvider } from "styled-components/native";
 
 import { store } from "@store/index";
@@ -21,7 +22,38 @@ const Providers = ({ children }: { children: ReactNode }) => (
 
 describe("CustomTabBar Component", () => {
   it("should be able to press the home button", () => {
-    const { getByTestId } = render(<CustomTabBar />, {
+    const stateMock: BottomTabBarProps["state"] = {
+      index: 0,
+      routes: [
+        {
+          key: "Home",
+          name: "Home",
+          params: undefined,
+        },
+        {
+          key: "Events",
+          name: "Events",
+          params: undefined,
+        },
+        {
+          key: "Donations",
+          name: "Donations",
+          params: undefined,
+        },
+        {
+          key: "Profile",
+          name: "Profile",
+          params: undefined,
+        },
+      ],
+      type: "tab",
+      history: [],
+      stale: false,
+      key: "Home",
+      routeNames: ["Home", "Events", "Donations", "Profile"],
+    };
+
+    const { getByTestId } = render(<CustomTabBar state={stateMock} />, {
       wrapper: Providers,
     });
 
@@ -30,7 +62,38 @@ describe("CustomTabBar Component", () => {
   });
 
   it("should be able to press the events button", () => {
-    const { getByTestId } = render(<CustomTabBar />, {
+    const stateMock: BottomTabBarProps["state"] = {
+      index: 1,
+      routes: [
+        {
+          key: "Home",
+          name: "Home",
+          params: undefined,
+        },
+        {
+          key: "Events",
+          name: "Events",
+          params: undefined,
+        },
+        {
+          key: "Donations",
+          name: "Donations",
+          params: undefined,
+        },
+        {
+          key: "Profile",
+          name: "Profile",
+          params: undefined,
+        },
+      ],
+      type: "tab",
+      history: [],
+      stale: false,
+      key: "Events",
+      routeNames: ["Home", "Events", "Donations", "Profile"],
+    };
+
+    const { getByTestId } = render(<CustomTabBar state={stateMock} />, {
       wrapper: Providers,
     });
 
@@ -39,7 +102,38 @@ describe("CustomTabBar Component", () => {
   });
 
   it("should be able to press the donations button", () => {
-    const { getByTestId } = render(<CustomTabBar />, {
+    const stateMock: BottomTabBarProps["state"] = {
+      index: 2,
+      routes: [
+        {
+          key: "Home",
+          name: "Home",
+          params: undefined,
+        },
+        {
+          key: "Events",
+          name: "Events",
+          params: undefined,
+        },
+        {
+          key: "Donations",
+          name: "Donations",
+          params: undefined,
+        },
+        {
+          key: "Profile",
+          name: "Profile",
+          params: undefined,
+        },
+      ],
+      type: "tab",
+      history: [],
+      stale: false,
+      key: "Donations",
+      routeNames: ["Home", "Events", "Donations", "Profile"],
+    };
+
+    const { getByTestId } = render(<CustomTabBar state={stateMock} />, {
       wrapper: Providers,
     });
 
@@ -48,7 +142,38 @@ describe("CustomTabBar Component", () => {
   });
 
   it("should be able to press the profile button", () => {
-    const { getByTestId } = render(<CustomTabBar />, {
+    const stateMock: BottomTabBarProps["state"] = {
+      index: 3,
+      routes: [
+        {
+          key: "Home",
+          name: "Home",
+          params: undefined,
+        },
+        {
+          key: "Events",
+          name: "Events",
+          params: undefined,
+        },
+        {
+          key: "Donations",
+          name: "Donations",
+          params: undefined,
+        },
+        {
+          key: "Profile",
+          name: "Profile",
+          params: undefined,
+        },
+      ],
+      type: "tab",
+      history: [],
+      stale: false,
+      key: "Profile",
+      routeNames: ["Home", "Events", "Donations", "Profile"],
+    };
+
+    const { getByTestId } = render(<CustomTabBar state={stateMock} />, {
       wrapper: Providers,
     });
 

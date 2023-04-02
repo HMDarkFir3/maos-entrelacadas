@@ -12,7 +12,7 @@ export const TabRoutes: FC = () => {
   return (
     <Navigator
       initialRouteName="Home"
-      tabBar={(props) => <CustomTabBar {...props} />}
+      tabBar={(props) => <CustomTabBar state={props.state} />}
       screenOptions={{
         headerShown: false,
       }}

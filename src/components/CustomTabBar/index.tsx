@@ -8,7 +8,9 @@ import { useSettings } from "@hooks/useSettings";
 
 import { Container, TabItem, TabItemText } from "./styles";
 
-interface Props extends BottomTabBarProps {}
+interface Props {
+  state: BottomTabBarProps["state"];
+}
 
 export const CustomTabBar: FC<Props> = (props) => {
   const { state } = props;
@@ -41,6 +43,7 @@ export const CustomTabBar: FC<Props> = (props) => {
           size={fontSizeValue(28)}
           color={getColors(isActive === "Home")}
         />
+
         <TabItemText
           style={{ fontSize: fontSizeValue(12) }}
           isActive={isActive === "Home"}
@@ -57,6 +60,7 @@ export const CustomTabBar: FC<Props> = (props) => {
           size={fontSizeValue(28)}
           color={getColors(isActive === "Events")}
         />
+
         <TabItemText
           style={{ fontSize: fontSizeValue(12) }}
           isActive={isActive === "Events"}
@@ -73,6 +77,7 @@ export const CustomTabBar: FC<Props> = (props) => {
           size={fontSizeValue(28)}
           color={getColors(isActive === "Donations")}
         />
+
         <TabItemText
           style={{ fontSize: fontSizeValue(12) }}
           isActive={isActive === "Donations"}
@@ -89,6 +94,7 @@ export const CustomTabBar: FC<Props> = (props) => {
           size={fontSizeValue(28)}
           color={getColors(isActive === "Profile")}
         />
+
         <TabItemText
           style={{ fontSize: fontSizeValue(12) }}
           isActive={isActive === "Profile"}
