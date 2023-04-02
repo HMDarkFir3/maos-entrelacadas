@@ -1,10 +1,10 @@
 import { FC } from "react";
-import { TouchableOpacityProps } from "react-native";
+import { RectButtonProps } from "react-native-gesture-handler";
 import { useTheme } from "styled-components/native";
 
-import { Container, Load } from "./styles";
+import { Container, Wrapper, Load } from "./styles";
 
-interface Props extends TouchableOpacityProps {
+interface Props extends RectButtonProps {
   icon: any;
   isLoading?: boolean;
 }
@@ -15,12 +15,14 @@ export const SmallButton: FC<Props> = (props) => {
   const { colors } = useTheme();
 
   return (
-    <Container activeOpacity={0.7} {...rest}>
-      {isLoading ? (
-        <Load size="small" color={colors.components.smallButton.icon} />
-      ) : (
-        <Icon />
-      )}
+    <Container>
+      <Wrapper {...rest}>
+        {isLoading ? (
+          <Load size="small" color={colors.components.smallButton.icon} />
+        ) : (
+          <Icon />
+        )}
+      </Wrapper>
     </Container>
   );
 };

@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components/native";
-import { Pressable } from "react-native";
+import { BorderlessButton } from "react-native-gesture-handler";
 
 import { STATUS_BAR_HEIGHT } from "@utils/globalVariables";
 
@@ -18,7 +18,7 @@ export const Wrapper = styled.View`
   gap: 12px;
 `;
 
-export const ProfileButton = styled(Pressable)``;
+export const ProfileButton = styled(BorderlessButton)``;
 
 export const UserImage = styled.Image`
   width: 48px;
@@ -46,4 +46,4 @@ export const Username = styled.Text`
   `}
 `;
 
-export const SignOutButton = styled(Pressable)``;
+export const SignOutButton = styled(BorderlessButton)``;

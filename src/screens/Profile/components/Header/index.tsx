@@ -24,11 +24,7 @@ export const Header: FC = () => {
   const onPressUserInfo = () => navigate("UserInfo");
 
   return (
-    <Container
-      testID="Header.Container"
-      android_ripple={{ color: colors.androidRipple.backgroundPrimary }}
-      onPress={onPressUserInfo}
-    >
+    <Container testID="Header.Container" onPress={onPressUserInfo}>
       <Wrapper>
         <UserImage source={{ uri: "https://www.github.com/hmdarkfir3.png" }} />
 

@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components/native";
 import { Image, TouchableOpacity } from "react-native";
+import { RectButton } from "react-native-gesture-handler";
 
 interface RegisterButtonTextProps {
   isGreen: boolean;
@@ -52,8 +53,15 @@ export const ButtonWrapper = styled.View`
   margin-bottom: 28px;
 `;
 
-export const RegisterButton = styled(TouchableOpacity)`
+export const RegisterButton = styled(RectButton)`
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  height: 56px;
+  width: 100%;
+
+  border-radius: 8px;
 `;
 
 export const RegisterButtonText = styled.Text<RegisterButtonTextProps>`

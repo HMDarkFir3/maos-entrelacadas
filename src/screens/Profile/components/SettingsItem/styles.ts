@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components/native";
-import { Pressable } from "react-native";
+import { RectButton } from "react-native-gesture-handler";
 
-export const Container = styled(Pressable)`
+export const Container = styled(RectButton)`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;

@@ -1,5 +1,5 @@
 import { useState, forwardRef } from "react";
-import { TextInput, TextInputProps, ViewStyle, StyleProp } from "react-native";
+import { TextInput, TextInputProps, ViewStyle } from "react-native";
 import { useTheme } from "styled-components/native";
 import { Eye, EyeSlash } from "phosphor-react-native";
 
@@ -58,7 +58,6 @@ export const Input = forwardRef<TextInput, Props>((props, ref) => {
         {isPassword && (
           <TogglePasswordVisibilityButton
             testID="Input.TogglePasswordVisibilityButton"
-            activeOpacity={0.7}
             onPress={onTogglePasswordVisibility}
           >
             {isVisibility ? (

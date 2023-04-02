@@ -31,7 +31,6 @@ export const FontSwitcher: FC = () => {
     <>
       <Container
         testID="FontSwitcher.OpenFontSwitcherButton"
-        android_ripple={{ color: colors.androidRipple.backgroundPrimary }}
         onPress={onPressOpenFontSwitcher}
       >
         <Wrapper>
@@ -57,9 +56,6 @@ export const FontSwitcher: FC = () => {
             renderItem={({ item }) => (
               <Item
                 testID="FontSwitcher.Item"
-                android_ripple={{
-                  color: colors.androidRipple.backgroundPrimary,
-                }}
                 onPress={() =>
                   changeFontSize(
                     item.name as "Pequeno" | "Normal" | "Grande",

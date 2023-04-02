@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components/native";
-import { View, TextInput, TouchableOpacity } from "react-native";
+import { View, TextInput } from "react-native";
+import { BorderlessButton } from "react-native-gesture-handler";
 
 interface StyledInputProps {
   isEditable: boolean;
@@ -43,4 +44,4 @@ export const MaxLength = styled.Text`
   `}
 `;
 
-export const TogglePasswordVisibilityButton = styled(TouchableOpacity)``;
+export const TogglePasswordVisibilityButton = styled(BorderlessButton)``;

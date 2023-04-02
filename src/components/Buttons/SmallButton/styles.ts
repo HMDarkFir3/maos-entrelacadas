@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components/native";
-import { TouchableOpacity } from "react-native";
+import { RectButton } from "react-native-gesture-handler";
 
-export const Container = styled(TouchableOpacity)`
+export const Container = styled.View`
   align-items: center;
   justify-content: center;
 
@@ -15,6 +15,16 @@ export const Container = styled(TouchableOpacity)`
     css`
       background-color: ${theme.colors.components.smallButton.background};
     `}
+
+  overflow: hidden;
+`;
+
+export const Wrapper = styled(RectButton)`
+  align-items: center;
+  justify-content: center;
+
+  width: 78px;
+  height: 48px;
 `;
 
 export const Load = styled.ActivityIndicator``;

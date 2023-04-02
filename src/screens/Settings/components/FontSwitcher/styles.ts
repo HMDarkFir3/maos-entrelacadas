@@ -1,11 +1,11 @@
 import styled, { css } from "styled-components/native";
-import { Pressable } from "react-native";
+import { RectButton } from "react-native-gesture-handler";
 
 interface ItemTextProps {
   selected: boolean;
 }
 
-export const Container = styled(Pressable)`
+export const Container = styled(RectButton)`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -43,7 +43,7 @@ export const List = styled.View`
   background-color: ${({ theme }) => theme.colors.background};
 `;
 
-export const Item = styled(Pressable)`
+export const Item = styled(RectButton)`
   flex-direction: row;
   align-items: center;
 

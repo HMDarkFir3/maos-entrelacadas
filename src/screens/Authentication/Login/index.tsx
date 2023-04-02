@@ -109,6 +109,7 @@ export const Login: FC = () => {
             )}
             isLoading={isLoading}
             onPress={onPressLogin}
+            enabled={!isLoading}
           />
         </Footer>
       </Container>

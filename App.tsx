@@ -1,4 +1,3 @@
-import "react-native-gesture-handler";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 import {
@@ -9,6 +8,7 @@ import {
 import { FC } from "react";
 import { Provider as ReduxProvider } from "react-redux";
 import { NavigationContainer } from "@react-navigation/native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import { store } from "@store/index";
 
@@ -35,7 +35,9 @@ export const App: FC = () => {
       <ReduxProvider store={store}>
         <AuthProvider>
           <SettingsProvider>
-            <Routes />
+            <GestureHandlerRootView style={{ flex: 1 }}>
+              <Routes />
+            </GestureHandlerRootView>
           </SettingsProvider>
         </AuthProvider>
       </ReduxProvider>

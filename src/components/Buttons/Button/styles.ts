@@ -1,7 +1,8 @@
 import styled, { css } from "styled-components/native";
 import { TouchableOpacity } from "react-native";
+import { RectButton } from "react-native-gesture-handler";
 
-export const Container = styled(TouchableOpacity)`
+export const Container = styled(RectButton)`
   align-items: center;
   justify-content: center;
 

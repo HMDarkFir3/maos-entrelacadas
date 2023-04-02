@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { TouchableOpacityProps } from "react-native";
+import { BorderlessButtonProps } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { useTheme } from "styled-components/native";
 import { ArrowLeft } from "phosphor-react-native";
@@ -8,7 +8,7 @@ import { useSettings } from "@hooks/useSettings";
 
 import { Container, Title } from "./styles";
 
-interface Props extends TouchableOpacityProps {
+interface Props extends BorderlessButtonProps {
   onBackButton?: () => void;
 }
 
@@ -28,7 +28,7 @@ export const BackButton: FC<Props> = (props) => {
   };
 
   return (
-    <Container activeOpacity={0.7} onPress={onPressBackButton} {...rest}>
+    <Container onPress={onPressBackButton} {...rest}>
       <ArrowLeft
         size={fontSizeValue(20)}
         color={colors.components.backButton.icon}

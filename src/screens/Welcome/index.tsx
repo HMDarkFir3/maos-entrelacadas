@@ -38,7 +38,7 @@ export const Welcome: FC = () => {
 
       <ButtonWrapper>
         <Button
-          style={{ marginBottom: 28 }}
+          style={{ marginBottom: 16 }}
           title="Login"
           onPress={() => onPressLogin("Login")}
         />

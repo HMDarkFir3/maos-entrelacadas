@@ -58,15 +58,7 @@ export const Header: FC = () => {
   return (
     <Container>
       <Wrapper>
-        <ProfileButton
-          testID="Header.ProfileButton"
-          android_ripple={{
-            color: colors.androidRipple.backgroundPrimary,
-            radius: 32,
-            borderless: true,
-          }}
-          onPress={onPressProfile}
-        >
+        <ProfileButton testID="Header.ProfileButton" onPress={onPressProfile}>
           <UserImage
             source={{ uri: "https://www.github.com/hmdarkfir3.png" }}
           />
@@ -79,15 +71,7 @@ export const Header: FC = () => {
         </UserInfo>
       </Wrapper>
 
-      <SignOutButton
-        testID="Header.SignOutButton"
-        android_ripple={{
-          color: colors.androidRipple.backgroundPrimary,
-          radius: 20,
-          borderless: true,
-        }}
-        onPress={onPressLogOut}
-      >
+      <SignOutButton testID="Header.SignOutButton" onPress={onPressLogOut}>
         <SignOut
           size={fontSizeValue(24)}
           color={colors.screens.home.components.header.icon}

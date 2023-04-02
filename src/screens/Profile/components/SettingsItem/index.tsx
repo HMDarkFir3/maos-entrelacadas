@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { PressableProps } from "react-native";
+import { RectButtonProps } from "react-native-gesture-handler";
 import { CaretRight } from "phosphor-react-native";
 import { useTheme } from "styled-components/native";
 
@@ -7,7 +7,7 @@ import { useSettings } from "@hooks/useSettings";
 
 import { Container, Wrapper, Title } from "./styles";
 
-interface Props extends PressableProps {
+interface Props extends RectButtonProps {
   icon: any;
   title: string;
 }
@@ -19,10 +19,7 @@ export const SettingsItem: FC<Props> = (props) => {
   const { colors } = useTheme();
 
   return (
-    <Container
-      android_ripple={{ color: colors.androidRipple.backgroundPrimary }}
-      {...rest}
-    >
+    <Container {...rest}>
       <Wrapper>
         <Icon />
         <Title style={{ fontSize: fontSizeValue(20) }} numberOfLines={1}>

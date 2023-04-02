@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components/native";
-import { Pressable } from "react-native";
+import { RectButton } from "react-native-gesture-handler";
 
 interface TabItemTextProps {
   isActive: boolean;
@@ -17,11 +17,7 @@ export const Container = styled.View`
   border-color: ${({ theme }) => theme.colors.components.customTabBar.border};
 `;
 
-export const TabItem = styled(Pressable).attrs(({ theme }) => ({
-  android_ripple: {
-    color: theme.colors.androidRipple.backgroundPrimary,
-  },
-}))`
+export const TabItem = styled(RectButton)`
   flex: 1;
   align-items: center;
   justify-content: center;
