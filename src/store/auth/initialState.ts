@@ -1,18 +1,6 @@
-import { UserDTO } from "@dtos/UserDTO";
+import { InitialStateData } from "@store/auth/types";
 
-export interface AuthState {
-  givenName: string;
-  email: string;
-  gender: string;
-  birthdate: string | null;
-  password: string;
-  confirmPassword: string;
-  isSigned: boolean;
-  isLoading: boolean;
-  user: UserDTO | null;
-}
-
-export const initialState = {
+export const initialState: InitialStateData = {
   user: null,
   givenName: "",
   email: "",
@@ -22,4 +10,4 @@ export const initialState = {
   confirmPassword: "",
   isSigned: false,
   isLoading: false,
-} as AuthState;
+};

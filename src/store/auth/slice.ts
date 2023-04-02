@@ -2,34 +2,51 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { UserDTO } from "@dtos/UserDTO";
 
-import { initialState, AuthState } from "@store/auth/initialState";
+import { initialState } from "@store/auth/initialState";
+
+import { InitialStateData } from "@store/auth/types";
 
 export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setEmailField: (state: AuthState, action: PayloadAction<string>) => {
+    setEmailField: (state: InitialStateData, action: PayloadAction<string>) => {
       state.email = action.payload;
     },
-    setPasswordField: (state: AuthState, action: PayloadAction<string>) => {
+    setPasswordField: (
+      state: InitialStateData,
+      action: PayloadAction<string>
+    ) => {
       state.password = action.payload;
     },
-    setGivenNameField: (state: AuthState, action: PayloadAction<string>) => {
+    setGivenNameField: (
+      state: InitialStateData,
+      action: PayloadAction<string>
+    ) => {
       state.givenName = action.payload;
     },
-    setGenderField: (state: AuthState, action: PayloadAction<string>) => {
+    setGenderField: (
+      state: InitialStateData,
+      action: PayloadAction<string>
+    ) => {
       state.gender = action.payload;
     },
-    setBirthdateField: (state: AuthState, action: PayloadAction<string>) => {
+    setBirthdateField: (
+      state: InitialStateData,
+      action: PayloadAction<string>
+    ) => {
       state.birthdate = action.payload;
     },
     setConfirmPasswordField: (
-      state: AuthState,
+      state: InitialStateData,
       action: PayloadAction<string>
     ) => {
       state.confirmPassword = action.payload;
     },
-    setUser: (state: AuthState, action: PayloadAction<UserDTO | null>) => {
+    setUser: (
+      state: InitialStateData,
+      action: PayloadAction<UserDTO | null>
+    ) => {
       state.user = action.payload;
 
       if (state.user) {
@@ -38,13 +55,13 @@ export const authSlice = createSlice({
         state.isSigned = false;
       }
     },
-    setEmptyFields: (state: AuthState) => {
+    setEmptyFields: (state: InitialStateData) => {
       return {
         ...state,
         ...initialState,
       };
     },
-    setIsLoading: (state: AuthState, action: PayloadAction<boolean>) => {
+    setIsLoading: (state: InitialStateData, action: PayloadAction<boolean>) => {
       state.isLoading = action.payload;
     },
   },
