@@ -16,7 +16,6 @@ import { UserDTO } from "@dtos/UserDTO";
 import { useAppDispatch } from "@hooks/useAppDispatch";
 
 import { setUser, setIsLoading } from "@store/auth/actions";
-import { setIsActive } from "@store/tabBar/actions";
 
 import { COLLECTION_USER } from "@storages/index";
 
@@ -131,7 +130,6 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     try {
       await AsyncStorage.removeItem(COLLECTION_USER);
       await auth().signOut();
-      dispatch(setIsActive("Home"));
       dispatch(setUser(null));
     } catch (error) {
       console.log(error);

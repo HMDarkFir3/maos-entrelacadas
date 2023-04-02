@@ -9,8 +9,6 @@ import { useAppSelector } from "@hooks/useAppSelector";
 import { useAuth } from "@hooks/useAuth";
 import { useSettings } from "@hooks/useSettings";
 
-import { setIsActive } from "@store/tabBar/actions";
-
 import {
   Container,
   Wrapper,
@@ -32,10 +30,7 @@ export const Header: FC = () => {
 
   const formattedGivenName: string | undefined = user?.given_name.split(" ")[0];
 
-  const onPressProfile = () => {
-    navigate("Profile");
-    dispatch(setIsActive("Profile"));
-  };
+  const onPressProfile = () => navigate("Profile");
 
   const onPressLogOut = () => {
     Alert.alert(

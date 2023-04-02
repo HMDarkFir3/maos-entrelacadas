@@ -1,28 +1,34 @@
 import { FC } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { useTheme } from "styled-components/native";
 import { House, MapPinLine, Gift, User } from "phosphor-react-native";
 
-import { useAppDispatch } from "@hooks/useAppDispatch";
-import { useAppSelector } from "@hooks/useAppSelector";
 import { useSettings } from "@hooks/useSettings";
-
-import { setIsActive } from "@store/tabBar/actions";
 
 import { Container, TabItem, TabItemText } from "./styles";
 
-export const CustomTabBar: FC = () => {
-  const dispatch = useAppDispatch();
-  const { isActive } = useAppSelector((store) => store.tabBar);
+interface Props extends BottomTabBarProps {}
+
+export const CustomTabBar: FC<Props> = (props) => {
+  const { state } = props;
+
   const { fontSizeValue } = useSettings();
   const { navigate } = useNavigation();
   const { colors } = useTheme();
 
   const onPressNavigate = (
     screenName: "Home" | "Events" | "Donations" | "Profile"
-  ) => {
-    navigate(screenName);
-    dispatch(setIsActive(screenName));
+  ) => navigate(screenName);
+
+  const isActive = state.routeNames[state.index];
+
+  const getColors = (isActive: boolean) => {
+    if (isActive) {
+      return colors.components.customTabBar.active;
+    } else {
+      return colors.components.customTabBar.inactive;
+    }
   };
 
   return (
@@ -33,11 +39,7 @@ export const CustomTabBar: FC = () => {
       >
         <House
           size={fontSizeValue(28)}
-          color={
-            isActive === "Home"
-              ? colors.components.customTabBar.active
-              : colors.components.customTabBar.inactive
-          }
+          color={getColors(isActive === "Home")}
         />
         <TabItemText
           style={{ fontSize: fontSizeValue(12) }}
@@ -53,11 +55,7 @@ export const CustomTabBar: FC = () => {
       >
         <MapPinLine
           size={fontSizeValue(28)}
-          color={
-            isActive === "Events"
-              ? colors.components.customTabBar.active
-              : colors.components.customTabBar.inactive
-          }
+          color={getColors(isActive === "Events")}
         />
         <TabItemText
           style={{ fontSize: fontSizeValue(12) }}
@@ -73,11 +71,7 @@ export const CustomTabBar: FC = () => {
       >
         <Gift
           size={fontSizeValue(28)}
-          color={
-            isActive === "Donations"
-              ? colors.components.customTabBar.active
-              : colors.components.customTabBar.inactive
-          }
+          color={getColors(isActive === "Donations")}
         />
         <TabItemText
           style={{ fontSize: fontSizeValue(12) }}
@@ -93,11 +87,7 @@ export const CustomTabBar: FC = () => {
       >
         <User
           size={fontSizeValue(28)}
-          color={
-            isActive === "Profile"
-              ? colors.components.customTabBar.active
-              : colors.components.customTabBar.inactive
-          }
+          color={getColors(isActive === "Profile")}
         />
         <TabItemText
           style={{ fontSize: fontSizeValue(12) }}
