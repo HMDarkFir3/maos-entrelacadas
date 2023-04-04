@@ -1,6 +1,6 @@
-import styled, { css } from "styled-components/native";
-import { View, TextInput } from "react-native";
-import { BorderlessButton } from "react-native-gesture-handler";
+import styled, { css } from 'styled-components/native';
+import { View, TextInput } from 'react-native';
+import { BorderlessButton } from 'react-native-gesture-handler';
 
 interface StyledInputProps {
   isEditable: boolean;

@@ -1,5 +1,5 @@
-import styled, { css } from "styled-components/native";
-import { RectButton } from "react-native-gesture-handler";
+import styled, { css } from 'styled-components/native';
+import { RectButton } from 'react-native-gesture-handler';
 
 interface TabItemTextProps {
   isActive: boolean;
@@ -10,8 +10,7 @@ export const Container = styled.View`
 
   height: 64px;
 
-  background-color: ${({ theme }) =>
-    theme.colors.components.customTabBar.background};
+  background-color: ${({ theme }) => theme.colors.components.customTabBar.background};
 
   border-top-width: 1px;
   border-color: ${({ theme }) => theme.colors.components.customTabBar.border};

@@ -1,4 +1,4 @@
-import { authSlice } from "@store/auth/slice";
+import { authSlice } from '@store/auth/slice';
 
 export const {
   setEmailField,

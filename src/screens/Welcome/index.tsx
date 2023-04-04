@@ -1,9 +1,9 @@
-import { FC } from "react";
-import { useNavigation } from "@react-navigation/native";
+import { FC } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
-import { useSettings } from "@hooks/useSettings";
+import { useSettings } from '@hooks/useSettings';
 
-import { Button } from "@components/Buttons/Button";
+import { Button } from '@components/Buttons/Button';
 
 import {
   Container,
@@ -14,18 +14,17 @@ import {
   ButtonWrapper,
   RegisterButton,
   RegisterButtonText,
-} from "./styles";
+} from './styles';
 
 export const Welcome: FC = () => {
   const { fontSizeValue } = useSettings();
   const { navigate } = useNavigation();
 
-  const onPressLogin = (screenName: "Login" | "StepOne") =>
-    navigate(screenName);
+  const onPressLogin = (screenName: 'Login' | 'StepOne') => navigate(screenName);
 
   return (
     <Container>
-      <Logo source={require("@assets/img/logo.png")} />
+      <Logo source={require('@assets/img/logo.png')} />
 
       <TextWrapper>
         <Title style={{ fontSize: fontSizeValue(48) }} numberOfLines={1}>
@@ -37,21 +36,11 @@ export const Welcome: FC = () => {
       </TextWrapper>
 
       <ButtonWrapper>
-        <Button
-          style={{ marginBottom: 16 }}
-          title="Login"
-          onPress={() => onPressLogin("Login")}
-        />
+        <Button style={{ marginBottom: 16 }} title="Login" onPress={() => onPressLogin('Login')} />
 
-        <RegisterButton
-          testID="Welcome.RegisterButton"
-          onPress={() => onPressLogin("StepOne")}
-        >
-          <RegisterButtonText
-            style={{ fontSize: fontSizeValue(20) }}
-            isGreen={false}
-          >
-            Não tem uma conta?{" "}
+        <RegisterButton testID="Welcome.RegisterButton" onPress={() => onPressLogin('StepOne')}>
+          <RegisterButtonText style={{ fontSize: fontSizeValue(20) }} isGreen={false}>
+            Não tem uma conta?{' '}
             <RegisterButtonText style={{ fontSize: fontSizeValue(20) }} isGreen>
               Registrar-se
             </RegisterButtonText>

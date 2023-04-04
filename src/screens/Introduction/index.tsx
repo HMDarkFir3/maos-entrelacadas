@@ -1,25 +1,19 @@
-import { useState, useRef, FC } from "react";
-import { FlatList, Alert, Animated, ViewToken } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { useTheme } from "styled-components/native";
-import { ArrowRight, Check } from "phosphor-react-native";
+import { useState, useRef, FC } from 'react';
+import { FlatList, Alert, Animated, ViewToken } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { useTheme } from 'styled-components/native';
+import { ArrowRight, Check } from 'phosphor-react-native';
 
-import { useSettings } from "@hooks/useSettings";
+import { useSettings } from '@hooks/useSettings';
 
-import { IntroductionSlider } from "@components-of-screens/Introduction/components/IntroductionSlider";
-import { IntroductionPaginator } from "@components-of-screens/Introduction/components/IntroductionPaginator";
-import { SmallButton } from "@components/Buttons/SmallButton";
+import { IntroductionSlider } from '@components-of-screens/Introduction/components/IntroductionSlider';
+import { IntroductionPaginator } from '@components-of-screens/Introduction/components/IntroductionPaginator';
+import { SmallButton } from '@components/Buttons/SmallButton';
 
-import { introductionSlider } from "@utils/introductionSlider";
-import { SCREEN_WIDTH, SCREEN_HEIGHT } from "@utils/globalVariables";
+import { introductionSlider } from '@utils/introductionSlider';
+import { SCREEN_WIDTH, SCREEN_HEIGHT } from '@utils/globalVariables';
 
-import {
-  Container,
-  Footer,
-  JumpButton,
-  JumpButtonWrapper,
-  Title,
-} from "./styles";
+import { Container, Footer, JumpButton, JumpButtonWrapper, Title } from './styles';
 
 interface ViewabilityConfigRef {
   viewAreaCoveragePercentThreshold: number;
@@ -34,27 +28,25 @@ export const Introduction: FC = () => {
 
   const introductionSliderRef = useRef<FlatList>(null);
   const scrollX = useRef<Animated.Value>(new Animated.Value(0)).current;
-  const onViewableItemsChanged = useRef(
-    ({ viewableItems }: { viewableItems: ViewToken[] }) => {
-      setCurrentIndex(viewableItems[0].index);
-    }
-  ).current;
+  const onViewableItemsChanged = useRef(({ viewableItems }: { viewableItems: ViewToken[] }) => {
+    setCurrentIndex(viewableItems[0].index);
+  }).current;
   const viewabilityConfig = useRef<ViewabilityConfigRef>({
     viewAreaCoveragePercentThreshold: 50,
   }).current;
 
   const jumpSlides = () => {
-    Alert.alert("Pular Introdução!", "Deseja pular a introdução?", [
+    Alert.alert('Pular Introdução!', 'Deseja pular a introdução?', [
       {
-        text: "Não",
-        style: "cancel",
+        text: 'Não',
+        style: 'cancel',
       },
       {
-        text: "Sim",
-        style: "default",
+        text: 'Sim',
+        style: 'default',
         onPress: async () => {
           await sawIntroductionInStorage();
-          navigate("Welcome");
+          navigate('Welcome');
         },
       },
     ]);
@@ -67,7 +59,7 @@ export const Introduction: FC = () => {
       });
     } else {
       await sawIntroductionInStorage();
-      navigate("Welcome");
+      navigate('Welcome');
     }
   };
 
@@ -95,15 +87,17 @@ export const Introduction: FC = () => {
         )}
         onViewableItemsChanged={onViewableItemsChanged}
         viewabilityConfig={viewabilityConfig}
-        getItemLayout={(_, index) => ({
-          length: SCREEN_WIDTH,
-          offset: SCREEN_WIDTH * index,
-          index,
-        })}
+        getItemLayout={(_, index) => {
+          return {
+            length: SCREEN_WIDTH,
+            offset: SCREEN_WIDTH * index,
+            index,
+          };
+        }}
       />
 
       <IntroductionPaginator
-        style={{ position: "absolute", bottom: SCREEN_HEIGHT / 2.21 }}
+        style={{ position: 'absolute', bottom: SCREEN_HEIGHT / 2.21 }}
         data={introductionSlider}
         scrollX={scrollX}
       />

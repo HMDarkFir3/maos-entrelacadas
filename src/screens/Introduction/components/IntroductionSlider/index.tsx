@@ -1,9 +1,14 @@
-import { FC } from "react";
+import { FC } from 'react';
 
-import { useSettings } from "@hooks/useSettings";
+import { useSettings } from '@hooks/useSettings';
 
-import { introductionSlider } from "@utils/introductionSlider";
-import { SCREEN_WIDTH } from "@utils/globalVariables";
+import { introductionSlider } from '@utils/introductionSlider';
+import { SCREEN_WIDTH } from '@utils/globalVariables';
+
+import IntroductionSlide1 from '@assets/svg/introduction_slide_1.svg';
+import IntroductionSlide2 from '@assets/svg/introduction_slide_2.svg';
+import IntroductionSlide3 from '@assets/svg/introduction_slide_3.svg';
+import IntroductionSlide4 from '@assets/svg/introduction_slide_4.svg';
 
 import {
   Container,
@@ -12,15 +17,10 @@ import {
   Title,
   DescriptionWrapper,
   Description,
-} from "./styles";
-
-import IntroductionSlide1 from "@assets/svg/introduction_slide_1.svg";
-import IntroductionSlide2 from "@assets/svg/introduction_slide_2.svg";
-import IntroductionSlide3 from "@assets/svg/introduction_slide_3.svg";
-import IntroductionSlide4 from "@assets/svg/introduction_slide_4.svg";
+} from './styles';
 
 interface Props {
-  data: typeof introductionSlider[0];
+  data: (typeof introductionSlider)[0];
 }
 
 export const IntroductionSlider: FC<Props> = (props) => {
@@ -32,10 +32,10 @@ export const IntroductionSlider: FC<Props> = (props) => {
     <Container>
       <SvgWrapper>
         <>
-          {id === "1" && <IntroductionSlide1 width={SCREEN_WIDTH} />}
-          {id === "2" && <IntroductionSlide2 width={SCREEN_WIDTH} />}
-          {id === "3" && <IntroductionSlide3 width={SCREEN_WIDTH} />}
-          {id === "4" && <IntroductionSlide4 width={SCREEN_WIDTH} />}
+          {id === '1' && <IntroductionSlide1 width={SCREEN_WIDTH} />}
+          {id === '2' && <IntroductionSlide2 width={SCREEN_WIDTH} />}
+          {id === '3' && <IntroductionSlide3 width={SCREEN_WIDTH} />}
+          {id === '4' && <IntroductionSlide4 width={SCREEN_WIDTH} />}
         </>
       </SvgWrapper>
 
@@ -45,10 +45,7 @@ export const IntroductionSlider: FC<Props> = (props) => {
         </Title>
 
         <DescriptionWrapper>
-          <Description
-            style={{ fontSize: fontSizeValue(20) }}
-            numberOfLines={3}
-          >
+          <Description style={{ fontSize: fontSizeValue(20) }} numberOfLines={3}>
             {description}
           </Description>
         </DescriptionWrapper>

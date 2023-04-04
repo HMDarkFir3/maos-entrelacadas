@@ -1,7 +1,7 @@
-import styled, { css } from "styled-components/native";
-import { Image } from "react-native";
+import styled, { css } from 'styled-components/native';
+import { Image } from 'react-native';
 
-import { SCREEN_WIDTH, STATUS_BAR_HEIGHT } from "@utils/globalVariables";
+import { SCREEN_WIDTH, STATUS_BAR_HEIGHT } from '@utils/globalVariables';
 
 export const Container = styled.View``;
 
@@ -39,7 +39,6 @@ export const Description = styled.Text`
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};
-    color: ${theme.colors.screens.authentication.components.header
-      .textSecondary};
+    color: ${theme.colors.screens.authentication.components.header.textSecondary};
   `}
 `;

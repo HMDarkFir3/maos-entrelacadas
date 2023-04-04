@@ -1,10 +1,10 @@
-import { FC } from "react";
+import { FC } from 'react';
 
-import { useSettings } from "@hooks/useSettings";
+import { useSettings } from '@hooks/useSettings';
 
-import { BackButton } from "@components/Buttons/BackButton";
+import { BackButton } from '@components/Buttons/BackButton';
 
-import { Container, Wrapper, Logo, Title, Description } from "./styles";
+import { Container, Wrapper, Logo, Title, Description } from './styles';
 
 interface Props {
   testID?: string;
@@ -22,7 +22,8 @@ export const Header: FC<Props> = (props) => {
     <Container>
       <Wrapper>
         <BackButton testID={testID} onBackButton={onBackButton} />
-        <Logo source={require("@assets/img/logo.png")} />
+
+        <Logo source={require('@assets/img/logo.png')} />
       </Wrapper>
 
       <Title style={{ fontSize: fontSizeValue(48) }} numberOfLines={1}>

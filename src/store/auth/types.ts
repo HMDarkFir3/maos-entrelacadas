@@ -1,4 +1,4 @@
-import { UserDTO } from "@dtos/UserDTO";
+import { UserDTO } from '@dtos/UserDTO';
 
 export interface InitialStateData {
   givenName: string;

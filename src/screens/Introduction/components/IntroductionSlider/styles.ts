@@ -1,7 +1,7 @@
-import styled, { css } from "styled-components/native";
-import { Dimensions } from "react-native";
+import styled, { css } from 'styled-components/native';
+import { Dimensions } from 'react-native';
 
-const { width, height } = Dimensions.get("window");
+const { width, height } = Dimensions.get('window');
 
 export const Container = styled.View`
   align-items: center;
@@ -30,15 +30,14 @@ export const Title = styled.Text`
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.medium};
-    color: ${theme.colors.screens.introduction.components.introductionSlider
-      .textPrimary};
+    color: ${theme.colors.screens.introduction.components.introductionSlider.textPrimary};
   `}
 `;
 
 export const DescriptionWrapper = styled.View`
   align-items: center;
 
-  width: ${Dimensions.get("window").width}px;
+  width: ${Dimensions.get('window').width}px;
 `;
 
 export const Description = styled.Text`
@@ -50,7 +49,6 @@ export const Description = styled.Text`
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};
-    color: ${theme.colors.screens.introduction.components.introductionSlider
-      .textSecondary};
+    color: ${theme.colors.screens.introduction.components.introductionSlider.textSecondary};
   `}
 `;

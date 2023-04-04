@@ -1,24 +1,20 @@
-import { useRef, FC } from "react";
-import { TextInput } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { useTheme } from "styled-components/native";
-import { User, EnvelopeSimple, ArrowRight } from "phosphor-react-native";
+import { useRef, FC } from 'react';
+import { TextInput } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { useTheme } from 'styled-components/native';
+import { User, EnvelopeSimple, ArrowRight } from 'phosphor-react-native';
 
-import { useAppDispatch } from "@hooks/useAppDispatch";
-import { useAppSelector } from "@hooks/useAppSelector";
-import { useSettings } from "@hooks/useSettings";
+import { useAppDispatch } from '@hooks/useAppDispatch';
+import { useAppSelector } from '@hooks/useAppSelector';
+import { useSettings } from '@hooks/useSettings';
 
-import {
-  setEmptyFields,
-  setGivenNameField,
-  setEmailField,
-} from "@store/auth/actions";
+import { setEmptyFields, setGivenNameField, setEmailField } from '@store/auth/actions';
 
-import { Header } from "@components-of-screens/Authentication/components/Header";
-import { Input } from "@components/Inputs/Input";
-import { SmallButton } from "@components/Buttons/SmallButton";
+import { Header } from '@components-of-screens/Authentication/components/Header';
+import { Input } from '@components/Inputs/Input';
+import { SmallButton } from '@components/Buttons/SmallButton';
 
-import { InputBlurButton, Container, InputWrapper, Footer } from "../../styles";
+import { InputBlurButton, Container, InputWrapper, Footer } from '../../styles';
 
 export const StepOne: FC = () => {
   const dispatch = useAppDispatch();
@@ -38,7 +34,7 @@ export const StepOne: FC = () => {
   const onPressNextStep = () => {
     if (!givenName.trim() || !email.trim()) return;
 
-    navigate("StepTwo");
+    navigate('StepTwo');
   };
 
   const onPressBackButton = () => dispatch(setEmptyFields());
@@ -61,10 +57,7 @@ export const StepOne: FC = () => {
             value={givenName}
             onChangeText={(text) => dispatch(setGivenNameField(text))}
             icon={() => (
-              <User
-                size={fontSizeValue(24)}
-                color={colors.components.input.placeholder}
-              />
+              <User size={fontSizeValue(24)} color={colors.components.input.placeholder} />
             )}
             placeholder="Nome e Sobrenome"
             maxLength={50}

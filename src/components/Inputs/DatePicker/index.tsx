@@ -1,12 +1,12 @@
-import { useState, FC } from "react";
-import { ViewStyle } from "react-native";
-import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { useState, FC } from 'react';
+import { ViewStyle } from 'react-native';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
-import { useSettings } from "@hooks/useSettings";
+import { useSettings } from '@hooks/useSettings';
 
-import { formatDate } from "@utils/formatDate";
+import { formatDate } from '@utils/formatDate';
 
-import { Container, Date, Placeholder } from "./styles";
+import { Container, Date, Placeholder } from './styles';
 
 interface Props {
   testDateTimePickerModalID?: string;
@@ -33,8 +33,7 @@ export const DatePicker: FC<Props> = (props) => {
 
   const [isOpenDatePicker, setIsOpenDatePicker] = useState<boolean>(false);
 
-  const onPressOpenDatePicker = () =>
-    setIsOpenDatePicker((prevState) => !prevState);
+  const onPressOpenDatePicker = () => setIsOpenDatePicker((prevState) => !prevState);
 
   const onChangeDate = (date: Date) => {
     if (onChange) {
@@ -43,8 +42,7 @@ export const DatePicker: FC<Props> = (props) => {
     }
   };
 
-  const onCancelDatePicker = () =>
-    setIsOpenDatePicker((prevState) => !prevState);
+  const onCancelDatePicker = () => setIsOpenDatePicker((prevState) => !prevState);
 
   return (
     <Container
@@ -61,7 +59,7 @@ export const DatePicker: FC<Props> = (props) => {
         </Date>
       ) : (
         <Placeholder style={{ fontSize: fontSizeValue(20) }}>
-          {placeholder ?? "Selecione uma data"}
+          {placeholder ?? 'Selecione uma data'}
         </Placeholder>
       )}
 

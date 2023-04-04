@@ -1,36 +1,25 @@
-import { useRef, FC } from "react";
-import { TextInput } from "react-native";
-import { useTheme } from "styled-components/native";
-import { LockOpen, Check } from "phosphor-react-native";
+import { useRef, FC } from 'react';
+import { TextInput } from 'react-native';
+import { useTheme } from 'styled-components/native';
+import { LockOpen, Check } from 'phosphor-react-native';
 
-import { useAppDispatch } from "@hooks/useAppDispatch";
-import { useAppSelector } from "@hooks/useAppSelector";
-import { useAuth } from "@hooks/useAuth";
-import { useSettings } from "@hooks/useSettings";
+import { useAppDispatch } from '@hooks/useAppDispatch';
+import { useAppSelector } from '@hooks/useAppSelector';
+import { useAuth } from '@hooks/useAuth';
+import { useSettings } from '@hooks/useSettings';
 
-import {
-  setEmptyFields,
-  setPasswordField,
-  setConfirmPasswordField,
-} from "@store/auth/actions";
+import { setPasswordField, setConfirmPasswordField } from '@store/auth/actions';
 
-import { Header } from "@components-of-screens/Authentication/components/Header";
-import { Input } from "@components/Inputs/Input";
-import { SmallButton } from "@components/Buttons/SmallButton";
+import { Header } from '@components-of-screens/Authentication/components/Header';
+import { Input } from '@components/Inputs/Input';
+import { SmallButton } from '@components/Buttons/SmallButton';
 
-import { InputBlurButton, Container, InputWrapper, Footer } from "../../styles";
+import { InputBlurButton, Container, InputWrapper, Footer } from '../../styles';
 
 export const StepThree: FC = () => {
   const dispatch = useAppDispatch();
-  const {
-    givenName,
-    email,
-    gender,
-    birthdate,
-    password,
-    confirmPassword,
-    isLoading,
-  } = useAppSelector((store) => store.auth);
+  const { givenName, email, gender, birthdate, password, confirmPassword, isLoading } =
+    useAppSelector((store) => store.auth);
   const { register } = useAuth();
   const { fontSizeValue } = useSettings();
   const { colors } = useTheme();
@@ -50,10 +39,7 @@ export const StepThree: FC = () => {
   };
 
   return (
-    <InputBlurButton
-      testID="StepThree.InputBlurButton"
-      onPress={onPressInScreen}
-    >
+    <InputBlurButton testID="StepThree.InputBlurButton" onPress={onPressInScreen}>
       <Container>
         <Header
           testID="StepThree.Header"
@@ -68,10 +54,7 @@ export const StepThree: FC = () => {
             value={password}
             onChangeText={(text) => dispatch(setPasswordField(text))}
             icon={() => (
-              <LockOpen
-                size={fontSizeValue(24)}
-                color={colors.components.input.placeholder}
-              />
+              <LockOpen size={fontSizeValue(24)} color={colors.components.input.placeholder} />
             )}
             placeholder="Senha"
             isPassword
@@ -84,10 +67,7 @@ export const StepThree: FC = () => {
             value={confirmPassword}
             onChangeText={(text) => dispatch(setConfirmPasswordField(text))}
             icon={() => (
-              <LockOpen
-                size={fontSizeValue(24)}
-                color={colors.components.input.placeholder}
-              />
+              <LockOpen size={fontSizeValue(24)} color={colors.components.input.placeholder} />
             )}
             isPassword
             placeholder="Confirmar senha"

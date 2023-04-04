@@ -1,8 +1,8 @@
-import { FC } from "react";
-import { RectButtonProps } from "react-native-gesture-handler";
-import { useTheme } from "styled-components/native";
+import { FC } from 'react';
+import { RectButtonProps } from 'react-native-gesture-handler';
+import { useTheme } from 'styled-components/native';
 
-import { Container, Wrapper, Load } from "./styles";
+import { Container, Wrapper, Load } from './styles';
 
 interface Props extends RectButtonProps {
   icon: any;
@@ -17,11 +17,7 @@ export const SmallButton: FC<Props> = (props) => {
   return (
     <Container>
       <Wrapper {...rest}>
-        {isLoading ? (
-          <Load size="small" color={colors.components.smallButton.icon} />
-        ) : (
-          <Icon />
-        )}
+        {isLoading ? <Load size="small" color={colors.components.smallButton.icon} /> : <Icon />}
       </Wrapper>
     </Container>
   );

@@ -1,14 +1,14 @@
 export const typeFonts = [
   {
-    name: "Pequeno",
-    value: "sm",
+    name: 'Pequeno',
+    value: 'sm',
   },
   {
-    name: "Normal",
-    value: "md",
+    name: 'Normal',
+    value: 'md',
   },
   {
-    name: "Grande",
-    value: "lg",
+    name: 'Grande',
+    value: 'lg',
   },
 ];

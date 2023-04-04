@@ -1,6 +1,6 @@
-import styled from "styled-components/native";
+import styled from 'styled-components/native';
 
-import { STATUS_BAR_HEIGHT } from "@utils/globalVariables";
+import { STATUS_BAR_HEIGHT } from '@utils/globalVariables';
 
 export const Container = styled.View`
   flex: 1;
@@ -9,6 +9,8 @@ export const Container = styled.View`
 `;
 
 export const Header = styled.View`
+  align-items: flex-start;
+
   margin-top: ${STATUS_BAR_HEIGHT + 24}px;
   padding: 0 24px;
 `;

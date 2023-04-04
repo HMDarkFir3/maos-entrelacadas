@@ -1,5 +1,5 @@
-import styled, { css } from "styled-components/native";
-import { RectButton } from "react-native-gesture-handler";
+import styled, { css } from 'styled-components/native';
+import { RectButton } from 'react-native-gesture-handler';
 
 interface ItemTextProps {
   selected: boolean;
@@ -32,8 +32,7 @@ export const Title = styled.Text`
 export const SelectedFont = styled.Text`
   ${({ theme }) => css`
     font-family: ${theme.fonts.medium};
-    color: ${theme.colors.screens.settings.components.fontSwitcher
-      .textSecondary};
+    color: ${theme.colors.screens.settings.components.fontSwitcher.textSecondary};
   `}
 `;
 

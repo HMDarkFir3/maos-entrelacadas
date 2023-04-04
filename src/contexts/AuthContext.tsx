@@ -1,23 +1,16 @@
-import {
-  createContext,
-  useEffect,
-  useReducer,
-  FC,
-  Dispatch,
-  ReactNode,
-  Reducer,
-} from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import auth from "@react-native-firebase/auth";
-import firestore from "@react-native-firebase/firestore";
+/* eslint-disable react/jsx-no-constructed-context-values */
+import { createContext, useEffect, useCallback, FC, ReactNode } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
 
-import { UserDTO } from "@dtos/UserDTO";
+import { UserDTO } from '@dtos/UserDTO';
 
-import { useAppDispatch } from "@hooks/useAppDispatch";
+import { useAppDispatch } from '@hooks/useAppDispatch';
 
-import { setUser, setIsLoading } from "@store/auth/actions";
+import { setUser, setIsLoading } from '@store/auth/actions';
 
-import { COLLECTION_USER } from "@storages/index";
+import { COLLECTION_USER } from '@storages/index';
 
 export interface AuthContextData {
   login: (email: string, password: string) => Promise<void>;
@@ -25,7 +18,7 @@ export interface AuthContextData {
     givenName: string,
     email: string,
     gender: string,
-    birthdate: Date | null,
+    birthdate: string | null,
     password: string
   ) => Promise<void>;
   logOut: () => Promise<void>;
@@ -40,93 +33,84 @@ export const AuthContext = createContext({} as AuthContextData);
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const dispatch = useAppDispatch();
 
-  const getUserData = async () => {
-    const storage = await AsyncStorage.getItem(COLLECTION_USER);
+  const login = useCallback(
+    async (email: string, password: string) => {
+      try {
+        dispatch(setIsLoading(true));
 
-    if (storage) {
-      const formattedUser: UserDTO = JSON.parse(storage);
+        const { user } = await auth().signInWithEmailAndPassword(email, password);
 
-      dispatch(setUser(formattedUser));
-    }
-  };
+        await firestore()
+          .collection('users')
+          .doc(user?.uid)
+          .get()
+          .then(async (documentSnapshot) => {
+            const formattedBirthdate = new Date(documentSnapshot.data()!.birthdate.seconds * 1000);
 
-  const login = async (email: string, password: string) => {
-    try {
-      dispatch(setIsLoading(true));
+            const data = {
+              uid: user?.uid,
+              given_name: documentSnapshot.data()?.given_name,
+              email: documentSnapshot.data()?.email,
+              gender: documentSnapshot.data()?.gender,
+              birthdate: formattedBirthdate.toISOString(),
+            } as UserDTO;
 
-      const { user } = await auth().signInWithEmailAndPassword(email, password);
+            dispatch(setUser(data));
+            await AsyncStorage.setItem(COLLECTION_USER, JSON.stringify(data));
+          });
+      } catch (error) {
+        console.log(error);
+      } finally {
+        dispatch(setIsLoading(false));
+      }
+    },
+    [dispatch]
+  );
 
-      await firestore()
-        .collection("users")
-        .doc(user?.uid)
-        .get()
-        .then(async (documentSnapshot) => {
-          const formattedBirthdate = new Date(
-            documentSnapshot.data()?.birthdate.seconds * 1000
-          );
+  const register = useCallback(
+    async (
+      givenName: string,
+      email: string,
+      gender: string,
+      birthdate: string | null,
+      password: string
+    ) => {
+      try {
+        dispatch(setIsLoading(true));
 
-          const data = {
-            uid: user?.uid,
-            given_name: documentSnapshot.data()?.given_name,
-            email: documentSnapshot.data()?.email,
-            gender: documentSnapshot.data()?.gender,
-            birthdate: formattedBirthdate.toISOString(),
-          } as UserDTO;
+        const { user } = await auth().createUserWithEmailAndPassword(email, password);
 
-          dispatch(setUser(data));
-          await AsyncStorage.setItem(COLLECTION_USER, JSON.stringify(data));
-        });
-    } catch (error) {
-      console.log(error);
-    } finally {
-      dispatch(setIsLoading(false));
-    }
-  };
-
-  const register = async (
-    givenName: string,
-    email: string,
-    gender: string,
-    birthdate: Date | null,
-    password: string
-  ) => {
-    try {
-      dispatch(setIsLoading(true));
-
-      const { user } = await auth().createUserWithEmailAndPassword(
-        email,
-        password
-      );
-
-      await firestore()
-        .collection("users")
-        .doc(user?.uid)
-        .set({
-          given_name: givenName,
-          email,
-          gender,
-          birthdate,
-        })
-        .then(async () => {
-          const data = {
-            uid: user.uid,
+        await firestore()
+          .collection('users')
+          .doc(user?.uid)
+          .set({
             given_name: givenName,
             email,
             gender,
-            birthdate: birthdate?.toISOString(),
-          } as UserDTO;
+            birthdate,
+          })
+          .then(async () => {
+            const data = {
+              uid: user.uid,
+              given_name: givenName,
+              email,
+              gender,
+              birthdate,
+            } as UserDTO;
 
-          dispatch(setUser(data));
-          await AsyncStorage.setItem(COLLECTION_USER, JSON.stringify(data));
-        });
-    } catch (error) {
-      console.log(error);
-    } finally {
-      dispatch(setIsLoading(false));
-    }
-  };
+            dispatch(setUser(data));
+            await AsyncStorage.setItem(COLLECTION_USER, JSON.stringify(data));
+          });
+      } catch (error) {
+        console.log(error);
+      } finally {
+        dispatch(setIsLoading(false));
+      }
+    },
+    [dispatch]
+  );
 
-  const logOut = async () => {
+  const logOut = useCallback(async () => {
     try {
       await AsyncStorage.removeItem(COLLECTION_USER);
       await auth().signOut();
@@ -134,15 +118,23 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [dispatch]);
 
   useEffect(() => {
+    const getUserData = async () => {
+      const storage = await AsyncStorage.getItem(COLLECTION_USER);
+
+      if (storage) {
+        const formattedUser: UserDTO = JSON.parse(storage);
+
+        dispatch(setUser(formattedUser));
+      }
+    };
+
     getUserData();
-  }, []);
+  }, [dispatch]);
 
   return (
-    <AuthContext.Provider value={{ login, register, logOut }}>
-      {children}
-    </AuthContext.Provider>
+    <AuthContext.Provider value={{ login, register, logOut }}>{children}</AuthContext.Provider>
   );
 };

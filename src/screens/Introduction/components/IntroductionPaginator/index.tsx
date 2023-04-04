@@ -1,10 +1,10 @@
-import { FC } from "react";
-import { Animated, ViewProps } from "react-native";
+import { FC } from 'react';
+import { Animated, ViewProps } from 'react-native';
 
-import { introductionSlider } from "@utils/introductionSlider";
-import { SCREEN_WIDTH } from "@utils/globalVariables";
+import { introductionSlider } from '@utils/introductionSlider';
+import { SCREEN_WIDTH } from '@utils/globalVariables';
 
-import { Container, Dot } from "./styles";
+import { Container, Dot } from './styles';
 
 interface Props extends ViewProps {
   data: typeof introductionSlider;
@@ -26,13 +26,13 @@ export const IntroductionPaginator: FC<Props> = (props) => {
         const scaleX = scrollX.interpolate({
           inputRange,
           outputRange: [1, 2, 1],
-          extrapolate: "clamp",
+          extrapolate: 'clamp',
         });
 
         const opacity = scrollX.interpolate({
           inputRange,
           outputRange: [0.3, 1, 0.3],
-          extrapolate: "clamp",
+          extrapolate: 'clamp',
         });
 
         return (

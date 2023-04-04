@@ -1,4 +1,3 @@
-import { settingsSlice } from "@store/settings/slice";
+import { settingsSlice } from '@store/settings/slice';
 
-export const { setSawIntroduction, setTheme, setFontSize } =
-  settingsSlice.actions;
+export const { setSawIntroduction, setTheme, setFontSize } = settingsSlice.actions;

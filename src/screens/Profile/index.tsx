@@ -1,22 +1,16 @@
-import { FC } from "react";
-import { Alert } from "react-native";
-import { useNavigation } from "@react-navigation/native";
-import { useTheme } from "styled-components/native";
-import {
-  Funnel,
-  Gear,
-  ClockCounterClockwise,
-  Question,
-  SignOut,
-} from "phosphor-react-native";
+import { FC } from 'react';
+import { Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { useTheme } from 'styled-components/native';
+import { Funnel, Gear, ClockCounterClockwise, Question, SignOut } from 'phosphor-react-native';
 
-import { useAuth } from "@hooks/useAuth";
-import { useSettings } from "@hooks/useSettings";
+import { useAuth } from '@hooks/useAuth';
+import { useSettings } from '@hooks/useSettings';
 
-import { Header } from "@components-of-screens/Profile/components/Header";
-import { SettingsItem } from "@components-of-screens/Profile/components/SettingsItem";
+import { Header } from '@components-of-screens/Profile/components/Header';
+import { SettingsItem } from '@components-of-screens/Profile/components/SettingsItem';
 
-import { Container, Wrapper, EventHeader, EventTitle, Footer } from "./styles";
+import { Container, Wrapper, EventHeader, EventTitle, Footer } from './styles';
 
 export const Profile: FC = () => {
   const { logOut } = useAuth();
@@ -24,19 +18,19 @@ export const Profile: FC = () => {
   const { navigate } = useNavigation();
   const { colors } = useTheme();
 
-  const onPressNavigate = (screenName: "Settings") => navigate(screenName);
+  const onPressNavigate = (screenName: 'Settings') => navigate(screenName);
 
   const onPressLogOut = () => {
     Alert.alert(
-      "Sair",
-      "Deseja sair da aplicação?",
+      'Sair',
+      'Deseja sair da aplicação?',
       [
         {
-          text: "Não",
-          style: "cancel",
+          text: 'Não',
+          style: 'cancel',
         },
         {
-          text: "Sim",
+          text: 'Sim',
           onPress: () => logOut(),
         },
       ],
@@ -50,14 +44,9 @@ export const Profile: FC = () => {
         <Header />
 
         <EventHeader>
-          <EventTitle style={{ fontSize: fontSizeValue(20) }}>
-            Eventos
-          </EventTitle>
+          <EventTitle style={{ fontSize: fontSizeValue(20) }}>Eventos</EventTitle>
 
-          <Funnel
-            size={fontSizeValue(24)}
-            color={colors.screens.profile.icon}
-          />
+          <Funnel size={fontSizeValue(24)} color={colors.screens.profile.icon} />
         </EventHeader>
       </Wrapper>
 
@@ -71,7 +60,7 @@ export const Profile: FC = () => {
             />
           )}
           title="Configurações"
-          onPress={() => onPressNavigate("Settings")}
+          onPress={() => onPressNavigate('Settings')}
         />
 
         <SettingsItem

@@ -1,7 +1,7 @@
-import styled, { css } from "styled-components/native";
-import { View } from "react-native";
-import { RectButton } from "react-native-gesture-handler";
-import Animated from "react-native-reanimated";
+import styled, { css } from 'styled-components/native';
+import { View } from 'react-native';
+import { RectButton } from 'react-native-gesture-handler';
+import Animated from 'react-native-reanimated';
 
 interface ItemTextProps {
   isEditable: boolean;

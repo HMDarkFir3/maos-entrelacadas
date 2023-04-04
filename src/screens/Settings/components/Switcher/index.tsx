@@ -1,10 +1,10 @@
-import { FC } from "react";
-import { Switch, SwitchProps } from "react-native";
-import { useTheme } from "styled-components/native";
+import { FC } from 'react';
+import { Switch, SwitchProps } from 'react-native';
+import { useTheme } from 'styled-components/native';
 
-import { useSettings } from "@hooks/useSettings";
+import { useSettings } from '@hooks/useSettings';
 
-import { Container, Wrapper, Title } from "./styles";
+import { Container, Wrapper, Title } from './styles';
 
 interface Props extends SwitchProps {
   icon: any;

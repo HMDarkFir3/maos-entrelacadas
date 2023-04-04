@@ -1,5 +1,5 @@
-import styled from "styled-components/native";
-import { View, Animated } from "react-native";
+import styled from 'styled-components/native';
+import { View, Animated } from 'react-native';
 
 export const Container = styled(View)`
   flex-direction: row;
@@ -12,7 +12,6 @@ export const Dot = styled(Animated.View)`
   margin: 0 10px;
 
   background-color: ${({ theme }) =>
-    theme.colors.screens.introduction.components.introductionSliderPaginator
-      .dot};
+    theme.colors.screens.introduction.components.introductionSliderPaginator.dot};
   border-radius: 2px;
 `;

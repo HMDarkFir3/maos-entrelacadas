@@ -1,6 +1,6 @@
-import styled, { css } from "styled-components/native";
-import { Image } from "react-native";
-import { RectButton } from "react-native-gesture-handler";
+import styled, { css } from 'styled-components/native';
+import { Image } from 'react-native';
+import { RectButton } from 'react-native-gesture-handler';
 
 interface RegisterButtonTextProps {
   isGreen: boolean;

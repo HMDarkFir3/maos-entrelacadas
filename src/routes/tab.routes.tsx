@@ -1,26 +1,24 @@
-import { FC } from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { FC } from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { Home } from "@screens/Home";
-import { Profile } from "@screens/Profile";
+import { Home } from '@screens/Home';
+import { Profile } from '@screens/Profile';
 
-import { CustomTabBar } from "@components/CustomTabBar";
+import { CustomTabBar } from '@components/CustomTabBar';
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
-export const TabRoutes: FC = () => {
-  return (
-    <Navigator
-      initialRouteName="Home"
-      tabBar={(props) => <CustomTabBar state={props.state} />}
-      screenOptions={{
-        headerShown: false,
-      }}
-    >
-      <Screen name="Home" component={Home} />
-      <Screen name="Events" component={Home} />
-      <Screen name="Donations" component={Home} />
-      <Screen name="Profile" component={Profile} />
-    </Navigator>
-  );
-};
+export const TabRoutes: FC = () => (
+  <Navigator
+    initialRouteName="Home"
+    tabBar={({ state }) => <CustomTabBar state={state} />}
+    screenOptions={{
+      headerShown: false,
+    }}
+  >
+    <Screen name="Home" component={Home} />
+    <Screen name="Events" component={Home} />
+    <Screen name="Donations" component={Home} />
+    <Screen name="Profile" component={Profile} />
+  </Navigator>
+);

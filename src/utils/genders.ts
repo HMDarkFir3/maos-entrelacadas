@@ -1,18 +1,18 @@
 export const genders = [
   {
     id: 1,
-    name: "Masculino",
+    name: 'Masculino',
   },
   {
     id: 2,
-    name: "Feminino",
+    name: 'Feminino',
   },
   {
     id: 3,
-    name: "Outro",
+    name: 'Outro',
   },
   {
     id: 4,
-    name: "Prefiro não dizer",
+    name: 'Prefiro não dizer',
   },
 ];

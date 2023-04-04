@@ -1,19 +1,12 @@
-import { FC } from "react";
-import { useNavigation } from "@react-navigation/native";
-import { useTheme } from "styled-components/native";
-import { Info } from "phosphor-react-native";
+import { FC } from 'react';
+import { useNavigation } from '@react-navigation/native';
+import { useTheme } from 'styled-components/native';
+import { Info } from 'phosphor-react-native';
 
-import { useAppSelector } from "@hooks/useAppSelector";
-import { useSettings } from "@hooks/useSettings";
+import { useAppSelector } from '@hooks/useAppSelector';
+import { useSettings } from '@hooks/useSettings';
 
-import {
-  Container,
-  Wrapper,
-  UserImage,
-  UserInfo,
-  Username,
-  Role,
-} from "./styles";
+import { Container, Wrapper, UserImage, UserInfo, Username, Role } from './styles';
 
 export const Header: FC = () => {
   const { user } = useAppSelector((store) => store.auth);
@@ -21,12 +14,12 @@ export const Header: FC = () => {
   const { navigate } = useNavigation();
   const { colors } = useTheme();
 
-  const onPressUserInfo = () => navigate("UserInfo");
+  const onPressUserInfo = () => navigate('UserInfo');
 
   return (
     <Container testID="Header.Container" onPress={onPressUserInfo}>
       <Wrapper>
-        <UserImage source={{ uri: "https://www.github.com/hmdarkfir3.png" }} />
+        <UserImage source={{ uri: 'https://www.github.com/hmdarkfir3.png' }} />
 
         <UserInfo>
           <Username style={{ fontSize: fontSizeValue(20) }} numberOfLines={1}>
@@ -36,10 +29,7 @@ export const Header: FC = () => {
         </UserInfo>
       </Wrapper>
 
-      <Info
-        size={fontSizeValue(24)}
-        color={colors.screens.profile.components.header.icon}
-      />
+      <Info size={fontSizeValue(24)} color={colors.screens.profile.components.header.icon} />
     </Container>
   );
 };

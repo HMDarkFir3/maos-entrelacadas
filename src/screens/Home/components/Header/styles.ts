@@ -1,7 +1,7 @@
-import styled, { css } from "styled-components/native";
-import { BorderlessButton } from "react-native-gesture-handler";
+import styled, { css } from 'styled-components/native';
+import { BorderlessButton } from 'react-native-gesture-handler';
 
-import { STATUS_BAR_HEIGHT } from "@utils/globalVariables";
+import { STATUS_BAR_HEIGHT } from '@utils/globalVariables';
 
 export const Container = styled.View`
   flex-direction: row;
@@ -26,8 +26,7 @@ export const UserImage = styled.Image`
 
   border-radius: 24px;
   border-width: 2px;
-  border-color: ${({ theme }) =>
-    theme.colors.screens.home.components.header.primary};
+  border-color: ${({ theme }) => theme.colors.screens.home.components.header.primary};
 `;
 
 export const UserInfo = styled.View``;

@@ -1,9 +1,9 @@
-import { FC } from "react";
-import { RectButtonProps } from "react-native-gesture-handler";
+import { FC } from 'react';
+import { RectButtonProps } from 'react-native-gesture-handler';
 
-import { useSettings } from "@hooks/useSettings";
+import { useSettings } from '@hooks/useSettings';
 
-import { Container, Title } from "./styles";
+import { Container, Title } from './styles';
 
 interface Props extends RectButtonProps {
   title: string;

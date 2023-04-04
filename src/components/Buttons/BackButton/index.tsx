@@ -1,12 +1,12 @@
-import { FC } from "react";
-import { BorderlessButtonProps } from "react-native-gesture-handler";
-import { useNavigation } from "@react-navigation/native";
-import { useTheme } from "styled-components/native";
-import { ArrowLeft } from "phosphor-react-native";
+import { FC } from 'react';
+import { BorderlessButtonProps } from 'react-native-gesture-handler';
+import { useNavigation } from '@react-navigation/native';
+import { useTheme } from 'styled-components/native';
+import { ArrowLeft } from 'phosphor-react-native';
 
-import { useSettings } from "@hooks/useSettings";
+import { useSettings } from '@hooks/useSettings';
 
-import { Container, Title } from "./styles";
+import { Container, Title } from './styles';
 
 interface Props extends BorderlessButtonProps {
   onBackButton?: () => void;
@@ -29,10 +29,7 @@ export const BackButton: FC<Props> = (props) => {
 
   return (
     <Container onPress={onPressBackButton} {...rest}>
-      <ArrowLeft
-        size={fontSizeValue(20)}
-        color={colors.components.backButton.icon}
-      />
+      <ArrowLeft size={fontSizeValue(20)} color={colors.components.backButton.icon} />
       <Title style={{ fontSize: fontSizeValue(14) }}>Voltar</Title>
     </Container>
   );

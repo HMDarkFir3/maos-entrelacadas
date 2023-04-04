@@ -1,22 +1,14 @@
-import { useState, FC } from "react";
-import { FlatList } from "react-native";
-import { useTheme } from "styled-components/native";
-import { TextAa } from "phosphor-react-native";
+import { useState, FC } from 'react';
+import { FlatList } from 'react-native';
+import { useTheme } from 'styled-components/native';
+import { TextAa } from 'phosphor-react-native';
 
-import { useAppSelector } from "@hooks/useAppSelector";
-import { useSettings } from "@hooks/useSettings";
+import { useAppSelector } from '@hooks/useAppSelector';
+import { useSettings } from '@hooks/useSettings';
 
-import { typeFonts } from "@utils/typeFonts";
+import { typeFonts } from '@utils/typeFonts';
 
-import {
-  Container,
-  Wrapper,
-  Title,
-  SelectedFont,
-  List,
-  Item,
-  ItemText,
-} from "./styles";
+import { Container, Wrapper, Title, SelectedFont, List, Item, ItemText } from './styles';
 
 export const FontSwitcher: FC = () => {
   const { fontSize } = useAppSelector((store) => store.settings);
@@ -29,10 +21,7 @@ export const FontSwitcher: FC = () => {
 
   return (
     <>
-      <Container
-        testID="FontSwitcher.OpenFontSwitcherButton"
-        onPress={onPressOpenFontSwitcher}
-      >
+      <Container testID="FontSwitcher.OpenFontSwitcherButton" onPress={onPressOpenFontSwitcher}>
         <Wrapper>
           <TextAa
             size={fontSizeValue(24)}
@@ -44,9 +33,7 @@ export const FontSwitcher: FC = () => {
           </Title>
         </Wrapper>
 
-        <SelectedFont style={{ fontSize: fontSizeValue(20) }}>
-          {fontSize.name}
-        </SelectedFont>
+        <SelectedFont style={{ fontSize: fontSizeValue(20) }}>{fontSize.name}</SelectedFont>
       </Container>
       {isOpen && (
         <List testID="FontSwitcher.List">
@@ -58,8 +45,8 @@ export const FontSwitcher: FC = () => {
                 testID="FontSwitcher.Item"
                 onPress={() =>
                   changeFontSize(
-                    item.name as "Pequeno" | "Normal" | "Grande",
-                    item.value as "sm" | "md" | "lg"
+                    item.name as 'Pequeno' | 'Normal' | 'Grande',
+                    item.value as 'sm' | 'md' | 'lg'
                   )
                 }
               >

@@ -1,13 +1,13 @@
-import { InitialStateData } from "@store/auth/types";
+import { InitialStateData } from '@store/auth/types';
 
 export const initialState: InitialStateData = {
   user: null,
-  givenName: "",
-  email: "",
-  password: "",
-  gender: "",
+  givenName: '',
+  email: '',
+  password: '',
+  gender: '',
   birthdate: null,
-  confirmPassword: "",
+  confirmPassword: '',
   isSigned: false,
   isLoading: false,
 };

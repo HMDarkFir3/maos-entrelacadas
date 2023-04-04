@@ -1,5 +1,5 @@
-import styled, { css } from "styled-components/native";
-import { RectButton } from "react-native-gesture-handler";
+import styled, { css } from 'styled-components/native';
+import { RectButton } from 'react-native-gesture-handler';
 
 export const Container = styled.View`
   align-items: center;

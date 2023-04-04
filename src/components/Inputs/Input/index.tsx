@@ -1,9 +1,9 @@
-import { useState, forwardRef } from "react";
-import { TextInput, TextInputProps, ViewStyle } from "react-native";
-import { useTheme } from "styled-components/native";
-import { Eye, EyeSlash } from "phosphor-react-native";
+import { useState, forwardRef } from 'react';
+import { TextInput, TextInputProps, ViewStyle } from 'react-native';
+import { useTheme } from 'styled-components/native';
+import { Eye, EyeSlash } from 'phosphor-react-native';
 
-import { useSettings } from "@hooks/useSettings";
+import { useSettings } from '@hooks/useSettings';
 
 import {
   Container,
@@ -11,7 +11,7 @@ import {
   StyledInput,
   TogglePasswordVisibilityButton,
   MaxLength,
-} from "./styles";
+} from './styles';
 
 interface Props extends TextInputProps {
   style?: ViewStyle;
@@ -38,8 +38,7 @@ export const Input = forwardRef<TextInput, Props>((props, ref) => {
 
   const [isVisibility, setIsVisibility] = useState<boolean>(false);
 
-  const onTogglePasswordVisibility = () =>
-    setIsVisibility((prevState) => !prevState);
+  const onTogglePasswordVisibility = () => setIsVisibility((prevState) => !prevState);
 
   return (
     <Container style={style}>
@@ -61,15 +60,9 @@ export const Input = forwardRef<TextInput, Props>((props, ref) => {
             onPress={onTogglePasswordVisibility}
           >
             {isVisibility ? (
-              <EyeSlash
-                size={fontSizeValue(24)}
-                color={colors.components.input.placeholder}
-              />
+              <EyeSlash size={fontSizeValue(24)} color={colors.components.input.placeholder} />
             ) : (
-              <Eye
-                size={fontSizeValue(24)}
-                color={colors.components.input.placeholder}
-              />
+              <Eye size={fontSizeValue(24)} color={colors.components.input.placeholder} />
             )}
           </TogglePasswordVisibilityButton>
         )}

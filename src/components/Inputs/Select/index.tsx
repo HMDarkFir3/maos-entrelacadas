@@ -1,17 +1,12 @@
-import { useState, FC } from "react";
-import { ViewStyle, FlatList } from "react-native";
-import {
-  useAnimatedStyle,
-  interpolate,
-  withTiming,
-  Extrapolate,
-} from "react-native-reanimated";
-import { useTheme } from "styled-components/native";
-import { CaretDown } from "phosphor-react-native";
+import { useState, FC } from 'react';
+import { ViewStyle, FlatList } from 'react-native';
+import { useAnimatedStyle, interpolate, withTiming, Extrapolate } from 'react-native-reanimated';
+import { useTheme } from 'styled-components/native';
+import { CaretDown } from 'phosphor-react-native';
 
-import { useSettings } from "@hooks/useSettings";
+import { useSettings } from '@hooks/useSettings';
 
-import { genders } from "@utils/genders";
+import { genders } from '@utils/genders';
 
 import {
   Container,
@@ -23,7 +18,7 @@ import {
   ItemText,
   ItemSeparator,
   SelectedText,
-} from "./styles";
+} from './styles';
 
 interface Props<T> {
   style?: ViewStyle;
@@ -36,15 +31,7 @@ interface Props<T> {
 }
 
 export const Select: FC<Props<typeof genders>> = (props) => {
-  const {
-    style,
-    value,
-    onChange,
-    icon: Icon,
-    placeholder,
-    data,
-    isEditable = true,
-  } = props;
+  const { style, value, onChange, icon: Icon, placeholder, data, isEditable = true } = props;
 
   const { fontSizeValue } = useSettings();
   const { colors } = useTheme();
@@ -52,12 +39,7 @@ export const Select: FC<Props<typeof genders>> = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const caretWrapperAnimatedStyle = useAnimatedStyle(() => {
-    const rotate = interpolate(
-      isOpen ? 1 : 0,
-      [0, 1],
-      [0, 180],
-      Extrapolate.CLAMP
-    );
+    const rotate = interpolate(isOpen ? 1 : 0, [0, 1], [0, 180], Extrapolate.CLAMP);
 
     return {
       transform: [{ rotate: withTiming(`${rotate}deg`, { duration: 300 }) }],
@@ -75,30 +57,20 @@ export const Select: FC<Props<typeof genders>> = (props) => {
 
   return (
     <Container style={style}>
-      <Wrapper
-        testID="Select.Wrapper"
-        enabled={isEditable}
-        onPress={onPressOpenSelect}
-      >
+      <Wrapper testID="Select.Wrapper" enabled={isEditable} onPress={onPressOpenSelect}>
         <Icon />
         {value ? (
-          <ItemText
-            style={{ marginLeft: 16, fontSize: fontSizeValue(20) }}
-            isEditable={isEditable}
-          >
+          <ItemText style={{ marginLeft: 16, fontSize: fontSizeValue(20) }} isEditable={isEditable}>
             {value}
           </ItemText>
         ) : (
           <Placeholder style={{ marginLeft: 16, fontSize: fontSizeValue(20) }}>
-            {placeholder ?? "Selecione uma opção"}
+            {placeholder ?? 'Selecione uma opção'}
           </Placeholder>
         )}
 
         <CaretWrapper style={caretWrapperAnimatedStyle}>
-          <CaretDown
-            size={fontSizeValue(16)}
-            color={colors.components.select.primary}
-          />
+          <CaretDown size={fontSizeValue(16)} color={colors.components.select.primary} />
         </CaretWrapper>
       </Wrapper>
 
