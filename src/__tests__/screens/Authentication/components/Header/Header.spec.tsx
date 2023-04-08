@@ -1,15 +1,15 @@
-import { ReactNode } from "react";
-import { render } from "@testing-library/react-native";
-import { Provider as ReduxProvider } from "react-redux";
-import { ThemeProvider } from "styled-components/native";
+import { ReactNode } from 'react';
+import { render } from '@testing-library/react-native';
+import { Provider as ReduxProvider } from 'react-redux';
+import { ThemeProvider } from 'styled-components/native';
 
-import { store } from "@store/index";
+import { store } from '@store/index';
 
-import { SettingsProvider } from "@contexts/SettingsContext";
+import { SettingsProvider } from '@contexts/SettingsContext';
 
-import { Header } from "@components-of-screens/Authentication/components/Header";
+import { Header } from '@components-of-screens/Authentication/components/Header';
 
-import { light } from "@themes/light";
+import { light } from '@themes/light';
 
 const Providers = ({ children }: { children: ReactNode }) => (
   <ReduxProvider store={store}>
@@ -19,8 +19,8 @@ const Providers = ({ children }: { children: ReactNode }) => (
   </ReduxProvider>
 );
 
-describe("Header Component", () => {
-  it("should be able to render the component", () => {
+describe('Header Component', () => {
+  it('should be able to render the component', () => {
     const onBackButtonMock = jest.fn();
 
     const { getByText } = render(
@@ -32,9 +32,9 @@ describe("Header Component", () => {
       { wrapper: Providers }
     );
 
-    const title = getByText("Faça login");
+    const title = getByText('Faça login');
     const description = getByText(
-      "Queremos impactar de forma positiva a sua vida e de sua comunidade."
+      'Queremos impactar de forma positiva a sua vida e de sua comunidade.'
     );
 
     expect(title).toBeTruthy();

@@ -1,16 +1,16 @@
-import { ReactNode } from "react";
-import { render, fireEvent } from "@testing-library/react-native";
-import { Provider as ReduxProvider } from "react-redux";
-import { ThemeProvider } from "styled-components/native";
-import { Activity } from "phosphor-react-native";
+import { ReactNode } from 'react';
+import { render, fireEvent } from '@testing-library/react-native';
+import { Provider as ReduxProvider } from 'react-redux';
+import { ThemeProvider } from 'styled-components/native';
+import { Activity } from 'phosphor-react-native';
 
-import { store } from "@store/index";
+import { store } from '@store/index';
 
-import { SettingsProvider } from "@contexts/SettingsContext";
+import { SettingsProvider } from '@contexts/SettingsContext';
 
-import { Select } from "@components/Inputs/Select";
+import { Select } from '@components/Inputs/Select';
 
-import { light } from "@themes/light";
+import { light } from '@themes/light';
 
 const Providers = ({ children }: { children: ReactNode }) => (
   <ReduxProvider store={store}>
@@ -20,59 +20,49 @@ const Providers = ({ children }: { children: ReactNode }) => (
   </ReduxProvider>
 );
 
-describe("Select", () => {
+describe('Select', () => {
   const onChangeMock = jest.fn();
   const dataMock = [
     {
       id: 1,
-      name: "Masculino",
+      name: 'Masculino',
     },
     {
       id: 2,
-      name: "Feminino",
+      name: 'Feminino',
     },
   ];
 
-  it("should be able to render the component when pressed the select", () => {
+  it('should be able to render the component when pressed the select', () => {
     const { getByTestId } = render(
-      <Select
-        icon={() => <Activity />}
-        data={dataMock}
-        onChange={onChangeMock}
-        value=""
-      />,
+      <Select icon={() => <Activity />} data={dataMock} onChange={onChangeMock} value="" />,
       {
         wrapper: Providers,
       }
     );
 
-    const selectWrapper = getByTestId("Select.Wrapper");
+    const selectWrapper = getByTestId('Select.Wrapper');
     fireEvent.press(selectWrapper);
   });
 
-  it("should be able to render the component when selected an item", () => {
+  it('should be able to render the component when selected an item', () => {
     const { getByTestId, getByText } = render(
-      <Select
-        icon={() => <Activity />}
-        data={dataMock}
-        onChange={onChangeMock}
-        value="Feminino"
-      />,
+      <Select icon={() => <Activity />} data={dataMock} onChange={onChangeMock} value="Feminino" />,
       {
         wrapper: Providers,
       }
     );
 
-    const selectWrapper = getByTestId("Select.Wrapper");
+    const selectWrapper = getByTestId('Select.Wrapper');
     fireEvent.press(selectWrapper);
 
     const selectItem = getByText(/masculino/i);
     fireEvent.press(selectItem);
 
-    expect(onChangeMock).toBeCalledWith("Masculino");
+    expect(onChangeMock).toBeCalledWith('Masculino');
   });
 
-  it("should be able to render the component when onChange not exists", () => {
+  it('should be able to render the component when onChange not exists', () => {
     const { getByTestId, getByText } = render(
       <Select icon={() => <Activity />} data={dataMock} value="Feminino" />,
       {
@@ -80,7 +70,7 @@ describe("Select", () => {
       }
     );
 
-    const selectWrapper = getByTestId("Select.Wrapper");
+    const selectWrapper = getByTestId('Select.Wrapper');
     fireEvent.press(selectWrapper);
 
     const selectItem = getByText(/masculino/i);

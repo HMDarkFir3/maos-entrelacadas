@@ -6,8 +6,8 @@ import { useTheme } from 'styled-components/native';
 
 import { useAppSelector } from '@hooks/useAppSelector';
 
-import { AuthRoutes } from '@routes/auth.routes';
-import { AppRoutes } from '@routes/app.routes';
+import { AuthRoutes } from '@routes/Auth.routes';
+import { AppRoutes } from '@routes/App.routes';
 
 export const Routes: FC = () => {
   const { isSigned } = useAppSelector((store) => store.auth);

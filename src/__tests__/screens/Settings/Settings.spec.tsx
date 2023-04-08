@@ -1,15 +1,15 @@
-import { ReactNode } from "react";
-import { render, fireEvent, act } from "@testing-library/react-native";
-import { Provider as ReduxProvider } from "react-redux";
-import { ThemeProvider } from "styled-components/native";
+import { ReactNode } from 'react';
+import { render, fireEvent, act } from '@testing-library/react-native';
+import { Provider as ReduxProvider } from 'react-redux';
+import { ThemeProvider } from 'styled-components/native';
 
-import { store } from "@store/index";
+import { store } from '@store/index';
 
-import { AuthProvider } from "@contexts/AuthContext";
+import { AuthProvider } from '@contexts/AuthContext';
 
-import { Settings } from "@screens/Settings";
+import { Settings } from '@screens/Settings';
 
-import { light } from "@themes/light";
+import { light } from '@themes/light';
 
 const Providers = ({ children }: { children: ReactNode }) => (
   <ReduxProvider store={store}>
@@ -19,15 +19,15 @@ const Providers = ({ children }: { children: ReactNode }) => (
   </ReduxProvider>
 );
 
-jest.mock("@hooks/useSettings", () => {
+jest.mock('@hooks/useSettings', () => {
   return {
     useSettings: () => ({
       state: {
         theme: {
-          title: "light",
+          title: 'light',
         },
         fontSize: {
-          name: "normal",
+          name: 'normal',
         },
       },
       toggleTheme: jest.fn(),
@@ -36,30 +36,30 @@ jest.mock("@hooks/useSettings", () => {
   };
 });
 
-describe("Settings Screen", () => {
-  it("should be able to press the theme switcher", () => {
+describe('Settings Screen', () => {
+  it('should be able to press the theme switcher', () => {
     const { getByText } = render(<Settings />, { wrapper: Providers });
 
-    const themeSwitcher = getByText("Tema escuro");
+    const themeSwitcher = getByText('Tema escuro');
 
     act(() => {
-      fireEvent(themeSwitcher, "onSwitchValue");
+      fireEvent(themeSwitcher, 'onSwitchValue');
     });
 
     render(<Settings />, { wrapper: Providers });
 
     act(() => {
-      fireEvent(themeSwitcher, "onSwitchValue");
+      fireEvent(themeSwitcher, 'onSwitchValue');
     });
   });
 
-  it("should be able to press the notification switcher", () => {
+  it('should be able to press the notification switcher', () => {
     const { getByText } = render(<Settings />, { wrapper: Providers });
 
-    const notificationSwitcher = getByText("Receber notificações");
+    const notificationSwitcher = getByText('Receber notificações');
 
     act(() => {
-      fireEvent(notificationSwitcher, "onSwitchValue");
+      fireEvent(notificationSwitcher, 'onSwitchValue');
     });
   });
 });

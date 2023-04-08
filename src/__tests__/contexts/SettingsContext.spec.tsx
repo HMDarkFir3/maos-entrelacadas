@@ -1,43 +1,36 @@
-import { ReactNode } from "react";
-import { View, Text, Button, FlatList } from "react-native";
-import { render, fireEvent, act, waitFor } from "@testing-library/react-native";
-import { Provider as ReduxProvider } from "react-redux";
+import { ReactNode } from 'react';
+import { View, Text, Button, FlatList } from 'react-native';
+import { render, fireEvent, act, waitFor } from '@testing-library/react-native';
+import { Provider as ReduxProvider } from 'react-redux';
 
-import { store } from "@store/index";
+import { store } from '@store/index';
 
-import { SettingsProvider } from "@contexts/SettingsContext";
+import { SettingsProvider } from '@contexts/SettingsContext';
 
-import { useSettings } from "@hooks/useSettings";
+import { useSettings } from '@hooks/useSettings';
 
-const Providers = ({ children }: { children: ReactNode }) => {
-  return (
-    <ReduxProvider store={store}>
-      <SettingsProvider>{children}</SettingsProvider>
-    </ReduxProvider>
-  );
-};
+const Providers = ({ children }: { children: ReactNode }) => (
+  <ReduxProvider store={store}>
+    <SettingsProvider>{children}</SettingsProvider>
+  </ReduxProvider>
+);
 
-describe("SettingsContext", () => {
+describe('SettingsContext', () => {
   const ComponentMock = () => {
-    const {
-      fontSizeValue,
-      sawIntroductionInStorage,
-      changeFontSize,
-      toggleTheme,
-    } = useSettings();
+    const { fontSizeValue, sawIntroductionInStorage, changeFontSize, toggleTheme } = useSettings();
 
     const dataMock = [
       {
-        name: "Pequeno",
-        size: "sm",
+        name: 'Pequeno',
+        size: 'sm',
       },
       {
-        name: "Normal",
-        size: "md",
+        name: 'Normal',
+        size: 'md',
       },
       {
-        name: "Grande",
-        size: "lg",
+        name: 'Grande',
+        size: 'lg',
       },
     ];
 
@@ -57,8 +50,8 @@ describe("SettingsContext", () => {
               title={item.name}
               onPress={() =>
                 changeFontSize(
-                  item.name as "Pequeno" | "Normal" | "Grande",
-                  item.size as "sm" | "md" | "lg"
+                  item.name as 'Pequeno' | 'Normal' | 'Grande',
+                  item.size as 'sm' | 'md' | 'lg'
                 )
               }
             />
@@ -68,15 +61,15 @@ describe("SettingsContext", () => {
     );
   };
 
-  it("should be able to render correctly", () => {
+  it('should be able to render correctly', () => {
     const { getByText } = render(<ComponentMock />, { wrapper: Providers });
-    expect(getByText("Test")).toBeTruthy();
+    expect(getByText('Test')).toBeTruthy();
   });
 
-  it("should be able to press the jump introduction", () => {
+  it('should be able to press the jump introduction', () => {
     const { getByText } = render(<ComponentMock />, { wrapper: Providers });
 
-    const jumpIntroduction = getByText("Jump Introduction");
+    const jumpIntroduction = getByText('Jump Introduction');
 
     waitFor(() => {
       act(() => {
@@ -87,10 +80,10 @@ describe("SettingsContext", () => {
     render(<ComponentMock />, { wrapper: Providers });
   });
 
-  it("should be able to press the toggle theme", () => {
+  it('should be able to press the toggle theme', () => {
     const { getByText } = render(<ComponentMock />, { wrapper: Providers });
 
-    const toggleTheme = getByText("Toggle Theme");
+    const toggleTheme = getByText('Toggle Theme');
 
     waitFor(() => {
       act(() => {
@@ -105,12 +98,12 @@ describe("SettingsContext", () => {
     });
   });
 
-  it("should be able to press the change font size", () => {
+  it('should be able to press the change font size', () => {
     const { getByText } = render(<ComponentMock />, { wrapper: Providers });
 
-    const smallFontSize = getByText("Pequeno");
-    const normalFontSize = getByText("Normal");
-    const largeFontSize = getByText("Grande");
+    const smallFontSize = getByText('Pequeno');
+    const normalFontSize = getByText('Normal');
+    const largeFontSize = getByText('Grande');
 
     waitFor(() => {
       act(() => {

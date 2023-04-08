@@ -1,16 +1,16 @@
-import { ReactNode } from "react";
-import { render, fireEvent } from "@testing-library/react-native";
-import { Provider as ReduxProvider } from "react-redux";
-import { ThemeProvider } from "styled-components/native";
-import { Activity } from "phosphor-react-native";
+import { ReactNode } from 'react';
+import { render, fireEvent } from '@testing-library/react-native';
+import { Provider as ReduxProvider } from 'react-redux';
+import { ThemeProvider } from 'styled-components/native';
+import { Activity } from 'phosphor-react-native';
 
-import { store } from "@store/index";
+import { store } from '@store/index';
 
-import { SettingsProvider } from "@contexts/SettingsContext";
+import { SettingsProvider } from '@contexts/SettingsContext';
 
-import { DatePicker } from "@components/Inputs/DatePicker";
+import { DatePicker } from '@components/Inputs/DatePicker';
 
-import { light } from "@themes/light";
+import { light } from '@themes/light';
 
 const Providers = ({ children }: { children: ReactNode }) => (
   <ReduxProvider store={store}>
@@ -20,8 +20,8 @@ const Providers = ({ children }: { children: ReactNode }) => (
   </ReduxProvider>
 );
 
-describe("DatePicker", () => {
-  it("should be able to render the component", () => {
+describe('DatePicker', () => {
+  it('should be able to render the component', () => {
     const onChangeMock = jest.fn();
     const valueMock: Date | null = null;
 
@@ -37,15 +37,15 @@ describe("DatePicker", () => {
       }
     );
 
-    const datePicker = getByTestId("DatePicker");
+    const datePicker = getByTestId('DatePicker');
     fireEvent.press(datePicker);
 
-    const dateTimePickerModal = getByTestId("DatePicker.DateTimePickerModal");
-    fireEvent(dateTimePickerModal, "onConfirm", new Date());
-    fireEvent(dateTimePickerModal, "onCancel");
+    const dateTimePickerModal = getByTestId('DatePicker.DateTimePickerModal');
+    fireEvent(dateTimePickerModal, 'onConfirm', new Date());
+    fireEvent(dateTimePickerModal, 'onCancel');
   });
 
-  it("should be able to render the component when value exists", () => {
+  it('should be able to render the component when value exists', () => {
     const onChangeMock = jest.fn();
     const valueMock: Date | null = new Date();
 
@@ -54,22 +54,22 @@ describe("DatePicker", () => {
         testDateTimePickerModalID="DatePicker.DateTimePickerModal"
         icon={() => <Activity />}
         onChange={onChangeMock}
-        value={valueMock}
+        value={String(valueMock)}
       />,
       {
         wrapper: Providers,
       }
     );
 
-    const datePicker = getByTestId("DatePicker");
+    const datePicker = getByTestId('DatePicker');
     fireEvent.press(datePicker);
 
-    const dateTimePickerModal = getByTestId("DatePicker.DateTimePickerModal");
-    fireEvent(dateTimePickerModal, "onConfirm", new Date());
-    fireEvent(dateTimePickerModal, "onCancel");
+    const dateTimePickerModal = getByTestId('DatePicker.DateTimePickerModal');
+    fireEvent(dateTimePickerModal, 'onConfirm', new Date());
+    fireEvent(dateTimePickerModal, 'onCancel');
   });
 
-  it("should be able to render the component when onChange not exists", () => {
+  it('should be able to render the component when onChange not exists', () => {
     const valueMock: Date | null = null;
 
     const { getByTestId } = render(
@@ -83,11 +83,11 @@ describe("DatePicker", () => {
       }
     );
 
-    const datePicker = getByTestId("DatePicker");
+    const datePicker = getByTestId('DatePicker');
     fireEvent.press(datePicker);
 
-    const dateTimePickerModal = getByTestId("DatePicker.DateTimePickerModal");
-    fireEvent(dateTimePickerModal, "onConfirm", new Date());
-    fireEvent(dateTimePickerModal, "onCancel");
+    const dateTimePickerModal = getByTestId('DatePicker.DateTimePickerModal');
+    fireEvent(dateTimePickerModal, 'onConfirm', new Date());
+    fireEvent(dateTimePickerModal, 'onCancel');
   });
 });

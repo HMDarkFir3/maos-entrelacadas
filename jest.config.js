@@ -1,10 +1,10 @@
 module.exports = {
-  preset: "jest-expo",
+  preset: 'jest-expo',
   transformIgnorePatterns: [
-    "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg|@react-native-firebase/.*)",
+    'node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg|@react-native-firebase/.*)',
   ],
-  setupFiles: ["./jest-setup.js"],
+  setupFiles: ['./jest-setup.js'],
   collectCoverage: true,
-  collectCoverageFrom: ["src/**/*.tsx", "!src/**/*.test.tsx"],
-  coverageReporters: ["lcov"],
+  collectCoverageFrom: ['src/**/*.tsx', '!src/**/*.test.tsx'],
+  coverageReporters: ['lcov'],
 };

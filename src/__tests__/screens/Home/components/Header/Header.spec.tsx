@@ -1,17 +1,17 @@
-import { ReactNode } from "react";
-import { Alert } from "react-native";
-import { render, fireEvent } from "@testing-library/react-native";
-import { Provider as ReduxProvider } from "react-redux";
-import { ThemeProvider } from "styled-components/native";
+import { ReactNode } from 'react';
+import { Alert } from 'react-native';
+import { render, fireEvent } from '@testing-library/react-native';
+import { Provider as ReduxProvider } from 'react-redux';
+import { ThemeProvider } from 'styled-components/native';
 
-import { store } from "@store/index";
+import { store } from '@store/index';
 
-import { AuthProvider } from "@contexts/AuthContext";
-import { SettingsProvider } from "@contexts/SettingsContext";
+import { AuthProvider } from '@contexts/AuthContext';
+import { SettingsProvider } from '@contexts/SettingsContext';
 
-import { Header } from "@components-of-screens/Home/components/Header";
+import { Header } from '@components-of-screens/Home/components/Header';
 
-import { light } from "@themes/light";
+import { light } from '@themes/light';
 
 const Providers = ({ children }: { children: ReactNode }) => (
   <ReduxProvider store={store}>
@@ -23,34 +23,34 @@ const Providers = ({ children }: { children: ReactNode }) => (
   </ReduxProvider>
 );
 
-describe("Header Component", () => {
-  it("should be able to press the profile button", () => {
+describe('Header Component', () => {
+  it('should be able to press the profile button', () => {
     const { getByTestId } = render(<Header />, { wrapper: Providers });
 
-    const profileButton = getByTestId("Header.ProfileButton");
+    const profileButton = getByTestId('Header.ProfileButton');
     fireEvent.press(profileButton);
   });
 
-  it("should be able to press the sign out button", async () => {
-    const alertMock = jest.spyOn(Alert, "alert");
+  it('should be able to press the sign out button', async () => {
+    const alertMock = jest.spyOn(Alert, 'alert');
 
     const { getByTestId } = render(<Header />, {
       wrapper: Providers,
     });
 
-    const signOutButton = getByTestId("Header.SignOutButton");
+    const signOutButton = getByTestId('Header.SignOutButton');
     fireEvent.press(signOutButton);
 
     expect(alertMock).toHaveBeenCalledWith(
-      "Sair",
-      "Deseja sair da aplicação?",
+      'Sair',
+      'Deseja sair da aplicação?',
       [
         {
-          text: "Não",
-          style: "cancel",
+          text: 'Não',
+          style: 'cancel',
         },
         {
-          text: "Sim",
+          text: 'Sim',
           onPress: expect.any(Function),
         },
       ],
@@ -58,14 +58,14 @@ describe("Header Component", () => {
     );
 
     const alertButtons = alertMock.mock.calls[0][2];
-    const alertButton = alertButtons?.find((button) => button.text === "Sim");
+    const alertButton = alertButtons?.find((button) => button.text === 'Sim');
 
     if (alertButton) {
       if (alertButton.onPress) {
         alertButton.onPress();
       }
     } else {
-      throw new Error("Alert button not found");
+      throw new Error('Alert button not found');
     }
   });
 });

@@ -1,14 +1,12 @@
-import React from "react";
+import 'react-native-gesture-handler/jestSetup';
 
-import mockAsyncStorage from "@react-native-async-storage/async-storage/jest/async-storage-mock";
+import mockAsyncStorage from '@react-native-async-storage/async-storage/jest/async-storage-mock';
 
-jest.mock("@react-native-async-storage/async-storage", () => mockAsyncStorage);
-
-import "react-native-gesture-handler/jestSetup";
+jest.mock('@react-native-async-storage/async-storage', () => mockAsyncStorage);
 
 // include this section and the NativeAnimatedHelper section for mocking react-native-reanimated
-jest.mock("react-native-reanimated", () => {
-  const Reanimated = require("react-native-reanimated/mock");
+jest.mock('react-native-reanimated', () => {
+  const Reanimated = require('react-native-reanimated/mock');
 
   // The mock for `call` immediately calls the callback which is incorrect
   // So we override it with a no-op
@@ -18,9 +16,9 @@ jest.mock("react-native-reanimated", () => {
 });
 
 // Silence the warning: Animated: `useNativeDriver` is not supported because the native animated module is missing
-jest.mock("react-native/Libraries/Animated/NativeAnimatedHelper");
+jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
 
-jest.mock("@react-navigation/native", () => {
+jest.mock('@react-navigation/native', () => {
   return {
     useFocusEffect: jest.fn(),
     useNavigation: () => {
@@ -32,7 +30,7 @@ jest.mock("@react-navigation/native", () => {
   };
 });
 
-jest.mock("@react-navigation/native-stack", () => {
+jest.mock('@react-navigation/native-stack', () => {
   return {
     createNativeStackNavigator: jest.fn(() => {
       return {
@@ -44,7 +42,7 @@ jest.mock("@react-navigation/native-stack", () => {
   };
 });
 
-jest.mock("@react-navigation/bottom-tabs", () => {
+jest.mock('@react-navigation/bottom-tabs', () => {
   return {
     createBottomTabNavigator: jest.fn(() => {
       return {
@@ -55,7 +53,7 @@ jest.mock("@react-navigation/bottom-tabs", () => {
   };
 });
 
-jest.mock("expo-navigation-bar", () => {
+jest.mock('expo-navigation-bar', () => {
   return {
     NavigationBar: jest.fn(() => {
       return {
@@ -66,4 +64,4 @@ jest.mock("expo-navigation-bar", () => {
   };
 });
 
-jest.mock("react-native/Libraries/EventEmitter/NativeEventEmitter");
+jest.mock('react-native/Libraries/EventEmitter/NativeEventEmitter');

@@ -1,16 +1,16 @@
-import { ReactNode } from "react";
-import { render, fireEvent } from "@testing-library/react-native";
-import { Provider as ReduxProvider } from "react-redux";
-import { ThemeProvider } from "styled-components/native";
+import { ReactNode } from 'react';
+import { render, fireEvent } from '@testing-library/react-native';
+import { Provider as ReduxProvider } from 'react-redux';
+import { ThemeProvider } from 'styled-components/native';
 
-import { store } from "@store/index";
+import { store } from '@store/index';
 
-import { AuthProvider } from "@contexts/AuthContext";
-import { SettingsProvider } from "@contexts/SettingsContext";
+import { AuthProvider } from '@contexts/AuthContext';
+import { SettingsProvider } from '@contexts/SettingsContext';
 
-import { StepTwo } from "@screens/Authentication/Register/StepTwo";
+import { StepTwo } from '@screens/Authentication/Register/StepTwo';
 
-import { light } from "@themes/light";
+import { light } from '@themes/light';
 
 const Providers = ({ children }: { children: ReactNode }) => (
   <ReduxProvider store={store}>
@@ -22,58 +22,56 @@ const Providers = ({ children }: { children: ReactNode }) => (
   </ReduxProvider>
 );
 
-describe("StepTwo Screen", () => {
-  it("should be able to render the component", () => {
+describe('StepTwo Screen', () => {
+  it('should be able to render the component', () => {
     const { getByText } = render(<StepTwo />, { wrapper: Providers });
 
-    const title = getByText("Crie sua conta!");
-    const description = getByText(
-      "Selecione seu gênero e preecha sua data de nascimento."
-    );
+    const title = getByText('Crie sua conta!');
+    const description = getByText('Selecione seu gênero e preecha sua data de nascimento.');
 
     expect(title).toBeTruthy();
     expect(description).toBeTruthy();
   });
 
-  it("should be able to press the next button", () => {
+  it('should be able to press the next button', () => {
     const { getByTestId } = render(<StepTwo />, {
       wrapper: Providers,
     });
 
-    const smallButton = getByTestId("StepTwo.SmallButton");
+    const smallButton = getByTestId('StepTwo.SmallButton');
     fireEvent.press(smallButton);
   });
 
-  it("should be able to press the back button", () => {
+  it('should be able to press the back button', () => {
     const { getByTestId } = render(<StepTwo />, {
       wrapper: Providers,
     });
 
-    const header = getByTestId("StepTwo.Header");
-    fireEvent.press(header, "onBackButton");
+    const header = getByTestId('StepTwo.Header');
+    fireEvent.press(header, 'onBackButton');
   });
 
-  it("should be able to select a gender and a birthdate", () => {
+  it('should be able to select a gender and a birthdate', () => {
     const { getByText, getByTestId } = render(<StepTwo />, {
       wrapper: Providers,
     });
 
-    const genderInput = getByText("Gênero");
+    const genderInput = getByText('Gênero');
     fireEvent.press(genderInput);
 
-    const genderSelected = getByText("Masculino");
+    const genderSelected = getByText('Masculino');
     fireEvent.press(genderSelected);
 
-    const birthdateInput = getByText("Data de Nascimento");
+    const birthdateInput = getByText('Data de Nascimento');
     fireEvent.press(birthdateInput);
 
-    const dateTimePickerModal = getByTestId("StepTwo.DatePicker");
+    const dateTimePickerModal = getByTestId('StepTwo.DatePicker');
 
     expect(dateTimePickerModal).toBeTruthy();
 
-    fireEvent(dateTimePickerModal, "onConfirm", new Date());
+    fireEvent(dateTimePickerModal, 'onConfirm', new Date());
 
-    const smallButton = getByTestId("StepTwo.SmallButton");
+    const smallButton = getByTestId('StepTwo.SmallButton');
     fireEvent.press(smallButton);
   });
 });
