@@ -2,10 +2,12 @@ import { createContext, useEffect, useCallback, FC, ReactNode } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ThemeProvider } from 'styled-components/native';
 
+import { api } from '@services/api';
+
 import { useAppDispatch } from '@hooks/useAppDispatch';
 import { useAppSelector } from '@hooks/useAppSelector';
 
-import { setSawIntroduction, setTheme, setFontSize } from '@store/settings/actions';
+import { setGenders, setSawIntroduction, setTheme, setFontSize } from '@store/settings/actions';
 
 import { COLLECTION_INTRODUCTION, COLLECTION_THEME, COLLECTION_FONT_SIZE } from '@storages/index';
 
@@ -108,6 +110,20 @@ export const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
     getSawIntroductionInStorage();
     getThemeInStorage();
     getFontSizeInStorage();
+  }, [dispatch]);
+
+  useEffect(() => {
+    const fetchGenders = async () => {
+      try {
+        const { data } = await api.get('/genders');
+
+        dispatch(setGenders(data));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchGenders();
   }, [dispatch]);
 
   return (

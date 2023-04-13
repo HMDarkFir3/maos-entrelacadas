@@ -43,6 +43,7 @@
         "explicitSpread": "ignore"
       }
     ],
-    "react/destructuring-assignment": "off"
+    "react/destructuring-assignment": "off",
+    "import/no-extraneous-dependencies": "off"
   }
 }

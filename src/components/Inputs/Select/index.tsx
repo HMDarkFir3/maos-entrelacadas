@@ -4,9 +4,9 @@ import { useAnimatedStyle, interpolate, withTiming, Extrapolate } from 'react-na
 import { useTheme } from 'styled-components/native';
 import { CaretDown } from 'phosphor-react-native';
 
-import { useSettings } from '@hooks/useSettings';
+import { GenderDTO } from '@dtos/GenderDTO';
 
-import { genders } from '@utils/genders';
+import { useSettings } from '@hooks/useSettings';
 
 import {
   Container,
@@ -30,7 +30,7 @@ interface Props<T> {
   isEditable?: boolean;
 }
 
-export const Select: FC<Props<typeof genders>> = (props) => {
+export const Select: FC<Props<GenderDTO.Response[]>> = (props) => {
   const { style, value, onChange, icon: Icon, placeholder, data, isEditable = true } = props;
 
   const { fontSizeValue } = useSettings();
@@ -57,7 +57,12 @@ export const Select: FC<Props<typeof genders>> = (props) => {
 
   return (
     <Container style={style}>
-      <Wrapper testID="Select.Wrapper" enabled={isEditable} onPress={onPressOpenSelect}>
+      <Wrapper
+        testID="Select.Wrapper"
+        activeOpacity={0.7}
+        disabled={!isEditable}
+        onPress={onPressOpenSelect}
+      >
         <Icon />
         {value ? (
           <ItemText style={{ marginLeft: 16, fontSize: fontSizeValue(20) }} isEditable={isEditable}>

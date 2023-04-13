@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components/native';
-import { View } from 'react-native';
-import { RectButton } from 'react-native-gesture-handler';
+import { View, TouchableOpacity } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 interface ItemTextProps {
@@ -15,7 +14,7 @@ export const Container = styled(View)`
   z-index: 2;
 `;
 
-export const Wrapper = styled(RectButton)`
+export const Wrapper = styled(TouchableOpacity)`
   flex-direction: row;
   align-items: center;
 
@@ -56,7 +55,7 @@ export const List = styled.View`
   border-bottom-right-radius: 16px;
 `;
 
-export const Item = styled(RectButton)``;
+export const Item = styled(TouchableOpacity)``;
 
 export const ItemText = styled.Text<ItemTextProps>`
   flex: 1;

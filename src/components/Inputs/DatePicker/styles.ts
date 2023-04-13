@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components/native';
-import { RectButton } from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native';
 
 interface DateProps {
   isEditable: boolean;
 }
 
-export const Container = styled(RectButton)`
+export const Container = styled(TouchableOpacity)`
   flex-direction: row;
   align-items: center;
 
