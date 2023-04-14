@@ -66,10 +66,14 @@ describe('StepOne Screen', () => {
     });
 
     const givenNameInput = getByTestId('StepOne.GivenNameInput');
+    const usernameInput = getByTestId('StepOne.UsernameInput');
     const emailInput = getByTestId('StepOne.EmailInput');
+    const cellphoneInput = getByTestId('StepOne.CellphoneInput');
 
     fireEvent.changeText(givenNameInput, 'John Doe');
+    fireEvent.changeText(usernameInput, 'john_doe');
     fireEvent.changeText(emailInput, 'johndoe@example.com');
+    fireEvent.changeText(cellphoneInput, '11111111111');
 
     const smallButton = getByTestId('StepOne.SmallButton');
     fireEvent.press(smallButton);

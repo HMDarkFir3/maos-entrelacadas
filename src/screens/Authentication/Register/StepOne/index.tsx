@@ -2,7 +2,7 @@ import { useRef, FC } from 'react';
 import { TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useTheme } from 'styled-components/native';
-import { User, EnvelopeSimple, ArrowRight } from 'phosphor-react-native';
+import { User, EnvelopeSimple, Phone, ArrowRight } from 'phosphor-react-native';
 
 import { useAppDispatch } from '@hooks/useAppDispatch';
 import { useAppSelector } from '@hooks/useAppSelector';
@@ -23,12 +23,16 @@ export const StepOne: FC = () => {
   const { navigate } = useNavigation();
   const { colors } = useTheme();
 
-  const nameInputRef = useRef<TextInput>(null);
+  const givenNameInputRef = useRef<TextInput>(null);
+  const usernameInputRef = useRef<TextInput>(null);
   const emailInputRef = useRef<TextInput>(null);
+  const cellphoneInputRef = useRef<TextInput>(null);
 
   const onPressInScreen = () => {
-    nameInputRef.current?.blur();
+    givenNameInputRef.current?.blur();
+    usernameInputRef.current?.blur();
     emailInputRef.current?.blur();
+    cellphoneInputRef.current?.blur();
   };
 
   const onPressNextStep = () => {
@@ -52,14 +56,27 @@ export const StepOne: FC = () => {
         <InputWrapper>
           <Input
             testID="StepOne.GivenNameInput"
-            ref={nameInputRef}
-            style={{ marginBottom: 32 }}
+            ref={givenNameInputRef}
+            style={{ marginBottom: 16 }}
             value={givenName}
             onChangeText={(text) => dispatch(setGivenNameField(text))}
             icon={() => (
               <User size={fontSizeValue(24)} color={colors.components.input.placeholder} />
             )}
             placeholder="Nome e Sobrenome"
+            maxLength={50}
+          />
+
+          <Input
+            testID="StepOne.UsernameInput"
+            ref={usernameInputRef}
+            style={{ marginBottom: 16 }}
+            value={givenName}
+            onChangeText={(text) => dispatch(setGivenNameField(text))}
+            icon={() => (
+              <User size={fontSizeValue(24)} color={colors.components.input.placeholder} />
+            )}
+            placeholder="Usuário"
             maxLength={50}
           />
 
@@ -78,6 +95,20 @@ export const StepOne: FC = () => {
             placeholder="Email"
             keyboardType="email-address"
             maxLength={50}
+          />
+
+          <Input
+            testID="StepOne.CellphoneInput"
+            ref={cellphoneInputRef}
+            style={{ marginBottom: 16 }}
+            value={email}
+            onChangeText={(text) => dispatch(setEmailField(text))}
+            icon={() => (
+              <Phone size={fontSizeValue(24)} color={colors.components.input.placeholder} />
+            )}
+            placeholder="Celular"
+            keyboardType="phone-pad"
+            maxLength={11}
           />
         </InputWrapper>
 

@@ -10,24 +10,6 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    setEmailField: (state: InitialStateData, action: PayloadAction<string>) => {
-      return {
-        ...state,
-        email: action.payload,
-      };
-    },
-    setPasswordField: (state: InitialStateData, action: PayloadAction<string>) => {
-      return {
-        ...state,
-        password: action.payload,
-      };
-    },
-    setGivenNameField: (state: InitialStateData, action: PayloadAction<string>) => {
-      return {
-        ...state,
-        givenName: action.payload,
-      };
-    },
     setGenderField: (state: InitialStateData, action: PayloadAction<string>) => {
       return {
         ...state,
@@ -40,23 +22,12 @@ export const authSlice = createSlice({
         birthdate: action.payload,
       };
     },
-    setConfirmPasswordField: (state: InitialStateData, action: PayloadAction<string>) => {
-      return {
-        ...state,
-        confirmPassword: action.payload,
-      };
-    },
     setUser: (state: InitialStateData, action: PayloadAction<UserDTO | null>) => {
       return {
         ...state,
-        user: action.payload,
+        user: action.payload?.user ?? null,
+        accessToken: action.payload?.access_token ?? null,
         isSigned: !!action.payload,
-      };
-    },
-    setEmptyFields: (state: InitialStateData) => {
-      return {
-        ...state,
-        ...initialState,
       };
     },
     setIsLoading: (state: InitialStateData, action: PayloadAction<boolean>) => {

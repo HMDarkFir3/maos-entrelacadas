@@ -91,10 +91,10 @@ export const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
     };
 
     const getThemeInStorage = async () => {
-      const themeInStorage = await AsyncStorage.getItem(COLLECTION_THEME);
-      const formattedTheme = themeInStorage === 'light' ? light : dark;
+      const storage = await AsyncStorage.getItem(COLLECTION_THEME);
+      const formattedTheme = storage === 'light' ? light : dark;
 
-      if (themeInStorage) {
+      if (storage) {
         dispatch(setTheme(formattedTheme));
       }
     };

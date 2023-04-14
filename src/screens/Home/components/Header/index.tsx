@@ -26,7 +26,7 @@ export const Header: FC = () => {
   const { navigate } = useNavigation();
   const { colors } = useTheme();
 
-  const formattedGivenName: string | undefined = user?.given_name.split(' ')[0];
+  const formattedGivenName: string | undefined = user?.person.name.split(' ')[0];
 
   const onPressProfile = () => navigate('Profile');
 

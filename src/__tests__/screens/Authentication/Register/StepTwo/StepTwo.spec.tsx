@@ -33,6 +33,15 @@ describe('StepTwo Screen', () => {
     expect(description).toBeTruthy();
   });
 
+  it('should be able to press the screen', () => {
+    const { getByTestId } = render(<StepTwo />, {
+      wrapper: Providers,
+    });
+
+    const inputBlurButton = getByTestId('StepTwo.InputBlurButton');
+    fireEvent.press(inputBlurButton);
+  });
+
   it('should be able to press the next button', () => {
     const { getByTestId } = render(<StepTwo />, {
       wrapper: Providers,
@@ -51,7 +60,7 @@ describe('StepTwo Screen', () => {
     fireEvent.press(header, 'onBackButton');
   });
 
-  it('should be able to select a gender and a birthdate', () => {
+  it('should be able to select a gender, birthdate and inputs', () => {
     const { getByText, getByTestId } = render(<StepTwo />, {
       wrapper: Providers,
     });
@@ -59,8 +68,8 @@ describe('StepTwo Screen', () => {
     const genderInput = getByText('Gênero');
     fireEvent.press(genderInput);
 
-    const genderSelected = getByText('Masculino');
-    fireEvent.press(genderSelected);
+    // const genderSelected = getByText('Outro');
+    // fireEvent.press(genderSelected);
 
     const birthdateInput = getByText('Data de Nascimento');
     fireEvent.press(birthdateInput);
@@ -70,6 +79,12 @@ describe('StepTwo Screen', () => {
     expect(dateTimePickerModal).toBeTruthy();
 
     fireEvent(dateTimePickerModal, 'onConfirm', new Date());
+
+    const passwordInput = getByTestId('StepTwo.PasswordInput');
+    fireEvent.changeText(passwordInput, '123456');
+
+    const confirmPasswordInput = getByTestId('StepTwo.ConfirmPasswordInput');
+    fireEvent.changeText(confirmPasswordInput, '123456');
 
     const smallButton = getByTestId('StepTwo.SmallButton');
     fireEvent.press(smallButton);

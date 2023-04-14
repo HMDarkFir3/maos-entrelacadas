@@ -8,7 +8,6 @@ import { Welcome } from '@screens/Welcome';
 import { Login } from '@screens/Authentication/Login';
 import { StepOne } from '@screens/Authentication/Register/StepOne';
 import { StepTwo } from '@screens/Authentication/Register/StepTwo';
-import { StepThree } from '@screens/Authentication/Register/StepThree';
 
 const { Navigator, Group, Screen } = createNativeStackNavigator();
 
@@ -24,7 +23,6 @@ export const AuthRoutes: FC = () => {
       <Group>
         <Screen name="StepOne" component={StepOne} />
         <Screen name="StepTwo" component={StepTwo} />
-        <Screen name="StepThree" component={StepThree} />
       </Group>
     </Navigator>
   );

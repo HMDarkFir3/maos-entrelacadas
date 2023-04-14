@@ -1,13 +1,10 @@
 import { UserDTO } from '@dtos/UserDTO';
 
 export interface InitialStateData {
-  givenName: string;
-  email: string;
-  gender: string;
+  user: UserDTO['user'] | null;
+  accessToken: string | null;
+  gender: string | null;
   birthdate: string | null;
-  password: string;
-  confirmPassword: string;
   isSigned: boolean;
   isLoading: boolean;
-  user: UserDTO | null;
 }

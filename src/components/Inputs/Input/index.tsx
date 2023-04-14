@@ -1,5 +1,6 @@
 import { useState, forwardRef } from 'react';
 import { TextInput, TextInputProps, ViewStyle } from 'react-native';
+import { Controller } from 'react-hook-form';
 import { useTheme } from 'styled-components/native';
 import { Eye, EyeSlash } from 'phosphor-react-native';
 
@@ -10,12 +11,15 @@ import {
   Wrapper,
   StyledInput,
   TogglePasswordVisibilityButton,
+  ErrorText,
   MaxLength,
 } from './styles';
 
 interface Props extends TextInputProps {
   style?: ViewStyle;
-  value?: string;
+  control: any;
+  inputName: string;
+  error: string | undefined;
   icon: any;
   isPassword?: boolean;
   isEditable?: boolean;
@@ -25,11 +29,14 @@ interface Props extends TextInputProps {
 export const Input = forwardRef<TextInput, Props>((props, ref) => {
   const {
     style,
-    value,
+    control,
+    inputName,
+    error,
     icon: Icon,
     isPassword = false,
     isEditable = true,
     maxLength,
+    value: inputValue,
     ...rest
   } = props;
 
@@ -42,17 +49,26 @@ export const Input = forwardRef<TextInput, Props>((props, ref) => {
 
   return (
     <Container style={style}>
-      <Wrapper>
+      <Wrapper error={!!error}>
         <Icon />
-        <StyledInput
-          ref={ref}
-          style={{ fontSize: fontSizeValue(20) }}
-          secureTextEntry={isPassword && !isVisibility}
-          placeholderTextColor={colors.components.input.placeholder}
-          maxLength={maxLength}
-          isEditable={isEditable}
-          editable={isEditable}
-          {...rest}
+
+        <Controller
+          control={control}
+          render={({ field: { value, onChange } }) => (
+            <StyledInput
+              ref={ref}
+              style={{ fontSize: fontSizeValue(20) }}
+              value={value}
+              onChangeText={onChange}
+              secureTextEntry={isPassword && !isVisibility}
+              placeholderTextColor={colors.components.input.placeholder}
+              maxLength={maxLength}
+              isEditable={isEditable}
+              editable={isEditable}
+              {...rest}
+            />
+          )}
+          name={inputName}
         />
         {isPassword && (
           <TogglePasswordVisibilityButton
@@ -68,9 +84,11 @@ export const Input = forwardRef<TextInput, Props>((props, ref) => {
         )}
       </Wrapper>
 
+      {error && <ErrorText style={{ fontSize: fontSizeValue(16) }}>{error}</ErrorText>}
+
       {maxLength && (
         <MaxLength style={{ fontSize: fontSizeValue(16) }}>
-          {value?.length}/{maxLength}
+          {inputValue?.length}/{maxLength}
         </MaxLength>
       )}
     </Container>

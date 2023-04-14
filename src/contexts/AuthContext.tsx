@@ -1,8 +1,7 @@
-/* eslint-disable react/jsx-no-constructed-context-values */
-import { createContext, useEffect, useCallback, FC, ReactNode } from 'react';
+import { createContext, useEffect, FC, ReactNode } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import auth from '@react-native-firebase/auth';
 
+import { LoginDTO } from '@dtos/LoginDTO';
 import { UserDTO } from '@dtos/UserDTO';
 
 import { api } from '@services/api';
@@ -13,8 +12,13 @@ import { setUser, setIsLoading } from '@store/auth/actions';
 
 import { COLLECTION_USER } from '@storages/index';
 
+export interface LoginFormState {
+  email: string;
+  password: string;
+}
+
 export interface AuthContextData {
-  login: () => Promise<void>;
+  login: (form: LoginFormState) => Promise<void>;
   register: () => Promise<void>;
   logOut: () => Promise<void>;
 }
@@ -28,25 +32,24 @@ export const AuthContext = createContext({} as AuthContextData);
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const dispatch = useAppDispatch();
 
-  const login = useCallback(async () => {
+  const login = async (form: LoginFormState) => {
     try {
       dispatch(setIsLoading(true));
 
-      const { data } = await api.post('/auth/login', {
-        email: 'henrique@email.com',
-        password: '123456',
-      });
+      const { data } = await api.post<LoginDTO.Response>('/auth/login', {
+        email: form.email,
+        password: form.password,
+      } as LoginDTO.Request);
 
-      console.log(data);
+      await AsyncStorage.setItem(COLLECTION_USER, JSON.stringify(data));
 
       dispatch(setUser(data));
-      await AsyncStorage.setItem(COLLECTION_USER, JSON.stringify(data));
     } catch (error) {
       console.log(error);
     } finally {
       dispatch(setIsLoading(false));
     }
-  }, [dispatch]);
+  };
 
   const register = async () => {
     try {
@@ -76,15 +79,14 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  const logOut = useCallback(async () => {
+  const logOut = async () => {
     try {
       await AsyncStorage.removeItem(COLLECTION_USER);
-      await auth().signOut();
       dispatch(setUser(null));
     } catch (error) {
       console.log(error);
     }
-  }, [dispatch]);
+  };
 
   useEffect(() => {
     const getUserData = async () => {
@@ -101,6 +103,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   }, [dispatch]);
 
   return (
+    /* eslint-disable react/jsx-no-constructed-context-values */
     <AuthContext.Provider value={{ login, register, logOut }}>{children}</AuthContext.Provider>
   );
 };

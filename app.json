@@ -32,10 +32,8 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#3cb371"
       },
-      "package": "com.hmdarkfire.maosentrelacadas.preview",
-      "googleServicesFile": "./google-services.json"
+      "package": "com.hmdarkfire.maosentrelacadas.preview"
     },
-    "plugins": ["@react-native-firebase/app"],
     "extra": {
       "eas": {
         "projectId": "dfcd84b5-f1d4-4aa5-a828-f2fe48c6758d"

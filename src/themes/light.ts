@@ -104,6 +104,7 @@ export const light = {
         primary: '#3cb371',
         text: '#1c1e26',
         placeholder: '#8babc3',
+        error: '#ff3333',
       },
       select: {
         primary: '#3cb371',

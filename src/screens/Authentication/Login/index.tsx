@@ -1,14 +1,16 @@
 import { useRef, FC } from 'react';
 import { TextInput } from 'react-native';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import { useTheme } from 'styled-components/native';
 import { EnvelopeSimple, LockOpen, Check } from 'phosphor-react-native';
 
-import { useAppDispatch } from '@hooks/useAppDispatch';
 import { useAppSelector } from '@hooks/useAppSelector';
 import { useAuth } from '@hooks/useAuth';
 import { useSettings } from '@hooks/useSettings';
 
-import { setEmailField, setPasswordField, setEmptyFields } from '@store/auth/actions';
+import { LoginFormState } from '@contexts/AuthContext';
 
 import { Header } from '@components-of-screens/Authentication/components/Header';
 import { Input } from '@components/Inputs/Input';
@@ -25,8 +27,7 @@ import {
 } from '../styles';
 
 export const Login: FC = () => {
-  const dispatch = useAppDispatch();
-  const { email, password, isLoading } = useAppSelector((store) => store.auth);
+  const { isLoading } = useAppSelector((store) => store.auth);
   const { login } = useAuth();
   const { fontSizeValue } = useSettings();
   const { colors } = useTheme();
@@ -34,14 +35,29 @@ export const Login: FC = () => {
   const emailInputRef = useRef<TextInput>(null);
   const passwordInputRef = useRef<TextInput>(null);
 
+  const schema = yup
+    .object({
+      email: yup.string().email('Email inválido.').required('Email obrigatório.'),
+      password: yup.string().required('Senha obrigatória.').min(6, 'Mínimo de 6 caracteres.'),
+    })
+    .required();
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormState>({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+    resolver: yupResolver(schema),
+  });
+
   const onPressInScreen = () => {
     emailInputRef.current?.blur();
     passwordInputRef.current?.blur();
   };
-
-  const onPressLogin = () => login();
-
-  const onPressBackButton = () => setEmptyFields();
 
   return (
     <InputBlurButton testID="Login.InputBlurButton" onPress={onPressInScreen}>
@@ -50,15 +66,15 @@ export const Login: FC = () => {
           testID="Login.Header"
           title="Faça login"
           description="Queremos impactar de forma positiva a sua vida e de sua comunidade."
-          onBackButton={onPressBackButton}
         />
 
         <InputWrapper>
           <Input
             ref={emailInputRef}
             style={{ marginBottom: 32 }}
-            value={email}
-            onChangeText={(text) => dispatch(setEmailField(text))}
+            control={control}
+            inputName="email"
+            error={errors.email?.message}
             icon={() => (
               <EnvelopeSimple
                 size={fontSizeValue(24)}
@@ -72,8 +88,9 @@ export const Login: FC = () => {
           <Input
             ref={passwordInputRef}
             style={{ marginBottom: 16 }}
-            value={password}
-            onChangeText={(text) => dispatch(setPasswordField(text))}
+            control={control}
+            inputName="password"
+            error={errors.password?.message}
             icon={() => (
               <LockOpen size={fontSizeValue(24)} color={colors.components.input.placeholder} />
             )}
@@ -101,7 +118,7 @@ export const Login: FC = () => {
               />
             )}
             isLoading={isLoading}
-            onPress={onPressLogin}
+            onPress={handleSubmit((data: LoginFormState) => login(data))}
             enabled={!isLoading}
           />
         </Footer>
