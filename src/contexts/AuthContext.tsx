@@ -2,9 +2,10 @@
 import { createContext, useEffect, useCallback, FC, ReactNode } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import auth from '@react-native-firebase/auth';
-import firestore from '@react-native-firebase/firestore';
 
 import { UserDTO } from '@dtos/UserDTO';
+
+import { api } from '@services/api';
 
 import { useAppDispatch } from '@hooks/useAppDispatch';
 
@@ -13,14 +14,8 @@ import { setUser, setIsLoading } from '@store/auth/actions';
 import { COLLECTION_USER } from '@storages/index';
 
 export interface AuthContextData {
-  login: (email: string, password: string) => Promise<void>;
-  register: (
-    givenName: string,
-    email: string,
-    gender: string,
-    birthdate: string | null,
-    password: string
-  ) => Promise<void>;
+  login: () => Promise<void>;
+  register: () => Promise<void>;
   logOut: () => Promise<void>;
 }
 
@@ -33,82 +28,53 @@ export const AuthContext = createContext({} as AuthContextData);
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
   const dispatch = useAppDispatch();
 
-  const login = useCallback(
-    async (email: string, password: string) => {
-      try {
-        dispatch(setIsLoading(true));
+  const login = useCallback(async () => {
+    try {
+      dispatch(setIsLoading(true));
 
-        const { user } = await auth().signInWithEmailAndPassword(email, password);
+      const { data } = await api.post('/auth/login', {
+        email: 'henrique@email.com',
+        password: '123456',
+      });
 
-        await firestore()
-          .collection('users')
-          .doc(user?.uid)
-          .get()
-          .then(async (documentSnapshot) => {
-            const formattedBirthdate = new Date(documentSnapshot.data()!.birthdate.seconds * 1000);
+      console.log(data);
 
-            const data = {
-              uid: user?.uid,
-              given_name: documentSnapshot.data()?.given_name,
-              email: documentSnapshot.data()?.email,
-              gender: documentSnapshot.data()?.gender,
-              birthdate: formattedBirthdate.toISOString(),
-            } as UserDTO;
+      dispatch(setUser(data));
+      await AsyncStorage.setItem(COLLECTION_USER, JSON.stringify(data));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      dispatch(setIsLoading(false));
+    }
+  }, [dispatch]);
 
-            dispatch(setUser(data));
-            await AsyncStorage.setItem(COLLECTION_USER, JSON.stringify(data));
-          });
-      } catch (error) {
-        console.log(error);
-      } finally {
-        dispatch(setIsLoading(false));
-      }
-    },
-    [dispatch]
-  );
+  const register = async () => {
+    try {
+      dispatch(setIsLoading(true));
 
-  const register = useCallback(
-    async (
-      givenName: string,
-      email: string,
-      gender: string,
-      birthdate: string | null,
-      password: string
-    ) => {
-      try {
-        dispatch(setIsLoading(true));
+      const userInfo = {
+        username: 'hrq_marques',
+        password: '123456',
+        email: 'henrique@email.com',
+        cellphone: '13981630534',
+        person: {
+          name: 'Henrique Marques',
+          birthDate: '2022-05-05',
+          gender: {
+            name: 'Assexual',
+          },
+        },
+      };
 
-        const { user } = await auth().createUserWithEmailAndPassword(email, password);
-
-        await firestore()
-          .collection('users')
-          .doc(user?.uid)
-          .set({
-            given_name: givenName,
-            email,
-            gender,
-            birthdate,
-          })
-          .then(async () => {
-            const data = {
-              uid: user.uid,
-              given_name: givenName,
-              email,
-              gender,
-              birthdate,
-            } as UserDTO;
-
-            dispatch(setUser(data));
-            await AsyncStorage.setItem(COLLECTION_USER, JSON.stringify(data));
-          });
-      } catch (error) {
-        console.log(error);
-      } finally {
-        dispatch(setIsLoading(false));
-      }
-    },
-    [dispatch]
-  );
+      await api.post('users/create', { ...userInfo }).catch((err) => {
+        console.log(err);
+      });
+    } catch (error) {
+      console.log();
+    } finally {
+      dispatch(setIsLoading(false));
+    }
+  };
 
   const logOut = useCallback(async () => {
     try {

@@ -18,8 +18,7 @@ import { InputBlurButton, Container, InputWrapper, Footer } from '../../styles';
 
 export const StepThree: FC = () => {
   const dispatch = useAppDispatch();
-  const { givenName, email, gender, birthdate, password, confirmPassword, isLoading } =
-    useAppSelector((store) => store.auth);
+  const { password, confirmPassword, isLoading } = useAppSelector((store) => store.auth);
   const { register } = useAuth();
   const { fontSizeValue } = useSettings();
   const { colors } = useTheme();
@@ -35,7 +34,7 @@ export const StepThree: FC = () => {
   const onPressSubmit = () => {
     if (!password.trim() || !confirmPassword.trim()) return;
 
-    register(givenName, email, gender, birthdate, password);
+    register();
   };
 
   return (

@@ -39,7 +39,7 @@ export const Login: FC = () => {
     passwordInputRef.current?.blur();
   };
 
-  const onPressLogin = () => login(email, password);
+  const onPressLogin = () => login();
 
   const onPressBackButton = () => setEmptyFields();
 
