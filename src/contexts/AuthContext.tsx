@@ -1,4 +1,5 @@
 import { createContext, useEffect, FC, ReactNode } from 'react';
+import { Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { LoginDTO } from '@dtos/LoginDTO';
@@ -8,7 +9,7 @@ import { api } from '@services/api';
 
 import { useAppDispatch } from '@hooks/useAppDispatch';
 
-import { setUser, setIsLoading } from '@store/auth/actions';
+import { setUser, setError, setIsLoading } from '@store/auth/actions';
 
 import { COLLECTION_USER } from '@storages/index';
 
@@ -45,7 +46,17 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
 
       dispatch(setUser(data));
     } catch (error) {
-      console.log(error);
+      const errors = {
+        400: 'Email ou senha incorretos',
+        401: 'Não autorizado',
+        403: 'Acesso negado',
+        404: 'Não encontrado',
+        500: 'Erro interno do servidor',
+      } as any;
+
+      Alert.alert('Ocorreu um error no sistema', errors[error.response.data.statusCode]);
+
+      // dispatch(setError(errors[error.response.data.statusCode]));
     } finally {
       dispatch(setIsLoading(false));
     }

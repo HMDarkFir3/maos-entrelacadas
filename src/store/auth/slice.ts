@@ -30,6 +30,12 @@ export const authSlice = createSlice({
         isSigned: !!action.payload,
       };
     },
+    setError: (state: InitialStateData, action: PayloadAction<string | null>) => {
+      return {
+        ...state,
+        error: action.payload ?? null,
+      };
+    },
     setIsLoading: (state: InitialStateData, action: PayloadAction<boolean>) => {
       return {
         ...state,

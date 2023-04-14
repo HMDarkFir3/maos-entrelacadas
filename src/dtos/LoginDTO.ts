@@ -7,4 +7,8 @@ export namespace LoginDTO {
   }
 
   export interface Response extends UserDTO {}
+
+  export interface Error {
+    message: string;
+  }
 }
