@@ -3,16 +3,22 @@ import { FlatList } from 'react-native';
 import { useTheme } from 'styled-components/native';
 import { TextAa } from 'phosphor-react-native';
 
+import { useAppDispatch } from '@hooks/useAppDispatch';
 import { useAppSelector } from '@hooks/useAppSelector';
 import { useSettings } from '@hooks/useSettings';
+
+import { changeFontSize } from '@store/settings/actions';
+
+import { FontSizeData } from '@store/settings/types';
 
 import { typeFonts } from '@utils/typeFonts';
 
 import { Container, Wrapper, Title, SelectedFont, List, Item, ItemText } from './styles';
 
 export const FontSwitcher: FC = () => {
+  const dispatch = useAppDispatch();
   const { fontSize } = useAppSelector((store) => store.settings);
-  const { changeFontSize, fontSizeValue } = useSettings();
+  const { fontSizeValue } = useSettings();
   const { colors } = useTheme();
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -43,12 +49,14 @@ export const FontSwitcher: FC = () => {
             renderItem={({ item }) => (
               <Item
                 testID="FontSwitcher.Item"
-                onPress={() =>
-                  changeFontSize(
-                    item.name as 'Pequeno' | 'Normal' | 'Grande',
-                    item.value as 'sm' | 'md' | 'lg'
-                  )
-                }
+                onPress={() => {
+                  const formmattedValue = {
+                    name: item.name,
+                    value: item.value,
+                  };
+
+                  dispatch(changeFontSize(formmattedValue as FontSizeData));
+                }}
               >
                 <ItemText
                   selected={item.value === fontSize.value}

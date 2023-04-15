@@ -1,11 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { DefaultTheme } from 'styled-components/native';
+
+import { GenderDTO } from '@dtos/GenderDTO';
 
 import { initialState } from '@store/settings/initialState';
 
 import { InitialStateData, FontSizeData } from '@store/settings/types';
 
-import { GenderDTO } from '@dtos/GenderDTO';
+import { light } from '@themes/light';
+import { dark } from '@themes/dark';
 
 export const settingsSlice = createSlice({
   name: 'settings',
@@ -14,14 +16,16 @@ export const settingsSlice = createSlice({
     setSawIntroduction: (state: InitialStateData) => {
       state.sawIntroduction = true;
     },
+    toggleTheme: (state: InitialStateData) => {
+      const formattedTheme = state.theme.title === 'light' ? dark : light;
+
+      state.theme = formattedTheme;
+    },
+    changeFontSize: (state: InitialStateData, action: PayloadAction<FontSizeData>) => {
+      state.fontSize = action.payload;
+    },
     setGenders: (state: InitialStateData, action: PayloadAction<GenderDTO.Response[]>) => {
       state.genders = action.payload;
-    },
-    setTheme: (state: InitialStateData, action: PayloadAction<DefaultTheme>) => {
-      state.theme = action.payload;
-    },
-    setFontSize: (state: InitialStateData, action: PayloadAction<FontSizeData>) => {
-      state.fontSize = action.payload;
     },
   },
 });

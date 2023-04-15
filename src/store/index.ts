@@ -19,7 +19,7 @@ const persistConfig: PersistConfig<any> = {
   key: 'root',
   version: 1,
   storage: AsyncStorage,
-  timeout: 8000,
+  timeout: 9000,
   blacklist: ['isLoading'],
 };
 
