@@ -6,11 +6,13 @@ import * as yup from 'yup';
 import { useTheme } from 'styled-components/native';
 import { EnvelopeSimple, LockOpen, Check } from 'phosphor-react-native';
 
+import { useAppDispatch } from '@hooks/useAppDispatch';
 import { useAppSelector } from '@hooks/useAppSelector';
-import { useAuth } from '@hooks/useAuth';
 import { useSettings } from '@hooks/useSettings';
 
 import { LoginFormState } from '@contexts/AuthContext';
+
+import { login } from '@store/auth/thunks';
 
 import { Header } from '@components-of-screens/Authentication/components/Header';
 import { Input } from '@components/Inputs/Input';
@@ -27,8 +29,8 @@ import {
 } from '../styles';
 
 export const Login: FC = () => {
+  const dispatch = useAppDispatch();
   const { isLoading } = useAppSelector((store) => store.auth);
-  const { login } = useAuth();
   const { fontSizeValue } = useSettings();
   const { colors } = useTheme();
 
@@ -65,6 +67,8 @@ export const Login: FC = () => {
     reset();
     clearErrors();
   };
+
+  const onSubmit = async (data: LoginFormState) => dispatch(login(data));
 
   return (
     <InputBlurButton testID="Login.InputBlurButton" onPress={onPressInScreen}>
@@ -126,7 +130,7 @@ export const Login: FC = () => {
               />
             )}
             isLoading={isLoading}
-            onPress={handleSubmit((data: LoginFormState) => login(data))}
+            onPress={handleSubmit((data: LoginFormState) => onSubmit(data))}
             enabled={!isLoading}
           />
         </Footer>

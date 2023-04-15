@@ -11,29 +11,17 @@ export const settingsSlice = createSlice({
   name: 'settings',
   initialState,
   reducers: {
-    setGenders: (state: InitialStateData, action: PayloadAction<GenderDTO.Response[]>) => {
-      return {
-        ...state,
-        genders: action.payload,
-      };
+    setSawIntroduction: (state: InitialStateData) => {
+      state.sawIntroduction = true;
     },
-    setSawIntroduction: (state: InitialStateData, action: PayloadAction<boolean>) => {
-      return {
-        ...state,
-        sawIntroduction: action.payload,
-      };
+    setGenders: (state: InitialStateData, action: PayloadAction<GenderDTO.Response[]>) => {
+      state.genders = action.payload;
     },
     setTheme: (state: InitialStateData, action: PayloadAction<DefaultTheme>) => {
-      return {
-        ...state,
-        theme: action.payload,
-      };
+      state.theme = action.payload;
     },
     setFontSize: (state: InitialStateData, action: PayloadAction<FontSizeData>) => {
-      return {
-        ...state,
-        fontSize: action.payload,
-      };
+      state.fontSize = action.payload;
     },
   },
 });

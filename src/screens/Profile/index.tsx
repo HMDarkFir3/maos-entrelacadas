@@ -4,8 +4,10 @@ import { useNavigation } from '@react-navigation/native';
 import { useTheme } from 'styled-components/native';
 import { Funnel, Gear, ClockCounterClockwise, Question, SignOut } from 'phosphor-react-native';
 
-import { useAuth } from '@hooks/useAuth';
+import { useAppDispatch } from '@hooks/useAppDispatch';
 import { useSettings } from '@hooks/useSettings';
+
+import { logout } from '@store/auth/actions';
 
 import { Header } from '@components-of-screens/Profile/components/Header';
 import { SettingsItem } from '@components-of-screens/Profile/components/SettingsItem';
@@ -13,7 +15,7 @@ import { SettingsItem } from '@components-of-screens/Profile/components/Settings
 import { Container, Wrapper, EventHeader, EventTitle, Footer } from './styles';
 
 export const Profile: FC = () => {
-  const { logOut } = useAuth();
+  const dispatch = useAppDispatch();
   const { fontSizeValue } = useSettings();
   const { navigate } = useNavigation();
   const { colors } = useTheme();
@@ -31,7 +33,7 @@ export const Profile: FC = () => {
         },
         {
           text: 'Sim',
-          onPress: () => logOut(),
+          onPress: () => dispatch(logout()),
         },
       ],
       { cancelable: true }

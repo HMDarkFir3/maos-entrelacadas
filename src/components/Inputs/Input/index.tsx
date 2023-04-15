@@ -22,7 +22,7 @@ interface Props extends TextInputProps {
   control: any;
   inputName: string;
   dirtyValue?: string;
-  error: string | undefined;
+  error: any;
   icon: any;
   isPassword?: boolean;
   isEditable?: boolean;

@@ -1,3 +1,3 @@
 import { authSlice } from '@store/auth/slice';
 
-export const { setUser, setIsLoading } = authSlice.actions;
+export const { logout } = authSlice.actions;

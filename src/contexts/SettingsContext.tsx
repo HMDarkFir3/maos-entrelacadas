@@ -7,15 +7,14 @@ import { api } from '@services/api';
 import { useAppDispatch } from '@hooks/useAppDispatch';
 import { useAppSelector } from '@hooks/useAppSelector';
 
-import { setGenders, setSawIntroduction, setTheme, setFontSize } from '@store/settings/actions';
+import { setGenders, setTheme, setFontSize } from '@store/settings/actions';
 
-import { COLLECTION_INTRODUCTION, COLLECTION_THEME, COLLECTION_FONT_SIZE } from '@storages/index';
+import { COLLECTION_FONT_SIZE } from '@storages/index';
 
 import { light } from '@themes/light';
 import { dark } from '@themes/dark';
 
 export interface SettingsContextData {
-  sawIntroductionInStorage: () => Promise<void>;
   toggleTheme: () => Promise<void>;
   changeFontSize: (
     name: 'Pequeno' | 'Normal' | 'Grande',
@@ -34,18 +33,10 @@ export const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
   const dispatch = useAppDispatch();
   const { theme, fontSize } = useAppSelector((store) => store.settings);
 
-  const sawIntroductionInStorage = useCallback(async () => {
-    dispatch(setSawIntroduction(true));
-
-    await AsyncStorage.setItem(COLLECTION_INTRODUCTION, JSON.stringify(true));
-  }, [dispatch]);
-
   const toggleTheme = useCallback(async () => {
     const formattedTheme = theme.title === 'light' ? dark : light;
 
     dispatch(setTheme(formattedTheme));
-
-    await AsyncStorage.setItem(COLLECTION_THEME, formattedTheme.title);
   }, [dispatch, theme.title]);
 
   const changeFontSize = useCallback(
@@ -82,22 +73,14 @@ export const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
   );
 
   useEffect(() => {
-    const getSawIntroductionInStorage = async () => {
-      const storage = await AsyncStorage.getItem(COLLECTION_INTRODUCTION);
+    // const getThemeInStorage = async () => {
+    //   const storage = await AsyncStorage.getItem(COLLECTION_THEME);
+    //   const formattedTheme = storage === 'light' ? light : dark;
 
-      if (storage) {
-        dispatch(setSawIntroduction(JSON.parse(storage)));
-      }
-    };
-
-    const getThemeInStorage = async () => {
-      const storage = await AsyncStorage.getItem(COLLECTION_THEME);
-      const formattedTheme = storage === 'light' ? light : dark;
-
-      if (storage) {
-        dispatch(setTheme(formattedTheme));
-      }
-    };
+    //   if (storage) {
+    //     dispatch(setTheme(formattedTheme));
+    //   }
+    // };
 
     const getFontSizeInStorage = async () => {
       const storage = await AsyncStorage.getItem(COLLECTION_FONT_SIZE);
@@ -107,8 +90,8 @@ export const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
       }
     };
 
-    getSawIntroductionInStorage();
-    getThemeInStorage();
+    // getSawIntroductionInStorage();
+    // getThemeInStorage();
     getFontSizeInStorage();
   }, [dispatch]);
 
@@ -130,7 +113,6 @@ export const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
     <SettingsContext.Provider
       // eslint-disable-next-line react/jsx-no-constructed-context-values
       value={{
-        sawIntroductionInStorage,
         toggleTheme,
         changeFontSize,
         fontSizeValue,

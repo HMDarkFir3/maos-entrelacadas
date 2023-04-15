@@ -9,11 +9,13 @@ import { ptBR } from 'date-fns/locale';
 import { useTheme } from 'styled-components/native';
 import { GenderNeuter, Cake, LockOpen, Check } from 'phosphor-react-native';
 
+import { useAppDispatch } from '@hooks/useAppDispatch';
 import { useAppSelector } from '@hooks/useAppSelector';
-import { useAuth } from '@hooks/useAuth';
 import { useSettings } from '@hooks/useSettings';
 
-import { RegisterFormState, StepOneFormState, StepTwoFormState } from '@contexts/AuthContext';
+import { register } from '@store/auth/thunks';
+
+import { StepOneFormState, StepTwoFormState, RegisterFormState } from '@store/auth/types';
 
 import { Header } from '@components-of-screens/Authentication/components/Header';
 import { Select } from '@components/Inputs/Select';
@@ -28,9 +30,9 @@ interface Params {
 }
 
 export const StepTwo: FC = () => {
+  const dispatch = useAppDispatch();
   const { isLoading } = useAppSelector((store) => store.auth);
   const { genders } = useAppSelector((store) => store.settings);
-  const { register } = useAuth();
   const { fontSizeValue } = useSettings();
   const { colors } = useTheme();
 
@@ -90,7 +92,7 @@ export const StepTwo: FC = () => {
       birthdate: formmatedBirthdate,
     };
 
-    register(formInfo);
+    dispatch(register(formInfo));
   };
 
   return (

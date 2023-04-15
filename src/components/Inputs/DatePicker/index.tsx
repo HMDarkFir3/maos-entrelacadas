@@ -15,7 +15,7 @@ interface Props {
   control: any;
   datePickerName: string;
   dirtyValue: string;
-  error: string | undefined;
+  error: any;
   placeholder?: string;
   icon: any;
   isEditable?: boolean;

@@ -6,7 +6,6 @@ import { ThemeProvider } from 'styled-components/native';
 
 import { store } from '@store/index';
 
-import { AuthProvider } from '@contexts/AuthContext';
 import { SettingsProvider } from '@contexts/SettingsContext';
 
 import { Header } from '@components-of-screens/Home/components/Header';
@@ -15,11 +14,9 @@ import { light } from '@themes/light';
 
 const Providers = ({ children }: { children: ReactNode }) => (
   <ReduxProvider store={store}>
-    <AuthProvider>
-      <SettingsProvider>
-        <ThemeProvider theme={light}>{children}</ThemeProvider>
-      </SettingsProvider>
-    </AuthProvider>
+    <SettingsProvider>
+      <ThemeProvider theme={light}>{children}</ThemeProvider>
+    </SettingsProvider>
   </ReduxProvider>
 );
 

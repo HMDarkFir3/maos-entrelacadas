@@ -4,9 +4,11 @@ import { useNavigation } from '@react-navigation/native';
 import { useTheme } from 'styled-components/native';
 import { SignOut } from 'phosphor-react-native';
 
+import { useAppDispatch } from '@hooks/useAppDispatch';
 import { useAppSelector } from '@hooks/useAppSelector';
-import { useAuth } from '@hooks/useAuth';
 import { useSettings } from '@hooks/useSettings';
+
+import { logout } from '@store/auth/actions';
 
 import {
   Container,
@@ -20,8 +22,8 @@ import {
 } from './styles';
 
 export const Header: FC = () => {
+  const dispatch = useAppDispatch();
   const { user } = useAppSelector((store) => store.auth);
-  const { logOut } = useAuth();
   const { fontSizeValue } = useSettings();
   const { navigate } = useNavigation();
   const { colors } = useTheme();
@@ -41,7 +43,7 @@ export const Header: FC = () => {
         },
         {
           text: 'Sim',
-          onPress: () => logOut(),
+          onPress: () => dispatch(logout()),
         },
       ],
       { cancelable: true }

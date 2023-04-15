@@ -4,7 +4,10 @@ import { useNavigation } from '@react-navigation/native';
 import { useTheme } from 'styled-components/native';
 import { ArrowRight, Check } from 'phosphor-react-native';
 
+import { useAppDispatch } from '@hooks/useAppDispatch';
 import { useSettings } from '@hooks/useSettings';
+
+import { setSawIntroduction } from '@store/settings/actions';
 
 import { IntroductionSlider } from '@components-of-screens/Introduction/components/IntroductionSlider';
 import { IntroductionPaginator } from '@components-of-screens/Introduction/components/IntroductionPaginator';
@@ -20,7 +23,8 @@ interface ViewabilityConfigRef {
 }
 
 export const Introduction: FC = () => {
-  const { sawIntroductionInStorage, fontSizeValue } = useSettings();
+  const dispatch = useAppDispatch();
+  const { fontSizeValue } = useSettings();
   const { navigate } = useNavigation();
   const { colors } = useTheme();
 
@@ -44,21 +48,21 @@ export const Introduction: FC = () => {
       {
         text: 'Sim',
         style: 'default',
-        onPress: async () => {
-          await sawIntroductionInStorage();
+        onPress: () => {
+          dispatch(setSawIntroduction());
           navigate('Welcome');
         },
       },
     ]);
   };
 
-  const scrollToNextSlide = async () => {
+  const scrollToNextSlide = () => {
     if (currentIndex! < introductionSlider.length - 1) {
       introductionSliderRef.current?.scrollToIndex({
         index: currentIndex! + 1,
       });
     } else {
-      await sawIntroductionInStorage();
+      dispatch(setSawIntroduction());
       navigate('Welcome');
     }
   };

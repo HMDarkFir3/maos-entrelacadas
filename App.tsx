@@ -2,13 +2,14 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useFonts } from 'expo-font';
 import { Ubuntu_400Regular, Ubuntu_500Medium, Ubuntu_700Bold } from '@expo-google-fonts/ubuntu';
 import { FC } from 'react';
+import { Text } from 'react-native';
 import { Provider as ReduxProvider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
 import { NavigationContainer } from '@react-navigation/native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
-import { store } from '@store/index';
+import { store, persistor } from '@store/index';
 
-import { AuthProvider } from '@contexts/AuthContext';
 import { SettingsProvider } from '@contexts/SettingsContext';
 
 import { Routes } from '@routes/index.routes';
@@ -30,13 +31,13 @@ export const App: FC = () => {
   return (
     <NavigationContainer>
       <ReduxProvider store={store}>
-        <AuthProvider>
+        <PersistGate loading={<Text>...Loading</Text>} persistor={persistor}>
           <SettingsProvider>
             <GestureHandlerRootView style={{ flex: 1 }}>
               <Routes />
             </GestureHandlerRootView>
           </SettingsProvider>
-        </AuthProvider>
+        </PersistGate>
       </ReduxProvider>
     </NavigationContainer>
   );

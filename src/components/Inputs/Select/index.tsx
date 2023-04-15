@@ -27,7 +27,7 @@ interface Props<T> {
   control: any;
   selectName: string;
   dirtyValue: string;
-  error: string | undefined;
+  error: any;
   placeholder?: string;
   icon: any;
   data: T;
