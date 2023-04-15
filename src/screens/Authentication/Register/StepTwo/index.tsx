@@ -13,7 +13,7 @@ import { useAppDispatch } from '@hooks/useAppDispatch';
 import { useAppSelector } from '@hooks/useAppSelector';
 import { useSettings } from '@hooks/useSettings';
 
-import { register } from '@store/auth/thunks';
+import { register } from '@store/auth/thunks/register';
 
 import { StepOneFormState, StepTwoFormState, RegisterFormState } from '@store/auth/types';
 

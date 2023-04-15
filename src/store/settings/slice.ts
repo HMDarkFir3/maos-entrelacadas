@@ -24,8 +24,11 @@ export const settingsSlice = createSlice({
     changeFontSize: (state: InitialStateData, action: PayloadAction<FontSizeData>) => {
       state.fontSize = action.payload;
     },
+
     setGenders: (state: InitialStateData, action: PayloadAction<GenderDTO.Response[]>) => {
       state.genders = action.payload;
     },
   },
 });
+
+export const selectFontSize = (state: InitialStateData) => state.fontSize;

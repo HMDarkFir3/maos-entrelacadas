@@ -9,7 +9,7 @@ import { User, EnvelopeSimple, Phone, ArrowRight } from 'phosphor-react-native';
 
 import { useSettings } from '@hooks/useSettings';
 
-import { StepOneFormState } from '@contexts/AuthContext';
+import { StepOneFormState } from '@store/auth/types';
 
 import { Header } from '@components-of-screens/Authentication/components/Header';
 import { Input } from '@components/Inputs/Input';

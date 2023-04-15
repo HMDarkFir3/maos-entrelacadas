@@ -10,9 +10,8 @@ import { useAppDispatch } from '@hooks/useAppDispatch';
 import { useAppSelector } from '@hooks/useAppSelector';
 import { useSettings } from '@hooks/useSettings';
 
-import { LoginFormState } from '@contexts/AuthContext';
-
-import { login } from '@store/auth/thunks';
+import { login } from '@store/auth/thunks/login';
+import { LoginFormState } from '@store/auth/types';
 
 import { Header } from '@components-of-screens/Authentication/components/Header';
 import { Input } from '@components/Inputs/Input';
