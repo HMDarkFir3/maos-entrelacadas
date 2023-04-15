@@ -1,6 +1,7 @@
 import { useState, FC } from 'react';
 import { ViewStyle, FlatList } from 'react-native';
 import { useAnimatedStyle, interpolate, withTiming, Extrapolate } from 'react-native-reanimated';
+import { Controller } from 'react-hook-form';
 import { useTheme } from 'styled-components/native';
 import { CaretDown } from 'phosphor-react-native';
 
@@ -13,6 +14,7 @@ import {
   Wrapper,
   Placeholder,
   CaretWrapper,
+  ErrorText,
   List,
   Item,
   ItemText,
@@ -22,8 +24,10 @@ import {
 
 interface Props<T> {
   style?: ViewStyle;
-  value: string;
-  onChange?: (item: string) => void;
+  control: any;
+  selectName: string;
+  dirtyValue: string;
+  error: string | undefined;
   placeholder?: string;
   icon: any;
   data: T;
@@ -31,7 +35,17 @@ interface Props<T> {
 }
 
 export const Select: FC<Props<GenderDTO.Response[]>> = (props) => {
-  const { style, value, onChange, icon: Icon, placeholder, data, isEditable = true } = props;
+  const {
+    style,
+    control,
+    selectName,
+    dirtyValue,
+    error,
+    icon: Icon,
+    placeholder,
+    data,
+    isEditable = true,
+  } = props;
 
   const { fontSizeValue } = useSettings();
   const { colors } = useTheme();
@@ -48,25 +62,19 @@ export const Select: FC<Props<GenderDTO.Response[]>> = (props) => {
 
   const onPressOpenSelect = () => setIsOpen((prevState) => !prevState);
 
-  const onPressSelectItem = (item: string) => {
-    if (onChange) {
-      onChange(item);
-      setIsOpen(false);
-    }
-  };
-
   return (
     <Container style={style}>
       <Wrapper
         testID="Select.Wrapper"
+        error={!!error}
         activeOpacity={0.7}
         disabled={!isEditable}
         onPress={onPressOpenSelect}
       >
         <Icon />
-        {value ? (
+        {dirtyValue ? (
           <ItemText style={{ marginLeft: 16, fontSize: fontSizeValue(20) }} isEditable={isEditable}>
-            {value}
+            {dirtyValue}
           </ItemText>
         ) : (
           <Placeholder style={{ marginLeft: 16, fontSize: fontSizeValue(20) }}>
@@ -79,23 +87,36 @@ export const Select: FC<Props<GenderDTO.Response[]>> = (props) => {
         </CaretWrapper>
       </Wrapper>
 
+      {error && <ErrorText style={{ fontSize: fontSizeValue(16) }}>{error}</ErrorText>}
+
       {isOpen && (
         <List>
-          <FlatList
-            data={data}
-            keyExtractor={(item) => String(item.id)}
-            renderItem={({ item }) => (
-              <Item onPress={() => onPressSelectItem(item.name)}>
-                <SelectedText
-                  style={{ marginLeft: 16, fontSize: fontSizeValue(20) }}
-                  isSelected={item.name === value}
-                >
-                  {item.name}
-                </SelectedText>
-              </Item>
+          <Controller
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <FlatList
+                data={data}
+                keyExtractor={(item) => String(item.id)}
+                renderItem={({ item }) => (
+                  <Item
+                    onPress={() => {
+                      setIsOpen(false);
+                      onChange(item.name);
+                    }}
+                  >
+                    <SelectedText
+                      style={{ marginLeft: 16, fontSize: fontSizeValue(20) }}
+                      isSelected={item.name === value}
+                    >
+                      {item.name}
+                    </SelectedText>
+                  </Item>
+                )}
+                ItemSeparatorComponent={() => <ItemSeparator />}
+                showsVerticalScrollIndicator={false}
+              />
             )}
-            ItemSeparatorComponent={() => <ItemSeparator />}
-            showsVerticalScrollIndicator={false}
+            name={selectName}
           />
         </List>
       )}

@@ -11,14 +11,17 @@ import {
   Wrapper,
   StyledInput,
   TogglePasswordVisibilityButton,
+  Footer,
   ErrorText,
   MaxLength,
+  EmptyView,
 } from './styles';
 
 interface Props extends TextInputProps {
   style?: ViewStyle;
   control: any;
   inputName: string;
+  dirtyValue?: string;
   error: string | undefined;
   icon: any;
   isPassword?: boolean;
@@ -31,12 +34,12 @@ export const Input = forwardRef<TextInput, Props>((props, ref) => {
     style,
     control,
     inputName,
+    dirtyValue,
     error,
     icon: Icon,
     isPassword = false,
     isEditable = true,
     maxLength,
-    value: inputValue,
     ...rest
   } = props;
 
@@ -83,14 +86,19 @@ export const Input = forwardRef<TextInput, Props>((props, ref) => {
           </TogglePasswordVisibilityButton>
         )}
       </Wrapper>
+      <Footer>
+        {error ? (
+          <ErrorText style={{ fontSize: fontSizeValue(16) }}>{error}</ErrorText>
+        ) : (
+          <EmptyView />
+        )}
 
-      {error && <ErrorText style={{ fontSize: fontSizeValue(16) }}>{error}</ErrorText>}
-
-      {maxLength && (
-        <MaxLength style={{ fontSize: fontSizeValue(16) }}>
-          {inputValue?.length}/{maxLength}
-        </MaxLength>
-      )}
+        {maxLength && (
+          <MaxLength style={{ fontSize: fontSizeValue(16) }}>
+            {dirtyValue?.length}/{maxLength}
+          </MaxLength>
+        )}
+      </Footer>
     </Container>
   );
 });

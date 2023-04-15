@@ -45,6 +45,11 @@ export const StyledInput = styled(TextInput)<StyledInputProps>`
   `}
 `;
 
+export const Footer = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
 export const ErrorText = styled.Text`
   margin-top: 6px;
 
@@ -57,12 +62,12 @@ export const ErrorText = styled.Text`
 export const MaxLength = styled.Text`
   margin-top: 6px;
 
-  text-align: right;
-
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};
     color: ${theme.colors.components.input.placeholder};
   `}
 `;
+
+export const EmptyView = styled.View``;
 
 export const TogglePasswordVisibilityButton = styled(BorderlessButton)``;

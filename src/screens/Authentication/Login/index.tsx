@@ -38,13 +38,15 @@ export const Login: FC = () => {
   const schema = yup
     .object({
       email: yup.string().email('Email inválido.').required('Email obrigatório.'),
-      password: yup.string().required('Senha obrigatória.').min(6, 'Mínimo de 6 caracteres.'),
+      password: yup.string().required('Senha obrigatória.').min(8, 'Mínimo de 8 caracteres.'),
     })
     .required();
 
   const {
     control,
     handleSubmit,
+    reset,
+    clearErrors,
     formState: { errors },
   } = useForm<LoginFormState>({
     defaultValues: {
@@ -59,6 +61,11 @@ export const Login: FC = () => {
     passwordInputRef.current?.blur();
   };
 
+  const onPressBackButton = () => {
+    reset();
+    clearErrors();
+  };
+
   return (
     <InputBlurButton testID="Login.InputBlurButton" onPress={onPressInScreen}>
       <Container>
@@ -66,6 +73,7 @@ export const Login: FC = () => {
           testID="Login.Header"
           title="Faça login"
           description="Queremos impactar de forma positiva a sua vida e de sua comunidade."
+          onBackButton={onPressBackButton}
         />
 
         <InputWrapper>

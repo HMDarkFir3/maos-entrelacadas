@@ -2,6 +2,10 @@ import styled, { css } from 'styled-components/native';
 import { View, TouchableOpacity } from 'react-native';
 import Animated from 'react-native-reanimated';
 
+interface WrapperProps {
+  error: boolean;
+}
+
 interface ItemTextProps {
   isEditable: boolean;
 }
@@ -14,14 +18,22 @@ export const Container = styled(View)`
   z-index: 2;
 `;
 
-export const Wrapper = styled(TouchableOpacity)`
+export const Wrapper = styled(TouchableOpacity)<WrapperProps>`
   flex-direction: row;
   align-items: center;
 
   padding: 0 12px 8px 0;
 
   border-bottom-width: 1px;
-  border-color: ${({ theme }) => theme.colors.components.select.primary};
+
+  ${({ error, theme }) =>
+    error
+      ? css`
+          border-color: ${theme.colors.components.select.error};
+        `
+      : css`
+          border-color: ${theme.colors.components.select.primary};
+        `}
 `;
 
 export const Placeholder = styled.Text`
@@ -53,6 +65,15 @@ export const List = styled.View`
   border-color: ${({ theme }) => theme.colors.components.select.primary};
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
+`;
+
+export const ErrorText = styled.Text`
+  margin-top: 6px;
+
+  ${({ theme }) => css`
+    font-family: ${theme.fonts.regular};
+    color: ${theme.colors.components.select.error};
+  `}
 `;
 
 export const Item = styled(TouchableOpacity)``;

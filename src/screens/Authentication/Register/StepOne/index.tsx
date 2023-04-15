@@ -1,14 +1,15 @@
 import { useRef, FC } from 'react';
 import { TextInput } from 'react-native';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import { useNavigation } from '@react-navigation/native';
 import { useTheme } from 'styled-components/native';
 import { User, EnvelopeSimple, Phone, ArrowRight } from 'phosphor-react-native';
 
-import { useAppDispatch } from '@hooks/useAppDispatch';
-import { useAppSelector } from '@hooks/useAppSelector';
 import { useSettings } from '@hooks/useSettings';
 
-import { setEmptyFields, setGivenNameField, setEmailField } from '@store/auth/actions';
+import { StepOneFormState } from '@contexts/AuthContext';
 
 import { Header } from '@components-of-screens/Authentication/components/Header';
 import { Input } from '@components/Inputs/Input';
@@ -17,8 +18,6 @@ import { SmallButton } from '@components/Buttons/SmallButton';
 import { InputBlurButton, Container, InputWrapper, Footer } from '../../styles';
 
 export const StepOne: FC = () => {
-  const dispatch = useAppDispatch();
-  const { givenName, email } = useAppSelector((store) => store.auth);
   const { fontSizeValue } = useSettings();
   const { navigate } = useNavigation();
   const { colors } = useTheme();
@@ -28,6 +27,33 @@ export const StepOne: FC = () => {
   const emailInputRef = useRef<TextInput>(null);
   const cellphoneInputRef = useRef<TextInput>(null);
 
+  const schema = yup
+    .object({
+      givenName: yup.string().required('Nome obrigatório.'),
+      username: yup.string().required('Usuário obrigatório.'),
+      email: yup.string().email('Email inválido.').required('Email obrigatório.'),
+      cellphone: yup.string().required('Celular obrigatório.').min(11, 'Celular inválido.'),
+    })
+    .required();
+
+  const {
+    control,
+    handleSubmit,
+    clearErrors,
+    reset,
+    watch,
+    formState: { errors },
+  } = useForm<StepOneFormState>({
+    defaultValues: {
+      givenName: '',
+      username: '',
+      email: '',
+      cellphone: '',
+    },
+
+    resolver: yupResolver(schema),
+  });
+
   const onPressInScreen = () => {
     givenNameInputRef.current?.blur();
     usernameInputRef.current?.blur();
@@ -35,13 +61,14 @@ export const StepOne: FC = () => {
     cellphoneInputRef.current?.blur();
   };
 
-  const onPressNextStep = () => {
-    if (!givenName.trim() || !email.trim()) return;
-
-    navigate('StepTwo');
+  const onPressBackButton = () => {
+    reset();
+    clearErrors();
   };
 
-  const onPressBackButton = () => dispatch(setEmptyFields());
+  const onSubmit = (data: StepOneFormState) => {
+    navigate('StepTwo', { formStepOne: data });
+  };
 
   return (
     <InputBlurButton testID="StepOne.InputBlurButton" onPress={onPressInScreen}>
@@ -58,8 +85,10 @@ export const StepOne: FC = () => {
             testID="StepOne.GivenNameInput"
             ref={givenNameInputRef}
             style={{ marginBottom: 16 }}
-            value={givenName}
-            onChangeText={(text) => dispatch(setGivenNameField(text))}
+            control={control}
+            inputName="givenName"
+            dirtyValue={watch().givenName}
+            error={errors.givenName?.message}
             icon={() => (
               <User size={fontSizeValue(24)} color={colors.components.input.placeholder} />
             )}
@@ -71,8 +100,10 @@ export const StepOne: FC = () => {
             testID="StepOne.UsernameInput"
             ref={usernameInputRef}
             style={{ marginBottom: 16 }}
-            value={givenName}
-            onChangeText={(text) => dispatch(setGivenNameField(text))}
+            control={control}
+            inputName="username"
+            dirtyValue={watch().username}
+            error={errors.username?.message}
             icon={() => (
               <User size={fontSizeValue(24)} color={colors.components.input.placeholder} />
             )}
@@ -84,8 +115,10 @@ export const StepOne: FC = () => {
             testID="StepOne.EmailInput"
             ref={emailInputRef}
             style={{ marginBottom: 16 }}
-            value={email}
-            onChangeText={(text) => dispatch(setEmailField(text))}
+            control={control}
+            inputName="email"
+            dirtyValue={watch().email}
+            error={errors.email?.message}
             icon={() => (
               <EnvelopeSimple
                 size={fontSizeValue(24)}
@@ -101,8 +134,10 @@ export const StepOne: FC = () => {
             testID="StepOne.CellphoneInput"
             ref={cellphoneInputRef}
             style={{ marginBottom: 16 }}
-            value={email}
-            onChangeText={(text) => dispatch(setEmailField(text))}
+            control={control}
+            inputName="cellphone"
+            dirtyValue={watch().cellphone}
+            error={errors.cellphone?.message}
             icon={() => (
               <Phone size={fontSizeValue(24)} color={colors.components.input.placeholder} />
             )}
@@ -122,7 +157,7 @@ export const StepOne: FC = () => {
                 weight="bold"
               />
             )}
-            onPress={onPressNextStep}
+            onPress={handleSubmit((data) => onSubmit(data))}
           />
         </Footer>
       </Container>

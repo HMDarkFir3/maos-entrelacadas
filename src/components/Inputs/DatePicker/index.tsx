@@ -1,18 +1,21 @@
 import { useState, FC } from 'react';
 import { ViewStyle } from 'react-native';
+import { Controller } from 'react-hook-form';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 import { useSettings } from '@hooks/useSettings';
 
 import { formatDate } from '@utils/formatDate';
 
-import { Container, Date, Placeholder } from './styles';
+import { Container, Wrapper, Date, Placeholder, ErrorText } from './styles';
 
 interface Props {
   testDateTimePickerModalID?: string;
   style?: ViewStyle;
-  value: string | null;
-  onChange?: (date: Date) => void;
+  control: any;
+  datePickerName: string;
+  dirtyValue: string;
+  error: string | undefined;
   placeholder?: string;
   icon: any;
   isEditable?: boolean;
@@ -22,8 +25,10 @@ export const DatePicker: FC<Props> = (props) => {
   const {
     testDateTimePickerModalID,
     style,
-    value,
-    onChange,
+    control,
+    datePickerName,
+    dirtyValue,
+    error,
     icon: Icon,
     placeholder,
     isEditable = true,
@@ -35,13 +40,6 @@ export const DatePicker: FC<Props> = (props) => {
 
   const onPressOpenDatePicker = () => setIsOpenDatePicker((prevState) => !prevState);
 
-  const onChangeDate = (date: Date) => {
-    if (onChange) {
-      onChange(date);
-      setIsOpenDatePicker(false);
-    }
-  };
-
   const onCancelDatePicker = () => setIsOpenDatePicker((prevState) => !prevState);
 
   return (
@@ -51,26 +49,39 @@ export const DatePicker: FC<Props> = (props) => {
       disabled={!isEditable}
       onPress={onPressOpenDatePicker}
     >
-      <Icon />
+      <Wrapper error={!!error}>
+        <Icon />
 
-      {value ? (
-        <Date style={{ fontSize: fontSizeValue(20) }} isEditable={isEditable}>
-          {formatDate(value)}
-        </Date>
-      ) : (
-        <Placeholder style={{ fontSize: fontSizeValue(20) }}>
-          {placeholder ?? 'Selecione uma data'}
-        </Placeholder>
-      )}
+        {dirtyValue ? (
+          <Date style={{ fontSize: fontSizeValue(20) }} isEditable={isEditable}>
+            {formatDate(dirtyValue)}
+          </Date>
+        ) : (
+          <Placeholder style={{ fontSize: fontSizeValue(20) }}>
+            {placeholder ?? 'Selecione uma data'}
+          </Placeholder>
+        )}
 
-      <DateTimePickerModal
-        testID={testDateTimePickerModalID}
-        isVisible={isOpenDatePicker}
-        mode="date"
-        onConfirm={onChangeDate}
-        onCancel={onCancelDatePicker}
-        locale="pt_BR"
-      />
+        <Controller
+          control={control}
+          render={({ field: { onChange } }) => (
+            <DateTimePickerModal
+              testID={testDateTimePickerModalID}
+              isVisible={isOpenDatePicker}
+              mode="date"
+              onConfirm={(date: Date) => {
+                onChange(date);
+                setIsOpenDatePicker(false);
+              }}
+              onCancel={onCancelDatePicker}
+              locale="pt_BR"
+            />
+          )}
+          name={datePickerName}
+        />
+      </Wrapper>
+
+      {error && <ErrorText style={{ fontSize: fontSizeValue(16) }}>{error}</ErrorText>}
     </Container>
   );
 };

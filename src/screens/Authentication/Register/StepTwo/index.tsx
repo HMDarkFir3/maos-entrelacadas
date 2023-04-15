@@ -1,20 +1,19 @@
 import { useRef, FC } from 'react';
 import { TextInput } from 'react-native';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+import { useRoute } from '@react-navigation/native';
+import { format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 import { useTheme } from 'styled-components/native';
 import { GenderNeuter, Cake, LockOpen, Check } from 'phosphor-react-native';
 
-import { useAppDispatch } from '@hooks/useAppDispatch';
 import { useAppSelector } from '@hooks/useAppSelector';
 import { useAuth } from '@hooks/useAuth';
 import { useSettings } from '@hooks/useSettings';
 
-import {
-  setEmptyFields,
-  setGenderField,
-  setBirthdateField,
-  setPasswordField,
-  setConfirmPasswordField,
-} from '@store/auth/actions';
+import { RegisterFormState, StepOneFormState, StepTwoFormState } from '@contexts/AuthContext';
 
 import { Header } from '@components-of-screens/Authentication/components/Header';
 import { Select } from '@components/Inputs/Select';
@@ -24,9 +23,11 @@ import { SmallButton } from '@components/Buttons/SmallButton';
 
 import { InputBlurButton, Container, InputWrapper, Footer } from '../../styles';
 
+interface Params {
+  formStepOne: StepOneFormState;
+}
+
 export const StepTwo: FC = () => {
-  const dispatch = useAppDispatch();
-  const { gender, birthdate, password, confirmPassword } = useAppSelector((store) => store.auth);
   const { genders } = useAppSelector((store) => store.settings);
   const { register } = useAuth();
   const { fontSizeValue } = useSettings();
@@ -35,18 +36,61 @@ export const StepTwo: FC = () => {
   const passwordInputRef = useRef<TextInput>(null);
   const confirmPasswordInputRef = useRef<TextInput>(null);
 
+  const route = useRoute();
+  const { formStepOne } = route.params as Params;
+
+  const schema = yup
+    .object({
+      gender: yup.string().required('Gênero obrigatório.'),
+      birthdate: yup.string().required('Data de nascimento obrigatória.'),
+      password: yup
+        .string()
+        .required('Senha obrigatória.')
+        .min(8, 'Mínimo de 8 caracteres.')
+        .equals([yup.ref('confirmPassword')], 'Senhas não conferem.'),
+      confirmPassword: yup
+        .string()
+        .required('Senha obrigatória.')
+        .min(8, 'Mínimo de 8 caracteres.')
+        .equals([yup.ref('password')], 'Senhas não conferem.'),
+    })
+    .required();
+
+  const {
+    control,
+    handleSubmit,
+    reset,
+    clearErrors,
+    watch,
+    formState: { errors },
+  } = useForm<StepTwoFormState>({
+    defaultValues: { gender: '', birthdate: '', password: '', confirmPassword: '' },
+    resolver: yupResolver(schema),
+  });
+
   const onPressInScreen = () => {
     passwordInputRef.current?.blur();
     confirmPasswordInputRef.current?.blur();
   };
 
-  const onPressRegister = () => {
-    if (!gender || !birthdate) return;
-
-    register();
+  const onPressBackButton = () => {
+    reset();
+    clearErrors();
   };
 
-  const onPressBackButton = () => dispatch(setEmptyFields());
+  const onSubmit = (data: StepTwoFormState) => {
+    const formmatedBirthdate = format(new Date(data.birthdate), 'yyyy-MM-dd', {
+      locale: ptBR,
+    });
+
+    const formInfo: RegisterFormState = {
+      ...formStepOne,
+      ...data,
+      birthdate: formmatedBirthdate,
+    };
+
+    register(formInfo);
+  };
 
   return (
     <InputBlurButton testID="StepTwo.InputBlurButton" onPress={onPressInScreen}>
@@ -61,8 +105,10 @@ export const StepTwo: FC = () => {
         <InputWrapper>
           <Select
             style={{ marginBottom: 32 }}
-            value={gender}
-            onChange={(item: string) => dispatch(setGenderField(item))}
+            control={control}
+            selectName="gender"
+            dirtyValue={watch().gender}
+            error={errors.gender?.message}
             icon={() => (
               <GenderNeuter size={fontSizeValue(24)} color={colors.components.select.placeholder} />
             )}
@@ -73,8 +119,10 @@ export const StepTwo: FC = () => {
           <DatePicker
             testDateTimePickerModalID="StepTwo.DatePicker"
             style={{ marginBottom: 32 }}
-            value={birthdate}
-            onChange={(date: Date) => dispatch(setBirthdateField(date.toISOString()))}
+            control={control}
+            datePickerName="birthdate"
+            dirtyValue={watch().birthdate}
+            error={errors.birthdate?.message}
             icon={() => (
               <Cake size={fontSizeValue(24)} color={colors.components.datePicker.placeholder} />
             )}
@@ -85,8 +133,10 @@ export const StepTwo: FC = () => {
             testID="StepTwo.PasswordInput"
             ref={passwordInputRef}
             style={{ marginBottom: 24 }}
-            value={password}
-            onChangeText={(text) => dispatch(setPasswordField(text))}
+            control={control}
+            inputName="password"
+            dirtyValue={watch().password}
+            error={errors.password?.message}
             icon={() => (
               <LockOpen size={fontSizeValue(24)} color={colors.components.input.placeholder} />
             )}
@@ -98,8 +148,10 @@ export const StepTwo: FC = () => {
           <Input
             testID="StepTwo.ConfirmPasswordInput"
             ref={confirmPasswordInputRef}
-            value={confirmPassword}
-            onChangeText={(text) => dispatch(setConfirmPasswordField(text))}
+            control={control}
+            inputName="confirmPassword"
+            dirtyValue={watch().confirmPassword}
+            error={errors.confirmPassword?.message}
             icon={() => (
               <LockOpen size={fontSizeValue(24)} color={colors.components.input.placeholder} />
             )}
@@ -119,7 +171,7 @@ export const StepTwo: FC = () => {
                 size={fontSizeValue(24)}
               />
             )}
-            onPress={onPressRegister}
+            onPress={handleSubmit((data: StepTwoFormState) => onSubmit(data))}
           />
         </Footer>
       </Container>

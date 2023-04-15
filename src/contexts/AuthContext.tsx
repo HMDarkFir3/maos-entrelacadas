@@ -9,7 +9,7 @@ import { api } from '@services/api';
 
 import { useAppDispatch } from '@hooks/useAppDispatch';
 
-import { setUser, setError, setIsLoading } from '@store/auth/actions';
+import { setUser, setIsLoading } from '@store/auth/actions';
 
 import { COLLECTION_USER } from '@storages/index';
 
@@ -18,9 +18,25 @@ export interface LoginFormState {
   password: string;
 }
 
+export interface StepOneFormState {
+  givenName: string;
+  username: string;
+  email: string;
+  cellphone: string;
+}
+
+export interface StepTwoFormState {
+  gender: string;
+  birthdate: string;
+  password: string;
+  confirmPassword: string;
+}
+
+export interface RegisterFormState extends StepOneFormState, StepTwoFormState {}
+
 export interface AuthContextData {
   login: (form: LoginFormState) => Promise<void>;
-  register: () => Promise<void>;
+  register: (form: RegisterFormState) => Promise<void>;
   logOut: () => Promise<void>;
 }
 
@@ -47,14 +63,13 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
       dispatch(setUser(data));
     } catch (error) {
       const errors = {
-        400: 'Email ou senha incorretos',
         401: 'Não autorizado',
-        403: 'Acesso negado',
-        404: 'Não encontrado',
         500: 'Erro interno do servidor',
       } as any;
 
-      Alert.alert('Ocorreu um error no sistema', errors[error.response.data.statusCode]);
+      if (error) {
+        Alert.alert('Ocorreu um error no sistema', errors[error.response.data.statusCode]);
+      }
 
       // dispatch(setError(errors[error.response.data.statusCode]));
     } finally {
@@ -62,7 +77,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  const register = async () => {
+  const register = async (form: RegisterFormState) => {
     try {
       dispatch(setIsLoading(true));
 

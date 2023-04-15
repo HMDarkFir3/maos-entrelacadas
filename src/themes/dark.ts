@@ -110,11 +110,13 @@ export const dark = {
         primary: '#3cb371',
         text: '#e5ebef',
         placeholder: '#c0c0c0',
+        error: '#ff3333',
       },
       datePicker: {
         primary: '#3cb371',
         text: '#e5ebef',
         placeholder: '#c0c0c0',
+        error: '#ff3333',
       },
       customTabBar: {
         background: '#222222',

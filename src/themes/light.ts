@@ -110,11 +110,13 @@ export const light = {
         primary: '#3cb371',
         text: '#1c1e26',
         placeholder: '#8babc3',
+        error: '#ff3333',
       },
       datePicker: {
         primary: '#3cb371',
         text: '#1c1e26',
         placeholder: '#8babc3',
+        error: '#ff3333',
       },
       customTabBar: {
         background: '#ffffff',
