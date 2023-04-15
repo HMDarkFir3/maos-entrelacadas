@@ -82,24 +82,24 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
       dispatch(setIsLoading(true));
 
       const userInfo = {
-        username: 'hrq_marques',
-        password: '123456',
-        email: 'henrique@email.com',
-        cellphone: '13981630534',
+        username: form.username,
+        password: form.password,
+        email: form.email,
+        cellphone: form.cellphone,
         person: {
-          name: 'Henrique Marques',
-          birthDate: '2022-05-05',
+          name: form.givenName,
+          birthdate: form.birthdate,
           gender: {
-            name: 'Assexual',
+            name: form.gender,
           },
         },
       };
 
-      await api.post('users/create', { ...userInfo }).catch((err) => {
-        console.log(err);
-      });
+      await api.post('users/create', { ...userInfo });
     } catch (error) {
-      console.log();
+      if (error) {
+        console.log(error.response.data.message);
+      }
     } finally {
       dispatch(setIsLoading(false));
     }

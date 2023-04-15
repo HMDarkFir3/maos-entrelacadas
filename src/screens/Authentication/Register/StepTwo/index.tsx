@@ -28,6 +28,7 @@ interface Params {
 }
 
 export const StepTwo: FC = () => {
+  const { isLoading } = useAppSelector((store) => store.auth);
   const { genders } = useAppSelector((store) => store.settings);
   const { register } = useAuth();
   const { fontSizeValue } = useSettings();
@@ -171,6 +172,7 @@ export const StepTwo: FC = () => {
                 size={fontSizeValue(24)}
               />
             )}
+            isLoading={isLoading}
             onPress={handleSubmit((data: StepTwoFormState) => onSubmit(data))}
           />
         </Footer>
