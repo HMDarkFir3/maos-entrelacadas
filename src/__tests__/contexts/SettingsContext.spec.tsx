@@ -1,9 +1,13 @@
 import { ReactNode } from 'react';
 import { View, Text, Button, FlatList } from 'react-native';
-import { render, fireEvent, act, waitFor } from '@testing-library/react-native';
+import { render, waitFor, act, fireEvent } from '@testing-library/react-native';
 import { Provider as ReduxProvider } from 'react-redux';
 
+import { useAppDispatch } from '@hooks/useAppDispatch';
+
 import { store } from '@store/index';
+import { changeFontSize } from '@store/settings/actions';
+import { FontSizeData } from '@store/settings/types';
 
 import { SettingsProvider } from '@contexts/SettingsContext';
 
@@ -17,20 +21,21 @@ const Providers = ({ children }: { children: ReactNode }) => (
 
 describe('SettingsContext', () => {
   const ComponentMock = () => {
-    const { fontSizeValue, sawIntroductionInStorage, changeFontSize, toggleTheme } = useSettings();
+    const dispatch = useAppDispatch();
+    const { fontSizeValue } = useSettings();
 
     const dataMock = [
       {
         name: 'Pequeno',
-        size: 'sm',
+        value: 'sm',
       },
       {
         name: 'Normal',
-        size: 'md',
+        value: 'md',
       },
       {
         name: 'Grande',
-        size: 'lg',
+        value: 'lg',
       },
     ];
 
@@ -38,22 +43,20 @@ describe('SettingsContext', () => {
       <View>
         <Text style={{ fontSize: fontSizeValue(20) }}>Test</Text>
 
-        <Button title="Jump Introduction" onPress={sawIntroductionInStorage} />
-
-        <Button title="Toggle Theme" onPress={toggleTheme} />
-
         <FlatList
           data={dataMock}
           keyExtractor={(item) => item.name}
           renderItem={({ item }) => (
             <Button
               title={item.name}
-              onPress={() =>
-                changeFontSize(
-                  item.name as 'Pequeno' | 'Normal' | 'Grande',
-                  item.size as 'sm' | 'md' | 'lg'
-                )
-              }
+              onPress={() => {
+                const formmattedValue = {
+                  name: item.name,
+                  value: item.value,
+                };
+
+                dispatch(changeFontSize(formmattedValue as FontSizeData));
+              }}
             />
           )}
         />
@@ -64,38 +67,6 @@ describe('SettingsContext', () => {
   it('should be able to render correctly', () => {
     const { getByText } = render(<ComponentMock />, { wrapper: Providers });
     expect(getByText('Test')).toBeTruthy();
-  });
-
-  it('should be able to press the jump introduction', () => {
-    const { getByText } = render(<ComponentMock />, { wrapper: Providers });
-
-    const jumpIntroduction = getByText('Jump Introduction');
-
-    waitFor(() => {
-      act(() => {
-        fireEvent.press(jumpIntroduction);
-      });
-    });
-
-    render(<ComponentMock />, { wrapper: Providers });
-  });
-
-  it('should be able to press the toggle theme', () => {
-    const { getByText } = render(<ComponentMock />, { wrapper: Providers });
-
-    const toggleTheme = getByText('Toggle Theme');
-
-    waitFor(() => {
-      act(() => {
-        fireEvent.press(toggleTheme);
-      });
-    });
-
-    render(<ComponentMock />, { wrapper: Providers });
-
-    act(() => {
-      fireEvent.press(toggleTheme);
-    });
   });
 
   it('should be able to press the change font size', () => {

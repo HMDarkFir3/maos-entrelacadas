@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { render, fireEvent } from '@testing-library/react-native';
+import { render, fireEvent, act } from '@testing-library/react-native';
 import { Provider as ReduxProvider } from 'react-redux';
 import { ThemeProvider } from 'styled-components/native';
 
@@ -36,7 +36,10 @@ describe('StepOne Screen', () => {
     });
 
     const inputBlurButton = getByTestId('StepOne.InputBlurButton');
-    fireEvent.press(inputBlurButton);
+
+    act(() => {
+      fireEvent.press(inputBlurButton);
+    });
   });
 
   it('should be able to press the next button', () => {
@@ -45,7 +48,10 @@ describe('StepOne Screen', () => {
     });
 
     const smallButton = getByTestId('StepOne.SmallButton');
-    fireEvent.press(smallButton);
+
+    act(() => {
+      fireEvent.press(smallButton);
+    });
   });
 
   it('should be able to press the back button', () => {
@@ -54,7 +60,10 @@ describe('StepOne Screen', () => {
     });
 
     const header = getByTestId('StepOne.Header');
-    fireEvent.press(header, 'onBackButton');
+
+    act(() => {
+      fireEvent.press(header, 'onBackButton');
+    });
   });
 
   it('should be able to change the values the inputs', async () => {
@@ -67,12 +76,16 @@ describe('StepOne Screen', () => {
     const emailInput = getByTestId('StepOne.EmailInput');
     const cellphoneInput = getByTestId('StepOne.CellphoneInput');
 
-    fireEvent.changeText(givenNameInput, 'John Doe');
-    fireEvent.changeText(usernameInput, 'john_doe');
-    fireEvent.changeText(emailInput, 'johndoe@example.com');
-    fireEvent.changeText(cellphoneInput, '11111111111');
+    act(() => {
+      fireEvent.changeText(givenNameInput, 'John Doe');
+      fireEvent.changeText(usernameInput, 'john_doe');
+      fireEvent.changeText(emailInput, 'johndoe@example.com');
+      fireEvent.changeText(cellphoneInput, '11111111111');
+    });
 
     const smallButton = getByTestId('StepOne.SmallButton');
-    fireEvent.press(smallButton);
+    act(() => {
+      fireEvent.press(smallButton);
+    });
   });
 });

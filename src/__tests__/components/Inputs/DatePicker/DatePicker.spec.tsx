@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
-import { render, fireEvent } from '@testing-library/react-native';
+import { render, fireEvent, renderHook } from '@testing-library/react-native';
 import { Provider as ReduxProvider } from 'react-redux';
+import { useForm } from 'react-hook-form';
 import { ThemeProvider } from 'styled-components/native';
 import { Activity } from 'phosphor-react-native';
 
@@ -21,16 +22,21 @@ const Providers = ({ children }: { children: ReactNode }) => (
 );
 
 describe('DatePicker', () => {
+  const controlMock = renderHook(() => useForm().control).result.current;
+  const datePickerNameMock = 'name';
+  const errorMock = 'error';
+
   it('should be able to render the component', () => {
-    const onChangeMock = jest.fn();
-    const valueMock: Date | null = null;
+    const dirtyValueMock = '2022-01-01';
 
     const { getByTestId } = render(
       <DatePicker
         testDateTimePickerModalID="DatePicker.DateTimePickerModal"
         icon={() => <Activity />}
-        onChange={onChangeMock}
-        value={valueMock}
+        control={controlMock}
+        datePickerName={datePickerNameMock}
+        dirtyValue={dirtyValueMock}
+        error={errorMock}
       />,
       {
         wrapper: Providers,
@@ -45,38 +51,17 @@ describe('DatePicker', () => {
     fireEvent(dateTimePickerModal, 'onCancel');
   });
 
-  it('should be able to render the component when value exists', () => {
-    const onChangeMock = jest.fn();
-    const valueMock: Date | null = new Date();
+  it("should be able to render the component when dont have 'dirtyValue'", () => {
+    const dirtyValueMock = '';
 
     const { getByTestId } = render(
       <DatePicker
         testDateTimePickerModalID="DatePicker.DateTimePickerModal"
         icon={() => <Activity />}
-        onChange={onChangeMock}
-        value={String(valueMock)}
-      />,
-      {
-        wrapper: Providers,
-      }
-    );
-
-    const datePicker = getByTestId('DatePicker');
-    fireEvent.press(datePicker);
-
-    const dateTimePickerModal = getByTestId('DatePicker.DateTimePickerModal');
-    fireEvent(dateTimePickerModal, 'onConfirm', new Date());
-    fireEvent(dateTimePickerModal, 'onCancel');
-  });
-
-  it('should be able to render the component when onChange not exists', () => {
-    const valueMock: Date | null = null;
-
-    const { getByTestId } = render(
-      <DatePicker
-        testDateTimePickerModalID="DatePicker.DateTimePickerModal"
-        icon={() => <Activity />}
-        value={valueMock}
+        control={controlMock}
+        datePickerName={datePickerNameMock}
+        dirtyValue={dirtyValueMock}
+        error={errorMock}
       />,
       {
         wrapper: Providers,

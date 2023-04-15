@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
-import { render, fireEvent } from '@testing-library/react-native';
+import { render, fireEvent, renderHook } from '@testing-library/react-native';
 import { Provider as ReduxProvider } from 'react-redux';
+import { useForm } from 'react-hook-form';
 import { ThemeProvider } from 'styled-components/native';
 import { Activity } from 'phosphor-react-native';
 
@@ -21,18 +22,59 @@ const Providers = ({ children }: { children: ReactNode }) => (
 );
 
 describe('Input', () => {
+  const controlMock = renderHook(() => useForm().control).result.current;
+  const inputNameMock = 'name';
+
   it('should be able to render the component', () => {
-    render(<Input icon={() => <Activity />} maxLength={10} />, {
-      wrapper: Providers,
-    });
+    const errorMock = 'error';
+
+    render(
+      <Input
+        control={controlMock}
+        inputName={inputNameMock}
+        error={errorMock}
+        icon={() => <Activity />}
+        maxLength={10}
+      />,
+      {
+        wrapper: Providers,
+      }
+    );
   });
 
   it('should be able to render the component when pressed toggle password', () => {
-    const { getByTestId } = render(<Input icon={() => <Activity />} isPassword />, {
-      wrapper: Providers,
-    });
+    const errorMock = 'error';
+
+    const { getByTestId } = render(
+      <Input
+        control={controlMock}
+        inputName={inputNameMock}
+        error={errorMock}
+        icon={() => <Activity />}
+        isPassword
+      />,
+      {
+        wrapper: Providers,
+      }
+    );
 
     const togglePasswordVisibilityButton = getByTestId('Input.TogglePasswordVisibilityButton');
     fireEvent.press(togglePasswordVisibilityButton);
+  });
+
+  it('should be able to render the component when it dont have an error', () => {
+    const errorMock = null;
+
+    render(
+      <Input
+        control={controlMock}
+        inputName={inputNameMock}
+        error={errorMock}
+        icon={() => <Activity />}
+      />,
+      {
+        wrapper: Providers,
+      }
+    );
   });
 });

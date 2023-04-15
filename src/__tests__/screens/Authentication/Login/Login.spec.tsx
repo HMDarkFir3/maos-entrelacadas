@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { render, fireEvent } from '@testing-library/react-native';
+import { render, fireEvent, act } from '@testing-library/react-native';
 import { Provider as ReduxProvider } from 'react-redux';
 import { ThemeProvider } from 'styled-components/native';
 
@@ -38,7 +38,10 @@ describe('Login Screen', () => {
     });
 
     const inputBlurButton = getByTestId('Login.InputBlurButton');
-    fireEvent.press(inputBlurButton);
+
+    act(() => {
+      fireEvent.press(inputBlurButton);
+    });
   });
 
   it('should be able to press the login button', () => {
@@ -47,7 +50,10 @@ describe('Login Screen', () => {
     });
 
     const smallButton = getByTestId('Login.SmallButton');
-    fireEvent.press(smallButton);
+
+    act(() => {
+      fireEvent.press(smallButton);
+    });
   });
 
   it('should be able to press the back button', () => {
@@ -56,18 +62,29 @@ describe('Login Screen', () => {
     });
 
     const header = getByTestId('Login.Header');
-    fireEvent.press(header, 'onBackButton');
+
+    act(() => {
+      fireEvent.press(header, 'onBackButton');
+    });
   });
 
   it('should be able to change the values the inputs', () => {
-    const { getByPlaceholderText } = render(<Login />, {
+    const { getByPlaceholderText, getByTestId } = render(<Login />, {
       wrapper: Providers,
     });
 
     const emailInput = getByPlaceholderText('Email');
     const passwordInput = getByPlaceholderText('Senha');
 
-    fireEvent.changeText(emailInput, 'henrique@test.com');
-    fireEvent.changeText(passwordInput, '123456');
+    act(() => {
+      fireEvent.changeText(emailInput, 'henrique@test.com');
+      fireEvent.changeText(passwordInput, '12345678');
+    });
+
+    const smallButton = getByTestId('Login.SmallButton');
+
+    act(() => {
+      fireEvent.press(smallButton);
+    });
   });
 });

@@ -9,7 +9,7 @@ import { useAppSelector } from '@hooks/useAppSelector';
 import { setGenders } from '@store/settings/actions';
 
 export interface SettingsContextData {
-  fontSizeValue: (size: number) => number;
+  fontSizeValue: (size: number) => number | undefined;
 }
 
 interface SettingsProviderProps {
@@ -27,9 +27,6 @@ export const SettingsProvider: FC<SettingsProviderProps> = ({ children }) => {
       switch (fontSize.value) {
         case 'sm': {
           return size * 0.8;
-        }
-        case 'md': {
-          return size;
         }
         case 'lg': {
           return size * 1.2;

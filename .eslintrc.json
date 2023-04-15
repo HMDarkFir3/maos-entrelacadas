@@ -45,6 +45,7 @@
     ],
     "react/destructuring-assignment": "off",
     "import/no-extraneous-dependencies": "off",
-    "no-param-reassign": ["error", { "props": false }]
+    "no-param-reassign": ["error", { "props": false }],
+    "no-undef": "off"
   }
 }

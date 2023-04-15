@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
-import { render, fireEvent } from '@testing-library/react-native';
+import { render, fireEvent, renderHook } from '@testing-library/react-native';
 import { Provider as ReduxProvider } from 'react-redux';
+import { useForm } from 'react-hook-form';
 import { ThemeProvider } from 'styled-components/native';
 import { Activity } from 'phosphor-react-native';
 
@@ -21,21 +22,32 @@ const Providers = ({ children }: { children: ReactNode }) => (
 );
 
 describe('Select', () => {
-  const onChangeMock = jest.fn();
   const dataMock = [
     {
-      id: 1,
+      id: '1',
       name: 'Masculino',
     },
     {
-      id: 2,
+      id: '2',
       name: 'Feminino',
     },
   ];
+  const controlMock = renderHook(() => useForm().control).result.current;
+  const selectNameMock = 'name';
+  const errorMock = 'error';
 
   it('should be able to render the component when pressed the select', () => {
+    const dirtyValueMock = 'Masculino';
+
     const { getByTestId } = render(
-      <Select icon={() => <Activity />} data={dataMock} onChange={onChangeMock} value="" />,
+      <Select
+        icon={() => <Activity />}
+        data={dataMock}
+        control={controlMock}
+        selectName={selectNameMock}
+        dirtyValue={dirtyValueMock}
+        error={errorMock}
+      />,
       {
         wrapper: Providers,
       }
@@ -46,25 +58,17 @@ describe('Select', () => {
   });
 
   it('should be able to render the component when selected an item', () => {
+    const dirtyValueMock = '';
+
     const { getByTestId, getByText } = render(
-      <Select icon={() => <Activity />} data={dataMock} onChange={onChangeMock} value="Feminino" />,
-      {
-        wrapper: Providers,
-      }
-    );
-
-    const selectWrapper = getByTestId('Select.Wrapper');
-    fireEvent.press(selectWrapper);
-
-    const selectItem = getByText(/masculino/i);
-    fireEvent.press(selectItem);
-
-    expect(onChangeMock).toBeCalledWith('Masculino');
-  });
-
-  it('should be able to render the component when onChange not exists', () => {
-    const { getByTestId, getByText } = render(
-      <Select icon={() => <Activity />} data={dataMock} value="Feminino" />,
+      <Select
+        icon={() => <Activity />}
+        data={dataMock}
+        control={controlMock}
+        selectName={selectNameMock}
+        dirtyValue={dirtyValueMock}
+        error={errorMock}
+      />,
       {
         wrapper: Providers,
       }
