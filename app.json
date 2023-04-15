@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Mãos Entrelaçadas (PREVIEW)",
+    "name": "Mãos Entrelaçadas (LOCAL)",
     "slug": "maosentrelacadas",
     "scheme": "maosentrelacadas",
     "version": "1.0.0",
@@ -31,8 +31,7 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#3cb371"
-      },
-      "package": "com.hmdarkfire.maosentrelacadas.preview"
+      }
     },
     "extra": {
       "eas": {
