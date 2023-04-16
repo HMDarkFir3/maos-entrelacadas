@@ -30,6 +30,8 @@ export const Header: FC = () => {
 
   const formattedGivenName: string | undefined = user?.person.name.split(' ')[0];
 
+  console.log(user);
+
   const onPressProfile = () => navigate('Profile');
 
   const onPressLogOut = () => {

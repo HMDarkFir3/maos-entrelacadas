@@ -2,7 +2,7 @@ import { createAsyncThunk, ActionReducerMapBuilder, PayloadAction } from '@redux
 
 import { api } from '@services/api';
 
-import { UserDTO } from '@dtos/UserDTO';
+import { User } from '@dtos/UserDTO';
 
 import { RegisterFormState, InitialStateData } from '@store/auth/types';
 
@@ -31,11 +31,13 @@ const registerBuilder = (builder: ActionReducerMapBuilder<InitialStateData>) => 
     .addCase(register.pending, (state: InitialStateData) => {
       state.isLoading = true;
     })
-    .addCase(register.fulfilled, (state: InitialStateData, action: PayloadAction<UserDTO>) => {
-      console.log(action.payload);
+    .addCase(register.fulfilled, (state: InitialStateData, action: PayloadAction<User>) => {
+      state.user = action.payload;
+      state.isSigned = true;
       state.isLoading = false;
     })
-    .addCase(register.rejected, (state: InitialStateData) => {
+    .addCase(register.rejected, (state: InitialStateData, action) => {
+      console.log('rejected', action.payload);
       state.isLoading = false;
     });
 };
