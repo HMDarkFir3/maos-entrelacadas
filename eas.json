@@ -16,7 +16,8 @@
     },
     "development": {
       "env": {
-        "APP_ENV": "development"
+        "APP_ENV": "development",
+        "API_URL": "https://smiling-headscarf-foal.cyclic.app/api"
       },
       "channel": "development",
       "distribution": "internal",
@@ -28,7 +29,8 @@
     },
     "preview": {
       "env": {
-        "APP_ENV": "preview"
+        "APP_ENV": "preview",
+        "API_URL": "https://smiling-headscarf-foal.cyclic.app/api"
       },
       "channel": "preview",
       "distribution": "internal",
