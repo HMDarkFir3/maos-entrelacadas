@@ -14,7 +14,6 @@ import { useAppSelector } from '@hooks/useAppSelector';
 import { useSettings } from '@hooks/useSettings';
 
 import { register } from '@store/auth/thunks/register';
-
 import { StepOneFormState, StepTwoFormState, RegisterFormState } from '@store/auth/types';
 
 import { Header } from '@components-of-screens/Authentication/components/Header';

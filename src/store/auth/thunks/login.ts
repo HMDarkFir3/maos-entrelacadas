@@ -1,9 +1,8 @@
 import { createAsyncThunk, ActionReducerMapBuilder, PayloadAction } from '@reduxjs/toolkit';
 
-import { LoginDTO } from '@dtos/LoginDTO';
-
 import { api } from '@services/api';
 
+import { LoginDTO } from '@dtos/LoginDTO';
 import { UserDTO } from '@dtos/UserDTO';
 
 import { LoginFormState, InitialStateData } from '@store/auth/types';

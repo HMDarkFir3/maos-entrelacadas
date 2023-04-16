@@ -8,7 +8,6 @@ import { useAppSelector } from '@hooks/useAppSelector';
 import { useSettings } from '@hooks/useSettings';
 
 import { changeFontSize } from '@store/settings/actions';
-
 import { FontSizeData } from '@store/settings/types';
 
 import { typeFonts } from '@utils/typeFonts';

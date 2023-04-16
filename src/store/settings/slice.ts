@@ -3,7 +3,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { GenderDTO } from '@dtos/GenderDTO';
 
 import { initialState } from '@store/settings/initialState';
-
 import { InitialStateData, FontSizeData } from '@store/settings/types';
 
 import { light } from '@themes/light';
