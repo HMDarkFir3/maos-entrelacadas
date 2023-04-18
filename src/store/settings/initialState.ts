@@ -1,8 +1,8 @@
-import { InitialStateData } from '@store/settings/types';
+import { InitialStateSettings } from '@store/settings/types';
 
 import { light } from '@themes/light';
 
-export const initialState: InitialStateData = {
+export const initialState: InitialStateSettings = {
   genders: [],
   sawIntroduction: false,
   theme: light,

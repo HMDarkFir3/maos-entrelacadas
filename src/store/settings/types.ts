@@ -7,7 +7,7 @@ export interface FontSizeData {
   value: 'sm' | 'md' | 'lg';
 }
 
-export interface InitialStateData {
+export interface InitialStateSettings {
   genders: GenderDTO.Response[];
   sawIntroduction: boolean;
   theme: DefaultTheme;

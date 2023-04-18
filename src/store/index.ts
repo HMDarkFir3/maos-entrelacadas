@@ -8,7 +8,6 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
-  PersistConfig,
 } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -20,7 +19,7 @@ const rootReducer = combineReducers({
   settings: settingsSlice.reducer,
 });
 
-const persistConfig: PersistConfig<any> = {
+const persistConfig = {
   key: 'root',
   version: 1,
   storage: AsyncStorage,

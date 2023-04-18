@@ -4,7 +4,7 @@ import { api } from '@services/api';
 
 import { UserDTO } from '@dtos/UserDTO';
 
-import { RegisterFormState, InitialStateData } from '@store/auth/types';
+import { RegisterFormState, InitialStateAuth } from '@store/auth/types';
 
 const register = createAsyncThunk('auth/register', async (form: RegisterFormState) => {
   const userInfo = {
@@ -26,18 +26,18 @@ const register = createAsyncThunk('auth/register', async (form: RegisterFormStat
   return data;
 });
 
-const registerBuilder = (builder: ActionReducerMapBuilder<InitialStateData>) => {
+const registerBuilder = (builder: ActionReducerMapBuilder<InitialStateAuth>) => {
   builder
-    .addCase(register.pending, (state: InitialStateData) => {
+    .addCase(register.pending, (state: InitialStateAuth) => {
       state.isLoading = true;
     })
-    .addCase(register.fulfilled, (state: InitialStateData, action: PayloadAction<UserDTO>) => {
+    .addCase(register.fulfilled, (state: InitialStateAuth, action: PayloadAction<UserDTO>) => {
       state.user = action.payload.userCreated;
       state.accessToken = action.payload.access_token;
       state.isSigned = true;
       state.isLoading = false;
     })
-    .addCase(register.rejected, (state: InitialStateData, action) => {
+    .addCase(register.rejected, (state: InitialStateAuth, action) => {
       console.log('rejected', action.payload);
       state.isLoading = false;
     });

@@ -1,6 +1,6 @@
 import { UserDTO } from '@dtos/UserDTO';
 
-export interface InitialStateData {
+export interface InitialStateAuth {
   user: UserDTO['user'] | null;
   accessToken: string | null;
   isSigned: boolean;
