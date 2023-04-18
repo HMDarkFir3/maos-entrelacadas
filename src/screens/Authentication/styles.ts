@@ -1,20 +1,20 @@
 import styled, { css } from 'styled-components/native';
-import { TouchableWithoutFeedback } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 
 import { SCREEN_WIDTH } from '@utils/globalVariables';
 
 export const Container = styled.View`
   flex: 1;
-  padding: 0 24px;
 
   background-color: ${({ theme }) => theme.colors.background};
 `;
 
-export const InputBlurButton = styled(TouchableWithoutFeedback)``;
+export const Wrapper = styled.View`
+  padding: 0 24px;
+`;
 
 export const InputWrapper = styled.View`
-  margin-top: 92px;
+  margin-top: 24px;
 `;
 
 export const ForgetPasswordContainer = styled.View`
@@ -39,8 +39,7 @@ export const Footer = styled.View`
   align-items: center;
   justify-content: flex-end;
 
-  position: absolute;
-  bottom: 32px;
-
   width: ${SCREEN_WIDTH}px;
+
+  margin: 20px 0;
 `;

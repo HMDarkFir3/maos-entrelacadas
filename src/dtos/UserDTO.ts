@@ -1,13 +1,10 @@
-export interface Gender {
-  id: string;
-  name: string;
-}
+import { GenderDTO } from '@dtos/GenderDTO';
 
 export interface Person {
   birthdate: string;
   cpf: null | string;
   createdAt: string;
-  gender: Gender;
+  gender: GenderDTO.Response;
   id: string;
   name: string;
   updatedAt: string;

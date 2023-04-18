@@ -24,6 +24,12 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#3cb371"
       }
+    },
+    "extra": {
+      "apiUrl": "https://smiling-headscarf-foal.cyclic.app/api",
+      "eas": {
+        "projectId": "dfcd84b5-f1d4-4aa5-a828-f2fe48c6758d"
+      }
     }
   }
 }

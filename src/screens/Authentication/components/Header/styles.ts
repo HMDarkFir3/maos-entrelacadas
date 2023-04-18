@@ -1,14 +1,22 @@
 import styled, { css } from 'styled-components/native';
 import { Image } from 'react-native';
+import Animated from 'react-native-reanimated';
 
-import { SCREEN_WIDTH, STATUS_BAR_HEIGHT } from '@utils/globalVariables';
+import { SCREEN_WIDTH, SCREEN_HEIGHT, STATUS_BAR_HEIGHT } from '@utils/globalVariables';
 
-export const Container = styled.View``;
+export const Container = styled(Animated.View)`
+  height: ${SCREEN_HEIGHT / 3}px;
+
+  margin-bottom: 92px;
+  padding: 0 24px;
+`;
 
 export const Wrapper = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+
+  height: 48px;
 
   margin-top: ${STATUS_BAR_HEIGHT + 40}px;
 `;
@@ -21,7 +29,7 @@ export const Logo = styled(Image)`
   height: 48px;
 `;
 
-export const Title = styled.Text`
+export const Title = styled(Animated.Text)`
   margin-top: 52px;
 
   text-align: center;
@@ -32,7 +40,7 @@ export const Title = styled.Text`
   `}
 `;
 
-export const Description = styled.Text`
+export const Description = styled(Animated.Text)`
   margin-top: 12px;
 
   text-align: center;

@@ -1,11 +1,11 @@
 import Constants from 'expo-constants';
 import axios from 'axios';
 
-interface ConstantsData {
+interface ConstantsEnv {
   apiUrl: string;
 }
 
-const { apiUrl } = Constants.expoConfig?.extra as ConstantsData;
+const { apiUrl } = Constants.expoConfig?.extra as ConstantsEnv;
 
 export const api = axios.create({
   baseURL: apiUrl,

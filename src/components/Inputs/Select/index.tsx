@@ -90,10 +90,10 @@ export const Select: FC<Props<GenderDTO.Response[]>> = (props) => {
       {error && <ErrorText style={{ fontSize: fontSizeValue(16) }}>{error}</ErrorText>}
 
       {isOpen && (
-        <List>
-          <Controller
-            control={control}
-            render={({ field: { onChange, value } }) => (
+        <Controller
+          control={control}
+          render={({ field: { onChange, value } }) => (
+            <List>
               <FlatList
                 data={data}
                 keyExtractor={(item) => String(item.id)}
@@ -115,10 +115,10 @@ export const Select: FC<Props<GenderDTO.Response[]>> = (props) => {
                 ItemSeparatorComponent={() => <ItemSeparator />}
                 showsVerticalScrollIndicator={false}
               />
-            )}
-            name={selectName}
-          />
-        </List>
+            </List>
+          )}
+          name={selectName}
+        />
       )}
     </Container>
   );
