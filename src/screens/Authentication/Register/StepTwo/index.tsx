@@ -37,8 +37,6 @@ export const StepTwo: FC = () => {
   const { keyboardShown } = useKeyboard();
   const { colors } = useTheme();
 
-  console.log('keyboardShown', keyboardShown);
-
   const route = useRoute();
   const { formStepOne } = route.params as Params;
 

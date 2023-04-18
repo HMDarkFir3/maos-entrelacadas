@@ -15,7 +15,9 @@ export const Header: FC = () => {
   return (
     <Container>
       <BackButton />
+
       <UserImage source={{ uri: 'https://www.github.com/hmdarkfir3.png' }} />
+
       <NotePencil size={fontSizeValue(32)} color={colors.screens.userInfo.components.header.icon} />
     </Container>
   );

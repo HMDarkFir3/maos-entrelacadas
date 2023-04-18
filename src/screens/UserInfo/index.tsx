@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { useForm } from 'react-hook-form';
 import { useTheme } from 'styled-components/native';
 import {
   UserSquare,
@@ -23,6 +24,16 @@ export const UserInfo: FC = () => {
   const { user } = useAppSelector((store) => store.auth);
   const { genders } = useAppSelector((store) => store.settings);
   const { fontSizeValue } = useSettings();
+  const { control } = useForm({
+    defaultValues: {
+      status: user?.status,
+      name: user?.person.name,
+      email: user?.email,
+      gender: user?.person.gender.id,
+      birthdate: user?.person.birthdate,
+      password: '********',
+    },
+  });
   const { colors } = useTheme();
 
   return (
@@ -34,14 +45,16 @@ export const UserInfo: FC = () => {
           icon={() => (
             <UserSquare size={fontSizeValue(24)} color={colors.components.input.placeholder} />
           )}
-          defaultValue="Associado"
+          control={control}
+          inputName="status"
           isEditable={false}
         />
 
         <Input
           style={{ marginTop: 20 }}
           icon={() => <User size={fontSizeValue(24)} color={colors.components.input.placeholder} />}
-          defaultValue={user?.given_name}
+          control={control}
+          inputName="name"
           isEditable={false}
         />
 
@@ -50,7 +63,8 @@ export const UserInfo: FC = () => {
           icon={() => (
             <EnvelopeSimple size={fontSizeValue(24)} color={colors.components.input.placeholder} />
           )}
-          defaultValue={user?.email}
+          control={control}
+          inputName="email"
           isEditable={false}
         />
 
@@ -60,7 +74,9 @@ export const UserInfo: FC = () => {
           icon={() => (
             <GenderNeuter size={fontSizeValue(24)} color={colors.components.input.placeholder} />
           )}
-          value={user?.gender ?? 'Selecione um gênero'}
+          control={control}
+          selectName="gender"
+          dirtyValue={user?.person.gender.name}
           placeholder="Selecione um gênero"
           isEditable={false}
         />
@@ -68,7 +84,9 @@ export const UserInfo: FC = () => {
         <DatePicker
           style={{ marginTop: 20 }}
           icon={() => <Cake size={fontSizeValue(24)} color={colors.components.input.placeholder} />}
-          value={user?.birthdate ?? new Date().toISOString()}
+          control={control}
+          datePickerName="birthdate"
+          dirtyValue={user?.person.birthdate}
           placeholder="Selecione sua data de nascimento"
           isEditable={false}
         />
@@ -78,7 +96,8 @@ export const UserInfo: FC = () => {
           icon={() => (
             <LockOpen size={fontSizeValue(24)} color={colors.components.input.placeholder} />
           )}
-          defaultValue="************"
+          control={control}
+          inputName="password"
           isEditable={false}
         />
       </Wrapper>

@@ -26,8 +26,8 @@ interface Props<T> {
   style?: ViewStyle;
   control: any;
   selectName: string;
-  dirtyValue: string;
-  error: any;
+  dirtyValue?: string;
+  error?: any;
   placeholder?: string;
   icon: any;
   data: T;

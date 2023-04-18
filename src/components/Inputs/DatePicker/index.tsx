@@ -14,8 +14,8 @@ interface Props {
   style?: ViewStyle;
   control: any;
   datePickerName: string;
-  dirtyValue: string;
-  error: any;
+  dirtyValue?: string;
+  error?: any;
   placeholder?: string;
   icon: any;
   isEditable?: boolean;
@@ -74,7 +74,8 @@ export const DatePicker: FC<Props> = (props) => {
                 setIsOpenDatePicker(false);
               }}
               onCancel={onCancelDatePicker}
-              locale="pt_BR"
+              isDarkModeEnabled
+              locale="pt-BR"
             />
           )}
           name={datePickerName}
