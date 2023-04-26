@@ -14,7 +14,7 @@ import { IntroductionPaginator } from '@components-of-screens/Introduction/compo
 import { SmallButton } from '@components/Buttons/SmallButton';
 
 import { introductionSlider } from '@utils/introductionSlider';
-import { SCREEN_WIDTH, SCREEN_HEIGHT } from '@utils/globalVariables';
+import { SCREEN_WIDTH, SCREEN_HEIGHT } from '@utils/constants';
 
 import { Container, Footer, JumpButton, JumpButtonWrapper, Title } from './styles';
 

@@ -13,7 +13,7 @@ const initialValue = {
 };
 
 export function useKeyboard() {
-  const [shown, setShown] = useState(false);
+  const [shown, setShown] = useState<boolean>(false);
   const [coordinates, setCoordinates] = useState<{
     start: undefined | KeyboardMetrics;
     end: KeyboardMetrics;

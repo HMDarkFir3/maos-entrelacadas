@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components/native';
 import { Image } from 'react-native';
 import Animated from 'react-native-reanimated';
 
-import { SCREEN_WIDTH, SCREEN_HEIGHT, STATUS_BAR_HEIGHT } from '@utils/globalVariables';
+import { SCREEN_WIDTH, SCREEN_HEIGHT, STATUS_BAR_HEIGHT } from '@utils/constants';
 
 export const Container = styled(Animated.View)`
   height: ${SCREEN_HEIGHT / 3}px;

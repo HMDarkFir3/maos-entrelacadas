@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { useSettings } from '@hooks/useSettings';
 
 import { introductionSlider } from '@utils/introductionSlider';
-import { SCREEN_WIDTH } from '@utils/globalVariables';
+import { SCREEN_WIDTH } from '@utils/constants';
 
 import IntroductionSlide1 from '@assets/svg/introduction_slide_1.svg';
 import IntroductionSlide2 from '@assets/svg/introduction_slide_2.svg';

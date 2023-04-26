@@ -5,7 +5,7 @@ import { useSettings } from '@hooks/useSettings';
 
 import { BackButton } from '@components/Buttons/BackButton';
 
-import { SCREEN_HEIGHT } from '@utils/globalVariables';
+import { SCREEN_HEIGHT } from '@utils/constants';
 
 import { Container, Wrapper, Logo, Title, Description } from './styles';
 

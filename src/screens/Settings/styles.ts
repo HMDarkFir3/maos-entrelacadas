@@ -1,6 +1,6 @@
 import styled from 'styled-components/native';
 
-import { STATUS_BAR_HEIGHT } from '@utils/globalVariables';
+import { STATUS_BAR_HEIGHT } from '@utils/constants';
 
 export const Container = styled.View`
   flex: 1;

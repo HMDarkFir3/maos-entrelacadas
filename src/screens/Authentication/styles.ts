@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
 
-import { SCREEN_WIDTH } from '@utils/globalVariables';
+import { SCREEN_WIDTH } from '@utils/constants';
 
 export const Container = styled.View`
   flex: 1;

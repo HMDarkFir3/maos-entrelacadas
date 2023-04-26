@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
 
-import { STATUS_BAR_HEIGHT } from '@utils/globalVariables';
+import { STATUS_BAR_HEIGHT } from '@utils/constants';
 
 export const Container = styled(RectButton)`
   flex-direction: row;

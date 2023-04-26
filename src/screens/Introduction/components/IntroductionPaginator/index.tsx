@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Animated, ViewProps } from 'react-native';
 
 import { introductionSlider } from '@utils/introductionSlider';
-import { SCREEN_WIDTH } from '@utils/globalVariables';
+import { SCREEN_WIDTH } from '@utils/constants';
 
 import { Container, Dot } from './styles';
 
