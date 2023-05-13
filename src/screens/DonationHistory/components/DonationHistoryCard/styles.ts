@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components/native';
 
 export const Container = styled.View`
   flex-direction: row;
+  align-items: center;
 
   gap: 16px;
 
@@ -40,8 +41,6 @@ export const DateWrapper = styled.View`
 export const Date = styled.Text`
   justify-content: center;
 
-  font-size: 16px;
-
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};
     color: ${theme.colors.screens.donationHistory.components.donationHistoryCard.textPrimary};
@@ -49,8 +48,6 @@ export const Date = styled.Text`
 `;
 
 export const Amount = styled.Text`
-  font-size: 28px;
-
   ${({ theme }) => css`
     font-family: ${theme.fonts.medium};
     color: ${theme.colors.screens.donationHistory.components.donationHistoryCard.textSecondary};
@@ -58,8 +55,6 @@ export const Amount = styled.Text`
 `;
 
 export const ClickHere = styled.Text`
-  font-size: 16px;
-
   ${({ theme }) => css`
     font-family: ${theme.fonts.bold};
     color: ${theme.colors.screens.donationHistory.components.donationHistoryCard.textSecondary};
@@ -67,8 +62,6 @@ export const ClickHere = styled.Text`
 `;
 
 export const Proof = styled.Text`
-  font-size: 16px;
-
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};
     color: ${theme.colors.screens.donationHistory.components.donationHistoryCard.textPrimary};

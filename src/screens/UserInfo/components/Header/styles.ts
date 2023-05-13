@@ -4,15 +4,19 @@ import { STATUS_BAR_HEIGHT } from '@utils/constants';
 
 export const Container = styled.View`
   flex-direction: row;
-  justify-content: space-between;
 
   margin-top: ${STATUS_BAR_HEIGHT + 24}px;
   padding: 12px 24px;
 `;
 
+export const Wrapper = styled.View`
+  flex: 1;
+  align-items: center;
+`;
+
 export const UserImage = styled.Image`
-  width: 176px;
-  height: 176px;
+  width: 152px;
+  height: 152px;
 
   border-radius: 88px;
   border-width: 2px;

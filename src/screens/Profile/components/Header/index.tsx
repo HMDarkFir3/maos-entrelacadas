@@ -25,7 +25,7 @@ export const Header: FC = () => {
           <Username style={{ fontSize: fontSizeValue(20) }} numberOfLines={1}>
             {user?.person.name}
           </Username>
-          <Role style={{ fontSize: fontSizeValue(16) }}>Associado</Role>
+          <Role style={{ fontSize: fontSizeValue(16) }}>{user?.status}</Role>
         </UserInfo>
       </Wrapper>
 

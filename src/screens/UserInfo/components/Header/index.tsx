@@ -6,7 +6,7 @@ import { useSettings } from '@hooks/useSettings';
 
 import { BackButton } from '@components/Buttons/BackButton';
 
-import { Container, UserImage } from './styles';
+import { Container, Wrapper, UserImage } from './styles';
 
 export const Header: FC = () => {
   const { fontSizeValue } = useSettings();
@@ -16,7 +16,9 @@ export const Header: FC = () => {
     <Container>
       <BackButton />
 
-      <UserImage source={{ uri: 'https://www.github.com/hmdarkfir3.png' }} />
+      <Wrapper>
+        <UserImage source={{ uri: 'https://www.github.com/hmdarkfir3.png' }} />
+      </Wrapper>
 
       <NotePencil size={fontSizeValue(32)} color={colors.screens.userInfo.components.header.icon} />
     </Container>

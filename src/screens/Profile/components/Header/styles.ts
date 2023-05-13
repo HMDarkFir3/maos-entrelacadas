@@ -38,6 +38,7 @@ export const Username = styled.Text`
 `;
 
 export const Role = styled.Text`
+  text-transform: capitalize;
   ${({ theme }) => css`
     font-family: ${theme.fonts.medium};
     color: ${theme.colors.screens.profile.components.header.text};

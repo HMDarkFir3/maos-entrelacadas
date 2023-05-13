@@ -22,7 +22,6 @@ export const Title = styled.Text`
   margin-top: 40px;
   margin-bottom: 36px;
 
-  font-size: 20px;
   ${({ theme }) => css`
     font-family: ${theme.fonts.medium};
     color: ${theme.colors.screens.donationHistory.text};
