@@ -3,21 +3,20 @@ import { StepOneFormState } from '@contexts/AuthContext';
 export declare global {
   export namespace ReactNavigation {
     export interface RootParamList {
+      // Auth
       Welcome: undefined;
       Login: undefined;
-
-      // Register
       StepOne: undefined;
       StepTwo: { formStepOne: StepOneFormState };
 
+      // App
       Home: undefined;
       Events: undefined;
       Donations: undefined;
-
-      // Settings
       Profile: undefined;
       Settings: undefined;
       UserInfo: undefined;
+      DonationHistory: undefined;
     }
   }
 }

@@ -85,6 +85,17 @@ export const light = {
           },
         },
       },
+      donationHistory: {
+        text: '#1c1e26',
+        components: {
+          donationHistoryCard: {
+            background: '#ecf8f1',
+            textPrimary: '#7d9cae',
+            textSecondary: '#3cb371',
+            icon: '#3cb371',
+          },
+        },
+      },
     },
 
     components: {

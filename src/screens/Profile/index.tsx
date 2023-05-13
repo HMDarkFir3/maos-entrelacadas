@@ -20,7 +20,7 @@ export const Profile: FC = () => {
   const { navigate } = useNavigation();
   const { colors } = useTheme();
 
-  const onPressNavigate = (screenName: 'Settings') => navigate(screenName);
+  const onPressNavigate = (screenName: 'Settings' | 'DonationHistory') => navigate(screenName);
 
   const onPressLogOut = () => {
     Alert.alert(
@@ -73,6 +73,7 @@ export const Profile: FC = () => {
             />
           )}
           title="Histórico de Doações"
+          onPress={() => onPressNavigate('DonationHistory')}
         />
 
         <SettingsItem

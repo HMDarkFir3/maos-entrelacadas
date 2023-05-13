@@ -22,7 +22,6 @@ const register = createAsyncThunk('auth/register', async (form: RegisterFormStat
   };
 
   const { data } = await api.post('/users/create', { ...userInfo });
-
   return data;
 });
 
@@ -32,13 +31,13 @@ const registerBuilder = (builder: ActionReducerMapBuilder<InitialStateAuth>) => 
       state.isLoading = true;
     })
     .addCase(register.fulfilled, (state: InitialStateAuth, action: PayloadAction<UserDTO>) => {
-      state.user = action.payload.userCreated;
+      state.user = action.payload.user;
       state.accessToken = action.payload.access_token;
       state.isSigned = true;
       state.isLoading = false;
     })
     .addCase(register.rejected, (state: InitialStateAuth, action) => {
-      console.log('rejected', action.payload);
+      console.log('rejected', action.error);
       state.isLoading = false;
     });
 };

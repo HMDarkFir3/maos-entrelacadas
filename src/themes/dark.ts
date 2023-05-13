@@ -85,6 +85,17 @@ export const dark = {
           },
         },
       },
+      donationHistory: {
+        text: '#e5ebef',
+        components: {
+          donationHistoryCard: {
+            background: '#111111',
+            textPrimary: '#e5ebef',
+            textSecondary: '#3cb371',
+            icon: '#3cb371',
+          },
+        },
+      },
     },
 
     components: {

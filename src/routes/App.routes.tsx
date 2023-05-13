@@ -5,6 +5,7 @@ import { TabRoutes } from '@routes/Tab.routes';
 
 import { Settings } from '@screens/Settings';
 import { UserInfo } from '@screens/UserInfo';
+import { DonationHistory } from '@screens/DonationHistory';
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -18,5 +19,6 @@ export const AppRoutes: FC = () => (
     <Screen name="TabRoutes" component={TabRoutes} />
     <Screen name="Settings" component={Settings} />
     <Screen name="UserInfo" component={UserInfo} />
+    <Screen name="DonationHistory" component={DonationHistory} />
   </Navigator>
 );
