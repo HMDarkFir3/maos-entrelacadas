@@ -36,7 +36,7 @@ export const Title = styled(Animated.Text)`
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.medium};
-    color: ${theme.colors.screens.authentication.components.header.textPrimary};
+    color: ${theme.colors.primary600};
   `}
 `;
 
@@ -47,6 +47,6 @@ export const Description = styled(Animated.Text)`
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};
-    color: ${theme.colors.screens.authentication.components.header.textSecondary};
+    color: ${theme.colors.text500};
   `}
 `;

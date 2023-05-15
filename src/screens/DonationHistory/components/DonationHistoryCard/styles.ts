@@ -25,10 +25,8 @@ export const IconWrapper = styled.View`
   border-width: 2px;
   border-radius: 4px;
   ${({ theme }) => css`
-    background-color: ${theme.colors.screens.donationHistory.components.donationHistoryCard
-      .background};
-    border-color: ${theme.colors.screens.donationHistory.components.donationHistoryCard
-      .textSecondary};
+    background-color: ${theme.colors.primary90};
+    border-color: ${theme.colors.primary600};
   `}
 `;
 
@@ -43,27 +41,27 @@ export const Date = styled.Text`
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};
-    color: ${theme.colors.screens.donationHistory.components.donationHistoryCard.textPrimary};
+    color: ${theme.colors.text500};
   `}
 `;
 
 export const Amount = styled.Text`
   ${({ theme }) => css`
     font-family: ${theme.fonts.medium};
-    color: ${theme.colors.screens.donationHistory.components.donationHistoryCard.textSecondary};
+    color: ${theme.colors.primary600};
   `}
 `;
 
 export const ClickHere = styled.Text`
   ${({ theme }) => css`
     font-family: ${theme.fonts.bold};
-    color: ${theme.colors.screens.donationHistory.components.donationHistoryCard.textSecondary};
+    color: ${theme.colors.primary600};
   `}
 `;
 
 export const Proof = styled.Text`
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};
-    color: ${theme.colors.screens.donationHistory.components.donationHistoryCard.textPrimary};
+    color: ${theme.colors.text500};
   `}
 `;

@@ -28,11 +28,7 @@ export const FontSwitcher: FC = () => {
     <>
       <Container testID="FontSwitcher.OpenFontSwitcherButton" onPress={onPressOpenFontSwitcher}>
         <Wrapper>
-          <TextAa
-            size={fontSizeValue(24)}
-            color={colors.screens.settings.components.fontSwitcher.icon}
-            weight="bold"
-          />
+          <TextAa size={fontSizeValue(24)} color={colors.icon600} weight="bold" />
           <Title style={{ fontSize: fontSizeValue(20) }} numberOfLines={1}>
             Tamanho da fonte
           </Title>

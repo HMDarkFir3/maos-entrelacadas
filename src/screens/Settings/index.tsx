@@ -36,13 +36,7 @@ export const Settings: FC = () => {
 
       <Wrapper>
         <Switcher
-          icon={() => (
-            <Moon
-              size={fontSizeValue(24)}
-              color={colors.screens.settings.components.switcher.icon}
-              weight="bold"
-            />
-          )}
+          icon={() => <Moon size={fontSizeValue(24)} color={colors.icon600} weight="bold" />}
           title="Tema escuro"
           value={theme.title === 'dark'}
           switchValue={theme.title === 'dark'}
@@ -50,13 +44,7 @@ export const Settings: FC = () => {
         />
 
         <Switcher
-          icon={() => (
-            <BellRinging
-              size={fontSizeValue(24)}
-              color={colors.screens.settings.components.switcher.icon}
-              weight="bold"
-            />
-          )}
+          icon={() => <BellRinging size={fontSizeValue(24)} color={colors.icon600} weight="bold" />}
           title="Receber notificações"
           switchValue={notificationsSwitch}
           onSwitchValue={onToggleNotifications}

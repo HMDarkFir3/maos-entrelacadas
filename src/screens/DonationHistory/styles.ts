@@ -24,6 +24,6 @@ export const Title = styled.Text`
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.medium};
-    color: ${theme.colors.screens.donationHistory.text};
+    color: ${theme.colors.text900};
   `}
 `;

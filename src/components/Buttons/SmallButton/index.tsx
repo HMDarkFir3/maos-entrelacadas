@@ -17,7 +17,7 @@ export const SmallButton: FC<Props> = (props) => {
   return (
     <Container>
       <Wrapper {...rest}>
-        {isLoading ? <Load size="small" color={colors.components.smallButton.icon} /> : <Icon />}
+        {isLoading ? <Load size="small" color={colors.icon40} /> : <Icon />}
       </Wrapper>
     </Container>
   );

@@ -8,7 +8,7 @@ export const Container = styled(RectButton)`
   width: 100%;
   height: 56px;
 
-  background-color: ${({ theme }) => theme.colors.components.button.background};
+  background-color: ${({ theme }) => theme.colors.primary600};
   border-radius: 8px;
 `;
 
@@ -16,6 +16,6 @@ export const Title = styled.Text`
   ${({ theme }) =>
     css`
       font-family: ${theme.fonts.bold};
-      color: ${theme.colors.components.button.text};
+      color: ${theme.colors.text100};
     `}
 `;

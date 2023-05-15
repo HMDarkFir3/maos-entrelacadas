@@ -83,9 +83,7 @@ export const StepOne: FC = () => {
                 inputName="givenName"
                 dirtyValue={watch().givenName}
                 error={errors.givenName?.message}
-                icon={() => (
-                  <User size={fontSizeValue(24)} color={colors.components.input.placeholder} />
-                )}
+                icon={() => <User size={fontSizeValue(24)} color={colors.placeholder} />}
                 placeholder="Nome e Sobrenome"
                 maxLength={50}
               />
@@ -97,9 +95,7 @@ export const StepOne: FC = () => {
                 inputName="username"
                 dirtyValue={watch().username}
                 error={errors.username?.message}
-                icon={() => (
-                  <User size={fontSizeValue(24)} color={colors.components.input.placeholder} />
-                )}
+                icon={() => <User size={fontSizeValue(24)} color={colors.placeholder} />}
                 placeholder="Usuário"
                 maxLength={50}
               />
@@ -111,12 +107,7 @@ export const StepOne: FC = () => {
                 inputName="email"
                 dirtyValue={watch().email}
                 error={errors.email?.message}
-                icon={() => (
-                  <EnvelopeSimple
-                    size={fontSizeValue(24)}
-                    color={colors.components.input.placeholder}
-                  />
-                )}
+                icon={() => <EnvelopeSimple size={fontSizeValue(24)} color={colors.placeholder} />}
                 placeholder="Email"
                 keyboardType="email-address"
                 maxLength={50}
@@ -129,9 +120,7 @@ export const StepOne: FC = () => {
                 inputName="cellphone"
                 dirtyValue={watch().cellphone}
                 error={errors.cellphone?.message}
-                icon={() => (
-                  <Phone size={fontSizeValue(24)} color={colors.components.input.placeholder} />
-                )}
+                icon={() => <Phone size={fontSizeValue(24)} color={colors.placeholder} />}
                 placeholder="Celular"
                 keyboardType="phone-pad"
                 maxLength={11}
@@ -145,13 +134,7 @@ export const StepOne: FC = () => {
       <Footer>
         <SmallButton
           testID="StepOne.SmallButton"
-          icon={() => (
-            <ArrowRight
-              size={fontSizeValue(24)}
-              color={colors.components.smallButton.icon}
-              weight="bold"
-            />
-          )}
+          icon={() => <ArrowRight size={fontSizeValue(24)} color={colors.icon40} weight="bold" />}
           onPress={handleSubmit((data) => onSubmit(data))}
         />
       </Footer>

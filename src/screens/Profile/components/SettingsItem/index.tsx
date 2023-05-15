@@ -27,10 +27,7 @@ export const SettingsItem: FC<Props> = (props) => {
         </Title>
       </Wrapper>
 
-      <CaretRight
-        size={fontSizeValue(24)}
-        color={colors.screens.profile.components.settingsItem.icon}
-      />
+      <CaretRight size={fontSizeValue(24)} color={colors.icon900} />
     </Container>
   );
 };

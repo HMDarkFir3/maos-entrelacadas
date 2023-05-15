@@ -125,17 +125,9 @@ export const Introduction: FC = () => {
           testID="Introduction.SmallButton"
           icon={() =>
             currentIndex === introductionSlider.length - 1 ? (
-              <Check
-                color={colors.components.smallButton.icon}
-                weight="bold"
-                size={fontSizeValue(24)}
-              />
+              <Check color={colors.icon40} weight="bold" size={fontSizeValue(24)} />
             ) : (
-              <ArrowRight
-                color={colors.components.smallButton.icon}
-                weight="bold"
-                size={fontSizeValue(24)}
-              />
+              <ArrowRight color={colors.icon40} weight="bold" size={fontSizeValue(24)} />
             )
           }
           onPress={scrollToNextSlide}

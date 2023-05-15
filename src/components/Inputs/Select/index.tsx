@@ -83,7 +83,7 @@ export const Select: FC<Props<GenderDTO.Response[]>> = (props) => {
         )}
 
         <CaretWrapper style={caretWrapperAnimatedStyle}>
-          <CaretDown size={fontSizeValue(16)} color={colors.components.select.primary} />
+          <CaretDown size={fontSizeValue(16)} color={colors.primary600} />
         </CaretWrapper>
       </Wrapper>
 

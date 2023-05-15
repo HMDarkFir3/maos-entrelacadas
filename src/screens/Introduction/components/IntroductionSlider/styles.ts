@@ -30,7 +30,7 @@ export const Title = styled.Text`
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.medium};
-    color: ${theme.colors.screens.introduction.components.introductionSlider.textPrimary};
+    color: ${theme.colors.primary600};
   `}
 `;
 
@@ -49,6 +49,6 @@ export const Description = styled.Text`
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};
-    color: ${theme.colors.screens.introduction.components.introductionSlider.textSecondary};
+    color: ${theme.colors.text500};
   `}
 `;

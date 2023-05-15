@@ -10,10 +10,10 @@ export const Container = styled.View`
 
   height: 64px;
 
-  background-color: ${({ theme }) => theme.colors.components.customTabBar.background};
+  background-color: ${({ theme }) => theme.colors.background};
 
   border-top-width: 1px;
-  border-color: ${({ theme }) => theme.colors.components.customTabBar.border};
+  border-color: ${({ theme }) => theme.colors.primary600};
 `;
 
 export const TabItem = styled(RectButton)`
@@ -25,8 +25,6 @@ export const TabItem = styled(RectButton)`
 export const TabItemText = styled.Text<TabItemTextProps>`
   ${({ theme, isActive }) => css`
     font-family: ${theme.fonts.bold};
-    color: ${isActive
-      ? theme.colors.components.customTabBar.active
-      : theme.colors.components.customTabBar.inactive};
+    color: ${isActive ? theme.colors.primary600 : theme.colors.text600};
   `}
 `;

@@ -16,15 +16,15 @@ export const Routes: FC = () => {
 
   useFocusEffect(
     useCallback(() => {
-      NavigationBar.setBackgroundColorAsync(theme.colors.navigationBar.backgroundPrimary);
+      NavigationBar.setBackgroundColorAsync(theme.colors.navigationBar);
       NavigationBar.setButtonStyleAsync(theme.title === 'light' ? 'dark' : 'light');
-    }, [theme.colors.navigationBar.backgroundPrimary, theme.title])
+    }, [theme.colors.navigationBar, theme.title])
   );
 
   return (
     <>
       <StatusBar
-        backgroundColor={colors.statusBar.backgroundPrimary}
+        backgroundColor={colors.statusBar}
         style={theme.title === 'light' ? 'dark' : 'light'}
       />
 

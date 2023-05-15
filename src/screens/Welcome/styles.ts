@@ -30,7 +30,7 @@ export const Title = styled.Text`
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.medium};
-    color: ${theme.colors.screens.welcome.textPrimary};
+    color: ${theme.colors.primary600};
   `}
 `;
 
@@ -41,7 +41,7 @@ export const Description = styled.Text`
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};
-    color: ${theme.colors.screens.welcome.textSecondary};
+    color: ${theme.colors.text500};
   `}
 `;
 
@@ -71,13 +71,13 @@ export const RegisterButtonText = styled.Text<RegisterButtonTextProps>`
     isGreen &&
     css`
       font-family: ${theme.fonts.bold};
-      color: ${theme.colors.screens.welcome.textPrimary};
+      color: ${theme.colors.primary600};
     `}
 
   ${({ theme, isGreen }) =>
     !isGreen &&
     css`
       font-family: ${theme.fonts.regular};
-      color: ${theme.colors.screens.welcome.textSecondary};
+      color: ${theme.colors.text500};
     `}
 `;

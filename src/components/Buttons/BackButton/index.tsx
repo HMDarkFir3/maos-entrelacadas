@@ -29,7 +29,7 @@ export const BackButton: FC<Props> = (props) => {
 
   return (
     <Container onPress={onPressBackButton} {...rest}>
-      <ArrowLeft size={fontSizeValue(20)} color={colors.components.backButton.icon} />
+      <ArrowLeft size={fontSizeValue(20)} color={colors.icon1000} />
       <Title style={{ fontSize: fontSizeValue(14) }}>Voltar</Title>
     </Container>
   );

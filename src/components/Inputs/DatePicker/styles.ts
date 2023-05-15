@@ -22,10 +22,10 @@ export const Wrapper = styled.View<WrapperProps>`
   ${({ error, theme }) =>
     error
       ? css`
-          border-color: ${theme.colors.components.datePicker.error};
+          border-color: ${theme.colors.error};
         `
       : css`
-          border-color: ${theme.colors.components.datePicker.primary};
+          border-color: ${theme.colors.primary600};
         `}
 `;
 
@@ -36,9 +36,7 @@ export const Date = styled.Text<DateProps>`
 
   ${({ theme, isEditable }) => css`
     font-family: ${theme.fonts.regular};
-    color: ${isEditable
-      ? theme.colors.components.select.text
-      : theme.colors.components.select.placeholder};
+    color: ${isEditable ? theme.colors.text900 : theme.colors.placeholder};
   `}
 `;
 
@@ -49,7 +47,7 @@ export const Placeholder = styled.Text`
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};
-    color: ${theme.colors.components.select.placeholder};
+    color: ${theme.colors.placeholder};
   `}
 `;
 
@@ -58,6 +56,6 @@ export const ErrorText = styled.Text`
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};
-    color: ${theme.colors.components.datePicker.error};
+    color: ${theme.colors.error};
   `}
 `;

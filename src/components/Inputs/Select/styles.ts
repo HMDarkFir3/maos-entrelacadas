@@ -29,10 +29,10 @@ export const Wrapper = styled(TouchableOpacity)<WrapperProps>`
   ${({ error, theme }) =>
     error
       ? css`
-          border-color: ${theme.colors.components.select.error};
+          border-color: ${theme.colors.error};
         `
       : css`
-          border-color: ${theme.colors.components.select.primary};
+          border-color: ${theme.colors.primary600};
         `}
 `;
 
@@ -43,7 +43,7 @@ export const Placeholder = styled.Text`
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};
-    color: ${theme.colors.components.select.placeholder};
+    color: ${theme.colors.placeholder};
   `}
 `;
 
@@ -62,7 +62,7 @@ export const List = styled.View`
   border-bottom-width: 1px;
   border-left-width: 1px;
   border-right-width: 1px;
-  border-color: ${({ theme }) => theme.colors.components.select.primary};
+  border-color: ${({ theme }) => theme.colors.primary600};
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
 `;
@@ -72,7 +72,7 @@ export const ErrorText = styled.Text`
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};
-    color: ${theme.colors.components.select.error};
+    color: ${theme.colors.error};
   `}
 `;
 
@@ -82,9 +82,7 @@ export const ItemText = styled.Text<ItemTextProps>`
   flex: 1;
 
   ${({ theme, isEditable }) => css`
-    color: ${isEditable
-      ? theme.colors.components.select.text
-      : theme.colors.components.select.placeholder};
+    color: ${isEditable ? theme.colors.text900 : theme.colors.placeholder};
   `}
 `;
 
@@ -93,15 +91,13 @@ export const ItemSeparator = styled.View`
 
   margin: 12px 0;
 
-  background-color: ${({ theme }) => theme.colors.components.select.primary};
+  background-color: ${({ theme }) => theme.colors.primary600};
 
   opacity: 0.3;
 `;
 
 export const SelectedText = styled.Text<SelectedTextProps>`
   ${({ theme, isSelected }) => css`
-    color: ${isSelected
-      ? theme.colors.components.select.primary
-      : theme.colors.components.select.placeholder};
+    color: ${isSelected ? theme.colors.primary600 : theme.colors.placeholder};
   `}
 `;

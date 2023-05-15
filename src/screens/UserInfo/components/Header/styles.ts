@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { BorderlessButton } from 'react-native-gesture-handler';
 
 import { STATUS_BAR_HEIGHT } from '@utils/constants';
 
@@ -9,16 +10,17 @@ export const Container = styled.View`
   padding: 12px 24px;
 `;
 
-export const Wrapper = styled.View`
-  flex: 1;
-  align-items: center;
-`;
-
 export const UserImage = styled.Image`
   width: 152px;
   height: 152px;
 
   border-radius: 88px;
   border-width: 2px;
-  border-color: ${({ theme }) => theme.colors.screens.userInfo.components.header.primary};
+  border-color: ${({ theme }) => theme.colors.primary600};
+`;
+
+export const EditButton = styled(BorderlessButton)``;
+
+export const Box = styled.View`
+  flex: 1;
 `;

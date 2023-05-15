@@ -1,19 +1,20 @@
 import styled from 'styled-components/native';
 
-import { STATUS_BAR_HEIGHT } from '@utils/constants';
-
 export const Container = styled.View`
   flex: 1;
 
   background-color: ${({ theme }) => theme.colors.background};
 `;
 
-export const Header = styled.View`
-  margin-top: ${STATUS_BAR_HEIGHT + 24}px;
+export const Wrapper = styled.View`
+  flex: 1;
+
+  margin-top: 24px;
   padding: 0 24px;
 `;
 
-export const Wrapper = styled.View`
-  margin-top: 24px;
-  padding: 0 24px;
+export const ButtonWrapper = styled.View`
+  padding: 24px;
+
+  background-color: ${({ theme }) => theme.colors.background};
 `;

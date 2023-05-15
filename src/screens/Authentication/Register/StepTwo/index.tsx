@@ -110,12 +110,7 @@ export const StepTwo: FC = () => {
                 selectName="gender"
                 dirtyValue={watch().gender}
                 error={errors.gender?.message}
-                icon={() => (
-                  <GenderNeuter
-                    size={fontSizeValue(24)}
-                    color={colors.components.select.placeholder}
-                  />
-                )}
+                icon={() => <GenderNeuter size={fontSizeValue(24)} color={colors.placeholder} />}
                 placeholder="Gênero"
                 data={genders}
               />
@@ -127,9 +122,7 @@ export const StepTwo: FC = () => {
                 datePickerName="birthdate"
                 dirtyValue={watch().birthdate}
                 error={errors.birthdate?.message}
-                icon={() => (
-                  <Cake size={fontSizeValue(24)} color={colors.components.datePicker.placeholder} />
-                )}
+                icon={() => <Cake size={fontSizeValue(24)} color={colors.placeholder} />}
                 placeholder="Data de Nascimento"
               />
 
@@ -140,9 +133,7 @@ export const StepTwo: FC = () => {
                 inputName="password"
                 dirtyValue={watch().password}
                 error={errors.password?.message}
-                icon={() => (
-                  <LockOpen size={fontSizeValue(24)} color={colors.components.input.placeholder} />
-                )}
+                icon={() => <LockOpen size={fontSizeValue(24)} color={colors.placeholder} />}
                 placeholder="Senha"
                 isPassword
                 maxLength={100}
@@ -154,9 +145,7 @@ export const StepTwo: FC = () => {
                 inputName="confirmPassword"
                 dirtyValue={watch().confirmPassword}
                 error={errors.confirmPassword?.message}
-                icon={() => (
-                  <LockOpen size={fontSizeValue(24)} color={colors.components.input.placeholder} />
-                )}
+                icon={() => <LockOpen size={fontSizeValue(24)} color={colors.placeholder} />}
                 isPassword
                 placeholder="Confirmar senha"
                 maxLength={100}
@@ -170,13 +159,7 @@ export const StepTwo: FC = () => {
       <Footer>
         <SmallButton
           testID="StepTwo.SmallButton"
-          icon={() => (
-            <Check
-              color={colors.components.smallButton.icon}
-              weight="bold"
-              size={fontSizeValue(24)}
-            />
-          )}
+          icon={() => <Check color={colors.icon40} weight="bold" size={fontSizeValue(24)} />}
           isLoading={isLoading}
           onPress={handleSubmit((data: StepTwoFormState) => onSubmit(data))}
         />

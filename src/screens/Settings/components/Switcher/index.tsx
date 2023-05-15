@@ -31,14 +31,10 @@ export const Switcher: FC<Props> = (props) => {
       <Switch
         {...rest}
         trackColor={{
-          false: colors.screens.settings.components.switcher.trackInactive,
-          true: colors.screens.settings.components.switcher.trackActive,
+          false: colors.switcher.trackInactive,
+          true: colors.switcher.trackActive,
         }}
-        thumbColor={
-          switchValue
-            ? colors.screens.settings.components.switcher.thumbActive
-            : colors.screens.settings.components.switcher.thumbInactive
-        }
+        thumbColor={switchValue ? colors.switcher.thumbActive : colors.switcher.thumbInactive}
         value={switchValue}
         onValueChange={onSwitchValue}
       />

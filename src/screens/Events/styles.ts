@@ -2,27 +2,19 @@ import styled, { css } from 'styled-components/native';
 
 export const Container = styled.View`
   flex: 1;
-  justify-content: space-between;
+
+  padding: 0 24px;
 
   background-color: ${({ theme }) => theme.colors.background};
 `;
 
-export const Wrapper = styled.View``;
-
-export const EventHeader = styled.View`
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-
+export const Title = styled.Text`
   margin-top: 32px;
-  padding: 0 24px;
-`;
+  margin-bottom: 36px;
 
-export const EventTitle = styled.Text`
+  font-size: 20px;
   ${({ theme }) => css`
     font-family: ${theme.fonts.medium};
     color: ${theme.colors.text900};
   `}
 `;
-
-export const Footer = styled.View``;

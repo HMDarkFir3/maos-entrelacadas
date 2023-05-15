@@ -13,7 +13,7 @@ export const Container = styled.View`
 
   ${({ theme }) =>
     css`
-      background-color: ${theme.colors.components.smallButton.background};
+      background-color: ${theme.colors.primary600};
     `}
 
   overflow: hidden;

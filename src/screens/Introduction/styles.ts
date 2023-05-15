@@ -44,6 +44,6 @@ export const Title = styled.Text`
   ${({ theme }) =>
     css`
       font-family: ${theme.fonts.regular};
-      color: ${theme.colors.screens.introduction.text};
+      color: ${theme.colors.text500};
     `}
 `;

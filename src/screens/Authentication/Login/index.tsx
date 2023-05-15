@@ -84,12 +84,7 @@ export const Login: FC = () => {
                 control={control}
                 inputName="email"
                 error={errors.email?.message}
-                icon={() => (
-                  <EnvelopeSimple
-                    size={fontSizeValue(24)}
-                    color={colors.components.input.placeholder}
-                  />
-                )}
+                icon={() => <EnvelopeSimple size={fontSizeValue(24)} color={colors.placeholder} />}
                 placeholder="Email"
                 keyboardType="email-address"
               />
@@ -99,9 +94,7 @@ export const Login: FC = () => {
                 control={control}
                 inputName="password"
                 error={errors.password?.message}
-                icon={() => (
-                  <LockOpen size={fontSizeValue(24)} color={colors.components.input.placeholder} />
-                )}
+                icon={() => <LockOpen size={fontSizeValue(24)} color={colors.placeholder} />}
                 isPassword
                 placeholder="Senha"
               />
@@ -125,13 +118,7 @@ export const Login: FC = () => {
       <Footer>
         <SmallButton
           testID="Login.SmallButton"
-          icon={() => (
-            <Check
-              color={colors.components.smallButton.icon}
-              weight="bold"
-              size={fontSizeValue(24)}
-            />
-          )}
+          icon={() => <Check color={colors.icon40} weight="bold" size={fontSizeValue(24)} />}
           isLoading={isLoading}
           onPress={handleSubmit((data: LoginFormState) => onSubmit(data))}
           enabled={!isLoading}

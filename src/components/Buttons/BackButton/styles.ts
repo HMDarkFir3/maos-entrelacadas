@@ -12,6 +12,6 @@ export const Title = styled.Text`
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};
-    color: ${theme.colors.components.backButton.title};
+    color: ${theme.colors.text900};
   `}
 `;

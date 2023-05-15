@@ -21,6 +21,6 @@ export const Title = styled.Text`
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.medium};
-    color: ${theme.colors.screens.profile.components.settingsItem.text};
+    color: ${theme.colors.text600};
   `}
 `;

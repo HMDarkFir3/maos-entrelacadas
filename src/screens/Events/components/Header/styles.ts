@@ -44,5 +44,3 @@ export const Username = styled.Text`
     color: ${theme.colors.text900};
   `}
 `;
-
-export const SignOutButton = styled(BorderlessButton)``;

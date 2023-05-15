@@ -25,14 +25,14 @@ export const Title = styled.Text`
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.medium};
-    color: ${theme.colors.screens.settings.components.fontSwitcher.textPrimary};
+    color: ${theme.colors.text600};
   `}
 `;
 
 export const SelectedFont = styled.Text`
   ${({ theme }) => css`
     font-family: ${theme.fonts.medium};
-    color: ${theme.colors.screens.settings.components.fontSwitcher.textSecondary};
+    color: ${theme.colors.primary600};
   `}
 `;
 
@@ -56,8 +56,6 @@ export const ItemText = styled.Text<ItemTextProps>`
 
   ${({ theme, selected }) => css`
     font-family: ${theme.fonts.medium};
-    color: ${selected
-      ? theme.colors.screens.settings.components.fontSwitcher.textSecondary
-      : theme.colors.screens.settings.components.fontSwitcher.textPrimary};
+    color: ${selected ? theme.colors.primary600 : theme.colors.text600};
   `}
 `;

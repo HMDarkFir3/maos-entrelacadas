@@ -64,7 +64,7 @@ export const Input = forwardRef<TextInput, Props>((props, ref) => {
               value={value}
               onChangeText={onChange}
               secureTextEntry={isPassword && !isVisibility}
-              placeholderTextColor={colors.components.input.placeholder}
+              placeholderTextColor={colors.placeholder}
               maxLength={maxLength}
               isEditable={isEditable}
               editable={isEditable}
@@ -79,9 +79,9 @@ export const Input = forwardRef<TextInput, Props>((props, ref) => {
             onPress={onTogglePasswordVisibility}
           >
             {isVisibility ? (
-              <EyeSlash size={fontSizeValue(24)} color={colors.components.input.placeholder} />
+              <EyeSlash size={fontSizeValue(24)} color={colors.placeholder} />
             ) : (
-              <Eye size={fontSizeValue(24)} color={colors.components.input.placeholder} />
+              <Eye size={fontSizeValue(24)} color={colors.placeholder} />
             )}
           </TogglePasswordVisibilityButton>
         )}

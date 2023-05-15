@@ -25,10 +25,10 @@ export const Wrapper = styled.View<WrapperProps>`
   ${({ error, theme }) =>
     error
       ? css`
-          border-color: ${theme.colors.components.input.error};
+          border-color: ${theme.colors.error};
         `
       : css`
-          border-color: ${theme.colors.components.input.primary};
+          border-color: ${theme.colors.primary600};
         `}
 `;
 
@@ -39,9 +39,7 @@ export const StyledInput = styled(TextInput)<StyledInputProps>`
 
   ${({ theme, isEditable }) => css`
     font-family: ${theme.fonts.regular};
-    color: ${isEditable
-      ? theme.colors.components.input.text
-      : theme.colors.components.input.placeholder};
+    color: ${isEditable ? theme.colors.text900 : theme.colors.placeholder};
   `}
 `;
 
@@ -55,7 +53,7 @@ export const ErrorText = styled.Text`
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};
-    color: ${theme.colors.components.input.error};
+    color: ${theme.colors.error};
   `}
 `;
 
@@ -64,7 +62,7 @@ export const MaxLength = styled.Text`
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};
-    color: ${theme.colors.components.input.placeholder};
+    color: ${theme.colors.placeholder};
   `}
 `;
 

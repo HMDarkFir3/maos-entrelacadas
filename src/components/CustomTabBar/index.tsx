@@ -24,8 +24,7 @@ export const CustomTabBar: FC<Props> = (props) => {
 
   const isActiveRoute = state.routeNames[state.index];
 
-  const getColors = (isActive: boolean) =>
-    isActive ? colors.components.customTabBar.active : colors.components.customTabBar.inactive;
+  const getColors = (isActive: boolean) => (isActive ? colors.primary600 : colors.text600);
 
   return (
     <Container>

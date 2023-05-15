@@ -30,7 +30,7 @@ export const ForgetPasswordButtonText = styled.Text`
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.medium};
-    color: ${theme.colors.screens.authentication.textPrimary};
+    color: ${theme.colors.primary600};
   `}
 `;
 

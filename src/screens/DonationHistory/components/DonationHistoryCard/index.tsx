@@ -22,19 +22,11 @@ export const DonationHistoryCard: FC = () => {
   return (
     <Container>
       <IconWrapper>
-        <CurrencyDollar
-          size={fontSizeValue(48)}
-          color={colors.screens.donationHistory.components.donationHistoryCard.icon}
-          weight="bold"
-        />
+        <CurrencyDollar size={fontSizeValue(48)} color={colors.icon600} weight="bold" />
       </IconWrapper>
       <Wrapper>
         <DateWrapper>
-          <CalendarCheck
-            size={fontSizeValue(16)}
-            color={colors.screens.donationHistory.components.donationHistoryCard.icon}
-            weight="bold"
-          />
+          <CalendarCheck size={fontSizeValue(16)} color={colors.icon600} weight="bold" />
           <Date style={{ fontSize: fontSizeValue(16) }}>21 de novembro às 12:03</Date>
         </DateWrapper>
         <Amount style={{ fontSize: fontSizeValue(28) }}>R$320,00</Amount>

@@ -48,52 +48,32 @@ export const Profile: FC = () => {
         <EventHeader>
           <EventTitle style={{ fontSize: fontSizeValue(20) }}>Eventos</EventTitle>
 
-          <Funnel size={fontSizeValue(24)} color={colors.screens.profile.icon} />
+          <Funnel size={fontSizeValue(24)} color={colors.icon600} />
         </EventHeader>
       </Wrapper>
 
       <Footer>
         <SettingsItem
           testID="Profile.Settings"
-          icon={() => (
-            <Gear
-              size={fontSizeValue(24)}
-              color={colors.screens.profile.components.settingsItem.icon}
-            />
-          )}
+          icon={() => <Gear size={fontSizeValue(24)} color={colors.icon900} />}
           title="Configurações"
           onPress={() => onPressNavigate('Settings')}
         />
 
         <SettingsItem
-          icon={() => (
-            <ClockCounterClockwise
-              size={fontSizeValue(24)}
-              color={colors.screens.profile.components.settingsItem.icon}
-            />
-          )}
+          icon={() => <ClockCounterClockwise size={fontSizeValue(24)} color={colors.icon900} />}
           title="Histórico de Doações"
           onPress={() => onPressNavigate('DonationHistory')}
         />
 
         <SettingsItem
-          icon={() => (
-            <Question
-              size={fontSizeValue(24)}
-              color={colors.screens.profile.components.settingsItem.icon}
-            />
-          )}
+          icon={() => <Question size={fontSizeValue(24)} color={colors.icon900} />}
           title="Ajuda"
         />
 
         <SettingsItem
           testID="Profile.LogOut"
-          icon={() => (
-            <SignOut
-              size={fontSizeValue(24)}
-              color={colors.screens.profile.components.settingsItem.icon}
-            />
-          )}
+          icon={() => <SignOut size={fontSizeValue(24)} color={colors.icon900} />}
           title="Sair"
           onPress={onPressLogOut}
         />

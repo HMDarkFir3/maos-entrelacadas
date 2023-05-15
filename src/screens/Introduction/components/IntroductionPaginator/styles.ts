@@ -11,7 +11,6 @@ export const Dot = styled(Animated.View)`
 
   margin: 0 10px;
 
-  background-color: ${({ theme }) =>
-    theme.colors.screens.introduction.components.introductionSliderPaginator.dot};
+  background-color: ${({ theme }) => theme.colors.primary600};
   border-radius: 2px;
 `;

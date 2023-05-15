@@ -20,6 +20,6 @@ export const Title = styled.Text`
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.medium};
-    color: ${theme.colors.screens.settings.components.switcher.text};
+    color: ${theme.colors.text600};
   `}
 `;

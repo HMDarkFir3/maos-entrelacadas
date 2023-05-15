@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { useState, FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTheme } from 'styled-components/native';
 import {
@@ -17,8 +17,9 @@ import { Header } from '@components-of-screens/UserInfo/components/Header';
 import { Input } from '@components/Inputs/Input';
 import { Select } from '@components/Inputs/Select';
 import { DatePicker } from '@components/Inputs/DatePicker';
+import { Button } from '@components/Buttons/Button';
 
-import { Container, Wrapper } from './styles';
+import { Container, Wrapper, ButtonWrapper } from './styles';
 
 export const UserInfo: FC = () => {
   const { user } = useAppSelector((store) => store.auth);
@@ -28,6 +29,7 @@ export const UserInfo: FC = () => {
     defaultValues: {
       status: user?.status,
       name: user?.person.name,
+      username: user?.username,
       email: user?.email,
       gender: user?.person.gender.id,
       birthdate: user?.person.birthdate,
@@ -36,15 +38,18 @@ export const UserInfo: FC = () => {
   });
   const { colors } = useTheme();
 
+  const [isEditable, setIsEditable] = useState<boolean>(false);
+
+  const onPressEdit = () => setIsEditable((prevState) => !prevState);
+  const onPressCancelEdit = () => setIsEditable(false);
+
   return (
     <Container>
-      <Header />
+      <Header isEditable={isEditable} onEdit={onPressEdit} onCancelEdit={onPressCancelEdit} />
 
       <Wrapper>
         <Input
-          icon={() => (
-            <UserSquare size={fontSizeValue(24)} color={colors.components.input.placeholder} />
-          )}
+          icon={() => <UserSquare size={fontSizeValue(24)} color={colors.placeholder} />}
           control={control}
           inputName="status"
           isEditable={false}
@@ -52,38 +57,42 @@ export const UserInfo: FC = () => {
 
         <Input
           style={{ marginTop: 20 }}
-          icon={() => <User size={fontSizeValue(24)} color={colors.components.input.placeholder} />}
+          icon={() => <User size={fontSizeValue(24)} color={colors.placeholder} />}
           control={control}
           inputName="name"
-          isEditable={false}
+          isEditable={isEditable}
         />
 
         <Input
           style={{ marginTop: 20 }}
-          icon={() => (
-            <EnvelopeSimple size={fontSizeValue(24)} color={colors.components.input.placeholder} />
-          )}
+          icon={() => <User size={fontSizeValue(24)} color={colors.placeholder} />}
+          control={control}
+          inputName="username"
+          isEditable={isEditable}
+        />
+
+        <Input
+          style={{ marginTop: 20 }}
+          icon={() => <EnvelopeSimple size={fontSizeValue(24)} color={colors.placeholder} />}
           control={control}
           inputName="email"
-          isEditable={false}
+          isEditable={isEditable}
         />
 
         <Select
           style={{ marginTop: 20 }}
           data={genders}
-          icon={() => (
-            <GenderNeuter size={fontSizeValue(24)} color={colors.components.input.placeholder} />
-          )}
+          icon={() => <GenderNeuter size={fontSizeValue(24)} color={colors.placeholder} />}
           control={control}
           selectName="gender"
           dirtyValue={user?.person.gender.name}
           placeholder="Selecione um gênero"
-          isEditable={false}
+          isEditable={isEditable}
         />
 
         <DatePicker
           style={{ marginTop: 20 }}
-          icon={() => <Cake size={fontSizeValue(24)} color={colors.components.input.placeholder} />}
+          icon={() => <Cake size={fontSizeValue(24)} color={colors.placeholder} />}
           control={control}
           datePickerName="birthdate"
           dirtyValue={user?.person.birthdate}
@@ -93,14 +102,18 @@ export const UserInfo: FC = () => {
 
         <Input
           style={{ marginTop: 20 }}
-          icon={() => (
-            <LockOpen size={fontSizeValue(24)} color={colors.components.input.placeholder} />
-          )}
+          icon={() => <LockOpen size={fontSizeValue(24)} color={colors.placeholder} />}
           control={control}
           inputName="password"
           isEditable={false}
         />
       </Wrapper>
+
+      {isEditable && (
+        <ButtonWrapper>
+          <Button title="Salvar" />
+        </ButtonWrapper>
+      )}
     </Container>
   );
 };

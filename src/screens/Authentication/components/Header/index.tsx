@@ -46,6 +46,7 @@ export const Header: FC<Props> = (props) => {
       <Title style={[animatedTextStyle, { fontSize: fontSizeValue(48) }]} numberOfLines={1}>
         {title}
       </Title>
+
       <Description style={[animatedTextStyle, { fontSize: fontSizeValue(20) }]} numberOfLines={3}>
         {description}
       </Description>

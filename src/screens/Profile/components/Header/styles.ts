@@ -25,7 +25,7 @@ export const UserImage = styled.Image`
 
   border-radius: 24px;
   border-width: 2px;
-  border-color: ${({ theme }) => theme.colors.screens.profile.components.header.primary};
+  border-color: ${({ theme }) => theme.colors.primary600};
 `;
 
 export const UserInfo = styled.View``;
@@ -33,7 +33,7 @@ export const UserInfo = styled.View``;
 export const Username = styled.Text`
   ${({ theme }) => css`
     font-family: ${theme.fonts.medium};
-    color: ${theme.colors.screens.profile.components.header.primary};
+    color: ${theme.colors.primary600};
   `}
 `;
 
@@ -41,6 +41,6 @@ export const Role = styled.Text`
   text-transform: capitalize;
   ${({ theme }) => css`
     font-family: ${theme.fonts.medium};
-    color: ${theme.colors.screens.profile.components.header.text};
+    color: ${theme.colors.text200};
   `}
 `;
