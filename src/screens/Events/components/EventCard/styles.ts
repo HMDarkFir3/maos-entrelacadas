@@ -8,7 +8,6 @@ export const Container = styled.View`
   justify-content: space-between;
 
   width: ${CARD_WIDTH}px;
-  height: ${CARD_WIDTH + 48}px;
 
   padding: 20px;
 
@@ -30,7 +29,7 @@ export const Image = styled.Image`
 
 export const Title = styled.Text`
   text-align: center;
-  font-size: 16px;
+  margin: 16px 0;
 
   ${({ theme }) => css`
     font-family: ${theme.fonts.medium};
@@ -42,11 +41,13 @@ export const Footer = styled.View``;
 
 export const DateWrapper = styled.View`
   flex-direction: row;
+  align-items: center;
   gap: 8px;
 `;
 
 export const Date = styled.Text`
-  font-size: 14px;
+  text-align: center;
+
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};
     color: ${theme.colors.text600};

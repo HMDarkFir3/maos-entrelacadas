@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components/native';
 import { RectButton } from 'react-native-gesture-handler';
 
-import { STATUS_BAR_HEIGHT } from '@utils/constants';
+import { STATUS_BAR_HEIGHT, SCREEN_WIDTH } from '@utils/constants';
 
 export const Container = styled(RectButton)`
   flex-direction: row;
@@ -31,6 +31,8 @@ export const UserImage = styled.Image`
 export const UserInfo = styled.View``;
 
 export const Username = styled.Text`
+  width: ${SCREEN_WIDTH - 168}px;
+
   ${({ theme }) => css`
     font-family: ${theme.fonts.medium};
     color: ${theme.colors.primary600};

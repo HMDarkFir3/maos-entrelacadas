@@ -13,8 +13,6 @@ export const Wrapper = styled.View`
 export const Date = styled.Text`
   margin-bottom: 8px;
 
-  font-size: 14px;
-
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};
     color: ${theme.colors.text600};
@@ -34,7 +32,6 @@ export const DescriptionWrapper = styled.View`
 `;
 
 export const Description = styled.Text`
-  font-size: 16px;
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};
     color: ${theme.colors.text900};
@@ -44,7 +41,6 @@ export const Description = styled.Text`
 export const Tag = styled.Text`
   margin-top: 12px;
 
-  font-size: 16px;
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};
     color: ${theme.colors.link};

@@ -1,22 +1,28 @@
 import { FC } from 'react';
 
+import { useSettings } from '@hooks/useSettings';
+
 import { Container, Wrapper, Date, Image, DescriptionWrapper, Description, Tag } from './styles';
 
-export const AnnouncementCard: FC = () => (
-  <Container>
-    <Date>24 de agosto às 12:21</Date>
+export const AnnouncementCard: FC = () => {
+  const { fontSizeValue } = useSettings();
 
-    <Wrapper>
-      <Image source={{ uri: 'https://github.com/hmdarkfir3.png' }} />
+  return (
+    <Container>
+      <Date style={{ fontSize: fontSizeValue(14) }}>24 de agosto às 12:21</Date>
 
-      <DescriptionWrapper>
-        <Description>
-          ATENÇÃO comunicação Mãos Entrelaçadas ensaio do dia 28/08/2022 CANCELADO! Fiquem atentos
-          que em breve divulgaremos a nova data! 🙏🏻💙
-        </Description>
+      <Wrapper>
+        <Image source={{ uri: 'https://github.com/hmdarkfir3.png' }} />
 
-        <Tag>#maosentrelaçadas #vemdemãos💙</Tag>
-      </DescriptionWrapper>
-    </Wrapper>
-  </Container>
-);
+        <DescriptionWrapper>
+          <Description style={{ fontSize: fontSizeValue(16) }}>
+            ATENÇÃO comunicação Mãos Entrelaçadas ensaio do dia 28/08/2022 CANCELADO! Fiquem atentos
+            que em breve divulgaremos a nova data! 🙏🏻💙
+          </Description>
+
+          <Tag style={{ fontSize: fontSizeValue(16) }}>#maosentrelaçadas #vemdemãos💙</Tag>
+        </DescriptionWrapper>
+      </Wrapper>
+    </Container>
+  );
+};

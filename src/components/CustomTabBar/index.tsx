@@ -19,7 +19,7 @@ export const CustomTabBar: FC<Props> = (props) => {
   const { navigate } = useNavigation();
   const { colors } = useTheme();
 
-  const onPressNavigate = (screenName: 'Home' | 'Events' | 'Donations' | 'Profile') =>
+  const onPressNavigate = (screenName: 'Announcements' | 'Events' | 'Donations' | 'Profile') =>
     navigate(screenName);
 
   const isActiveRoute = state.routeNames[state.index];
@@ -28,10 +28,13 @@ export const CustomTabBar: FC<Props> = (props) => {
 
   return (
     <Container>
-      <TabItem testID="CustomTabBar.TabItem1" onPress={() => onPressNavigate('Home')}>
-        <House size={fontSizeValue(28)} color={getColors(isActiveRoute === 'Home')} />
+      <TabItem testID="CustomTabBar.TabItem1" onPress={() => onPressNavigate('Announcements')}>
+        <House size={fontSizeValue(28)} color={getColors(isActiveRoute === 'Announcements')} />
 
-        <TabItemText style={{ fontSize: fontSizeValue(12) }} isActive={isActiveRoute === 'Home'}>
+        <TabItemText
+          style={{ fontSize: fontSizeValue(12) }}
+          isActive={isActiveRoute === 'Announcements'}
+        >
           Início
         </TabItemText>
       </TabItem>

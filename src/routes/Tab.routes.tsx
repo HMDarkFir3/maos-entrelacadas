@@ -11,13 +11,13 @@ const { Navigator, Screen } = createBottomTabNavigator();
 
 export const TabRoutes: FC = () => (
   <Navigator
-    initialRouteName="Home"
+    initialRouteName="Announcements"
     tabBar={({ state }) => <CustomTabBar state={state} />}
     screenOptions={{
       headerShown: false,
     }}
   >
-    <Screen name="Home" component={Announcements} />
+    <Screen name="Announcements" component={Announcements} />
     <Screen name="Events" component={Events} />
     <Screen name="Donations" component={Announcements} />
     <Screen name="Profile" component={Profile} />
