@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import { Home } from '@screens/Home';
+import { Announcement } from '@screens/Announcement';
 import { Events } from '@screens/Events';
 import { Profile } from '@screens/Profile';
 
@@ -17,9 +17,9 @@ export const TabRoutes: FC = () => (
       headerShown: false,
     }}
   >
-    <Screen name="Home" component={Home} />
+    <Screen name="Home" component={Announcement} />
     <Screen name="Events" component={Events} />
-    <Screen name="Donations" component={Home} />
+    <Screen name="Donations" component={Announcement} />
     <Screen name="Profile" component={Profile} />
   </Navigator>
 );

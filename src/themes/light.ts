@@ -15,6 +15,7 @@ export const light = {
 
     placeholder: '#8babc3',
     error: '#ff3333',
+    link: '#0d5da8',
 
     icon1000: '#1c1e26',
     icon900: '#6e8592',

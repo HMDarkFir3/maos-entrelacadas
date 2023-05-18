@@ -1,4 +1,5 @@
 import { UserDTO } from '@dtos/UserDTO';
+import { UpdateDTO } from '@dtos/UpdateDTO';
 
 export interface InitialStateAuth {
   user: UserDTO['user'] | null;
@@ -27,3 +28,8 @@ export interface StepTwoFormState {
 }
 
 export interface RegisterFormState extends StepOneFormState, StepTwoFormState {}
+
+export interface UpdateFormState {
+  data: UpdateDTO.Request;
+  id: string | undefined;
+}

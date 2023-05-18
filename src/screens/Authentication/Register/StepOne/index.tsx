@@ -56,9 +56,7 @@ export const StepOne: FC = () => {
     clearErrors();
   };
 
-  const onSubmit = (data: StepOneFormState) => {
-    navigate('StepTwo', { formStepOne: data });
-  };
+  const onSubmit = (data: StepOneFormState) => navigate('StepTwo', { formStepOne: data });
 
   return (
     <Container>

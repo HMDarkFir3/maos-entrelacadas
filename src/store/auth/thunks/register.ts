@@ -2,6 +2,7 @@ import { createAsyncThunk, ActionReducerMapBuilder, PayloadAction } from '@redux
 
 import { api } from '@services/api';
 
+import { RegisterDTO } from '@dtos/RegisterDTO';
 import { UserDTO } from '@dtos/UserDTO';
 
 import { RegisterFormState, InitialStateAuth } from '@store/auth/types';
@@ -19,9 +20,11 @@ const register = createAsyncThunk('auth/register', async (form: RegisterFormStat
         name: form.gender,
       },
     },
-  };
+  } as RegisterDTO.Request;
 
-  const { data } = await api.post('/users/create', { ...userInfo });
+  const { data } = await api.post<RegisterDTO.Response>('/users/create', {
+    ...userInfo,
+  } as RegisterDTO.Request);
   return data;
 });
 
@@ -35,6 +38,7 @@ const registerBuilder = (builder: ActionReducerMapBuilder<InitialStateAuth>) => 
       state.accessToken = action.payload.access_token;
       state.isSigned = true;
       state.isLoading = false;
+      console.log(action.payload);
     })
     .addCase(register.rejected, (state: InitialStateAuth, action) => {
       console.log('rejected', action.error);

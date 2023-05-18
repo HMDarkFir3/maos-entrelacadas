@@ -13,7 +13,7 @@ export const Wrapper = styled.View`
   padding: 0 24px;
 `;
 
-export const ButtonWrapper = styled.View`
+export const Footer = styled.View`
   padding: 24px;
 
   background-color: ${({ theme }) => theme.colors.background};

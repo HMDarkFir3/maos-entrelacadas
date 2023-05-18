@@ -5,7 +5,7 @@ export const dark = {
     background: '#222222',
 
     primary600: '#3cb371',
-    primary90: '#ecf8f1',
+    primary90: '#333333',
 
     text900: '#e5ebef',
     text600: '#e5ebef',
@@ -15,6 +15,7 @@ export const dark = {
 
     placeholder: '#c0c0c0',
     error: '#ff3333',
+    link: '#0d5da8',
 
     icon1000: '#e5ebef',
     icon900: '#6e8592',

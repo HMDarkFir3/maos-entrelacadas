@@ -19,3 +19,5 @@ export const Title = styled.Text`
       color: ${theme.colors.text100};
     `}
 `;
+
+export const Load = styled.ActivityIndicator``;

@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import Animated from 'react-native-reanimated';
 import { BorderlessButton } from 'react-native-gesture-handler';
 
 import { STATUS_BAR_HEIGHT } from '@utils/constants';
@@ -10,7 +11,7 @@ export const Container = styled.View`
   padding: 12px 24px;
 `;
 
-export const UserImage = styled.Image`
+export const UserImage = styled(Animated.Image)`
   width: 152px;
   height: 152px;
 

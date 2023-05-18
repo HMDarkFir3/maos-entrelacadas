@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { initialState } from '@store/auth/initialState';
 import { loginBuilder } from '@store/auth/thunks/login';
 import { registerBuilder } from '@store/auth/thunks/register';
+import { updateBuilder } from '@store/auth/thunks/update';
 import { InitialStateAuth } from '@store/auth/types';
 
 export const authSlice = createSlice({
@@ -18,5 +19,6 @@ export const authSlice = createSlice({
   extraReducers: (builder) => {
     loginBuilder(builder);
     registerBuilder(builder);
+    updateBuilder(builder);
   },
 });

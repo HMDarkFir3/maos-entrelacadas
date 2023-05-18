@@ -10,7 +10,7 @@ export declare global {
       StepTwo: { formStepOne: StepOneFormState };
 
       // App
-      Home: undefined;
+      Announcement: undefined;
       Events: undefined;
       Donations: undefined;
       Profile: undefined;

@@ -1,8 +1,23 @@
 import { GenderDTO } from '@dtos/GenderDTO';
 
+export interface Address {
+  id: number;
+  country: string;
+  state: string;
+  district: string;
+  city: string;
+  street: string;
+  number: string;
+  zipcode: number;
+  complement: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 export interface Person {
   birthdate: string;
-  cpf: null | string;
+  cpf: number | null;
+  address: Address | null;
   createdAt: string;
   gender: GenderDTO.Response;
   id: string;

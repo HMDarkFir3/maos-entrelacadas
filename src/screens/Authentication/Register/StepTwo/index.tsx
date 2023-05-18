@@ -75,14 +75,14 @@ export const StepTwo: FC = () => {
   };
 
   const onSubmit = (data: StepTwoFormState) => {
-    const formmatedBirthdate = format(new Date(data.birthdate), 'yyyy-MM-dd', {
+    const formattedBirthdate = format(new Date(data.birthdate), 'yyyy-MM-dd', {
       locale: ptBR,
     });
 
     const formInfo: RegisterFormState = {
       ...formStepOne,
       ...data,
-      birthdate: formmatedBirthdate,
+      birthdate: formattedBirthdate,
     };
 
     dispatch(register(formInfo));
