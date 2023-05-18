@@ -1,12 +1,12 @@
 import { FC } from 'react';
 import { FlatList } from 'react-native';
 
-import { Header } from '@components-of-screens/Announcement/components/Header';
-import { AnnouncementCard } from '@components-of-screens/Announcement/components/AnnouncementCard';
+import { Header } from '@components-of-screens/Announcements/components/Header';
+import { AnnouncementCard } from '@components-of-screens/Announcements/components/AnnouncementCard';
 
 import { Container, Title } from './styles';
 
-export const Announcement: FC = () => (
+export const Announcements: FC = () => (
   <Container>
     <Header />
 
