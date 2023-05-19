@@ -44,3 +44,5 @@ export const Username = styled.Text`
     color: ${theme.colors.text900};
   `}
 `;
+
+export const MenuButton = styled(BorderlessButton)``;

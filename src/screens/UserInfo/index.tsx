@@ -1,4 +1,4 @@
-import { useState, FC } from 'react';
+import { FC } from 'react';
 import { FlatList } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { useTheme } from 'styled-components/native';
@@ -19,6 +19,7 @@ import { useAppDispatch } from '@hooks/useAppDispatch';
 import { useSettings } from '@hooks/useSettings';
 import { useKeyboard } from '@hooks/useKeyboard';
 
+import { userEdit } from '@store/auth/actions';
 import { update } from '@store/auth/thunks/update';
 
 import { Header } from '@components-of-screens/UserInfo/components/Header';
@@ -43,6 +44,7 @@ interface FormUpdateState {
 export const UserInfo: FC = () => {
   const { user, isLoading } = useAppSelector((store) => store.auth);
   const dispatch = useAppDispatch();
+  const { isEditable } = useAppSelector((store) => store.auth);
   const { genders } = useAppSelector((store) => store.settings);
   const { fontSizeValue } = useSettings();
   const { keyboardShown } = useKeyboard();
@@ -60,10 +62,9 @@ export const UserInfo: FC = () => {
   });
   const { colors } = useTheme();
 
-  const [isEditable, setIsEditable] = useState<boolean>(false);
-
-  const onPressEdit = () => setIsEditable((prevState) => !prevState);
-  const onPressCancelEdit = () => setIsEditable(false);
+  const onBackButton = () => dispatch(userEdit(false));
+  const onPressEdit = () => dispatch(userEdit(true));
+  const onPressCancelEdit = () => dispatch(userEdit(false));
 
   const onSubmit = (data: FormUpdateState) => {
     const userInfo = {
@@ -87,6 +88,7 @@ export const UserInfo: FC = () => {
       <Header
         isEditable={isEditable}
         keyboardShown={keyboardShown}
+        onBackButton={onBackButton}
         onEdit={onPressEdit}
         onCancelEdit={onPressCancelEdit}
       />

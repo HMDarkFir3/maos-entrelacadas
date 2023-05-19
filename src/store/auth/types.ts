@@ -5,6 +5,7 @@ export interface InitialStateAuth {
   user: UserDTO['user'] | null;
   accessToken: string | null;
   isSigned: boolean;
+  isEditable: boolean;
   isLoading: boolean;
 }
 

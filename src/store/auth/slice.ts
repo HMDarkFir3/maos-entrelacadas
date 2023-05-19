@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { initialState } from '@store/auth/initialState';
 import { loginBuilder } from '@store/auth/thunks/login';
@@ -10,6 +10,9 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
+    userEdit: (state: InitialStateAuth, action: PayloadAction<boolean>) => {
+      state.isEditable = action.payload;
+    },
     logout: (state: InitialStateAuth) => {
       state.user = null;
       state.accessToken = null;

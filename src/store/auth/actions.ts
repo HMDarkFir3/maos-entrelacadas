@@ -1,3 +1,3 @@
 import { authSlice } from '@store/auth/slice';
 
-export const { logout } = authSlice.actions;
+export const { logout, userEdit } = authSlice.actions;

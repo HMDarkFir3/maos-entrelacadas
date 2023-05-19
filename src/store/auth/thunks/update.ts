@@ -22,10 +22,12 @@ const updateBuilder = (builder: ActionReducerMapBuilder<InitialStateAuth>) => {
     .addCase(update.fulfilled, (state: InitialStateAuth, action: PayloadAction<User>) => {
       state.user = action.payload;
       state.isLoading = false;
+      state.isEditable = false;
     })
     .addCase(update.rejected, (state: InitialStateAuth, action) => {
       console.log('rejected', action.error);
       state.isLoading = false;
+      state.isEditable = false;
     });
 };
 

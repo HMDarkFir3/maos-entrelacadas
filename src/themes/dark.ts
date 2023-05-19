@@ -6,6 +6,7 @@ export const dark = {
 
     primary600: '#3cb371',
     primary90: '#333333',
+    primary30: '#111111',
 
     text900: '#e5ebef',
     text600: '#e5ebef',

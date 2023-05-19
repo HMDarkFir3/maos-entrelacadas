@@ -12,12 +12,13 @@ import { Container, UserImage, EditButton, Box } from './styles';
 interface Props {
   isEditable: boolean;
   keyboardShown: boolean;
+  onBackButton: () => void;
   onEdit: () => void;
   onCancelEdit: () => void;
 }
 
 export const Header: FC<Props> = (props) => {
-  const { isEditable, keyboardShown, onEdit, onCancelEdit } = props;
+  const { isEditable, keyboardShown, onBackButton, onEdit, onCancelEdit } = props;
 
   const { fontSizeValue } = useSettings();
   const { colors } = useTheme();
@@ -32,7 +33,7 @@ export const Header: FC<Props> = (props) => {
   return (
     <Container>
       <Box>
-        <BackButton style={{ alignSelf: 'flex-start' }} />
+        <BackButton style={{ alignSelf: 'flex-start' }} onBackButton={onBackButton} />
       </Box>
 
       <UserImage
