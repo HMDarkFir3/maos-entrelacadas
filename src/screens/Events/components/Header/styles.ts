@@ -45,4 +45,4 @@ export const Username = styled.Text`
   `}
 `;
 
-export const MenuButton = styled(BorderlessButton)``;
+export const SignOutButton = styled(BorderlessButton)``;
