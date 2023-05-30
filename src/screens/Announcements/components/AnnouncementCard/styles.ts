@@ -6,8 +6,9 @@ export const Container = styled.View``;
 
 export const Wrapper = styled.View`
   background-color: ${({ theme }) => theme.colors.primary90};
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
+  border-radius: 8px;
+
+  overflow: hidden;
 `;
 
 export const CreatedAt = styled.Text`
@@ -22,13 +23,18 @@ export const CreatedAt = styled.Text`
 export const Image = styled.Image`
   width: ${SCREEN_WIDTH - 48}px;
   height: ${SCREEN_WIDTH - 48}px;
+`;
 
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+export const DotWrapper = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  padding: 16px;
 `;
 
 export const DescriptionWrapper = styled.View`
-  padding: 16px;
+  padding: 0 16px 16px;
 `;
 
 export const Description = styled.Text`

@@ -16,6 +16,21 @@ export const Container = styled(RectButton)`
   background-color: ${({ theme }) => theme.colors.primary90};
 `;
 
+export const CheckWrapper = styled.View`
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  top: 12px;
+  left: 12px;
+
+  width: 20px;
+  height: 20px;
+
+  background-color: ${({ theme }) => theme.colors.primary600};
+  border-radius: 4px;
+`;
+
 export const Image = styled.Image`
   align-self: center;
 

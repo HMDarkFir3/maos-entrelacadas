@@ -3,13 +3,13 @@ import { RectButtonProps } from 'react-native-gesture-handler';
 import { useTheme } from 'styled-components/native';
 import { format } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
-import { CalendarCheck, Clock } from 'phosphor-react-native';
+import { Check, CalendarCheck, Clock } from 'phosphor-react-native';
 
 import { EventsDTO } from '@dtos/EventsDTO';
 
 import { useSettings } from '@hooks/useSettings';
 
-import { Container, Image, Title, Footer, DateWrapper, EventAt } from './styles';
+import { Container, CheckWrapper, Image, Title, Footer, DateWrapper, EventAt } from './styles';
 
 interface Props extends RectButtonProps {
   data: EventsDTO.Response;
@@ -18,7 +18,7 @@ interface Props extends RectButtonProps {
 
 export const EventCard: FC<Props> = (props) => {
   const { ...rest } = props;
-  const { title, eventAt, startTime, endTime } = props.data;
+  const { title, eventAt, startTime, endTime, isSignedUp } = props.data;
 
   const { fontSizeValue } = useSettings();
   const { colors } = useTheme();
@@ -29,6 +29,12 @@ export const EventCard: FC<Props> = (props) => {
 
   return (
     <Container {...rest}>
+      {isSignedUp && (
+        <CheckWrapper>
+          <Check size={fontSizeValue(16)} color={colors.icon40} weight="bold" />
+        </CheckWrapper>
+      )}
+
       <Image source={{ uri: 'https://www.github.com/hmdarkfir3.png' }} />
 
       <Title style={{ fontSize: fontSizeValue(16) }}>{title}</Title>

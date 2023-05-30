@@ -1,0 +1,35 @@
+import { FC } from 'react';
+import { Animated, ViewProps } from 'react-native';
+
+import { SCREEN_WIDTH } from '@utils/constants';
+
+import { Container, Dot } from './styles';
+
+interface Props extends ViewProps {
+  data: any[];
+  scrollX: Animated.Value;
+}
+
+export const ImageDot: FC<Props> = (props) => {
+  const { data, scrollX, ...rest } = props;
+
+  return (
+    <Container {...rest}>
+      {data.map((item, index) => {
+        const inputRange = [
+          (index - 1) * SCREEN_WIDTH,
+          index * SCREEN_WIDTH,
+          (index + 1) * SCREEN_WIDTH,
+        ];
+
+        const opacity = scrollX.interpolate({
+          inputRange,
+          outputRange: [0.3, 1, 0.3],
+          extrapolate: 'clamp',
+        });
+
+        return <Dot testID="IntroductionPaginator.Dot" style={{ opacity }} key={item.id} />;
+      })}
+    </Container>
+  );
+};

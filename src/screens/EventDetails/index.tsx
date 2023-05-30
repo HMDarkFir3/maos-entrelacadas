@@ -6,7 +6,7 @@ import { format } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 import { CalendarCheck, Clock } from 'phosphor-react-native';
 
-import { getEvent } from '@services/GET/getEvent';
+import { getEventDetails } from '@services/GET/getEventDetails';
 import { createUserEvent } from '@services/POST/createUserEvent';
 
 import { useAppSelector } from '@hooks/useAppSelector';
@@ -36,7 +36,10 @@ export const EventDetails: FC = () => {
   const { fontSizeValue } = useSettings();
   const { params } = useRoute();
   const { id } = params as Params;
-  const { data, isLoading } = useQuery({ queryKey: ['event', id], queryFn: () => getEvent(id) });
+  const { data, isLoading } = useQuery({
+    queryKey: ['event', user?.id, id],
+    queryFn: () => getEventDetails(user?.id!, id),
+  });
   const mutation = useMutation({
     mutationKey: ['createUserEvent', user?.id, id],
     mutationFn: () => createUserEvent(user?.id!, id),

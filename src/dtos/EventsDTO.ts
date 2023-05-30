@@ -15,6 +15,7 @@ export namespace EventsDTO {
     updatedAt: string;
     startTime: string;
     endTime: string;
+    isSignedUp: boolean;
     images: Image[];
   }
 }
