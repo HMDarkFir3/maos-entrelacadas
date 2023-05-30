@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { FlatList } from 'react-native';
-import { useQuery } from '@tanstack/react-query';
 import { useNavigation } from '@react-navigation/native';
+import { useQuery } from '@tanstack/react-query';
 
 import { getEvents } from '@services/GET/getEvents';
 
@@ -18,7 +18,7 @@ export const Events: FC = () => {
   const { data, isLoading } = useQuery({ queryKey: ['events'], queryFn: getEvents });
   const { navigate } = useNavigation();
 
-  const onEventCard = (id: string) => navigate('Event', { id });
+  const onEventCard = (eventId: string) => navigate('EventDetails', { id: eventId });
 
   return (
     <Container>

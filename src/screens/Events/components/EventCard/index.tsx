@@ -25,7 +25,7 @@ export const EventCard: FC<Props> = (props) => {
 
   const formattedEventAt = format(new Date(eventAt), "dd 'de' MMMM", { locale: ptBR });
 
-  const formatTime = (time: string) => format(new Date(time), 'HH:mm');
+  const formatTime = (time: string) => format(new Date(time), 'HH:mm', { locale: ptBR });
 
   return (
     <Container {...rest}>

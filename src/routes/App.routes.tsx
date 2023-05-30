@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { TabRoutes } from '@routes/Tab.routes';
 
-import { Event } from '@screens/Event';
+import { EventDetails } from '@screens/EventDetails';
 import { Settings } from '@screens/Settings';
 import { UserInfo } from '@screens/UserInfo';
 import { DonationHistory } from '@screens/DonationHistory';
@@ -18,7 +18,7 @@ export const AppRoutes: FC = () => (
     }}
   >
     <Screen name="TabRoutes" component={TabRoutes} />
-    <Screen name="Event" component={Event} />
+    <Screen name="EventDetails" component={EventDetails} />
     <Screen name="Settings" component={Settings} />
     <Screen name="UserInfo" component={UserInfo} />
     <Screen name="DonationHistory" component={DonationHistory} />

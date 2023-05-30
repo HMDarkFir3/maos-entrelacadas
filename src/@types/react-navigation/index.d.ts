@@ -12,7 +12,7 @@ export declare global {
       // App
       Announcements: undefined;
       Events: undefined;
-      Event: { id: string };
+      EventDetails: { id: string };
       Donations: undefined;
       Profile: undefined;
       Settings: undefined;

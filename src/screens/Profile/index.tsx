@@ -1,23 +1,33 @@
 import { FC } from 'react';
-import { Alert } from 'react-native';
+import { Alert, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useQuery } from '@tanstack/react-query';
 import { useTheme } from 'styled-components/native';
 import { Funnel, Gear, ClockCounterClockwise, Question, SignOut } from 'phosphor-react-native';
 
+import { getUserEvents } from '@services/GET/getUserEvents';
+
+import { useAppSelector } from '@hooks/useAppSelector';
 import { useAppDispatch } from '@hooks/useAppDispatch';
 import { useSettings } from '@hooks/useSettings';
 
 import { logout } from '@store/auth/actions';
 
 import { Header } from '@components-of-screens/Profile/components/Header';
+import { UserEventCard } from '@components-of-screens/Profile/components/UserEventCard';
 import { SettingsItem } from '@components-of-screens/Profile/components/SettingsItem';
 
 import { Container, Wrapper, EventHeader, EventTitle, Footer } from './styles';
 
 export const Profile: FC = () => {
+  const { user } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   const { fontSizeValue } = useSettings();
   const { navigate } = useNavigation();
+  const { data, isLoading } = useQuery({
+    queryKey: ['userEvents', user?.id],
+    queryFn: () => getUserEvents(user?.id!),
+  });
   const { colors } = useTheme();
 
   const onPressNavigate = (screenName: 'Settings' | 'DonationHistory') => navigate(screenName);
@@ -40,6 +50,8 @@ export const Profile: FC = () => {
     );
   };
 
+  const onPressEvent = (eventId: string) => navigate('EventDetails', { id: eventId });
+
   return (
     <Container>
       <Wrapper>
@@ -50,6 +62,18 @@ export const Profile: FC = () => {
 
           <Funnel size={fontSizeValue(24)} color={colors.icon600} />
         </EventHeader>
+
+        <FlatList
+          style={{ marginTop: 20 }}
+          contentContainerStyle={{ paddingHorizontal: 24, gap: 12 }}
+          data={data}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <UserEventCard data={item} onPress={() => onPressEvent(item.id)} />
+          )}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+        />
       </Wrapper>
 
       <Footer>

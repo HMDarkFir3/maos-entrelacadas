@@ -12,7 +12,7 @@ import { createUserEvent } from '@services/POST/createUserEvent';
 import { useAppSelector } from '@hooks/useAppSelector';
 import { useSettings } from '@hooks/useSettings';
 
-import { Header } from '@components-of-screens/Event/components/Header';
+import { Header } from '@components-of-screens/EventDetails/components/Header';
 import { Button } from '@components/Buttons/Button';
 import { Loading } from '@components/Loading';
 
@@ -31,7 +31,7 @@ interface Params {
   id: string;
 }
 
-export const Event: FC = () => {
+export const EventDetails: FC = () => {
   const { user } = useAppSelector((state) => state.auth);
   const { fontSizeValue } = useSettings();
   const { params } = useRoute();
