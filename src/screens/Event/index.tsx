@@ -1,13 +1,15 @@
 import { FC } from 'react';
 import { useRoute } from '@react-navigation/native';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import { useTheme } from 'styled-components/native';
 import { format } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 import { CalendarCheck, Clock } from 'phosphor-react-native';
 
 import { getEvent } from '@services/GET/getEvent';
+import { createUserEvent } from '@services/POST/createUserEvent';
 
+import { useAppSelector } from '@hooks/useAppSelector';
 import { useSettings } from '@hooks/useSettings';
 
 import { Header } from '@components-of-screens/Event/components/Header';
@@ -30,18 +32,25 @@ interface Params {
 }
 
 export const Event: FC = () => {
+  const { user } = useAppSelector((state) => state.auth);
   const { fontSizeValue } = useSettings();
   const { params } = useRoute();
   const { id } = params as Params;
   const { data, isLoading } = useQuery({ queryKey: ['event', id], queryFn: () => getEvent(id) });
+  const mutation = useMutation({
+    mutationKey: ['createUserEvent', user?.id, id],
+    mutationFn: () => createUserEvent(user?.id!, id),
+  });
   const { colors } = useTheme();
 
-  let formattedEventAt = '';
+  let formattedEventAt: string = '';
 
   if (data?.eventAt) {
     formattedEventAt = format(new Date(data?.eventAt), "dd 'de' MMMM", { locale: ptBR });
   }
-  const formatTime = (time: string) => format(new Date(time), 'HH:mm');
+  const formatTime = (time: string): string => format(new Date(time), 'HH:mm');
+
+  const onSignUpEvent = () => mutation.mutate();
 
   return (
     <Container>
@@ -72,7 +81,11 @@ export const Event: FC = () => {
           </Wrapper>
 
           <ButtonWrapper>
-            <Button title="Confirmar presença" />
+            <Button
+              title="Confirmar presença"
+              isLoading={mutation.isLoading}
+              onPress={onSignUpEvent}
+            />
           </ButtonWrapper>
         </>
       )}
