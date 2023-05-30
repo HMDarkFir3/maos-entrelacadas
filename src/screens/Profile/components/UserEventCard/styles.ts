@@ -4,15 +4,15 @@ import { RectButton } from 'react-native-gesture-handler';
 import { SCREEN_WIDTH } from '@utils/constants';
 
 export const Container = styled(RectButton)`
-  width: ${(SCREEN_WIDTH - 48) / 2.25}px;
+  width: ${SCREEN_WIDTH / 1.85 - 48}px;
 
   background-color: ${({ theme }) => theme.colors.primary90};
   border-radius: 8px;
 `;
 
 export const Image = styled.Image`
-  width: ${(SCREEN_WIDTH - 48) / 2.25}px;
-  height: ${(SCREEN_WIDTH - 48) / 3.5}px;
+  width: ${SCREEN_WIDTH / 1.85 - 48}px;
+  height: ${SCREEN_WIDTH / 3.5}px;
 
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
@@ -36,12 +36,13 @@ export const Title = styled.Text`
   `}
 `;
 
-export const DateContainer = styled.View``;
+export const DateContainer = styled.View`
+  width: ${SCREEN_WIDTH / 1.5 - 80}px;
+`;
 
 export const DateWrapper = styled.View`
   flex-direction: row;
   align-items: center;
-
   gap: 8px;
 `;
 

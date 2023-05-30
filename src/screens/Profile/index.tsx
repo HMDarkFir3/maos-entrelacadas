@@ -16,6 +16,7 @@ import { logout } from '@store/auth/actions';
 import { Header } from '@components-of-screens/Profile/components/Header';
 import { UserEventCard } from '@components-of-screens/Profile/components/UserEventCard';
 import { SettingsItem } from '@components-of-screens/Profile/components/SettingsItem';
+import { Loading } from '@components/Loading';
 
 import { Container, Wrapper, EventHeader, EventTitle, Footer } from './styles';
 
@@ -63,17 +64,21 @@ export const Profile: FC = () => {
           <Funnel size={fontSizeValue(24)} color={colors.icon600} />
         </EventHeader>
 
-        <FlatList
-          style={{ marginTop: 20 }}
-          contentContainerStyle={{ paddingHorizontal: 24, gap: 12 }}
-          data={data}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <UserEventCard data={item} onPress={() => onPressEvent(item.id)} />
-          )}
-          horizontal
-          showsHorizontalScrollIndicator={false}
-        />
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <FlatList
+            style={{ marginTop: 20 }}
+            contentContainerStyle={{ paddingHorizontal: 24, gap: 12 }}
+            data={data}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <UserEventCard data={item} onPress={() => onPressEvent(item.id)} />
+            )}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+          />
+        )}
       </Wrapper>
 
       <Footer>
