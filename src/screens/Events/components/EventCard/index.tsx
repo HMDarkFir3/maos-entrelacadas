@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { RectButtonProps } from 'react-native-gesture-handler';
 import { useTheme } from 'styled-components/native';
 import { format } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
@@ -10,11 +11,13 @@ import { useSettings } from '@hooks/useSettings';
 
 import { Container, Image, Title, Footer, DateWrapper, EventAt } from './styles';
 
-interface Props {
+interface Props extends RectButtonProps {
   data: EventsDTO.Response;
+  onPress?: () => void;
 }
 
 export const EventCard: FC<Props> = (props) => {
+  const { ...rest } = props;
   const { title, eventAt, startTime, endTime } = props.data;
 
   const { fontSizeValue } = useSettings();
@@ -25,7 +28,7 @@ export const EventCard: FC<Props> = (props) => {
   const formatTime = (time: string) => format(new Date(time), 'HH:mm');
 
   return (
-    <Container>
+    <Container {...rest}>
       <Image source={{ uri: 'https://www.github.com/hmdarkfir3.png' }} />
 
       <Title style={{ fontSize: fontSizeValue(16) }}>{title}</Title>

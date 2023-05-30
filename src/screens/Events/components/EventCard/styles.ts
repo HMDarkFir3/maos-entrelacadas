@@ -1,10 +1,11 @@
 import styled, { css } from 'styled-components/native';
+import { RectButton } from 'react-native-gesture-handler';
 
 import { SCREEN_WIDTH } from '@utils/constants';
 
 const CARD_WIDTH = SCREEN_WIDTH / 2 - 36;
 
-export const Container = styled.View`
+export const Container = styled(RectButton)`
   justify-content: space-between;
 
   width: ${CARD_WIDTH}px;

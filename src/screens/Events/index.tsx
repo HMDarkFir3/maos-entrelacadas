@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { FlatList } from 'react-native';
 import { useQuery } from '@tanstack/react-query';
+import { useNavigation } from '@react-navigation/native';
 
 import { getEvents } from '@services/GET/getEvents';
 
@@ -15,6 +16,9 @@ import { Container, Title } from './styles';
 export const Events: FC = () => {
   const { fontSizeValue } = useSettings();
   const { data, isLoading } = useQuery({ queryKey: ['events'], queryFn: getEvents });
+  const { navigate } = useNavigation();
+
+  const onEventCard = (id: string) => navigate('Event', { id });
 
   return (
     <Container>
@@ -30,7 +34,7 @@ export const Events: FC = () => {
           contentContainerStyle={{ gap: 24, paddingBottom: 24 }}
           data={data}
           keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <EventCard data={item} />}
+          renderItem={({ item }) => <EventCard data={item} onPress={() => onEventCard(item.id)} />}
           numColumns={2}
           showsVerticalScrollIndicator={false}
         />
