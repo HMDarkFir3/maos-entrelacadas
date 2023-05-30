@@ -27,6 +27,8 @@
     },
     "extra": {
       "apiUrl": "https://smiling-headscarf-foal.cyclic.app/api",
+      "googleClientId": "312427646187-89ta4vu1tfrp9q9hchubpuq7a1scre1j.apps.googleusercontent.com",
+      "googleClientSecret": "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",
       "eas": {
         "projectId": "dfcd84b5-f1d4-4aa5-a828-f2fe48c6758d"
       }

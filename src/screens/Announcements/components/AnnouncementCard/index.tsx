@@ -1,26 +1,52 @@
 import { FC } from 'react';
+import { format } from 'date-fns';
+import ptBR from 'date-fns/locale/pt-BR';
+
+import { AnnouncementsDTO } from '@dtos/AnnouncementsDTO';
 
 import { useSettings } from '@hooks/useSettings';
 
-import { Container, Wrapper, Date, Image, DescriptionWrapper, Description, Tag } from './styles';
+import {
+  Container,
+  Wrapper,
+  CreatedAt,
+  Image,
+  DescriptionWrapper,
+  Description,
+  Tags,
+  Tag,
+} from './styles';
 
-export const AnnouncementCard: FC = () => {
+interface Props {
+  data: AnnouncementsDTO.Response;
+}
+
+export const AnnouncementCard: FC<Props> = (props) => {
+  const { createdAt, description, tags } = props.data;
+
   const { fontSizeValue } = useSettings();
+
+  const formattedCreatedAt = format(new Date(createdAt), "dd 'de' MMMM 'às' HH:mm", {
+    locale: ptBR,
+  });
 
   return (
     <Container>
-      <Date style={{ fontSize: fontSizeValue(14) }}>24 de agosto às 12:21</Date>
+      <CreatedAt style={{ fontSize: fontSizeValue(14) }}>{formattedCreatedAt}</CreatedAt>
 
       <Wrapper>
         <Image source={{ uri: 'https://github.com/hmdarkfir3.png' }} />
 
         <DescriptionWrapper>
-          <Description style={{ fontSize: fontSizeValue(16) }}>
-            ATENÇÃO comunicação Mãos Entrelaçadas ensaio do dia 28/08/2022 CANCELADO! Fiquem atentos
-            que em breve divulgaremos a nova data! 🙏🏻💙
-          </Description>
+          <Description style={{ fontSize: fontSizeValue(16) }}>{description}</Description>
 
-          <Tag style={{ fontSize: fontSizeValue(16) }}>#maosentrelaçadas #vemdemãos💙</Tag>
+          <Tags>
+            {tags.map((tag) => (
+              <Tag key={tag} style={{ fontSize: fontSizeValue(16) }}>
+                {tag}
+              </Tag>
+            ))}
+          </Tags>
         </DescriptionWrapper>
       </Wrapper>
     </Container>

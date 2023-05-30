@@ -8,7 +8,7 @@ const MENU_WIDTH = SCREEN_WIDTH / 2 - 36;
 export const Container = styled.View`
   position: absolute;
   right: 0;
-  top: 40px;
+  top: 44px;
 
   width: ${MENU_WIDTH}px;
 
@@ -26,8 +26,6 @@ export const Button = styled(RectButton)`
   flex-direction: row;
   align-items: center;
   gap: 8px;
-
-  width: 100%;
 
   padding: 8px 20px;
 `;

@@ -10,7 +10,7 @@ export const Wrapper = styled.View`
   border-bottom-right-radius: 8px;
 `;
 
-export const Date = styled.Text`
+export const CreatedAt = styled.Text`
   margin-bottom: 8px;
 
   ${({ theme }) => css`
@@ -38,9 +38,15 @@ export const Description = styled.Text`
   `}
 `;
 
-export const Tag = styled.Text`
-  margin-top: 12px;
+export const Tags = styled.View`
+  flex-direction: row;
+  flex-wrap: wrap;
+  column-gap: 8px;
 
+  margin-top: 12px;
+`;
+
+export const Tag = styled.Text`
   ${({ theme }) => css`
     font-family: ${theme.fonts.regular};
     color: ${theme.colors.link};

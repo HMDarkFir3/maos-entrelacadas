@@ -8,7 +8,7 @@ interface RegisterButtonTextProps {
 
 export const Container = styled.View`
   flex: 1;
-  align-items: center;
+
   justify-content: space-between;
 
   padding: 0 24px;
@@ -17,6 +17,8 @@ export const Container = styled.View`
 `;
 
 export const Logo = styled(Image)`
+  align-self: center;
+
   width: 200px;
   height: 200px;
 
@@ -46,8 +48,6 @@ export const Description = styled.Text`
 `;
 
 export const ButtonWrapper = styled.View`
-  align-items: center;
-
   width: 100%;
 
   margin-bottom: 28px;
@@ -80,4 +80,33 @@ export const RegisterButtonText = styled.Text<RegisterButtonTextProps>`
       font-family: ${theme.fonts.regular};
       color: ${theme.colors.text500};
     `}
+`;
+
+export const SeparatorWrapper = styled.View`
+  flex-direction: row;
+  align-items: center;
+
+  margin: 24px 0;
+`;
+
+export const Separator = styled.View`
+  flex: 1;
+
+  height: 1px;
+
+  background-color: ${({ theme }) => theme.colors.text200};
+`;
+
+export const SeparatorText = styled.Text`
+  margin: 0 16px;
+
+  ${({ theme }) => css`
+    font-family: ${theme.fonts.regular};
+    color: ${theme.colors.text200};
+  `}
+`;
+
+export const OAuthButtonWrapper = styled.View`
+  flex-direction: row;
+  justify-content: space-evenly;
 `;
