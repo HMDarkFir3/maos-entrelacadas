@@ -45,7 +45,7 @@ export const DateWrapper = styled.View`
   gap: 8px;
 `;
 
-export const Date = styled.Text`
+export const EventAt = styled.Text`
   text-align: center;
 
   ${({ theme }) => css`
