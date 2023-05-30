@@ -6,6 +6,7 @@ import { format } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 import { CalendarCheck, Clock } from 'phosphor-react-native';
 
+import { queryClient } from '@services/queryClient';
 import { getEventDetails } from '@services/GET/getEventDetails';
 import { createUserEvent } from '@services/POST/createUserEvent';
 
@@ -43,6 +44,7 @@ export const EventDetails: FC = () => {
   const mutation = useMutation({
     mutationKey: ['createUserEvent', user?.id, id],
     mutationFn: () => createUserEvent(user?.id!, id),
+    onSuccess: () => queryClient.invalidateQueries(['events']),
   });
   const { colors } = useTheme();
 
@@ -85,6 +87,7 @@ export const EventDetails: FC = () => {
 
           <ButtonWrapper>
             <Button
+              type={mutation.isSuccess || data?.isSignedUp ? 'secondary' : 'primary'}
               title="Confirmar presença"
               isLoading={mutation.isLoading}
               onPress={onSignUpEvent}

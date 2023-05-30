@@ -6,21 +6,24 @@ import { useSettings } from '@hooks/useSettings';
 import { Container, Title, Load } from './styles';
 
 interface Props extends RectButtonProps {
+  type?: 'primary' | 'secondary';
   title: string;
   isLoading?: boolean;
 }
 
 export const Button: FC<Props> = (props) => {
-  const { title, isLoading, ...rest } = props;
+  const { type = 'primary', title, isLoading, ...rest } = props;
 
   const { fontSizeValue } = useSettings();
 
   return (
-    <Container {...rest}>
+    <Container type={type} {...rest}>
       {isLoading ? (
         <Load color="#fff" />
       ) : (
-        <Title style={{ fontSize: fontSizeValue(16) }}>{title}</Title>
+        <Title style={{ fontSize: fontSizeValue(16) }} type={type}>
+          {title}
+        </Title>
       )}
     </Container>
   );
