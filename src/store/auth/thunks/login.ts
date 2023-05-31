@@ -26,7 +26,6 @@ const loginBuilder = (builder: ActionReducerMapBuilder<InitialStateAuth>) => {
       state.accessToken = action.payload.access_token;
       state.isSigned = true;
       state.isLoading = false;
-      console.log(action.payload);
     })
     .addCase(login.rejected, (state: InitialStateAuth, action) => {
       console.log(action.error.message);

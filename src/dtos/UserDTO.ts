@@ -15,9 +15,9 @@ export interface Address {
 }
 
 export interface Person {
+  address: Address | null;
   birthdate: string;
   cpf: number | null;
-  address: Address | null;
   createdAt: string;
   gender: GenderDTO.Response;
   id: string;
@@ -27,12 +27,16 @@ export interface Person {
 
 export interface User {
   cellphone: string;
+  createdAt: string;
   email: string;
+  facebookId: string;
+  googleId: string;
   id: string;
-  image: null | string;
   isAdmin: boolean;
+  image: null | string;
   person: Person;
   status: string;
+  updatedAt: string;
   username: string;
 }
 
