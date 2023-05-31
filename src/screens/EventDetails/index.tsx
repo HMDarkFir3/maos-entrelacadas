@@ -1,4 +1,5 @@
-import { FC } from 'react';
+import { useRef, FC } from 'react';
+import { FlatList, Animated } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { useTheme } from 'styled-components/native';
@@ -15,13 +16,16 @@ import { useSettings } from '@hooks/useSettings';
 
 import { Header } from '@components-of-screens/EventDetails/components/Header';
 import { Button } from '@components/Buttons/Button';
+import { ImageDot } from '@components/ImageDot';
 import { Loading } from '@components/Loading';
 
 import {
   Container,
   Wrapper,
   Title,
+  ImageWrapper,
   Image,
+  DotWrapper,
   DateWrapper,
   EventAt,
   ButtonWrapper,
@@ -48,6 +52,9 @@ export const EventDetails: FC = () => {
   });
   const { colors } = useTheme();
 
+  const imageSliderRef = useRef<FlatList>(null);
+  const scrollX = useRef<Animated.Value>(new Animated.Value(0)).current;
+
   let formattedEventAt: string = '';
 
   if (data?.eventAt) {
@@ -68,7 +75,29 @@ export const EventDetails: FC = () => {
           <Title style={{ fontSize: fontSizeValue(20) }}>{data?.title}</Title>
 
           <Wrapper showsVerticalScrollIndicator={false}>
-            <Image source={{ uri: 'https://github.com/hmdarkfir3.png' }} />
+            <ImageWrapper>
+              <Animated.FlatList
+                ref={imageSliderRef}
+                data={[0, 1, 2, 3, 4]}
+                keyExtractor={(item) => String(item)}
+                renderItem={() => <Image source={{ uri: 'https://github.com/hmdarkfir3.png' }} />}
+                horizontal
+                pagingEnabled
+                showsHorizontalScrollIndicator={false}
+                onScroll={Animated.event(
+                  [
+                    {
+                      nativeEvent: { contentOffset: { x: scrollX } },
+                    },
+                  ],
+                  { useNativeDriver: true }
+                )}
+              />
+
+              <DotWrapper>
+                <ImageDot data={[0, 1, 2, 3, 4]} scrollX={scrollX} />
+              </DotWrapper>
+            </ImageWrapper>
 
             <DateWrapper style={{ marginTop: 20 }}>
               <CalendarCheck size={fontSizeValue(16)} color={colors.icon600} weight="bold" />

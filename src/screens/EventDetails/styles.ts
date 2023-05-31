@@ -23,14 +23,26 @@ export const Title = styled.Text`
   `}
 `;
 
+export const ImageWrapper = styled.View`
+  margin-top: 20px;
+
+  background-color: ${({ theme }) => theme.colors.primary90};
+  border-radius: 8px;
+
+  overflow: hidden;
+`;
+
 export const Image = styled.Image`
   width: ${SCREEN_WIDTH - 48}px;
   height: 272px;
+`;
 
-  margin-top: 20px;
+export const DotWrapper = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  padding: 16px;
 `;
 
 export const ButtonWrapper = styled.View`
