@@ -10,6 +10,7 @@ import { CalendarCheck, Clock } from 'phosphor-react-native';
 import { queryClient } from '@services/queryClient';
 import { getEventDetails } from '@services/GET/getEventDetails';
 import { createUserEvent } from '@services/POST/createUserEvent';
+import { deleteUserEvent } from '@services/DELETE/deleteUserEvent';
 
 import { useAppSelector } from '@hooks/useAppSelector';
 import { useSettings } from '@hooks/useSettings';
@@ -41,14 +42,22 @@ export const EventDetails: FC = () => {
   const { fontSizeValue } = useSettings();
   const { params } = useRoute();
   const { id } = params as Params;
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ['event', user?.id, id],
     queryFn: () => getEventDetails(user?.id!, id),
   });
-  const mutation = useMutation({
+  const signUpEvent = useMutation({
     mutationKey: ['createUserEvent', user?.id, id],
     mutationFn: () => createUserEvent(user?.id!, id),
     onSuccess: () => queryClient.invalidateQueries(['events']),
+  });
+  const signOutEvent = useMutation({
+    mutationKey: ['deleteUserEvent', user?.id, id],
+    mutationFn: () => deleteUserEvent(user?.id!, id),
+    onSuccess: () => {
+      refetch();
+      queryClient.invalidateQueries(['events']);
+    },
   });
   const { colors } = useTheme();
 
@@ -62,7 +71,10 @@ export const EventDetails: FC = () => {
   }
   const formatTime = (time: string): string => format(new Date(time), 'HH:mm');
 
-  const onSignUpEvent = () => mutation.mutate();
+  const onSignUpEvent = () => signUpEvent.mutate();
+  const onSignOutEvent = () => {
+    signOutEvent.mutate();
+  };
 
   return (
     <Container>
@@ -116,10 +128,19 @@ export const EventDetails: FC = () => {
 
           <ButtonWrapper>
             <Button
-              type={mutation.isSuccess || data?.isSignedUp ? 'secondary' : 'primary'}
-              title="Confirmar presença"
-              isLoading={mutation.isLoading}
-              onPress={onSignUpEvent}
+              type={
+                (signUpEvent.isSuccess || data?.isSignedUp) && !signOutEvent.isSuccess
+                  ? 'secondary'
+                  : 'primary'
+              }
+              title={
+                (signUpEvent.isSuccess || data?.isSignedUp) && !signOutEvent.isSuccess
+                  ? 'Desmarcar presença'
+                  : 'Confirmar presença'
+              }
+              isLoading={signUpEvent.isLoading || signOutEvent.isLoading}
+              enabled={!signUpEvent.isLoading || !signOutEvent.isLoading}
+              onPress={signUpEvent.isSuccess || data?.isSignedUp ? onSignOutEvent : onSignUpEvent}
             />
           </ButtonWrapper>
         </>

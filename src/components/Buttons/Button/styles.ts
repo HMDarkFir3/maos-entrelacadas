@@ -17,7 +17,7 @@ export const Container = styled(RectButton)<ContainerProps>`
   height: 56px;
 
   background-color: ${({ theme, type }) =>
-    type === 'primary' ? theme.colors.primary600 : theme.colors.primary90};
+    type === 'primary' ? theme.colors.primary600 : theme.colors.primary300};
   border-radius: 8px;
 `;
 

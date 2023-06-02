@@ -7,6 +7,7 @@ export const light = {
     primary600: '#3cb371',
     primary90: '#ecf8f1',
     primary30: '#f8f8f8',
+    primary300: 'rgba(255, 53, 53, 0.3)',
 
     text900: '#1c1e26',
     text600: '#6e8592',

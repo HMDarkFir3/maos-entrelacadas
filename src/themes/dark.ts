@@ -7,6 +7,7 @@ export const dark = {
     primary600: '#3cb371',
     primary90: '#333333',
     primary30: '#111111',
+    primary300: 'rgba(255, 53, 53, 0.3)',
 
     text900: '#e5ebef',
     text600: '#e5ebef',
