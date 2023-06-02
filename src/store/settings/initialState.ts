@@ -7,4 +7,5 @@ export const initialState: InitialStateSettings = {
   sawIntroduction: false,
   theme: light,
   fontSize: { name: 'Normal', value: 'md' },
+  isSignUpUserEvent: false,
 };

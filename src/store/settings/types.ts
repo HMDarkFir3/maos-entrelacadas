@@ -12,4 +12,5 @@ export interface InitialStateSettings {
   sawIntroduction: boolean;
   theme: DefaultTheme;
   fontSize: FontSizeData;
+  isSignUpUserEvent: boolean;
 }

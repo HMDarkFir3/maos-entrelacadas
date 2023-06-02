@@ -1,19 +1,24 @@
-import { useRef, FC } from 'react';
+import { useState, useEffect, useRef, FC } from 'react';
 import { FlatList, Animated } from 'react-native';
 import { useRoute } from '@react-navigation/native';
-import { useQuery, useMutation } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import { useTheme } from 'styled-components/native';
 import { format } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 import { CalendarCheck, Clock } from 'phosphor-react-native';
+
+import { EventsDTO } from '@dtos/EventsDTO';
 
 import { queryClient } from '@services/queryClient';
 import { getEventDetails } from '@services/GET/getEventDetails';
 import { createUserEvent } from '@services/POST/createUserEvent';
 import { deleteUserEvent } from '@services/DELETE/deleteUserEvent';
 
+import { useAppDispatch } from '@hooks/useAppDispatch';
 import { useAppSelector } from '@hooks/useAppSelector';
 import { useSettings } from '@hooks/useSettings';
+
+import { toggleSignUpUserEvent } from '@store/settings/actions';
 
 import { Header } from '@components-of-screens/EventDetails/components/Header';
 import { Button } from '@components/Buttons/Button';
@@ -38,28 +43,34 @@ interface Params {
 }
 
 export const EventDetails: FC = () => {
+  const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state.auth);
+  const { isSignUpUserEvent } = useAppSelector((state) => state.settings);
   const { fontSizeValue } = useSettings();
   const { params } = useRoute();
   const { id } = params as Params;
-  const { data, isLoading, refetch } = useQuery({
-    queryKey: ['event', user?.id, id],
-    queryFn: () => getEventDetails(user?.id!, id),
-  });
   const signUpEvent = useMutation({
     mutationKey: ['createUserEvent', user?.id, id],
     mutationFn: () => createUserEvent(user?.id!, id),
-    onSuccess: () => queryClient.invalidateQueries(['events']),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['events']);
+      queryClient.invalidateQueries(['userEvents']);
+      dispatch(toggleSignUpUserEvent(true));
+    },
   });
   const signOutEvent = useMutation({
     mutationKey: ['deleteUserEvent', user?.id, id],
     mutationFn: () => deleteUserEvent(user?.id!, id),
     onSuccess: () => {
-      refetch();
       queryClient.invalidateQueries(['events']);
+      queryClient.invalidateQueries(['userEvents']);
+      dispatch(toggleSignUpUserEvent(false));
     },
   });
   const { colors } = useTheme();
+
+  const [data, setData] = useState<EventsDTO.Response>({} as EventsDTO.Response);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const imageSliderRef = useRef<FlatList>(null);
   const scrollX = useRef<Animated.Value>(new Animated.Value(0)).current;
@@ -72,9 +83,21 @@ export const EventDetails: FC = () => {
   const formatTime = (time: string): string => format(new Date(time), 'HH:mm');
 
   const onSignUpEvent = () => signUpEvent.mutate();
-  const onSignOutEvent = () => {
-    signOutEvent.mutate();
-  };
+  const onSignOutEvent = () => signOutEvent.mutate();
+
+  useEffect(() => {
+    getEventDetails(user?.id!, id)
+      .then((response) => {
+        setData(response);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, [id, user?.id]);
+
+  useEffect(() => {
+    dispatch(toggleSignUpUserEvent(data?.isSignedUp!));
+  }, [data?.isSignedUp, dispatch]);
 
   return (
     <Container>
@@ -128,19 +151,11 @@ export const EventDetails: FC = () => {
 
           <ButtonWrapper>
             <Button
-              type={
-                (signUpEvent.isSuccess || data?.isSignedUp) && !signOutEvent.isSuccess
-                  ? 'secondary'
-                  : 'primary'
-              }
-              title={
-                (signUpEvent.isSuccess || data?.isSignedUp) && !signOutEvent.isSuccess
-                  ? 'Desmarcar presença'
-                  : 'Confirmar presença'
-              }
+              type={isSignUpUserEvent ? 'secondary' : 'primary'}
+              title={isSignUpUserEvent ? 'Desmarcar presença' : 'Confirmar presença'}
               isLoading={signUpEvent.isLoading || signOutEvent.isLoading}
               enabled={!signUpEvent.isLoading || !signOutEvent.isLoading}
-              onPress={signUpEvent.isSuccess || data?.isSignedUp ? onSignOutEvent : onSignUpEvent}
+              onPress={isSignUpUserEvent ? onSignOutEvent : onSignUpEvent}
             />
           </ButtonWrapper>
         </>

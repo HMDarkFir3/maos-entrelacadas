@@ -23,9 +23,11 @@ export const settingsSlice = createSlice({
     changeFontSize: (state: InitialStateSettings, action: PayloadAction<FontSizeData>) => {
       state.fontSize = action.payload;
     },
-
     setGenders: (state: InitialStateSettings, action: PayloadAction<GenderDTO.Response[]>) => {
       state.genders = action.payload;
+    },
+    toggleSignUpUserEvent: (state: InitialStateSettings, action: PayloadAction<boolean>) => {
+      state.isSignUpUserEvent = action.payload;
     },
   },
 });
