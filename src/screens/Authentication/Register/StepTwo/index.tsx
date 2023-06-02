@@ -75,7 +75,7 @@ export const StepTwo: FC = () => {
   };
 
   const onSubmit = (data: StepTwoFormState) => {
-    const formattedBirthdate = format(new Date(data.birthdate), 'yyyy-MM-dd', {
+    const formattedBirthdate = format(new Date(data.birthdate as string), 'yyyy-MM-dd', {
       locale: ptBR,
     });
 

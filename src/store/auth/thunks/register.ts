@@ -12,10 +12,11 @@ const register = createAsyncThunk('auth/register', async (form: RegisterFormStat
     username: form.username,
     password: form.password,
     email: form.email,
-    cellphone: form.cellphone,
+    ...(form.cellphone && { cellphone: form.cellphone }),
+    ...(form.image && { image: { url: form.image } }),
     person: {
       name: form.givenName,
-      birthdate: form.birthdate,
+      ...(form.birthdate && { birthdate: form.birthdate }),
       gender: {
         name: form.gender,
       },
@@ -38,7 +39,7 @@ const registerBuilder = (builder: ActionReducerMapBuilder<InitialStateAuth>) => 
       state.accessToken = action.payload.access_token;
       state.isSigned = true;
       state.isLoading = false;
-      console.log(action.payload);
+      state.isEmptyData = false;
     })
     .addCase(register.rejected, (state: InitialStateAuth, action) => {
       console.log('rejected', action.error);

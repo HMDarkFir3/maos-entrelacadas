@@ -17,7 +17,9 @@
     "development": {
       "env": {
         "APP_ENV": "development",
-        "API_URL": "https://smiling-headscarf-foal.cyclic.app/api"
+        "API_URL": "https://smiling-headscarf-foal.cyclic.app/api",
+        "GOOGLE_CLIENT_ID": "312427646187-89ta4vu1tfrp9q9hchubpuq7a1scre1j.apps.googleusercontent.com",
+        "GOOGLE_CLIENT_SECRET": "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"
       },
       "channel": "development",
       "distribution": "internal",
@@ -30,7 +32,9 @@
     "preview": {
       "env": {
         "APP_ENV": "preview",
-        "API_URL": "https://smiling-headscarf-foal.cyclic.app/api"
+        "API_URL": "https://smiling-headscarf-foal.cyclic.app/api",
+        "GOOGLE_CLIENT_ID": "312427646187-89ta4vu1tfrp9q9hchubpuq7a1scre1j.apps.googleusercontent.com",
+        "GOOGLE_CLIENT_SECRET": "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"
       },
       "channel": "preview",
       "distribution": "internal",

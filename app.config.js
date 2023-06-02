@@ -18,6 +18,8 @@ export default ({ config }) => {
         },
         extra: {
           apiUrl: process.env.API_URL,
+          googleClientId: process.env.GOOGLE_CLIENT_ID,
+          googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
           eas: {
             projectId: 'dfcd84b5-f1d4-4aa5-a828-f2fe48c6758d',
           },
@@ -33,6 +35,8 @@ export default ({ config }) => {
         },
         extra: {
           apiUrl: process.env.API_URL,
+          googleClientId: process.env.GOOGLE_CLIENT_ID,
+          googleClientSecret: process.env.GOOGLE_CLIENT_SECRET,
           eas: {
             projectId: 'dfcd84b5-f1d4-4aa5-a828-f2fe48c6758d',
           },

@@ -6,4 +6,5 @@ export const initialState: InitialStateAuth = {
   isSigned: false,
   isEditable: false,
   isLoading: false,
+  isEmptyData: true,
 };

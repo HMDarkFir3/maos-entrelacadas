@@ -7,6 +7,7 @@ export interface InitialStateAuth {
   isSigned: boolean;
   isEditable: boolean;
   isLoading: boolean;
+  isEmptyData: boolean;
 }
 
 export interface LoginFormState {
@@ -15,20 +16,22 @@ export interface LoginFormState {
 }
 
 export interface StepOneFormState {
-  givenName: string;
-  username: string;
-  email: string;
-  cellphone: string;
+  givenName?: string;
+  username?: string;
+  email?: string;
+  cellphone?: string;
 }
 
 export interface StepTwoFormState {
-  gender: string;
-  birthdate: string;
-  password: string;
-  confirmPassword: string;
+  gender?: string;
+  birthdate?: string;
+  password?: string;
+  confirmPassword?: string;
 }
 
-export interface RegisterFormState extends StepOneFormState, StepTwoFormState {}
+export interface RegisterFormState extends StepOneFormState, StepTwoFormState {
+  image?: string;
+}
 
 export interface UpdateFormState {
   data: UpdateDTO.Request;

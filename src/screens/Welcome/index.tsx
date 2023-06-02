@@ -1,9 +1,17 @@
 import Constants from 'expo-constants';
 import * as Google from 'expo-auth-session/providers/google';
-import { FC } from 'react';
+import { useEffect, FC } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import axios from 'axios';
 
+import { api } from '@services/api';
+
+import { GoogleDTO } from '@dtos/GoogleDTO';
+
+import { useAppDispatch } from '@hooks/useAppDispatch';
 import { useSettings } from '@hooks/useSettings';
+
+import { register } from '@store/auth/thunks/register';
 
 import { Button } from '@components/Buttons/Button';
 import { OAuthButton } from '@components/Buttons/OAuthButton';
@@ -34,6 +42,7 @@ interface ConstantsEnv {
 const { googleClientId, googleClientSecret } = Constants.expoConfig?.extra as ConstantsEnv;
 
 export const Welcome: FC = () => {
+  const dispatch = useAppDispatch();
   const { fontSizeValue } = useSettings();
   const { navigate } = useNavigation();
 
@@ -46,6 +55,40 @@ export const Welcome: FC = () => {
     responseType: 'code',
     scopes: ['profile', 'email'],
   });
+
+  const getUserInfo = async (token: string) => {
+    const { data: googleResponse } = await axios.get<GoogleDTO.Response>(
+      'https://www.googleapis.com/userinfo/v2/me',
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    if (googleResponse.id) {
+      const { data } = await api.post(`/auth/google/login/${googleResponse.id}`);
+
+      if (data.message === 'User not found') {
+        const userInfo = {
+          username: googleResponse.name,
+          password: googleResponse.id,
+          email: googleResponse.email,
+          image: googleResponse.picture,
+          givenName: googleResponse.given_name,
+        };
+
+        dispatch(register(userInfo));
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (response?.type === 'success') {
+      getUserInfo(response.authentication?.accessToken as string);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [response?.type]);
 
   return (
     <Container>
@@ -79,7 +122,7 @@ export const Welcome: FC = () => {
         </SeparatorWrapper>
 
         <OAuthButtonWrapper>
-          <OAuthButton icon={LogoGoogle} />
+          <OAuthButton icon={LogoGoogle} onPress={() => promptAsync()} />
           <OAuthButton icon={LogoFacebook} />
         </OAuthButtonWrapper>
       </ButtonWrapper>
