@@ -5,9 +5,10 @@ export const dark = {
     background: '#222222',
 
     primary600: '#3cb371',
+    primary300: 'rgba(255, 53, 53, 0.3)',
+    primary150: '#fafafa',
     primary90: '#333333',
     primary30: '#111111',
-    primary300: 'rgba(255, 53, 53, 0.3)',
 
     text900: '#e5ebef',
     text600: '#e5ebef',
@@ -23,6 +24,11 @@ export const dark = {
     icon900: '#6e8592',
     icon600: '#3cb371',
     icon40: '#fafafa',
+
+    donation: '#111111',
+    donationActive: '#111111',
+    donationInactive: '#333333',
+    donationBorder: '#bdc8ce',
 
     switcher: {
       trackActive: '#3cb371',
