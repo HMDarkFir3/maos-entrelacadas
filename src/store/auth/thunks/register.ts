@@ -17,9 +17,7 @@ const register = createAsyncThunk('auth/register', async (form: RegisterFormStat
     person: {
       name: form.givenName,
       ...(form.birthdate && { birthdate: form.birthdate }),
-      gender: {
-        name: form.gender,
-      },
+      ...(form.gender && { gender: { name: form.gender } }),
     },
   } as RegisterDTO.Request;
 

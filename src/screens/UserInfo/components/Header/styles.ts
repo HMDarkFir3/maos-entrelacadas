@@ -11,6 +11,13 @@ export const Container = styled.View`
   padding: 12px 24px;
 `;
 
+export const UserImageWrapper = styled.View`
+  border-radius: 88px;
+  z-index: 0;
+`;
+
+export const UserImageButton = styled.TouchableWithoutFeedback``;
+
 export const UserImage = styled(Animated.Image)`
   width: 152px;
   height: 152px;
@@ -18,6 +25,25 @@ export const UserImage = styled(Animated.Image)`
   border-radius: 88px;
   border-width: 2px;
   border-color: ${({ theme }) => theme.colors.primary600};
+
+  z-index: 1;
+`;
+
+export const UserImageEdit = styled.View`
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  width: 32px;
+  height: 32px;
+
+  background-color: ${({ theme }) => theme.colors.primary600};
+  border-radius: 20px;
+
+  z-index: 2;
 `;
 
 export const EditButton = styled(BorderlessButton)``;

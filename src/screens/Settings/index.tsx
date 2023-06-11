@@ -1,6 +1,6 @@
-import { useState, FC } from 'react';
+import { FC } from 'react';
 import { useTheme } from 'styled-components/native';
-import { Moon, BellRinging } from 'phosphor-react-native';
+import { Moon } from 'phosphor-react-native';
 
 import { useAppDispatch } from '@hooks/useAppDispatch';
 import { useAppSelector } from '@hooks/useAppSelector';
@@ -20,13 +20,7 @@ export const Settings: FC = () => {
   const { fontSizeValue } = useSettings();
   const { colors } = useTheme();
 
-  const [notificationsSwitch, setNotificationsSwitch] = useState(false);
-
   const onToggleTheme = async () => dispatch(toggleTheme());
-
-  const onToggleNotifications = () => {
-    setNotificationsSwitch((prevState) => !prevState);
-  };
 
   return (
     <Container>
@@ -43,12 +37,12 @@ export const Settings: FC = () => {
           onSwitchValue={onToggleTheme}
         />
 
-        <Switcher
+        {/* <Switcher
           icon={() => <BellRinging size={fontSizeValue(24)} color={colors.icon600} weight="bold" />}
           title="Receber notificações"
           switchValue={notificationsSwitch}
           onSwitchValue={onToggleNotifications}
-        />
+        /> */}
 
         <FontSwitcher />
       </Wrapper>

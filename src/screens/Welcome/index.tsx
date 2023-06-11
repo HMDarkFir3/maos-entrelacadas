@@ -17,7 +17,6 @@ import { Button } from '@components/Buttons/Button';
 import { OAuthButton } from '@components/Buttons/OAuthButton';
 
 import LogoGoogle from '@assets/svg/logo_google.svg';
-import LogoFacebook from '@assets/svg/logo_facebook.svg';
 
 import {
   Container,
@@ -123,7 +122,6 @@ export const Welcome: FC = () => {
 
         <OAuthButtonWrapper>
           <OAuthButton icon={LogoGoogle} onPress={() => promptAsync()} />
-          <OAuthButton icon={LogoFacebook} />
         </OAuthButtonWrapper>
       </ButtonWrapper>
     </Container>
