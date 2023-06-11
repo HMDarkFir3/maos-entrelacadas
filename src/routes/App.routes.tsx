@@ -3,13 +3,14 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import { TabRoutes } from '@routes/Tab.routes';
 
-import { Donations } from '@screens/Donations';
+import { StepOne } from '@screens/Donations/StepOne';
+import { StepTwo } from '@screens/Donations/StepTwo';
 import { EventDetails } from '@screens/EventDetails';
 import { Settings } from '@screens/Settings';
 import { UserInfo } from '@screens/UserInfo';
 import { DonationHistory } from '@screens/DonationHistory';
 
-const { Navigator, Screen } = createNativeStackNavigator();
+const { Navigator, Group, Screen } = createNativeStackNavigator();
 
 export const AppRoutes: FC = () => (
   <Navigator
@@ -19,7 +20,13 @@ export const AppRoutes: FC = () => (
     }}
   >
     <Screen name="TabRoutes" component={TabRoutes} />
-    <Screen name="Donations" component={Donations} />
+
+    {/* Donations */}
+    <Group>
+      <Screen name="Donations_StepOne" component={StepOne} />
+      <Screen name="Donations_StepTwo" component={StepTwo} />
+    </Group>
+
     <Screen name="EventDetails" component={EventDetails} />
     <Screen name="Settings" component={Settings} />
     <Screen name="UserInfo" component={UserInfo} />

@@ -19,6 +19,7 @@
     "@react-navigation/native": "^6.0.13",
     "@react-navigation/native-stack": "^6.9.0",
     "@reduxjs/toolkit": "^1.9.3",
+    "@stripe/stripe-react-native": "^0.27.2",
     "@tanstack/react-query": "^4.29.12",
     "axios": "^1.3.5",
     "date-fns": "^2.29.3",

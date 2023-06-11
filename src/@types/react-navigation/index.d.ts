@@ -13,7 +13,8 @@ export declare global {
       Announcements: undefined;
       Events: undefined;
       EventDetails: { id: string };
-      Donations: undefined;
+      Donations_StepOne: undefined;
+      Donations_StepTwo: { amount: string };
       Profile: undefined;
       Settings: undefined;
       UserInfo: undefined;

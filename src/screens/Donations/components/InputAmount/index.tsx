@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { TextInputProps } from 'react-native';
 import { useTheme } from 'styled-components/native';
 import { CurrencyCircleDollar } from 'phosphor-react-native';
 
@@ -6,13 +7,13 @@ import { useSettings } from '@hooks/useSettings';
 
 import { Container, Wrapper, Title, Input, CurrencyType } from './styles';
 
-interface Props {
+interface Props extends TextInputProps {
   isActive: boolean;
   onPress?: () => void;
 }
 
 export const InputAmount: FC<Props> = (props) => {
-  const { isActive, onPress } = props;
+  const { isActive, onPress, ...rest } = props;
 
   const { fontSizeValue } = useSettings();
   const { colors } = useTheme();
@@ -22,7 +23,8 @@ export const InputAmount: FC<Props> = (props) => {
       <Wrapper isActive={isActive}>
         {isActive ? (
           <>
-            <Input keyboardType="numeric" style={{ fontSize: fontSizeValue(20) }} />
+            <Input keyboardType="numeric" style={{ fontSize: fontSizeValue(20) }} {...rest} />
+
             <CurrencyType style={{ fontSize: fontSizeValue(20) }}>brl</CurrencyType>
           </>
         ) : (

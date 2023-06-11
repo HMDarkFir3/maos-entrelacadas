@@ -8,16 +8,17 @@ interface Props {
   step: string;
   title: string;
   isActive: boolean;
+  isFinished?: boolean;
 }
 
 export const Step: FC<Props> = (props) => {
-  const { step, title, isActive } = props;
+  const { step, title, isActive, isFinished = false } = props;
 
   const { fontSizeValue } = useSettings();
 
   return (
     <Container>
-      <Circle isActive={isActive}>
+      <Circle isActive={isActive} isFinished={isFinished}>
         <CircleText style={{ fontSize: fontSizeValue(12) }}>{step}</CircleText>
       </Circle>
 

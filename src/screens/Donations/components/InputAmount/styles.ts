@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components/native';
+import { TextInput } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 
 interface ContainerProps {
@@ -70,7 +71,7 @@ export const Title = styled.Text`
   `}
 `;
 
-export const Input = styled.TextInput`
+export const Input = styled(TextInput)`
   flex: 1;
 
   ${({ theme }) => css`

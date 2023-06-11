@@ -1,11 +1,12 @@
 import { useState, useCallback, FC } from 'react';
 import { Switch } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { useTheme } from 'styled-components/native';
 
 import { useSettings } from '@hooks/useSettings';
 
 import { Header } from '@components-of-screens/Donations/components/Header';
-import { StepByStep } from '@components-of-screens/Donations/components/StepByStep';
+import { Step } from '@components-of-screens/Donations/components/Step';
 import { AmountCard } from '@components-of-screens/Donations/components/AmountCard';
 import { InputAmount } from '@components-of-screens/Donations/components/InputAmount';
 import { Button } from '@components/Buttons/Button';
@@ -14,10 +15,15 @@ import { donations } from '@utils/donations';
 
 import {
   Container,
-  Scroller,
   Wrapper,
+  StepByStepWrapper,
+  StepByStepSeparator,
+  Scroller,
   Title,
   Description,
+} from '../styles';
+
+import {
   AmountWrapper,
   Separator,
   MessageWrapper,
@@ -34,11 +40,13 @@ interface SelectedAmount {
   amount: string;
 }
 
-export const Donations: FC = () => {
+export const StepOne: FC = () => {
   const { fontSizeValue } = useSettings();
+  const { navigate } = useNavigation();
   const { colors } = useTheme();
 
   const [selectedAmount, setSelectedAmount] = useState<SelectedAmount>({} as SelectedAmount);
+  const [inputAmount, setInputAmount] = useState<string>('');
   const [isActiveInputAmount, setIsActiveInputAmount] = useState<boolean>(false);
   const [switchValue] = useState(false);
 
@@ -51,20 +59,34 @@ export const Donations: FC = () => {
         return;
       }
 
+      setInputAmount('');
       setSelectedAmount({ id: selected.id, amount: selected.amount });
     },
-    [selectedAmount]
+    [selectedAmount.id]
   );
 
-  const onInputAmount = useCallback(() => {
+  const onToggleInputAmount = useCallback(() => {
     setSelectedAmount({} as SelectedAmount);
     setIsActiveInputAmount((prevState) => !prevState);
   }, []);
 
+  const onNavigateToStepTwo = () =>
+    navigate('Donations_StepTwo', { amount: selectedAmount.amount || inputAmount });
+
   return (
     <Container>
       <Header />
-      <StepByStep />
+      <StepByStepWrapper>
+        <Step step="1" title="Doação" isActive />
+
+        <StepByStepSeparator />
+
+        <Step step="2" title="Pagamento" isActive={false} />
+
+        <StepByStepSeparator />
+
+        <Step step="3" title="Confirmação" isActive={false} />
+      </StepByStepWrapper>
 
       <Scroller showsVerticalScrollIndicator={false}>
         <Wrapper>
@@ -85,7 +107,12 @@ export const Donations: FC = () => {
             ))}
           </AmountWrapper>
 
-          <InputAmount isActive={isActiveInputAmount} onPress={onInputAmount} />
+          <InputAmount
+            value={inputAmount}
+            onChangeText={setInputAmount}
+            isActive={isActiveInputAmount}
+            onPress={onToggleInputAmount}
+          />
         </Wrapper>
 
         <Separator />
@@ -120,7 +147,7 @@ export const Donations: FC = () => {
         <Separator />
 
         <ButtonWrapper>
-          <Button title="Confirmar a doação" />
+          <Button title="Confirmar a doação" onPress={onNavigateToStepTwo} />
         </ButtonWrapper>
       </Scroller>
     </Container>

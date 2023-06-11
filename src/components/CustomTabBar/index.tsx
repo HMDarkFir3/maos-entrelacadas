@@ -19,8 +19,9 @@ export const CustomTabBar: FC<Props> = (props) => {
   const { navigate } = useNavigation();
   const { colors } = useTheme();
 
-  const onPressNavigate = (screenName: 'Announcements' | 'Events' | 'Donations' | 'Profile') =>
-    navigate(screenName);
+  const onPressNavigate = (
+    screenName: 'Announcements' | 'Events' | 'Donations_StepOne' | 'Profile'
+  ) => navigate(screenName);
 
   const isActiveRoute = state.routeNames[state.index];
 
@@ -47,12 +48,12 @@ export const CustomTabBar: FC<Props> = (props) => {
         </TabItemText>
       </TabItem>
 
-      <TabItem testID="CustomTabBar.TabItem3" onPress={() => onPressNavigate('Donations')}>
-        <Gift size={fontSizeValue(28)} color={getColors(isActiveRoute === 'Donations')} />
+      <TabItem testID="CustomTabBar.TabItem3" onPress={() => onPressNavigate('Donations_StepOne')}>
+        <Gift size={fontSizeValue(28)} color={getColors(isActiveRoute === 'Donations_StepOne')} />
 
         <TabItemText
           style={{ fontSize: fontSizeValue(12) }}
-          isActive={isActiveRoute === 'Donations'}
+          isActive={isActiveRoute === 'Donations_StepOne'}
         >
           Doações
         </TabItemText>

@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components/native';
 
 interface CircleProps {
   isActive: boolean;
+  isFinished: boolean;
 }
 
 interface TitleProps {
@@ -24,9 +25,23 @@ export const Circle = styled.View<CircleProps>`
 
   border-radius: 12px;
 
-  ${({ theme, isActive }) => css`
-    background-color: ${isActive ? theme.colors.donation : theme.colors.text200};
-  `}
+  ${({ theme, isActive }) =>
+    isActive &&
+    css`
+      background-color: ${theme.colors.donation};
+    `}
+
+  ${({ theme, isActive }) =>
+    !isActive &&
+    css`
+      background-color: ${theme.colors.text200};
+    `}
+
+  ${({ theme, isFinished }) =>
+    isFinished &&
+    css`
+      background-color: ${theme.colors.primary600};
+    `}
 `;
 
 export const CircleText = styled.Text`
