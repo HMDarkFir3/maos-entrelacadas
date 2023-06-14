@@ -3,7 +3,7 @@ import { Alert, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useQuery } from '@tanstack/react-query';
 import { useTheme } from 'styled-components/native';
-import { Funnel, Gear, ClockCounterClockwise, SignOut } from 'phosphor-react-native';
+import { Funnel, Gear, SignOut } from 'phosphor-react-native';
 
 import { getUserEvents } from '@services/GET/getUserEvents';
 
@@ -89,11 +89,11 @@ export const Profile: FC = () => {
           onPress={() => onPressNavigate('Settings')}
         />
 
-        <SettingsItem
+        {/* <SettingsItem
           icon={() => <ClockCounterClockwise size={fontSizeValue(24)} color={colors.icon900} />}
           title="Histórico de Doações"
           onPress={() => onPressNavigate('DonationHistory')}
-        />
+        /> */}
 
         {/* <SettingsItem
           icon={() => <Question size={fontSizeValue(24)} color={colors.icon900} />}
