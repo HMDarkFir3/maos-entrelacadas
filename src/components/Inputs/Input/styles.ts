@@ -4,6 +4,7 @@ import { BorderlessButton } from 'react-native-gesture-handler';
 
 interface WrapperProps {
   error: boolean;
+  isEditable: boolean;
 }
 
 interface StyledInputProps {
@@ -22,14 +23,20 @@ export const Wrapper = styled.View<WrapperProps>`
 
   border-bottom-width: 1px;
 
-  ${({ error, theme }) =>
-    error
+  ${({ isEditable, theme }) =>
+    isEditable
       ? css`
-          border-color: ${theme.colors.error};
+          border-color: ${theme.colors.primary600};
         `
       : css`
-          border-color: ${theme.colors.primary600};
+          border-color: ${theme.colors.placeholder};
         `}
+
+  ${({ error, theme }) =>
+    error &&
+    css`
+      border-color: ${theme.colors.error};
+    `}
 `;
 
 export const StyledInput = styled(TextInput)<StyledInputProps>`

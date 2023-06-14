@@ -3,7 +3,7 @@ import { Alert, FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useQuery } from '@tanstack/react-query';
 import { useTheme } from 'styled-components/native';
-import { Funnel, Gear, ClockCounterClockwise, Question, SignOut } from 'phosphor-react-native';
+import { Funnel, Gear, ClockCounterClockwise, SignOut } from 'phosphor-react-native';
 
 import { getUserEvents } from '@services/GET/getUserEvents';
 
@@ -95,10 +95,10 @@ export const Profile: FC = () => {
           onPress={() => onPressNavigate('DonationHistory')}
         />
 
-        <SettingsItem
+        {/* <SettingsItem
           icon={() => <Question size={fontSizeValue(24)} color={colors.icon900} />}
           title="Ajuda"
-        />
+        /> */}
 
         <SettingsItem
           testID="Profile.LogOut"

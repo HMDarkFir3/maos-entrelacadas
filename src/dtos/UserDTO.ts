@@ -25,6 +25,10 @@ export interface Person {
   updatedAt: string;
 }
 
+export interface Image {
+  url: string;
+}
+
 export interface User {
   cellphone: string;
   createdAt: string;
@@ -33,7 +37,7 @@ export interface User {
   googleId: string;
   id: string;
   isAdmin: boolean;
-  image: null | string;
+  image: null | Image;
   person: Person;
   status: string;
   updatedAt: string;

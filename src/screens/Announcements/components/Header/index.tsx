@@ -54,7 +54,9 @@ export const Header: FC = () => {
     <Container>
       <Wrapper>
         <ProfileButton testID="Header.ProfileButton" onPress={onPressProfile}>
-          <UserImage source={{ uri: 'https://www.github.com/hmdarkfir3.png' }} />
+          <UserImage
+            source={user?.image?.url ? { uri: user.image.url } : require('@assets/img/empty.png')}
+          />
         </ProfileButton>
 
         <UserInfo>

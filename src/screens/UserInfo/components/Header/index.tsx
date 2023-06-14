@@ -1,12 +1,17 @@
 import * as MediaLibrary from 'expo-media-library';
 import * as ImagePicker from 'expo-image-picker';
 import * as FileSystem from 'expo-file-system';
-import { FC } from 'react';
+import { useState, FC } from 'react';
 import { ToastAndroid } from 'react-native';
 import { useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import { useTheme } from 'styled-components/native';
 import { NotePencil, X, PencilSimple } from 'phosphor-react-native';
 
+import { api } from '@services/api';
+
+import { setAvatarUser } from '@store/auth/actions';
+
+import { useAppDispatch } from '@hooks/useAppDispatch';
 import { useAppSelector } from '@hooks/useAppSelector';
 import { useSettings } from '@hooks/useSettings';
 
@@ -20,6 +25,7 @@ import {
   UserImageEdit,
   EditButton,
   Box,
+  Loading,
 } from './styles';
 
 interface Props {
@@ -41,8 +47,10 @@ interface PhotoInfo {
 export const Header: FC<Props> = (props) => {
   const { isEditable, keyboardShown, onBackButton, onEdit, onCancelEdit } = props;
 
+  const dispatch = useAppDispatch();
   const { user } = useAppSelector((store) => store.auth);
   const { fontSizeValue } = useSettings();
+  const [permissionResponse, requestPermission] = MediaLibrary.usePermissions();
   const { colors } = useTheme();
 
   const animatedUserImageStyle = useAnimatedStyle(() => {
@@ -52,7 +60,12 @@ export const Header: FC<Props> = (props) => {
     };
   });
 
-  const [permissionResponse, requestPermission] = MediaLibrary.usePermissions();
+  const [image, setImage] = useState<string>(
+    user?.image?.url ?? 'https://www.github.com/hmdarkfir3.png'
+  );
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const formattedUsername: string | undefined = user?.username.split(' ')[0];
 
   const changeUserImage = async () => {
     if (!permissionResponse?.granted) {
@@ -80,13 +93,22 @@ export const Header: FC<Props> = (props) => {
           return;
         }
 
+        setImage(photoSelected.assets[0].uri);
+
         const fileExtension = photoSelected.assets[0].uri.split('.').pop();
 
-        const photoFile = {
-          name: `${user?.username}.${fileExtension}`.toLowerCase(),
-          uri: photoSelected.assets[0].base64,
-          ext: fileExtension,
-        } as any;
+        setIsLoading(true);
+
+        const { data } = await api.put(`/users/updateAvatar/${user?.id}`, {
+          photoFile: {
+            name: `${formattedUsername}`.toLowerCase(),
+            uri: photoSelected.assets[0].base64,
+            ext: fileExtension,
+          },
+        });
+
+        dispatch(setAvatarUser(data));
+        setIsLoading(false);
       }
     }
   };
@@ -100,14 +122,18 @@ export const Header: FC<Props> = (props) => {
       <UserImageWrapper>
         {isEditable && (
           <UserImageEdit>
-            <PencilSimple size={fontSizeValue(20)} color={colors.icon40} />
+            {isLoading ? (
+              <Loading size="small" color={colors.icon40} />
+            ) : (
+              <PencilSimple size={fontSizeValue(20)} color={colors.icon40} />
+            )}
           </UserImageEdit>
         )}
 
         <UserImageButton disabled={!isEditable} onPress={changeUserImage}>
           <UserImage
             style={animatedUserImageStyle}
-            source={{ uri: 'https://www.github.com/hmdarkfir3.png' }}
+            source={user?.image?.url ? { uri: image } : require('@assets/img/empty.png')}
           />
         </UserImageButton>
       </UserImageWrapper>

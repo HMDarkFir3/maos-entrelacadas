@@ -7,9 +7,9 @@ import {
   User,
   EnvelopeSimple,
   Phone,
-  GenderNeuter,
   Cake,
   LockOpen,
+  GenderNeuter,
 } from 'phosphor-react-native';
 
 import { UpdateDTO } from '@dtos/UpdateDTO';
@@ -24,8 +24,8 @@ import { update } from '@store/auth/thunks/update';
 
 import { Header } from '@components-of-screens/UserInfo/components/Header';
 import { Input } from '@components/Inputs/Input';
-import { Select } from '@components/Inputs/Select';
 import { DatePicker } from '@components/Inputs/DatePicker';
+import { Select } from '@components/Inputs/Select';
 import { Button } from '@components/Buttons/Button';
 
 import { Container, Wrapper, Footer } from './styles';
@@ -42,36 +42,41 @@ interface FormUpdateState {
 }
 
 export const UserInfo: FC = () => {
-  const { user, isLoading } = useAppSelector((store) => store.auth);
-  const dispatch = useAppDispatch();
-  const { isEditable } = useAppSelector((store) => store.auth);
+  const { user, isLoading, isEditable } = useAppSelector((store) => store.auth);
   const { genders } = useAppSelector((store) => store.settings);
+  const dispatch = useAppDispatch();
   const { fontSizeValue } = useSettings();
   const { keyboardShown } = useKeyboard();
-  const { control, handleSubmit } = useForm({
+  const { control, handleSubmit, watch } = useForm({
     defaultValues: {
       status: user?.status,
       name: user?.person.name,
       username: user?.username,
       email: user?.email,
       cellphone: user?.cellphone,
-      gender: user?.person.gender.id,
+      gender: user?.person.gender ? user.person.gender.name : '',
       birthdate: user?.person.birthdate,
       password: '********',
     },
   });
   const { colors } = useTheme();
 
+  console.log(user?.person.gender);
+
   const onBackButton = () => dispatch(userEdit(false));
   const onPressEdit = () => dispatch(userEdit(true));
   const onPressCancelEdit = () => dispatch(userEdit(false));
 
   const onSubmit = (data: FormUpdateState) => {
+    console.log(data.gender);
+
     const userInfo = {
       data: {
         username: data.username,
+        cellphone: data.cellphone,
         person: {
           name: data.name,
+          birthdate: data.birthdate,
           gender: {
             name: data.gender,
           },
@@ -107,18 +112,30 @@ export const UserInfo: FC = () => {
 
             <Input
               style={{ marginTop: 20 }}
-              icon={() => <User size={fontSizeValue(24)} color={colors.placeholder} />}
+              icon={() => (
+                <User
+                  size={fontSizeValue(24)}
+                  color={isEditable ? colors.primary600 : colors.placeholder}
+                />
+              )}
               control={control}
               inputName="name"
               isEditable={isEditable}
+              placeholder="Nome Completo"
             />
 
             <Input
               style={{ marginTop: 20 }}
-              icon={() => <User size={fontSizeValue(24)} color={colors.placeholder} />}
+              icon={() => (
+                <User
+                  size={fontSizeValue(24)}
+                  color={isEditable ? colors.primary600 : colors.placeholder}
+                />
+              )}
               control={control}
               inputName="username"
               isEditable={isEditable}
+              placeholder="Username"
             />
 
             <Input
@@ -131,31 +148,49 @@ export const UserInfo: FC = () => {
 
             <Input
               style={{ marginTop: 20 }}
-              icon={() => <Phone size={fontSizeValue(24)} color={colors.placeholder} />}
+              icon={() => (
+                <Phone
+                  size={fontSizeValue(24)}
+                  color={isEditable ? colors.primary600 : colors.placeholder}
+                />
+              )}
               control={control}
               inputName="cellphone"
-              isEditable={false}
+              placeholder="00000000000"
+              isEditable={isEditable}
             />
 
             <Select
               style={{ marginTop: 20 }}
               data={genders}
-              icon={() => <GenderNeuter size={fontSizeValue(24)} color={colors.placeholder} />}
+              icon={() => (
+                <GenderNeuter
+                  size={fontSizeValue(24)}
+                  color={isEditable ? colors.primary600 : colors.placeholder}
+                />
+              )}
               control={control}
               selectName="gender"
-              dirtyValue={user?.person.gender.name}
+              dirtyValue={watch().gender}
               placeholder="Selecione um gênero"
               isEditable={isEditable}
             />
 
             <DatePicker
               style={{ marginTop: 20 }}
-              icon={() => <Cake size={fontSizeValue(24)} color={colors.placeholder} />}
+              icon={() => (
+                <Cake
+                  size={fontSizeValue(24)}
+                  color={
+                    isEditable && !user?.person.birthdate ? colors.primary600 : colors.placeholder
+                  }
+                />
+              )}
               control={control}
               datePickerName="birthdate"
-              dirtyValue={user?.person.birthdate}
+              dirtyValue={watch().birthdate}
               placeholder="Selecione sua data de nascimento"
-              isEditable={false}
+              isEditable={user?.person.birthdate ? false : isEditable}
             />
 
             <Input

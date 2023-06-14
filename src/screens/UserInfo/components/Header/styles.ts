@@ -51,3 +51,5 @@ export const EditButton = styled(BorderlessButton)``;
 export const Box = styled.View`
   flex: 1;
 `;
+
+export const Loading = styled.ActivityIndicator``;

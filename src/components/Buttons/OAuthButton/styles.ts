@@ -25,3 +25,5 @@ export const Wrapper = styled(RectButton)`
 
   border-radius: 8px;
 `;
+
+export const Loading = styled.ActivityIndicator``;

@@ -4,6 +4,7 @@ import Animated from 'react-native-reanimated';
 
 interface WrapperProps {
   error: boolean;
+  isEditable: boolean;
 }
 
 interface ItemTextProps {
@@ -26,14 +27,20 @@ export const Wrapper = styled(TouchableOpacity)<WrapperProps>`
 
   border-bottom-width: 1px;
 
-  ${({ error, theme }) =>
-    error
+  ${({ isEditable, theme }) =>
+    isEditable
       ? css`
-          border-color: ${theme.colors.error};
+          border-color: ${theme.colors.primary600};
         `
       : css`
-          border-color: ${theme.colors.primary600};
+          border-color: ${theme.colors.placeholder};
         `}
+
+  ${({ error, theme }) =>
+    error &&
+    css`
+      border-color: ${theme.colors.error};
+    `}
 `;
 
 export const Placeholder = styled.Text`

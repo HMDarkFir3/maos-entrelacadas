@@ -19,7 +19,9 @@ export const Header: FC = () => {
   return (
     <Container testID="Header.Container" onPress={onPressUserInfo}>
       <Wrapper>
-        <UserImage source={{ uri: 'https://www.github.com/hmdarkfir3.png' }} />
+        <UserImage
+          source={user?.image?.url ? { uri: user.image.url } : require('@assets/img/empty.png')}
+        />
 
         <UserInfo>
           <Username style={{ fontSize: fontSizeValue(20) }} numberOfLines={1}>

@@ -1,7 +1,7 @@
 import { useState, useCallback, FC } from 'react';
-import { Switch } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { useTheme } from 'styled-components/native';
+import { useStripe } from '@stripe/stripe-react-native';
+
+import { api } from '@services/api';
 
 import { useSettings } from '@hooks/useSettings';
 
@@ -23,17 +23,7 @@ import {
   Description,
 } from '../styles';
 
-import {
-  AmountWrapper,
-  Separator,
-  MessageWrapper,
-  MessageHeader,
-  Message,
-  MessageLenght,
-  MessageInput,
-  AnonymousWrapper,
-  ButtonWrapper,
-} from './styles';
+import { AmountWrapper, Separator, ButtonWrapper } from './styles';
 
 interface SelectedAmount {
   id: string;
@@ -42,13 +32,11 @@ interface SelectedAmount {
 
 export const StepOne: FC = () => {
   const { fontSizeValue } = useSettings();
-  const { navigate } = useNavigation();
-  const { colors } = useTheme();
+  const stripe = useStripe();
 
   const [selectedAmount, setSelectedAmount] = useState<SelectedAmount>({} as SelectedAmount);
   const [inputAmount, setInputAmount] = useState<string>('');
   const [isActiveInputAmount, setIsActiveInputAmount] = useState<boolean>(false);
-  const [switchValue] = useState(false);
 
   const onSelectAmount = useCallback(
     (selected: SelectedAmount) => {
@@ -70,8 +58,23 @@ export const StepOne: FC = () => {
     setIsActiveInputAmount((prevState) => !prevState);
   }, []);
 
-  const onNavigateToStepTwo = () =>
-    navigate('Donations_StepTwo', { amount: selectedAmount.amount || inputAmount });
+  // const onNavigateToStepTwo = () =>
+  //   navigate('Donations_StepTwo', { amount: selectedAmount.amount || inputAmount });
+
+  const onPayment = async () => {
+    const { data } = await api.post('/donations/donate', {
+      amount: Number(selectedAmount.amount) || Number(inputAmount),
+    });
+
+    if (!data) return;
+
+    const initSheet = await stripe.initPaymentSheet({
+      paymentIntentClientSecret: data,
+    } as any);
+
+    console.log(initSheet);
+    if (initSheet.error) return;
+  };
 
   return (
     <Container>
@@ -117,37 +120,8 @@ export const StepOne: FC = () => {
 
         <Separator />
 
-        <MessageWrapper>
-          <MessageHeader>
-            <Message style={{ fontSize: fontSizeValue(16) }}>Mensagem</Message>
-            <MessageLenght style={{ fontSize: fontSizeValue(16) }}>200 restantes</MessageLenght>
-          </MessageHeader>
-
-          <MessageInput
-            placeholder="Escreva sua mensagem aqui"
-            placeholderTextColor={colors.placeholder}
-            multiline
-            maxLength={200}
-          />
-        </MessageWrapper>
-
-        <Separator />
-
-        <AnonymousWrapper>
-          <Message style={{ fontSize: fontSizeValue(16) }}>Enviar doação anônima</Message>
-          <Switch
-            trackColor={{
-              false: colors.switcher.trackInactive,
-              true: colors.switcher.trackActive,
-            }}
-            thumbColor={switchValue ? colors.switcher.thumbActive : colors.switcher.thumbInactive}
-          />
-        </AnonymousWrapper>
-
-        <Separator />
-
         <ButtonWrapper>
-          <Button title="Confirmar a doação" onPress={onNavigateToStepTwo} />
+          <Button title="Confirmar a doação" onPress={onPayment} />
         </ButtonWrapper>
       </Scroller>
     </Container>

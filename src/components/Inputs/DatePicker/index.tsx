@@ -49,7 +49,7 @@ export const DatePicker: FC<Props> = (props) => {
       disabled={!isEditable}
       onPress={onPressOpenDatePicker}
     >
-      <Wrapper error={!!error}>
+      <Wrapper error={!!error} isEditable={isEditable}>
         <Icon />
 
         {dirtyValue ? (

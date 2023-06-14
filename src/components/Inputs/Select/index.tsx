@@ -69,6 +69,7 @@ export const Select: FC<Props<GenderDTO.Response[]>> = (props) => {
         error={!!error}
         activeOpacity={0.7}
         disabled={!isEditable}
+        isEditable={isEditable}
         onPress={onPressOpenSelect}
       >
         <Icon />

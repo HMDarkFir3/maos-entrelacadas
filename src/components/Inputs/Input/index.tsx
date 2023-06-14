@@ -52,7 +52,7 @@ export const Input = forwardRef<TextInput, Props>((props, ref) => {
 
   return (
     <Container style={style}>
-      <Wrapper error={!!error}>
+      <Wrapper isEditable={isEditable} error={!!error}>
         <Icon />
 
         <Controller

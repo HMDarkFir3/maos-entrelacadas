@@ -1,6 +1,6 @@
 import Constants from 'expo-constants';
 import * as Google from 'expo-auth-session/providers/google';
-import { useEffect, FC } from 'react';
+import { useState, useEffect, FC } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 
@@ -12,6 +12,7 @@ import { useAppDispatch } from '@hooks/useAppDispatch';
 import { useSettings } from '@hooks/useSettings';
 
 import { register } from '@store/auth/thunks/register';
+import { setUser } from '@store/auth/actions';
 
 import { Button } from '@components/Buttons/Button';
 import { OAuthButton } from '@components/Buttons/OAuthButton';
@@ -45,6 +46,8 @@ export const Welcome: FC = () => {
   const { fontSizeValue } = useSettings();
   const { navigate } = useNavigation();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const onPressLogin = (screenName: 'Login' | 'StepOne') => navigate(screenName);
 
   const [, response, promptAsync] = Google.useAuthRequest({
@@ -56,29 +59,40 @@ export const Welcome: FC = () => {
   });
 
   const getUserInfo = async (token: string) => {
-    const { data: googleResponse } = await axios.get<GoogleDTO.Response>(
-      'https://www.googleapis.com/userinfo/v2/me',
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+    try {
+      const { data: googleResponse } = await axios.get<GoogleDTO.Response>(
+        'https://www.googleapis.com/userinfo/v2/me',
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (googleResponse.id) {
+        setIsLoading(true);
+        const { data } = await api.post(`/auth/google/login/${googleResponse.id}`);
+
+        if (data.access_token) {
+          dispatch(setUser(data));
+        }
+
+        if (data.message === 'User not found') {
+          const userInfo = {
+            username: googleResponse.name,
+            password: googleResponse.id,
+            email: googleResponse.email,
+            image: googleResponse.picture,
+            givenName: googleResponse.given_name,
+          };
+
+          dispatch(register(userInfo));
+        }
       }
-    );
-
-    if (googleResponse.id) {
-      const { data } = await api.post(`/auth/google/login/${googleResponse.id}`);
-
-      if (data.message === 'User not found') {
-        const userInfo = {
-          username: googleResponse.name,
-          password: googleResponse.id,
-          email: googleResponse.email,
-          image: googleResponse.picture,
-          givenName: googleResponse.given_name,
-        };
-
-        dispatch(register(userInfo));
-      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -116,12 +130,12 @@ export const Welcome: FC = () => {
 
         <SeparatorWrapper>
           <Separator />
-          <SeparatorText>Ou</SeparatorText>
+          <SeparatorText style={{ fontSize: fontSizeValue(16) }}>Ou</SeparatorText>
           <Separator />
         </SeparatorWrapper>
 
         <OAuthButtonWrapper>
-          <OAuthButton icon={LogoGoogle} onPress={() => promptAsync()} />
+          <OAuthButton icon={LogoGoogle} isLoading={isLoading} onPress={() => promptAsync()} />
         </OAuthButtonWrapper>
       </ButtonWrapper>
     </Container>
