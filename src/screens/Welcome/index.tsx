@@ -51,11 +51,8 @@ export const Welcome: FC = () => {
   const onPressLogin = (screenName: 'Login' | 'StepOne') => navigate(screenName);
 
   const [, response, promptAsync] = Google.useAuthRequest({
-    clientId: googleClientId,
-    clientSecret: googleClientSecret,
-    redirectUri: 'https://auth.expo.io/@hmdarkfire/maosentrelacadas',
-    responseType: 'code',
-    scopes: ['profile', 'email'],
+    expoClientId: '312427646187-89ta4vu1tfrp9q9hchubpuq7a1scre1j.apps.googleusercontent.com',
+    androidClientId: '312427646187-8di2q0a7c1vqtoq1im0hkr85v88i7dio.apps.googleusercontent.com',
   });
 
   const getUserInfo = async (token: string) => {

@@ -2,7 +2,7 @@
   "expo": {
     "name": "Mãos Entrelaçadas (LOCAL)",
     "slug": "maosentrelacadas",
-    "scheme": "maosentrelacadas",
+    "scheme": "com.maosentrelacadas.hmdarkfire.development",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

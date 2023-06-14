@@ -61,15 +61,11 @@ export const UserInfo: FC = () => {
   });
   const { colors } = useTheme();
 
-  console.log(user?.person.gender);
-
   const onBackButton = () => dispatch(userEdit(false));
   const onPressEdit = () => dispatch(userEdit(true));
   const onPressCancelEdit = () => dispatch(userEdit(false));
 
   const onSubmit = (data: FormUpdateState) => {
-    console.log(data.gender);
-
     const userInfo = {
       data: {
         username: data.username,

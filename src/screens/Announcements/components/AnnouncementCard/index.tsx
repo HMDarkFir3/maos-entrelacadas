@@ -26,11 +26,13 @@ interface Props {
 }
 
 export const AnnouncementCard: FC<Props> = (props) => {
-  const { createdAt, description, tags } = props.data;
+  const { createdAt, description, images, tags } = props.data;
+
+  console.log(images);
 
   const { fontSizeValue } = useSettings();
 
-  const iamgeSliderRef = useRef<FlatList>(null);
+  const imageSliderRef = useRef<FlatList>(null);
   const scrollX = useRef<Animated.Value>(new Animated.Value(0)).current;
 
   const formattedCreatedAt = format(new Date(createdAt), "dd 'de' MMMM 'às' HH:mm", {
@@ -43,10 +45,10 @@ export const AnnouncementCard: FC<Props> = (props) => {
 
       <Wrapper>
         <Animated.FlatList
-          ref={iamgeSliderRef}
-          data={[0, 1, 2, 3, 4]}
-          keyExtractor={(item) => String(item)}
-          renderItem={() => <Image source={{ uri: 'https://github.com/hmdarkfir3.png' }} />}
+          ref={imageSliderRef}
+          data={images}
+          keyExtractor={(item) => String(item.id)}
+          renderItem={({ item }) => <Image source={{ uri: item.url }} />}
           horizontal
           pagingEnabled
           showsHorizontalScrollIndicator={false}
@@ -61,7 +63,7 @@ export const AnnouncementCard: FC<Props> = (props) => {
         />
 
         <DotWrapper>
-          <ImageDot data={[0, 1, 2, 3, 4]} scrollX={scrollX} />
+          <ImageDot data={images} scrollX={scrollX} />
         </DotWrapper>
 
         <DescriptionWrapper>

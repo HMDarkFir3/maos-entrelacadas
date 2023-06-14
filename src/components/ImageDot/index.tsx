@@ -28,7 +28,7 @@ export const ImageDot: FC<Props> = (props) => {
           extrapolate: 'clamp',
         });
 
-        return <Dot testID="IntroductionPaginator.Dot" style={{ opacity }} key={item} />;
+        return <Dot testID="IntroductionPaginator.Dot" style={{ opacity }} key={item.id} />;
       })}
     </Container>
   );
