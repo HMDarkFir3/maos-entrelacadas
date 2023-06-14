@@ -28,8 +28,6 @@ interface Props {
 export const AnnouncementCard: FC<Props> = (props) => {
   const { createdAt, description, images, tags } = props.data;
 
-  console.log(images);
-
   const { fontSizeValue } = useSettings();
 
   const imageSliderRef = useRef<FlatList>(null);

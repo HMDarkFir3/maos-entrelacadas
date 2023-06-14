@@ -113,9 +113,9 @@ export const EventDetails: FC = () => {
             <ImageWrapper>
               <Animated.FlatList
                 ref={imageSliderRef}
-                data={[0, 1, 2, 3, 4]}
-                keyExtractor={(item) => String(item)}
-                renderItem={() => <Image source={{ uri: 'https://github.com/hmdarkfir3.png' }} />}
+                data={data.images}
+                keyExtractor={(item) => String(item.id)}
+                renderItem={({ item }) => <Image source={{ uri: item.url }} />}
                 horizontal
                 pagingEnabled
                 showsHorizontalScrollIndicator={false}
@@ -130,7 +130,7 @@ export const EventDetails: FC = () => {
               />
 
               <DotWrapper>
-                <ImageDot data={[0, 1, 2, 3, 4]} scrollX={scrollX} />
+                <ImageDot data={data.images} scrollX={scrollX} />
               </DotWrapper>
             </ImageWrapper>
 

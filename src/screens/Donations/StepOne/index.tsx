@@ -68,8 +68,10 @@ export const StepOne: FC = () => {
 
     if (!data) return;
 
+    console.log(data);
+
     const initSheet = await stripe.initPaymentSheet({
-      paymentIntentClientSecret: data,
+      paymentIntentClientSecret: data.clientSecret,
     } as any);
 
     console.log(initSheet);

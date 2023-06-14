@@ -18,7 +18,7 @@ interface Props extends RectButtonProps {
 
 export const EventCard: FC<Props> = (props) => {
   const { ...rest } = props;
-  const { title, eventAt, startTime, endTime, isSignedUp } = props.data;
+  const { title, eventAt, startTime, endTime, isSignedUp, images } = props.data;
 
   const { fontSizeValue } = useSettings();
   const { colors } = useTheme();
@@ -35,7 +35,7 @@ export const EventCard: FC<Props> = (props) => {
         </CheckWrapper>
       )}
 
-      <Image source={{ uri: 'https://www.github.com/hmdarkfir3.png' }} />
+      <Image source={{ uri: images[0].url }} />
 
       <Title style={{ fontSize: fontSizeValue(16) }}>{title}</Title>
 
